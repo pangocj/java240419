@@ -24,7 +24,6 @@ package basic;//클래스가 작성된 패키지를 표현하기 위해 사용�
 // => https://github.com/ 사이트 사용 
 //깃(Git) : 다수의 사용자들간의 파일 작업을 조율하기 위한 분산 버전 관리 시스템(프로그램)
 
-
 /** 이클립스로 만든 프로그램 - API 주석 */
 public class FirstEclipseApp {
 	/* JVM에 의해 자동으로 호출되는 메소드 */
