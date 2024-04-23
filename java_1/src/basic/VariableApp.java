@@ -37,7 +37,7 @@ public class VariableApp {
 	public static void main(String[] args) {
 		int su;//정수값을 저장하기 위한 변수 선언 - 메모리에 su 이름의 변수 생성
 		//대입연산자(=)를 사용하여 값을 변수에 저장
-		// => 대입연산자 오른쪽에는 변수를 왼쪽에는 값을 위치하여 값을 변수에 저장되도록 작성
+		// => 대입연산자 왼쪽에는 변수를 오른쪽에는 값을 위치하여 값을 변수에 저장되도록 작성
 		su=100;//입력 명령
 		System.out.print("초기값 = ");
 		System.out.println(su);//변수에 저장된 값을 제공받아 화면에 출력 - 출력 명령
@@ -56,18 +56,25 @@ public class VariableApp {
 		//NullString("") : 문자가 하나도 없는 비어 있는 문자열
 		System.out.println(""+2+0+2+4+"년은 호랑이띠입니다.");
 		System.out.println("==============================================================");
+		//동일한 자료형의 변수는 [,] 기호를 사용하여 나열 선언 가능
+		int num1=100,  num2=200;
+		System.out.println("연산결과 = "+num1+num2);//실행 오류
+		System.out.println("연산결과 = "+(num1+num2));
+		System.out.println("연산결과 = "+num1*num2);
+		System.out.println("연산결과 = "+(num1*num2));
+		System.out.println("==============================================================");
+		int kor=88, eng=90;//입력 명령
+		//int tot=88+90;
+		int tot=kor+eng;//데이타 처리 명령
+		System.out.println("점수 합계 = "+tot);//출력 명령
+		System.out.println("==============================================================");
+		//변수에 값이 저장되어 있지 않은 상태에서 변수를 사용할 경우 에러 발생
+		//int count;
+		//System.out.println("count = "+count);
+		
+		//변수에 저장할 수 없는 리터럴(값)을 저장 시킬 경우 에러 발생 
+		//int count=10.0;
+		//System.out.println("count = "+count);
+		System.out.println("==============================================================");
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
