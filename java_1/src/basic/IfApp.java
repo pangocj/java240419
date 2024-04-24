@@ -142,5 +142,16 @@ public class IfApp {
 			System.out.println("[에러]0~100 범위를 벗어난 비정상적인 점수가 입력 되었습니다.");
 		}
 		System.out.println("==============================================================");
+		String kor="둘";
+		String eng="";
+
+		//문자열을 비교하여 명령 선택 실행 가능
+		switch (kor) {
+		case "하나": eng="One"; break;
+		case "둘": eng="Two"; break;
+		case "셋": eng="Three"; break;
+		}
+		System.out.println("[결과]"+kor+" = "+eng);
+		System.out.println("==============================================================");
 	}
 }
