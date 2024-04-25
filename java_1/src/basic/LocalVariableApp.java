@@ -1,6 +1,5 @@
 package basic;
 
-
 //지역변수(Local Variable) : 메소드 내부에서 선언된 변수
 // => 지역변수는 선언된 블럭이 종료되면 자동 소멸되므로 선언된 블럭 내부에서만 사용 가능
 public class LocalVariableApp {

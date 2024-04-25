@@ -3,7 +3,7 @@ package basic;
 //제어문(Control Statement) : 프로그램의 흐름(스레드 - Thread)을 바꾸는 명령
 // => 선택문(if, switch), 반복문(for, while), 기타(break, continue, return)
 
-//if : 조건식에 의해 명령을 선택 실행하기 위한 선택문을 작성하는 키워드
+//if : 조건식에 의해 명령을 선택 실행하기 위한 명령을 작성하는 키워드
 
 //형식-1) if(조건식) { 명령; 명령; ... }
 // => 조건식의 결과값이 [true]인 경우 블럭 내부에 작성된 명령들을 실행
@@ -125,6 +125,7 @@ public class IfApp {
 			}
 			*/
 			
+			/*
 			if(jumsu >= 90) {
 				grade="A";
 			} else if(jumsu >= 80) {
@@ -136,22 +137,15 @@ public class IfApp {
 			} else {
 				grade="F";
 			}
+			*/
+			
+			grade = jumsu >= 90 ? "A" : jumsu >= 80 ? "B" : jumsu >= 70 ? "C" 
+					: jumsu >= 60 ? "D" : "F";
 			
 			System.out.println("[결과]"+jumsu+"점 = "+grade+"학점");
 		} else {
 			System.out.println("[에러]0~100 범위를 벗어난 비정상적인 점수가 입력 되었습니다.");
 		}
-		System.out.println("==============================================================");
-		String kor="둘";
-		String eng="";
-
-		//문자열을 비교하여 명령 선택 실행 가능
-		switch (kor) {
-		case "하나": eng="One"; break;
-		case "둘": eng="Two"; break;
-		case "셋": eng="Three"; break;
-		}
-		System.out.println("[결과]"+kor+" = "+eng);
 		System.out.println("==============================================================");
 	}
 }
