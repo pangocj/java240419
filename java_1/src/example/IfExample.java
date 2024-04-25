@@ -61,7 +61,7 @@ public class IfExample {
 			validResult=true;
 		}
 		
-		if(validResult) {//입력값 검증이 실패한 검증
+		if(validResult) {//입력값 검증이 실패한 경우
 			System.exit(0);
 		}
 		
