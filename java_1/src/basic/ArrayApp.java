@@ -43,6 +43,49 @@ public class ArrayApp {
 		System.out.println("numArray[0] = "+numArray[0]);
 		System.out.println("numArray[1] = "+numArray[1]);
 		System.out.println("numArray[2] = "+numArray[2]);
+		//배열의 요소를 구분하는 첨자를 잘못 사용한 경우 프로그램 실행시 ArrayIndexOutOfBoundsException 발생
+		// => 프로그램 실행시 예외가 발생된 경우 프로그램 강제 종료
+		//System.out.println("numArray[3] = "+numArray[3]);
+		System.out.println("==============================================================");
+		//참조변수.length : 참조변수에 저장된 메모리 주소로 참조한 배열의 요소의 갯수를 제공하는 표현식
+		System.out.println("numArray.length = "+numArray.length);
+		System.out.println("==============================================================");
+		int index=0;
+		//배열의 요소를 구분하기 위한 첨자는 변수 또는 연산식 사용 가능
+		numArray[index]=10;
+		numArray[index+1]=20;
+		numArray[index+2]=30;
+		
+		//for 구문을 사용하여 배열 요소에 대한 일괄처리
+		// => for 구문의 초기식, 조건식, 증감식에서 사용하는 변수를 첨자로 활용하여 일괄처리
+		// => 배열 요소의 입력, 계산, 출력에 대한 일괄처리시 사용
+		for(int i=0;i<numArray.length;i++) {
+			System.out.println("numArray["+i+"] = "+numArray[i]);
+		}
+		System.out.println("==============================================================");
+		//배열 생성시 배열 요소에 원하는 초기값 저장 가능
+		//형식) 자료형[] 참조변수=new 자료형[]{초기값, 초기값, ...};
+		// => 블럭 내부에 나열된 초기값의 갯수와 동일한 갯수의 요소를 가진 배열 생성
+		int[] su1Array=new int[]{10, 20, 30};
+
+		for(int i=0;i<su1Array.length;i++) {
+			System.out.println("su1Array["+i+"] = "+su1Array[i]);
+		}
+		System.out.println("==============================================================");
+		//new 연산자와 배열 자료형을 사용하지 않고 블럭 내부에 값을 나열하여 배열 생성 가능
+		//형식) 자료형[] 참조변수={초기값, 초기값, ...};
+		int[] su2Array={10, 20, 30};
+		
+		//Java 언어는 배열을 일괄처리 하기 위해 향상된 for 구문 제공
+		//형식) for(자료형 변수명 : 참조변수) { 명령; 명령; ... }
+		// => 참조변수에 저장된 메모리 주소로 참조하는 배열의 요소값을 커서(Cursor)를 사용해 
+		//차례대로 하나씩 제공받아 변수에 저장하여 일괄처리 하는 반복문
+		// => 배열의 모든 요소값을 제공받은 후 반복문 종료
+		// => 배열 요소의 계산, 출력에 대한 일괄처리시 사용
+		for(int number : su2Array) {
+			System.out.print(number+"\t");
+		}
+		System.out.println();
 		System.out.println("==============================================================");
 	}
 }
