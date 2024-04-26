@@ -77,7 +77,7 @@ public class MultiForApp {
 		//☆★★★★  i=4  흰별=1  검은별=4
 		//★★★★★  i=5  흰별=0  검은별=5
 		for(int i=1;i<=5;i++) {
-			for(int j=1;j<=5-i;j++) {
+			for(int j=5;j>i;j--) {
 				System.out.print("☆");
 			}
 			for(int j=1;j<=i;j++) {
