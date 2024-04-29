@@ -3,8 +3,8 @@ package basic;
 //import : 다른 패키지의 클래스를 소스파일에서 사용할 수 있도록 제공하는 키워드
 import java.util.Scanner;
 
-//System.out : 값을 화면(콘솔)에 출력하기 위한 객체 - 출력스트림
-//System.in : 키보드로부터 입력된 값을 얻어와 제공하기 위한 객체 - 입력스트림
+//System.out : 값(1Byte - 원시데이타)을 화면(콘솔)에 출력하기 위한 객체 - 출력스트림
+//System.in : 키보드로부터 입력된 값(1Byte)을 얻어와 제공하기 위한 객체 - 입력스트림
 
 //키보드로 이름과 나이를 입력받아 화면에 출력하는 프로그램 작성
 public class ScannerApp {
@@ -14,7 +14,6 @@ public class ScannerApp {
 		// => Scanner 클래스로 객체를 생성해야만 객체로 클래스의 메소드 호출 가능
 		//new Scanner(System.in) 명령으로 키보드 입력스트림을 사용해 Scanner 객체 생성하고
 		//생성된 객체를 참조변수에 저장
-		//참조변수에 저장된 객체를 사용하여 메소드 호출
 		Scanner scanner=new Scanner(System.in);
 		
 		//참조변수에 저장된 객체를 사용하여 메소드 호출

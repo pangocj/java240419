@@ -10,8 +10,12 @@ public class NumberTotalApp {
 
 		for(int i=1;i<=5;i++) {
 			System.out.print(i+"번째 정수값 입력 >> ");
+			/*
 			int number=scanner.nextInt();
 			total+=number;
+			*/
+
+			total+=scanner.nextInt();
 		}
 		
 		System.out.println("[결과]합계 = "+total);
