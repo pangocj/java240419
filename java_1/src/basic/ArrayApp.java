@@ -87,6 +87,7 @@ public class ArrayApp {
 		}
 		System.out.println();
 		System.out.println("==============================================================");
+		
 	}
 }
 
