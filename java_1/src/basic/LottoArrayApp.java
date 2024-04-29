@@ -59,17 +59,3 @@ public class LottoArrayApp {
 		System.out.println();
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
