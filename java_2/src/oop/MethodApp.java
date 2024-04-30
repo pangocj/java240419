@@ -1,5 +1,7 @@
 package oop;
 
+import java.util.Arrays;
+
 //프로그램 실행을 목적으로 작성된 클래스 - main() 메소드 작성
 public class MethodApp {
 	//JVM(Java Virtual Machine)에 의해 자동 호출되는 메소드 - 프로그램 실행의 시작점
@@ -18,5 +20,51 @@ public class MethodApp {
 		method.displayTwo();
 		method.displayOne();
 		System.out.println("==============================================================");
+		method.printOne();
+		method.printOne();
+		System.out.println("==============================================================");
+		method.printTwo(50);
+		method.printTwo(80);
+		method.printTwo(-30);
+		System.out.println("==============================================================");
+		method.printThree(35, 79);
+		method.printThree(19, 88);
+		method.printThree(67, 12);
+		System.out.println("==============================================================");
+		//메소드를 호출하여 반환되는 값을 제공받아 변수에 저장
+		int total=method.returnTot(30, 70);
+		System.out.println("합계 = "+total);
+		//메소드를 호출하여 반환되는 값을 제공받아 출력 처리
+		System.out.println("합계 = "+method.returnTot(20, 80));
+		System.out.println("==============================================================");
+		boolean result=method.isOddEven(10);
+		
+		//조건식 대신 boolean 변수에 저장된 논리값을 비교하여 명령을 선택 실행
+		if(result) {
+			System.out.println("매개변수에 전달된 값은 [짝수]입니다.");
+		} else {
+			System.out.println("매개변수에 전달된 값은 [홀수]입니다.");
+		}
+		
+		//조건식 대신 메소드를 호출하여 메소드의 반환값(논리값)을 비교하여 명령을 선택 실행
+		if(method.isOddEven(11)) {
+			System.out.println("매개변수에 전달된 값은 [짝수]입니다.");
+		} else {
+			System.out.println("매개변수에 전달된 값은 [홀수]입니다.");
+		}
+		System.out.println("==============================================================");
+		int[] numArray=method.returnArray();
+		System.out.println("배열 요소값 = "+Arrays.toString(numArray));
+		System.out.println("==============================================================");
 	}
 }
+
+
+
+
+
+
+
+
+
+

@@ -2,7 +2,7 @@ package oop;
 
 //메소드(Method) : 클래스에 작성된 함수 - 멤버함수
 // => 필드(멤버변수)를 사용하여 원하는 기능을 구현하기 위한 명령의 모임
-// => Java 명령은 메소드에서만 작성 가능
+// => 메소드에서만 Java 명령은 작성 가능
 
 //함수(Function) : 매개변수로 전달받은 값을 연산 처리하여 결과값을 반환하는 명령의 모임
 
@@ -28,6 +28,14 @@ package oop;
 // => 메소드 호출시 매개변수에 차례대로 값을 전달하여 저장해야만 메소드 호출 가능
 // => 매개변수에 정상적으로 값이 전달되지 않은 경우 메소드 호출 불가능 - 에러 발생
 
+//return : 메소드를 강제로 종료하여 프로그램의 흐름(스레드)를 메소드를 호출한 위치로 되돌리는 키워드 - 제어문
+// => 일반적으로 if 구문과 같이 사용
+//형식) if(조건식) return;  >> 메소드의 반환형을 [void]로 작성
+
+//return 키워드를 사용하여 메소드의 처리 결과값을 메소드를 호출한 명령으로 반환하는 기능 제공
+//형식) return 반환값;
+// => 메소드의 반환형을 반환값과 동일한 자료형으로 작성
+
 //객체 생성을 목적으로 작성된 클래스
 public class Method {
 	void displayOne() {
@@ -37,4 +45,95 @@ public class Method {
 	void displayTwo() {
 		System.out.println("Method 클래스에 작성된 displayTwo() 메소드 호출");
 	}
+	
+	void printOne() {
+		int tot=0;
+		for(int i=1;i<=100;i++) {
+			tot+=i;
+		}
+		System.out.println("1~100 범위의 정수들의 합계 = "+tot);
+	}
+	
+	void printTwo(int num) {
+		//데이타 검증
+		if(num < 0) {
+			System.out.println("[에러]매개변수에는 0 보다 큰 값이 전달되어 저장돼야 합니다.");
+			return;
+		}
+		
+		int tot=0;
+		for(int i=1;i<=num;i++) {
+			tot+=i;
+		}
+		System.out.println("1~"+num+" 범위의 정수들의 합계 = "+tot);
+	}
+	
+	void printThree(int num1, int num2) {
+		int tot=0;
+		
+		if(num1 > num2) {
+			int temp=num1;
+			num1=num2;
+			num2=temp;
+		}
+		
+		for(int i=num1;i<=num2;i++) {
+			tot+=i;
+		}
+		System.out.println(num1+"~"+num2+" 범위의 정수들의 합계 = "+tot);
+	}
+	
+	int returnTot(int num1, int num2) {
+		int tot=0;
+		
+		if(num1 > num2) {
+			int temp=num1;
+			num1=num2;
+			num2=temp;
+		}
+		
+		for(int i=num1;i<=num2;i++) {
+			tot+=i;
+		}
+		
+		return tot;
+	}
+	
+	//매개변수로 전달받은 정수값을 홀수와 짝수로 구분하여 논리값을 반환하는 메소드
+	// => false 반환 : 홀수, true 반환 : 짝수
+	boolean isOddEven(int num) {
+		if(num % 2 != 0) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+	
+	//배열의 메모리 주소를 반환하는 메소드
+	int[] returnArray() {
+		/*
+		int[] array={10, 20, 30, 40, 50};
+		return array;
+		*/
+		
+		//배열을 생성하여 참조변수에 저장하지 않고 직접 반환 처리 
+		//return {10, 20, 30, 40, 50};//에러 발생
+		return new int[]{10, 20, 30, 40, 50};
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
