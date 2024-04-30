@@ -56,6 +56,26 @@ public class MethodApp {
 		int[] numArray=method.returnArray();
 		System.out.println("배열 요소값 = "+Arrays.toString(numArray));
 		System.out.println("==============================================================");
+		/*
+		int[] suArray={10, 20, 30};
+		//메소드 매개변수에 참조변수에 저장된 배열의 주소값 전달
+		System.out.println("합계 = "+method.sumOne(suArray));
+		*/
+		
+		//배열을 생성하여 메소드 매개변수에 배열의 주소값 전달
+		//System.out.println("합계 = "+method.sumOne({10, 20, 30}));//에러 발생
+		System.out.println("합계 = "+method.sumOne(new int[]{10, 20, 30}));
+		System.out.println("==============================================================");
+		//0개 이상의 요소를 가진 배열을 생성하여 메소드 매개변수 전달
+		System.out.println("합계 = "+method.sumOne(new int[]{}));
+		System.out.println("합계 = "+method.sumOne(new int[]{10, 20}));
+		System.out.println("합계 = "+method.sumOne(new int[]{10, 20, 30, 40, 50}));
+		System.out.println("==============================================================");
+		System.out.println("합계 = "+method.sumTwo());
+		System.out.println("합계 = "+method.sumTwo(10, 20));
+		System.out.println("합계 = "+method.sumTwo(10, 20, 30));
+		System.out.println("합계 = "+method.sumTwo(10, 20, 30, 40, 50));
+		System.out.println("==============================================================");
 	}
 }
 

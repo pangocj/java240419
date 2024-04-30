@@ -120,20 +120,24 @@ public class Method {
 		//return {10, 20, 30, 40, 50};//에러 발생
 		return new int[]{10, 20, 30, 40, 50};
 	}
+	
+	//매개변수로 배열을 전달받아 배열의 모든 요소값의 합계를 계산하여 반환하는 메소드
+	int sumOne(int[] array) {//매개변수에 배열의 메모리 주소를 전달받아 저장
+		int sum=0;
+		for(int su : array) {
+			sum+=su;
+		}
+		return sum;
+	}
+	
+	//메소드 작성시 [...] 기호를 사용하여 매개변수를 작성하면 0개 이상의 값을 전달받아 
+	//매개변수에 저장 가능
+	// => 0개 이상의 값을 전달받아 저장한 매개변수는 메소드에서 배열과 동일하게 처리
+	int sumTwo(int... num) {
+		int sum=0;
+		for(int su : num) {
+			sum+=su;
+		}
+		return sum;
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
