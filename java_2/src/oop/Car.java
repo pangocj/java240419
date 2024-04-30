@@ -24,7 +24,7 @@ package oop;
 
 //자동차를 모델링하여 작성된 클래스
 // => 속성 : 모델명, 엔진상태, 현재속도 - 필드
-// => 행위 : 시동 온(On), 시동 오프(Off), 속성 증가, 속도 감소, 이동 중지 - 메소드
+// => 행위 : 시동 온(On), 시동 오프(Off), 속도 증가, 속도 감소, 이동 중지 - 메소드
 public class Car {
 	//필드(Field) : 표현대상의 속성값을 저장하기 위한 변수
 	// => 클래스에 작성된 모든 메소드에서 필드 사용 가능
@@ -38,7 +38,32 @@ public class Car {
 	
 	//메소드(Method) : 표현대상의 행위(기능)을 제공하기 위한 함수
 	// => 필드를 사용하여 메소드에 작성된 명령으로 원하는 기능 구현
+	void startEngine() {//시동 온(On)
+		engineStatus=true;
+		System.out.println(modelName+"의 자동차 시동을 켰습니다.");
+	}
 	
+	void stopEngine() {//시동 오프(Off)
+		engineStatus=false;
+		System.out.println(modelName+"의 자동차 시동을 껐습니다.");
+	}
+	
+	void speedUp(int speed) {//속도 증가
+		currentSpeed+=speed;
+		System.out.println(modelName+"의 자동차 속도가 "+speed
+				+"Km/h 증가 되었습니다. 현재 속도는 "+currentSpeed+"Km/h 입니다.");
+	}
+	
+	void speedDown(int speed) {//속도 감소
+		currentSpeed-=speed;
+		System.out.println(modelName+"의 자동차 속도가 "+speed
+				+"Km/h 감소 되었습니다. 현재 속도는 "+currentSpeed+"Km/h 입니다.");
+	}
+	
+	void speedZero() {//이동 중지
+		currentSpeed=0;
+		System.out.println(modelName+"의 자동차가 멈췄습니다.");
+	}
 }
 
 
