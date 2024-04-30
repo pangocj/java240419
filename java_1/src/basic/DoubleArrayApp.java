@@ -73,7 +73,6 @@ public class DoubleArrayApp {
 			}
 			System.out.println();
 		}
-
 		System.out.println("==============================================================");		
 	}
 }

@@ -38,16 +38,3 @@ public class Method {
 		System.out.println("Method 클래스에 작성된 displayTwo() 메소드 호출");
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
