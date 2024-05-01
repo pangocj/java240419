@@ -12,10 +12,16 @@ public class Student {
 
 	public Student(int num, String name, int kor, int eng) {
 		super();
+		//매개변수로 전달받은 값을 사용해 필드 초기화 처리
 		this.num = num;
 		this.name = name;
 		this.kor = kor;
 		this.eng = eng;
+		
+		//매개변수로 전달받은 값을 계산하여 필드 초기화 처리
+		// => 총점을 계산하는 메소드 호출하여 필드 초기화 처리 - 생성자에서 메소드 호출 가능
+		//tot=kor+eng;
+		calcTot();
 	}
 
 	public int getNum() {
