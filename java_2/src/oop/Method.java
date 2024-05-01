@@ -69,14 +69,13 @@ public class Method {
 	}
 	
 	void printThree(int num1, int num2) {
-		int tot=0;
-		
 		if(num1 > num2) {
 			int temp=num1;
 			num1=num2;
 			num2=temp;
 		}
 		
+		int tot=0;
 		for(int i=num1;i<=num2;i++) {
 			tot+=i;
 		}
@@ -84,14 +83,13 @@ public class Method {
 	}
 	
 	int returnTot(int num1, int num2) {
-		int tot=0;
-		
 		if(num1 > num2) {
 			int temp=num1;
 			num1=num2;
 			num2=temp;
 		}
 		
+		int tot=0;
 		for(int i=num1;i<=num2;i++) {
 			tot+=i;
 		}
