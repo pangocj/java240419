@@ -20,8 +20,11 @@ package association;
 //6.의존관계(Dependency) : 포함 관계로 설정된 클래스가 변경돼도 현재 클래스가 영향을 주지 않는 관계
 // => TV와 리모컨의 관계
 
+//자동차정보(모델명, 생산년도, 엔진정보)를 저장하기 위한 클래스
 public class Car {
-
+	private String modelName;
+	private int productionYear;
+	
 }
 
 
