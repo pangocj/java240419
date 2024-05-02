@@ -66,6 +66,11 @@ public class Car {
 	public void displayCar() {
 		System.out.println("모델명 = "+modelName);
 		System.out.println("생산년도 = "+productionYear);
-		System.out.println("엔진정보 = "+engine);
+		//System.out.println("엔진정보 = "+engine);
+		
+		//필드에 저장된 객체를 사용하여 클래스의 메소드 호출
+		//System.out.println("연료타입 = "+engine.getFualType());
+		//System.out.println("배기량 = "+engine.getDisplacement());
+		engine.displayEngine();
 	}
 }
