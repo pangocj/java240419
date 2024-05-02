@@ -2,7 +2,7 @@ package oop;
 
 //싱글턴 디자인 패턴을 적용하여 작성된 클래스 - 싱글톤 클래스(Singleton Class)
 // => 프로그램에 객체를 하나만 제공하기 위한 목적으로 클래스를 작성하기 위한 디자인 패턴 
-// => 프로그램에 불필요한 객체가 여러개 생성되는 것을 방지하기 위한 디자인 패턴
+// => 프로그램에 불필요한 객체가 여러개 생성되는 것을 방지하기 위해 사용
 // => 데이타 처리 기능의 메소드만 작성된 클래스를 선언할 때 싱글톤 디자인 패턴 적용
 
 public class Singleton {
@@ -18,7 +18,7 @@ public class Singleton {
 	private Singleton() {
 		// TODO Auto-generated constructor stub
 	}
-
+	
 	//정적 영역(Static Blcok) : 클래스 파일(XXX.class)을 읽어 메모리(methodArea)에 저장된 후
 	//자동으로 실행될 명령을 작성하기 위한 영역 - 정적 영역의 명령은 프로그램에서 한번만 실행
 	// => 정적 필드 및 정적 메소드만 사용 가능

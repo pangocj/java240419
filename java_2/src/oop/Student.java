@@ -20,7 +20,7 @@ public class Student {
 	// => 정적 필드는 직접 값을 저장하여 초기화 처리 - 생성자를 사용하여 초기화 미처리
 	// => 클래스로 생성된 모든 객체는 정적 필드 사용 가능 - 모든 객체가 값을 공유하여 사용
 	//public static int total=0;
-	private static int total=0;
+	private static int total;
 	
 	public Student() {
 		// TODO Auto-generated constructor stub
@@ -105,15 +105,3 @@ public class Student {
 		Student.total = total;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
