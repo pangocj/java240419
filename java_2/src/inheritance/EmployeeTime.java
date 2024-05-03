@@ -33,7 +33,14 @@ public class EmployeeTime extends Employee {
 	}
 	
 	//급여를 계산하여 반환하는 메소드
+	/*
 	public int computeTimePay() {
+		return moneyPerHour*workedHour;
+	}
+	*/
+	
+	@Override
+	public int computePay() {
 		return moneyPerHour*workedHour;
 	}
 }

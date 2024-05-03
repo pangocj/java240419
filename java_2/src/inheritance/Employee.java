@@ -31,4 +31,9 @@ public class Employee {
 	public void setEmpName(String empName) {
 		this.empName = empName;
 	}
+	
+	//급여를 계산하여 반환하는 메소드
+	public int computePay() {
+		return 0;
+	}
 }
