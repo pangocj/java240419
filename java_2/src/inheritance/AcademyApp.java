@@ -49,7 +49,6 @@ public class AcademyApp {
 			person.display();
 			System.out.println("==========================================================");
 		}
-		
 	}
 }
 
