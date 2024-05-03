@@ -4,12 +4,14 @@ package inheritance;
 public class EmployeeApp {
 	public static void main(String[] args) {
 		/*
+		//Employee 클래스가 추상클래스로 선언되어 있는 경우 객체 생성시 에러 발생
 		Employee employee=new Employee(1000, "홍길동");
 		System.out.println("사원번호 = "+employee.getEmpNo());
 		System.out.println("사원이름 = "+employee.getEmpName());
 		*/
 		
 		/*
+		//추상클래스로 참조변수를 생성하여 자식클래스의 객체를 저장 가능
 		Employee employee1=new EmployeeRegular();
 		Employee employee2=new EmployeeTime();
 		Employee employee3=new EmployeeContract();
@@ -47,6 +49,7 @@ public class EmployeeApp {
 			//묵시적 객체 형변환에 의해 부모클래스의 참조변수가 일시적으로 자식클래스의 객체를
 			//참조하여 자식클래스의 오버라이딩 선언된 메소드를 호출
 			System.out.println("사원급여 = "+employee.computePay());
+			System.out.println("인센티브 = "+employee.computeIncentive());
 			System.out.println("==========================================================");
 		}
 	}
