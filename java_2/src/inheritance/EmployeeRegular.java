@@ -29,5 +29,9 @@ public class EmployeeRegular extends Employee {
 	}
 	*/
 	
-	
+	//부모클래스의 메소드를 오버라이딩 선언
+	@Override
+	public int computePay() {
+		return annualSalary/12;
+	}
 }
