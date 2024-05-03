@@ -44,16 +44,3 @@ public class Car /* extends Object */ {
 		return "modelName : "+modelName+", userName : "+userName;
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
