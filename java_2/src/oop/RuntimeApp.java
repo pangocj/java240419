@@ -4,7 +4,7 @@ package oop;
 // => Runtime 클래스는 프로그램에 객체를 하나만 제공하는 싱글톤 클래스
 public class RuntimeApp {
 	public static void main(String[] args) {
-		//Runtime 클래스의 생성자은 은닉화 처리되어 있으므로 new 연산자로 생성자를 호출하여 객체 생성 불가능
+		//Runtime 클래스의 생성자는 은닉화 처리되어 있으므로 new 연산자로 생성자를 호출하여 객체 생성 불가능
 		//Runtime runtime=new Runtime();
 		
 		//Runtime.getRuntime() : Runtime 객체를 반환하는 정적 메소드

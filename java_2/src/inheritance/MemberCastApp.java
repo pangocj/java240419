@@ -50,6 +50,8 @@ public class MemberCastApp {
 		MemberEvent event=(MemberEvent)member4;
 		event.setEmail("xyz@itwill.xyz");
 		*/
+		
+		//. 연산자보다 Cast 연산자가 먼저 실행되도록 작성
 		((MemberEvent)member4).setEmail("xyz@itwill.xyz");
 		
 		//묵시적 객체 형변환 : 부모클래스의 메소드를 자식클래스에서 오버라이딩 선언하면 부모
