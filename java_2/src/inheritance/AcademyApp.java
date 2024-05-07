@@ -30,11 +30,15 @@ public class AcademyApp {
 			//사용하여 부모클래스의 참조변수로 자식클래스의 객체를 참조해 자식클래스의 메소드 호출
 			//문제점)상속관계가 아닌 클래스를 사용하여 명시적 객체 형변환할 경우 ClassCastException 발생
 			//해결법)참조변수로 객체 형변환 가능한 클래스인지를 확인한 후 명시적 객체 형변환 사용
-			// => instanceof 연산자를 사용하여 참조변수로 형변환 가능한 클래스인지를 비교
+			// => instanceof 연산자를 사용하여 참조변수로 객체 형변환 가능한 클래스인지를 비교
 			//형식) 참조변수 instanceof 클래스
 			// => 참조변수로 객체 형변환 가능한 클래스가 아닌 경우 [false]를 제공하고 객체 형변환
 			//가능한 클래스인 경우 [true]를 제공하는 연산자
 			if(person instanceof AcademyStudent) {
+				/*
+				AcademyStudent student=(AcademyStudent)person;
+				System.out.println(student.getCourse()+"의 학생정보 >> ");
+				*/
 				System.out.println(((AcademyStudent)person).getCourse()+"의 학생정보 >> ");
 			} else if(person instanceof AcademyInstructor) {
 				System.out.println(((AcademyInstructor)person).getSubject()+"의 강사정보 >> ");
@@ -45,7 +49,9 @@ public class AcademyApp {
 			//오버라이딩 선언된 자식메소드의 메소드는 묵시적 객체 형변환에 의해 부모클래스의
 			//참조변수가 일시적으로 자식클래스의 객체를 참조해 자식클래스의 메소드 호출
 			// => 부모클래스의 참조변수는 상속관계의 자식클래스의 객체로 자동 형변환되어
-			//자식클래스의 객체를 참조해 자식클래스의 메소드 호출 - 오버라이딩에 의한 다형성 
+			//자식클래스의 객체를 참조해 자식클래스의 메소드 호출 - 오버라이딩에 의한 다형성
+			//오버라이딩에 의한 다형성 : 자식클래스의 참조변수에 저장된 자식클래스의 객체에 
+			//의해 메소드를 선택 호출
 			person.display();
 			System.out.println("==========================================================");
 		}

@@ -3,7 +3,7 @@ package inheritance;
 //자동차정보(모델명, 소유자명)를 저장하기 위한 클래스
 // => 클래스 작성시 상속받은 부모클래스가 없는 경우 무조건 Object 클래스를 상속받아 사용
 // => 모든 Java 클래스는 Object 클래스를 상속받기 때문에 Object 클래스의 메소드 호출 가능
-//Object 클래스 : 모든 Java 클래스의 부모클래스 - Root Class
+//Object 클래스 : 모든 Java 클래스의 부모클래스 - 대표 클래스(Root Class)
 // => Object 클래스로 생성된 참조변수에는 모든 Java 클래스로 생성된 객체 저장 가능
 // => 메소드의 반환형이 Object 클래스인 경우 메소드에서 모든 Java 클래스로 생성된 객체 반환 가능
 public class Car /* extends Object */ {
