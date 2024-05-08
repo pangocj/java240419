@@ -40,7 +40,7 @@ public class OuterOne {
 
 	//객체 내부클래스(Instance Inner Class)
 	// => 객체 내부클래스는 컴파일되면 [외부클래스$내부클래스.class] 파일로 생성
-	// => 외부클래스에 종속되어 사용되는 클래스 - 외부클래스에서만 사용 가능한 클래스
+	// => 외부클래스의 객체에 종속되어 사용되는 클래스 - 외부클래스에서만 사용 가능한 클래스
 	public class InnerOne {
 		private int innerNum;
 		
@@ -64,8 +64,8 @@ public class OuterOne {
 		public void innerDisplay() {
 			System.out.println("innerNum = "+innerNum);
 			
-			//객체 내부클래스의 메소드에서는 외부클래스의 필드 또는 메소드를 접근 제한자에
-			//상관없이 직접 참조하여 사용 가능
+			//객체 내부클래스의 메소드에서는 외부클래스의 객체를 참조해 외부클래스의 필드 또는 
+			// 메소드를 접근 제한자에 상관없이 직접 참조하여 사용 가능
 			//System.out.println("outerNum = "+outerNum);
 			//outerDisplay();
 		}
