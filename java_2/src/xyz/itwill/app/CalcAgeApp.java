@@ -37,8 +37,8 @@ public class CalcAgeApp {
 		// => value 속성에 경고 관련 속성값을 사용하여 경고 제거 
 		// => value 속성외에 다른 속성이 없는 경우 속성값만 설정 가능
 		// => @SuppressWarnings 어노테이션은 명령 위에 작성 가능하지만 클래스 또는 메소드 위에 작성 가능
-		@SuppressWarnings( "deprecation")
 		//[Ctrl] 기능을 누른 상태에서 식별자를 마우스로 클릭한 경우 해당 식별자가 선언된 위치로 이동
+		@SuppressWarnings("deprecation")
 		int currentYear=now.getYear()+1900;
 		
 		//나이를 계산하여 변수에 저장
