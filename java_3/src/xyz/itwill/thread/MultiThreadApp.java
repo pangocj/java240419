@@ -61,6 +61,42 @@ public class MultiThreadApp {
 		*/
 		new Thread(new MultiThreadTwo()).start();
 		
+		/*
+		//Runnable 인터페이스를 상속받은 자식클래스로 객체를 여러개 생성할 필요가 없는 경우
+		//Runnable 인터페이스를 상속받은 익명클래스로 객체를 생성해 Thread 클래스의 생성자
+		//매개변수에 전달하여 Thread 객체 생성
+		new Thread(new Runnable() {
+			@Override
+			public void run() {
+				for(char i='a';i<='z';i++) {
+					System.out.print(i);
+					try {
+						Thread.sleep(500);
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+				}
+			}
+		}).start();
+		*/
+		
+		//Runnable 인터페이스에는 반환형이 [void]이고 매개변수가 없는 run() 메소드가 하나만
+		//작성된 함수형 인터페이스로 사용 가능
+		// => 람다표현식을 사용하여 객체 생성 가능
+		new Thread(() -> {
+			for(char i='a';i<='z';i++) {
+				System.out.print(i);
+				try {
+					Thread.sleep(500);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}).start();
+		
+		
 		for(int i=1;i<=9;i++) {
 			System.out.print(i);
 			
