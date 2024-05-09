@@ -6,9 +6,10 @@ public interface Printable {
 	void print();
 	
 	//JDK11 이상에서는 인터페이스에 명령을 존재하는 정적메소드와 기본메소드 작성 가능
+	
 	//정적메소드(Static Method) : static 제한자를 사용하여 작성된 메소드
 	// => Java 자료형(클래스 또는 인터페이스)을 사용하여 메소드 호출
-	// => 정적메소드는 자식메소드는 자식클래스에서 오버라이딩 선언 불가능
+	// => 정적메소드는 자식클래스에서 오버라이딩 선언 불가능
 	static void power() {
 		System.out.println("[장치]전원을 켰습니다.");	
 	}

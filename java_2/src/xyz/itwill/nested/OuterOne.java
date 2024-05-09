@@ -65,7 +65,7 @@ public class OuterOne {
 			System.out.println("innerNum = "+innerNum);
 			
 			//객체 내부클래스의 메소드에서는 외부클래스의 객체를 참조해 외부클래스의 필드 또는 
-			// 메소드를 접근 제한자에 상관없이 직접 참조하여 사용 가능
+			//메소드를 접근 제한자에 상관없이 직접 참조하여 사용 가능
 			//System.out.println("outerNum = "+outerNum);
 			//outerDisplay();
 		}
