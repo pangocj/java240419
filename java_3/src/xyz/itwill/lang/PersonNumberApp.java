@@ -50,8 +50,6 @@ public class PersonNumberApp {
 		}
 		
 		System.out.println("[결과]생년월일 = "+birthday+", 성별 = "+gender);
-		
-		
 	}
 }
 
