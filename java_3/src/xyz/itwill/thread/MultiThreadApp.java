@@ -20,8 +20,7 @@ package xyz.itwill.thread;
 //2.Runnable 인터페이스를 상속받은 자식클래스에서 무조건 run() 메소드를 오버라이딩 선언
 //=> run() 메소드에는 Thread 객체에 의해 생성된 새로운 스레드가 실행하기 위한 명령 작성
 //3.Runnable 인터페이스를 상속받은 자식클래스의 생성자로 객체 생성 - Runnable 객체
-//4.Thread 클래스의 매개변수가 작성된 생성자를 호출하여 Thread 객체 생성
-// => 생성자 매개변수에 Runnable 객체를 전달하여 Thread 객체 생성
+//4.Thread 클래스 생성자의 매개변수에 Runnable 객체를 전달하여 Thread 객체 생성
 // => Runnable 인터페이스를 상속받은 자식클래스의 run() 메소드를 Thread 객체로 사용 가능
 //5.생성된 Thread 객체를 참조하여 Thread 클래스의 start() 메소드 호출 
 
@@ -82,8 +81,7 @@ public class MultiThreadApp {
 		*/
 		
 		//Runnable 인터페이스에는 반환형이 [void]이고 매개변수가 없는 run() 메소드가 하나만
-		//작성된 함수형 인터페이스로 사용 가능
-		// => 람다표현식을 사용하여 객체 생성 가능
+		//작성된 함수형 인터페이스로 사용 가능 - 람다표현식을 사용하여 객체 생성 가능
 		new Thread(() -> {
 			for(char i='a';i<='z';i++) {
 				System.out.print(i);

@@ -35,11 +35,10 @@ public class PasswordMatchApp {
 				//예외클래스로 객체를 생성하여 인위적 예외 발생
 				//형식) throw new 예외클래스(값, 값, ...);
 				// => 예외클래스의 매개변수(예외메세지)가 작성된 생성자로 객체 생성
+				//throw new RuntimeException("[결과]키보드로 입력된 비밀번호가 틀립니다.");
 				
 				//인위적으로 발생되는 예외에 대한 예외클래스는 직접 작성하여 사용하는 것을 권장
 				// => 발생되는 예외를 명확히 구분하여 예외처리 가능
-				//throw new RuntimeException("[결과]키보드로 입력된 비밀번호가 틀립니다.");
-				
 				throw new PasswordMismatchException("[결과]키보드로 입력된 비밀번호가 틀립니다.");
 			}
 			
