@@ -89,20 +89,72 @@ public class StringApp {
 		//String.length() : String 객체에 저장된 문자열의 문자 갯수를 반환하는 메소드
 		System.out.println("문자열의 문자 갯수 = "+str5.length());
 		System.out.println("==============================================================");
+		//String.charAt(int index) : String 객체에 저장된 문자열에서 매개변수로 전달받은 첨자(Index)
+		//위치의 문자를 반환하는 메소드
+		System.out.println("두번째 위치의 문자 = "+str5.charAt(1));
+		System.out.println("==============================================================");
+		//String.indexOf(int ch) : String 객체에 저장된 문자열에서 매개변수로 전달받은 문자를
+		//처음부터 차례대로 검색하여 검색된 문자의 시작위치값(첨자)를 반환하는 메소드
+		System.out.println("A 문자의 저장 위치 = "+str5.indexOf('A'));
+		//String.indexOf(String str) : String 객체에 저장된 문자열에서 매개변수로 전달받은 문자열을
+		//처음부터 차례대로 검색하여 검색된 문자열의 시작위치값(첨자)를 반환하는 메소드
+		// => 매개변수로 전달받은 문자열을 찾을 수 없는 경우 [-1] 반환
+		System.out.println("EFG 문자열의 저장 위치 = "+str5.indexOf("EFG"));
+		System.out.println("XYZ 문자열의 저장 위치 = "+str5.indexOf("XYZ"));
+		System.out.println("==============================================================");
+		String str6="Java Programming";
+		System.out.println("str6 = "+str6);
 		
+		//String.toUpperCase() : String 객체에 저장된 문자열을 대문자로 변환하여 문자열을 반환하는 메소드
+		System.out.println("str6.toUpperCase() = "+str6.toUpperCase());
+		//String.toLowerCase() : String 객체에 저장된 문자열을 소문자로 변환하여 문자열을 반환하는 메소드
+		System.out.println("str6.toLowerCase() = "+str6.toLowerCase());
+		System.out.println("==============================================================");
+		String str7="    홍길동          ";
+		System.out.println("입력된 이름은 ["+str7+"]입니다.");
+		//String.trim() : String 객체에 저장된 문자열에 앞과 뒤에 존재하는 모든 공백을 제거한
+		//문자열을 반환하는 메소드
+		System.out.println("입력된 이름은 ["+str7.trim()+"]입니다.");
+		System.out.println("==============================================================");
+		String str8="    임    꺽    정     ";
+		System.out.println("입력된 이름은 ["+str8+"]입니다.");
+		//String.replace(String regEx, String replacement) : String 객체에 저장된 문자열에서
+		//검색 문자열(정규표현식)을 찾아 치환 문자열로 변경된 문자열을 반환하는 메소드
+		System.out.println("입력된 이름은 ["+str8.replace(" ", "").replace("꺽", "걱")+"]입니다.");
+		System.out.println("==============================================================");
+		//String str9="010-1234-5678";
+		String str9="010*1234*5678";
+		System.out.println("전화번호 = "+str9);
+		System.out.println("==============================================================");
+		//String.split(String regEx) : String 객체에 저장된 문자열에서 매개변수로 전달받은 
+		//문자열(구분자 : Delimiter - 정규표현식)로 구분하여 분리한 후 문자열 배열 요소에
+		//저장하여 배열을 반환하는 메소드
+		//String[] stringArray=str9.split("-");
+		//정규표현식에서 사용하는 메타문자를 일반문자로 사용하기 위해서는 [\\]룰 붙여 표현
+		String[] stringArray=str9.split("\\*");
 		
+		System.out.println("전화번호 앞부분 = "+stringArray[0]);
+		System.out.println("전화번호 중간부분 = "+stringArray[1]);
+		System.out.println("전화번호 뒷부분 = "+stringArray[2]);
+		System.out.println("==============================================================");
+		//String.substring(int beginIndex, int endIndex) : String 객체에 저장된 문자열에서 
+		//매개변수로 전달받은 시작첨자 위치의 문자부터 종료첨자 위치의 문자 전까지의 문자열을
+		//분리하여 문자열로 반환하는 메소드
+		System.out.println("전화번호 앞부분 = "+str9.substring(0, 3));
+		System.out.println("전화번호 중간부분 = "+str9.substring(4, 8));
+		//System.out.println("전화번호 뒷부분 = "+str9.substring(9, 13));
+		//String.substring(int beginIndex) : String 객체에 저장된 문자열에서 매개변수로 전달 
+		//받은 시작첨자 위치의 문자부터 마지막 문자까지 분리하여 문자열로 반환하는 메소드
+		System.out.println("전화번호 뒷부분 = "+str9.substring(9));
+		System.out.println("==============================================================");
+		//String.valueOf(Object obj) : 매개변수로 전달받은 객체(값)을 문자열로 변환하여
+		//String 객체로 반환하는 정적메소드
+		//String numStirng=String.valueOf(100);
+		//[문자열+숫자값] 또는 [숫자값+문자열] 형식의 연산식을 사용하면 숫자값을 문자열과 
+		//결합해 문자열로 제공받아 사용 가능
+		String numStirng=100+"";
 		
+		System.out.println("numStirng = "+numStirng);
+		System.out.println("==============================================================");
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
