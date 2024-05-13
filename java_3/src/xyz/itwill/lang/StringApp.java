@@ -16,7 +16,7 @@ public class StringApp {
 		//System.out.println("str1.toString() = "+str1.toString());
 		System.out.println("str1 = "+str1);
 		System.out.println("==============================================================");
-		//메소드영역에 생성된 기본 String 객체를 제공받아 참조변수에 저장
+		//메소드영역에 저장된 기존 String 객체를 제공받아 참조변수에 저장
 		String str2="ABC";
 		
 		//참조변수를 비교연산자로 비교하면 참조변수에 저장된 메모리주소를 비교하여 결과 제공
