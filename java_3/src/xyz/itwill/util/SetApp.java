@@ -12,7 +12,7 @@ import java.util.Set;
 // => Collection 인터페이스는 Set 인터페이스와 List 인터페이스의 부모 인터페이스 
 
 //Set 인터페이스를 상속받은 콜렉션 클래스 - HashSet 클래스, TreeSet 클래스 등
-// => 요소의 순서가 없으며 같은 객체(값)가 중복 저장되지 않는 기능 제공
+// => Set 객체는 객체를 저장한 요소의 순서가 없으며 동일한 객체(값) 중복 저장 불가능
 public class SetApp {
 	public static void main(String[] args) {
 		//new 연산자로 HashSet 클래스의 기본 생성자를 호출하여 객체 생성
