@@ -1,6 +1,7 @@
 package xyz.itwill.util;
 
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Set;
 
 //콜렉션 클래스(Collection Class) : 자료구조(Date Structure)를 사용하여 다수의 객체(값)를
@@ -57,23 +58,28 @@ public class SetApp {
 		set.remove("임꺽정");
 		System.out.println("set = "+set);
 		System.out.println("==============================================================");
+		//Set.iterator() : Set 객체에 저장된 요소값을 반복 처리할 수 있는 Iterator 객체를 반환하는 메소드
+		//Iterator 객체 : 콜렉션 클래스의 객체에 저장된 요소값을 반복 처리하기 위한 기능을 제공하는 객체
+		// => 반복지시자 : 내부의 커서(Cursor)를 사용하여 콜렉션 클래스의 객체 요소값을 제공받아 반복 처리
+		// => 제네릭에 클래스를 전달하여 Iterator 객체로 반복 처리할 수 있는 객체 설정 
+		Iterator<String> iterator=set.iterator();
 		
+		//Iterator 객체를 사용하여 Set 객체에 저장된 모든 요소값(객체)을 제공받아 일괄 처리
+		//Iterator.hasNext() : Iterator 객체로 처리 가능한 요소값의 존재 유무를 논리값으로 반환하는 메소드
+		// => false : 처리될 요소값 미존재, true : 처리될 요소값 존재
+		while(iterator.hasNext()) {
+			//Iterator.next() : Iterator 객체로 처리될 요소값(객체)를 반환하는 메소드
+			// => 제네릭을 사용했으므로 명시적 객체 형변환 불필요
+			String str=iterator.next();
+			System.out.println(str);			
+		}
+		System.out.println("==============================================================");
+		//향상된 for 구문을 사용하여 Set 객체에 저장된 요소값(객체)를 차례대로 제공받아
+		//참조변수에 저장해 일괄처리 가능
+		// => 향상된 for 구문을 사용하면 내부적으로 Iterator 객체를 사용해 반복 처리
+		for(String str : set) {
+			System.out.println(str);
+		}
+		System.out.println("==============================================================");
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
