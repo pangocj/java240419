@@ -1,6 +1,7 @@
 package xyz.itwill.util;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
 
@@ -74,24 +75,28 @@ public class ListApp {
 		}
 		System.out.println();
 		System.out.println("==============================================================");
-		
+		//List.contains(E element) : List 객체에 매개변수로 전달받은 객체와 동일한 객체가 요소값으로
+		//없는 경우 [false]를 반환하고 동일한 객체가 요소값으로 있는 경우 [true]를 반환하는 메소드
+		if(list.contains("홍길동")) {
+			System.out.println("List 객체에 저장된 요소값이 맞습니다.");
+		} else {
+			System.out.println("List 객체에 저장된 요소값이 아닙니다.");
+		}
+		System.out.println("==============================================================");
+		//List.clear() : List 객체에 저장된 모든 요소값을 삭제하는 메소드
+		list.clear();
+		System.out.println("list = "+list);
+
+		//List.isEmpty() : List 객체에 저장된 요소값이 있는 경우 [false]를 반환하고 요소값이
+		//하나도 없는 경우 [true]를 반환하는 메소드
+		if(list.isEmpty()) {//if(list.size() == 0) 명령과 동일
+			System.out.println("List 객체에 저장된 요소값이 하나도 없습니다.");
+		}
+		System.out.println("==============================================================");
+		//Arrays.asList(E ... elements) : 매개변수로 0개 이상의 객체를 전달받아 List 객체의
+		//요소값으로 저장한 List 객체를 반환하는 정적메소드
+		List<Integer> memberList=Arrays.asList(10, 20, 30, 40, 50);//배열(Array) >> List 객체
+		System.out.println("memberList = "+memberList);
+		System.out.println("==============================================================");
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
