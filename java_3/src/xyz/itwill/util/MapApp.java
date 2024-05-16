@@ -10,7 +10,7 @@ import java.util.Map;
 // => 이름(Key)을 사용하여 값(Value)을 빠르게 검색하여 제공하기 위해 사용하는 콜렉션 클래스
 public class MapApp {
 	public static void main(String[] args) {
-		//이름(K)과 값(V)에 대한 제네릭에 Java 자료형을 전달여 객체 생성
+		//이름(K)과 값(V)에 대한 제네릭에 Java 자료형을 전달하여 객체 생성
 		Map<Integer, String> map=new HashMap<Integer, String>();
 		
 		//Map.put(K key, V value) : 매개변수로 전달받은 이름과 값을 하나의 엔트리(Entry)로 묶어
@@ -68,12 +68,3 @@ public class MapApp {
 
 	}
 }
-
-
-
-
-
-
-
-
-

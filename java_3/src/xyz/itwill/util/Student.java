@@ -42,6 +42,9 @@ public class Student implements Comparable<Student> {
 		return "{학번 = "+num+", 이름 = "+name+"}";
 	}
 
+	//메소드를 호출한 객체(this)의 필드값과 매개변수로 전달받은 객체의 필드값을 비교하여 
+	//양수, 0, 음수 중 하나를 반환하는 메소드
+	// => Collections.sort(List<T> list) 메소드가 객체의 필드값을 비교하여 정렬하기 위해 자동 호출 
 	@Override
 	public int compareTo(Student o) {
 		//학번(정수값)을 빼기(-) 연산 처리하여 결과값(양수, 음수, 0)을 반환 - 학번 정렬 처리
