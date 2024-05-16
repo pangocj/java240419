@@ -38,7 +38,7 @@ public class PersonApp {
 		personList.add(new Person("홍길동", 50));
 		personList.add(new Person("임꺽정", 29));
 		personList.add(new Person("전우치", 35));
-		
+
 		System.out.println(personList);
 		System.out.println("==============================================================");
 		List<Person> thirtyList=filter(personList, person -> person.getAge() >= 30);
