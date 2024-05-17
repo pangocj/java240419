@@ -10,6 +10,8 @@ import java.awt.event.ActionListener;
 //컴퍼넌트(컨테이너)에서는 다양한 이벤트가 발생될 수 있으며 이벤트 발생시 원하는 명령이 실행
 //되도록 프로그램 작성 필요 - 이벤트 처리 프로그램
 
+//java.awt.event 패키지 : 이벤트 처리를 위한 Java 자료형이 선언된 패키지
+
 //이벤트 처리 프로그램을 작성하는 방법
 //1.컴퍼넌트(컨테이너) 관련 클래스를 사용하여 UI 클래스 작성
 // => UI 클래스는 기본적으로 Frame 클래스를 상속받아 작성
@@ -31,6 +33,7 @@ import java.awt.event.ActionListener;
 // => 이벤트 처리 프로그램은 기본적으로 다중 스레드 프로그램
 
 //[EXIT] 버튼을 누른 경우 프로그램을 종료하는 이벤트 프로그램 작성
+// => 이벤트 처리 클래스의 메소드에서 UI 클래스의 컴퍼넌트(컨테이너) 사용 불가능
 public class EventHandleApp extends Frame {
 	private static final long serialVersionUID = 1L;
 
@@ -49,7 +52,7 @@ public class EventHandleApp extends Frame {
 	}
 	
 	public static void main(String[] args) {
-		new EventHandleApp("이베트 처리");
+		new EventHandleApp("이벤트 처리");
 	}
 }
 
@@ -62,21 +65,3 @@ class ButtonEventHandle implements ActionListener {
 		System.exit(0);
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
