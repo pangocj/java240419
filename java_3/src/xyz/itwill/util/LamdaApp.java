@@ -24,13 +24,13 @@ public class LamdaApp {
 		*/
 		
 		//Consumer 함수형 인터페이스로 람다표현식을 사용해 객체를 생성하여 참조변수에 저장
-		Consumer<Integer> integerConsumer= i -> System.out.println(number + i);
+		Consumer<Integer> integerConsumer= i -> System.out.println(number + i); 
 		
 		integerConsumer.accept(200);
 		System.out.println("==============================================================");
 		//Predicate<T> 함수형 인터페이스 : 제네릭으로 전달된 Java 자료형의 객체를 매개변수로 전달받아 
 		//처리하고 논리값(boolean)을 반환하는 test() 추상메소드가 작성된 함수형 인터페이스
-		Predicate<Integer> isEven = i -> i % 2 == 0;
+		Predicate<Integer> isEven = i -> i % 2 == 0; 
 		
 		if(isEven.test(10)) {
 			System.out.println("입력값은 [짝수]입니다.");

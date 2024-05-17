@@ -25,8 +25,8 @@ public class NonLayoutManagerApp extends Frame {
 		Button button1=new Button("Button-1");
 		Button button2=new Button("Button-2");
 		
-		//배치관리자가 없는 컨테이너에 컴퍼넌트를 배치하기 위해서는 반드시 컴퍼넌트의 배치
-		//위치와 크기를 변경한 후 컴퍼넌트를 컨테이너에 배치 처리
+		//배치관리자가 없는 컨테이너에 컴퍼넌트를 배치하기 위해서는 반드시 컴퍼넌트의 출력위치와
+		//크기를 변경한 후 컴퍼넌트를 컨테이너에 배치 처리
 		button1.setBounds(80, 100, 150, 80);
 		button2.setBounds(190, 300, 100, 120);
 		

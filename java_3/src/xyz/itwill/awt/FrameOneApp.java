@@ -4,7 +4,7 @@ import java.awt.Frame;
 
 //JDK >> Desktop Application
 //1.CUI(Character User Interface) 프로그램 : 문자 중심의 사용자 환경에서 실행되는 프로그램  
-//2.GUI(Graphic User Interface) 프로그램 :  그래픽 중심의 사용자 환경에서 실행되는 프로그램
+//2.GUI(Graphic User Interface) 프로그램 : 그래픽 중심의 사용자 환경에서 실행되는 프로그램
 // => 컴퍼넌트를 사용하여 작성한 프로그램
 
 //java.awt 패키지 : GUI 프로그램을 작성하기 위한 Java 자료형이 선언된 패키지
@@ -22,8 +22,8 @@ import java.awt.Frame;
 
 public class FrameOneApp {
 	public static void main(String[] args) {
-		//Frame 클래스 : 멚가 존재하는 컨테이너를 생성하기 위한 클래스
-		// => new 연산자로 Frame 클래스의 기본 생성자를 호출하여 객체 생성 
+		//Frame 클래스 : 메뉴가 존재하는 컨테이너를 생성하기 위한 클래스
+		// => new 연산자로 Frame 클래스의 기본 생성자를 호출하여 객체 생성 - 제목 미설정 
 		// => Frame 클래스로 객체를 생성하면 프레임이 보여지지 않은 상태로 생성
 		//Frame frame=new Frame();
 		

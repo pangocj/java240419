@@ -36,7 +36,7 @@ import java.util.regex.Pattern;
 */
 
 //키보드를 이용하여 사용자로부터 값(문자열)을 입력받아 원하는 패턴의 문자열인지를 비교하여
-//결과를 출력하는 메소드
+//결과를 출력하는 프로그램 작성
 public class RegualarExpressionApp {
 	public static void main(String[] args) {
 		Scanner scanner=new Scanner(System.in);
@@ -113,20 +113,3 @@ public class RegualarExpressionApp {
 		scanner.close();
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
