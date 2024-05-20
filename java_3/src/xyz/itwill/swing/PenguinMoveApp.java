@@ -1,4 +1,4 @@
-package images;
+package xyz.itwill.swing;
 
 import java.awt.Graphics;
 import java.awt.Image;
