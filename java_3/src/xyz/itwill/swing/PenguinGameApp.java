@@ -203,6 +203,14 @@ public class PenguinGameApp extends JFrame {
 			while(isPenguinAlive && isStoneAlive) {
 				if(isRun) {
 					stoneY+=5;
+					
+					//돌멩이 이미지가 바닥에 떨어진 경우 콜렉션 객체에서 요소값 삭제 처리
+					if(stoneY >= JFRAME_HEIGHT-STONE_SIZE) {
+						isStoneAlive=false;
+						synchronized (stoneSet) {
+							stoneSet.remove(this);//this : StoneThread 객체
+						}
+					}
 				
 					//펭귄 이미지 출력 좌표값과 돌멩이 이미지 출력 좌표값이 중복될 경우 펭귄의
 					//상태를 죽음상태로 변경 
@@ -210,6 +218,9 @@ public class PenguinGameApp extends JFrame {
 						if(stoneX+10 >= penguinX && stoneX+10 <= penguinX+PENGUIN_SIZE
 							&& stoneX+20 >= penguinX && stoneX+20 <= penguinX+PENGUIN_SIZE) {//X 좌표값 비교
 							isPenguinAlive=false;
+							synchronized (stoneSet) {
+								stoneSet.clear();
+							}
 							repaint();
 						}
 					}
@@ -245,18 +256,3 @@ public class PenguinGameApp extends JFrame {
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
