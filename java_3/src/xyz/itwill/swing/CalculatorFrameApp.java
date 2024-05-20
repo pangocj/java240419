@@ -199,7 +199,7 @@ public class CalculatorFrameApp extends JFrame implements ActionListener {
 				//연산결과를 JLabel 컴퍼넌트를 사용하여 출력 처리
 				//label.setText(String.valueOf(result));
 				label.setText(result+"");
-				
+				 
 				//operation="";//연산식을 저장하기 위한 필드를 초기화 처리
 				operation=result+"";//연산 결과값을 operation 필드에 저장하여 지속적인 연산 가능
 			} catch (ArithmeticException exception) {
