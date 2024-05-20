@@ -245,12 +245,12 @@ public class PenguinGameApp extends JFrame {
 					synchronized (stoneSet) {
 						stoneSet.add(new StoneThread());
 					}
-					
-					try {
-						Thread.sleep(200);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
-					}
+				}
+				
+				try {
+					Thread.sleep(200);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
 				}
 			}
 		}
