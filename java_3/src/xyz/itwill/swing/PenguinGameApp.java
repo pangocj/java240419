@@ -6,6 +6,9 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.HashSet;
+import java.util.Random;
+import java.util.Set;
 
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -41,6 +44,9 @@ public class PenguinGameApp extends JFrame {
 	//돌멩이 이미지를 저장하기 위한 필드
 	private Image stoneImage;
 
+	//다수의 돌멩이 정보(StoneThread 객체)를 저장하기 위한 필드 - 콜렉션
+	private Set<StoneThread> stoneSet;
+	
 	public PenguinGameApp(String title) {
 		super(title);
 		
@@ -50,6 +56,8 @@ public class PenguinGameApp extends JFrame {
 			penguins[i]=new ImageIcon(getClass().getResource("/images/penguin"+(i+1)+".gif")).getImage();
 		}
 		stoneImage=new ImageIcon(getClass().getResource("/images/stone.gif")).getImage();  
+		
+		stoneSet=new HashSet<StoneThread>();
 		
 		init();
 		
@@ -94,6 +102,7 @@ public class PenguinGameApp extends JFrame {
 		isPenguinAlive=true;
 		
 		new PenguinAnimationThread().start();
+		new CreateStoneThread().start();
 	}
 	
 	public static void main(String[] args) {
@@ -119,6 +128,13 @@ public class PenguinGameApp extends JFrame {
 			g.setColor(Color.RED);
 			g.drawString("GAME OVER", 150, 200);
 			g.drawString("다시(F5)", 200, 300);
+		}
+		
+		//콜렉션 객체에 저장된 모든 돌멩이 정보를 이용하여 돌멩이 이미지 출력 처리
+		synchronized (stoneSet) {
+			for(StoneThread stone : stoneSet) {
+				g.drawImage(stoneImage, stone.stoneX, stone.stoneY, STONE_SIZE, STONE_SIZE, this);
+			}
 		}
 	}
 	
@@ -158,8 +174,82 @@ public class PenguinGameApp extends JFrame {
 		}
 	}
 	
+	//돌멩이 정보를 저장하기 위한 클래스
+	// => 돌멩이 이미지가 움직이도록 새로운 스레드를 사용해 돌멩이 이미지의 좌표값 변경
+	public class StoneThread extends Thread {
+		//돌멩이 이미지가 출력될 좌표값을 저장하기 위한 필드
+		private int stoneX, stoneY;
+
+		//돌멩이 상태를 저장하기 위한 필드
+		// => false : 소멸상태, true : 존재상태(기본)
+		private boolean isStoneAlive;
+		
+		//돌멩이 이미지가 떨어지는 속도를 저장하기 위한 필드
+		private int stoneSpeed;
+		
+		public StoneThread() {
+			stoneX=new Random().nextInt(JFRAME_WIDTH-STONE_SIZE);
+			stoneY=0;
+			isStoneAlive=true;
+			stoneSpeed=40;
+			
+			//스레드 클래스로 객체를 생성하면 자동으로 새로운 스레드가 생성되어 run() 메소드를
+			//호출하여 명령 실행
+			start();
+		}
+		
+		@Override
+		public void run() {
+			while(isPenguinAlive && isStoneAlive) {
+				if(isRun) {
+					stoneY+=5;
+				
+					//펭귄 이미지 출력 좌표값과 돌멩이 이미지 출력 좌표값이 중복될 경우 펭귄의
+					//상태를 죽음상태로 변경 
+					if(stoneY+20 >= penguinY) {//Y 좌표값 비교
+						if(stoneX+10 >= penguinX && stoneX+10 <= penguinX+PENGUIN_SIZE
+							&& stoneX+20 >= penguinX && stoneX+20 <= penguinX+PENGUIN_SIZE) {//X 좌표값 비교
+							isPenguinAlive=false;
+							repaint();
+						}
+					}
+				}
+				
+				try {
+					Thread.sleep(stoneSpeed);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
 	
+	//돌멩이 정보(StoneThread 객체)를 생성하여 콜렉션 객체의 요소값으로 저장하는 클래스
+	// => 새로운 스레드로 StoneThread 객체를 생성하여 콜렉션 객체의 요소값으로 저장
+	public class CreateStoneThread extends Thread {
+		@Override
+		public void run() {
+			while(isPenguinAlive) {
+				if(isRun) {
+					synchronized (stoneSet) {
+						stoneSet.add(new StoneThread());
+					}
+					
+					try {
+						Thread.sleep(200);
+					} catch (InterruptedException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+	}
 }
+
+
+
+
+
 
 
 
