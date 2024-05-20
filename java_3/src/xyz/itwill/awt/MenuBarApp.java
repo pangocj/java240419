@@ -30,7 +30,7 @@ public class MenuBarApp extends Frame {
 		MenuItem open=new MenuItem("Open", new MenuShortcut(KeyEvent.VK_O));
 		MenuItem save=new MenuItem("Save", new MenuShortcut(KeyEvent.VK_S));
 		MenuItem exit=new MenuItem("Exit");
-		
+
 		MenuItem view=new MenuItem("HelpView");
 		MenuItem info=new MenuItem("Information");
 		

@@ -45,9 +45,8 @@ public class SwingApp extends JFrame {
 		
 		//JFrame.getContentPane() : JFrame 객체의 Container 객체를 반환하는 메소드
 		// => JFrame 객체에 직접 컴퍼넌트 배치, 배경색 변경, 배치관리자 변경 등을 설정하지 않고
-		//JFrame 객체의 Container 객체에 컴퍼넌트 배치, 배경색 변경, 배치관리자 등 설정
+		//JFrame 객체의 Container 객체에 컴퍼넌트 배치, 배경색 변경, 배치관리자 변경 등 설정
 		Container container=getContentPane();
-		
 		
 		//JTextArea 컴퍼넌트는 문자열이 폭 또는 높이를 벗어날 경우 스크롤 미생성
 		// => 문자열이 JTextArea 컴퍼넌트의 폭 또는 높이를 벗어날 경우 스크롤이 생성되도록 
