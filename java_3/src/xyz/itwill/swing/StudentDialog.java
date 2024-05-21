@@ -14,6 +14,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.util.Vector;
+import java.awt.event.ActionEvent;
 
 public class StudentDialog extends JDialog {
 
@@ -32,7 +40,16 @@ public class StudentDialog extends JDialog {
 		super(frame, title, true);
 		
 		setBounds(700, 200, 450, 300);
-		setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
+		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				numTF.setText("");
+				nameTF.setText("");
+				phoneTF.setText("");
+				setVisible(false);
+			}
+		});
 		
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -105,6 +122,35 @@ public class StudentDialog extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("추가");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						//JTextField 컴퍼넌트의 입력값을 반환받아 저장
+						String num=numTF.getText();
+						String name=nameTF.getText();
+						String phone=phoneTF.getText();
+						
+						//Vector 객체를 생성하여 입력값을 요소에 저장하여 추가
+						// => Vector 객체가 JTable 컴퍼넌트의 하나의 행으로 출력
+						Vector<String> vector=new Vector<String>();
+						vector.add(num);
+						vector.add(name);
+						vector.add(phone);
+						
+						//JTable.getModel() : JTable 컴퍼넌트에 저장된 TableModel 객체를 
+						//반환하는 메소드
+						TableModel tableModel=((StudentFrameApp)frame).table.getModel();
+						
+						//DefaultTableModel.addRow(Vector vector) : 매개변수로 전달받은 
+						//Vector 객체를 JTable 컴퍼넌트의 행으로 추가하는 메소드
+						// => Vector 객체의 요소값이 행을 구성하는 열의 값으로 처리
+						((DefaultTableModel)tableModel).addRow(vector);
+						
+						numTF.setText("");
+						nameTF.setText("");
+						phoneTF.setText("");
+						setVisible(false);
+					}
+				});
 				okButton.setFont(new Font("굴림체", Font.BOLD, 20));
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
@@ -112,6 +158,16 @@ public class StudentDialog extends JDialog {
 			}
 			{
 				JButton cancelButton = new JButton("취소");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						//JTextField 컴퍼넌트의 입력값 초기화
+						numTF.setText("");
+						nameTF.setText("");
+						phoneTF.setText("");
+						//JDialog 컨테이너 숨김 처리
+						setVisible(false);
+					}
+				});
 				cancelButton.setFont(new Font("굴림체", Font.BOLD, 20));
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);

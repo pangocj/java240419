@@ -1,25 +1,24 @@
 package xyz.itwill.swing;
 
+import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.table.DefaultTableModel;
-
-import java.awt.BorderLayout;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import java.awt.Font;
-import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 public class StudentFrameApp extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTable table;
+	JTable table;
 	private StudentDialog studentDialog;
 
 	/**
@@ -84,6 +83,26 @@ public class StudentFrameApp extends JFrame {
 		panel.add(addButton);
 		
 		JButton removeButton = new JButton("학생삭제");
+		removeButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				DefaultTableModel tableModel=(DefaultTableModel)table.getModel();
+				
+				//DefaultTableModel.getRowCount() : DefaultTableModel 객체에 저장된 행의 
+				//갯수를 반환하는 메소드		
+				if(tableModel.getRowCount() == 0) return;
+				
+				//DefaultTableModel.getSelectedRow() : JTable 컴퍼넌트에 출력된 행에서 선택된
+				//행의 행번호를 반환하는 메소드
+				// => 선택행이 없는 경우 [-1] 반환
+				int row=table.getSelectedRow();
+				if(row == -1) return;
+				
+				//DefaultTableModel.removeRow(int row) : 매개변수로 전달받은 행번호의 행을
+				//DefaultTableModel 객체에서 삭제하는 메소드
+				// => JTable 컴퍼넌트에 출력된 행 삭제 처리
+				tableModel.removeRow(row);
+			}
+		});
 		removeButton.setFont(new Font("굴림체", Font.BOLD, 20));
 		panel.add(removeButton);
 		
