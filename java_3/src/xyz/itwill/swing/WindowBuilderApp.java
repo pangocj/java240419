@@ -80,6 +80,10 @@ public class WindowBuilderApp extends JFrame {
 		textArea.setFont(new Font("굴림체", Font.BOLD, 20));
 		scrollPane.setViewportView(textArea);
 		
+		redButton.addActionListener(new ButtonEventHandle());
+		greenButton.addActionListener(new ButtonEventHandle());
+		blueButton.addActionListener(new ButtonEventHandle());
+		
 		JTextField textField = new JTextField();
 		textField.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -96,4 +100,29 @@ public class WindowBuilderApp extends JFrame {
 		contentPane.add(textField, BorderLayout.SOUTH);
 		textField.setColumns(10);
 	}
+	
+	public class ButtonEventHandle implements ActionListener {
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			JButton eventSource=(JButton)e.getSource();
+			
+			redButton.setEnabled(true);
+			greenButton.setEnabled(true);
+			blueButton.setEnabled(true);
+
+			eventSource.setEnabled(false);
+			
+			if(eventSource == redButton) {
+				textArea.setForeground(Color.RED);
+			} else if(eventSource == greenButton) {
+				textArea.setForeground(Color.GREEN);
+			} else if(eventSource == blueButton) {
+				textArea.setForeground(Color.BLUE);
+			}
+		}
+	}
 }
+
+
+
+

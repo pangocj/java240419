@@ -19,7 +19,7 @@ public class PaintApp extends JFrame {
 		super(title);
 		
 		//JFrame 컨테이너에서 마우스 관련 이벤트가 발생될 경우 이벤트 처리를 위해 이벤트 처리 객체 등록
-		// => MouseAdapter 추상클래스를 상속받은 익명의 클래스를 사용하여 객체를 생성해 전달
+		// => 매개변수에 MouseAdapter 추상클래스를 상속받은 익명의 클래스를 사용하여 객체를 생성해 전달
 		addMouseListener(new MouseAdapter() {
 			//컴퍼넌트(컨테이너)에서 마우스 버튼을 누른 경우 자동 호출되는 이벤트 처리 메소드
 			// => 이벤트 처리 메소드의 매개변수에서는 이벤트 관련 정보가 저장된 Event 객체를 
