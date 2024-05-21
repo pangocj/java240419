@@ -2,19 +2,18 @@ package xyz.itwill.swing;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
-import java.awt.Font;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
-import javax.swing.BoxLayout;
-import java.awt.GridLayout;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
+import javax.swing.border.EmptyBorder;
 
 public class StudentDialog extends JDialog {
 
@@ -24,24 +23,17 @@ public class StudentDialog extends JDialog {
 	private JTextField nameTF;
 	private JTextField phoneTF;
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		try {
-			StudentDialog dialog = new StudentDialog();
-			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
-	/**
-	 * Create the dialog.
-	 */
-	public StudentDialog() {
-		setBounds(100, 100, 450, 300);
+	public StudentDialog(JFrame frame, String title) {
+		//부모클래스(JDialog 클래스)의 JDialog(Frame owner, String title, boolean model) 
+		//생성자를 super 키워드로 호출하여 JDialog 객체 생성
+		// => owner 매개변수에는 부모창(JFrame 객체)을 전달받고 model 매개변수에는 부모창의
+		//비활성화 여부를 설정하는 논리값(false : 부모창 활성화 - Modeless Dialog, true : 
+		//부모창 비활성화 - Model Dialog)을 전달받아 JDialog 객체 생성
+		super(frame, title, true);
+		
+		setBounds(700, 200, 450, 300);
+		setDefaultCloseOperation(JDialog.HIDE_ON_CLOSE);
+		
 		getContentPane().setLayout(new BorderLayout());
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
@@ -64,7 +56,7 @@ public class StudentDialog extends JDialog {
 			numTF = new JTextField();
 			numTF.setFont(new Font("굴림체", Font.PLAIN, 20));
 			GridBagConstraints gbc_numTF = new GridBagConstraints();
-			gbc_numTF.fill = GridBagConstraints.BOTH;
+			gbc_numTF.fill = GridBagConstraints.HORIZONTAL;
 			gbc_numTF.insets = new Insets(0, 0, 5, 0);
 			gbc_numTF.gridx = 1;
 			gbc_numTF.gridy = 0;
@@ -83,7 +75,7 @@ public class StudentDialog extends JDialog {
 			nameTF = new JTextField();
 			nameTF.setFont(new Font("굴림체", Font.PLAIN, 20));
 			GridBagConstraints gbc_nameTF = new GridBagConstraints();
-			gbc_nameTF.fill = GridBagConstraints.BOTH;
+			gbc_nameTF.fill = GridBagConstraints.HORIZONTAL;
 			gbc_nameTF.insets = new Insets(0, 0, 5, 0);
 			gbc_nameTF.gridx = 1;
 			gbc_nameTF.gridy = 1;
@@ -93,7 +85,6 @@ public class StudentDialog extends JDialog {
 			JLabel lblNewLabel_2 = new JLabel("전화번호");
 			lblNewLabel_2.setFont(new Font("굴림체", Font.BOLD, 20));
 			GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
-			gbc_lblNewLabel_2.fill = GridBagConstraints.VERTICAL;
 			gbc_lblNewLabel_2.insets = new Insets(0, 0, 0, 5);
 			gbc_lblNewLabel_2.gridx = 0;
 			gbc_lblNewLabel_2.gridy = 2;
@@ -103,7 +94,7 @@ public class StudentDialog extends JDialog {
 			phoneTF = new JTextField();
 			phoneTF.setFont(new Font("굴림체", Font.PLAIN, 20));
 			GridBagConstraints gbc_phoneTF = new GridBagConstraints();
-			gbc_phoneTF.fill = GridBagConstraints.BOTH;
+			gbc_phoneTF.fill = GridBagConstraints.HORIZONTAL;
 			gbc_phoneTF.gridx = 1;
 			gbc_phoneTF.gridy = 2;
 			contentPanel.add(phoneTF, gbc_phoneTF);

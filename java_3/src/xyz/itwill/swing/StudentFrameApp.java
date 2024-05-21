@@ -12,12 +12,15 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import java.awt.Font;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class StudentFrameApp extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
+	private StudentDialog studentDialog;
 
 	/**
 	 * Launch the application.
@@ -63,7 +66,7 @@ public class StudentFrameApp extends JFrame {
 		//JTable 클래스 : 값을 행과 열로 구성된 테이블(Table - 표) 형식으로 출력하는 컴퍼넌트를
 		//생성하기 위한 클래스
 		// => JTable(TableModel tm) 생성자를 사용하여 객체 생성
-		// => tm 매개변수에 TableModel 객체를 전달해 JTable 객체에 컬럼명과 행 출력 처리
+		// => tm 매개변수에 TableModel 객체를 전달 JTable 객체에 컬럼명과 행 출력 처리
 		table = new JTable(tableModel);
 		table.setFont(new Font("굴림체", Font.PLAIN, 16));
 		scrollPane.setViewportView(table);
@@ -72,12 +75,19 @@ public class StudentFrameApp extends JFrame {
 		contentPane.add(panel, BorderLayout.SOUTH);
 		
 		JButton addButton = new JButton("학생추가");
-		addButton.setFont(new Font("굴림체", Font.BOLD, 24));
+		addButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				studentDialog.setVisible(true);
+			}
+		});
+		addButton.setFont(new Font("굴림체", Font.BOLD, 20));
 		panel.add(addButton);
 		
 		JButton removeButton = new JButton("학생삭제");
-		removeButton.setFont(new Font("굴림체", Font.BOLD, 24));
+		removeButton.setFont(new Font("굴림체", Font.BOLD, 20));
 		panel.add(removeButton);
+		
+		studentDialog=new StudentDialog(this, "학생추가");				
 	}
 
 }
