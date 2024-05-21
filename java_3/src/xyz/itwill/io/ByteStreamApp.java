@@ -12,7 +12,6 @@ import java.io.IOException;
 // => 전달값을 1Byte 단위로 입력 또는 출력하기 위한 스트림
 // => InputStream 추상클래스와 OutputStream 추상클래스를 기반으로 선언된 클래스
 
-
 //키보드로 입력받은 원시데이타(1Byte)를 모니터로 전달하여 출력하는 프로그램 작성
 // => EOF(End Of File) 신호(Ctrl+Z - 입력 종료)를 받기 전까지 반복 처리
 public class ByteStreamApp {
