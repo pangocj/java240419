@@ -35,7 +35,7 @@ public class FileOutputStreamApp {
 			
 			if(readByte == -1) break;
 			
-			//파일 출력스트림으로 원시데이타를 전달하여 저장하여 저장(Save)
+			//파일 출력스트림으로 원시데이타를 전달하여 저장하여 저장 - Save
 			out.write(readByte);
 		}
 		
