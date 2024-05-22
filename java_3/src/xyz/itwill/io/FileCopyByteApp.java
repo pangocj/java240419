@@ -9,6 +9,7 @@ import java.io.IOException;
 
 //원본파일(c:\data\bandizip.exe)에 저장된 내용을 원시데이타로 읽어 타겟파일(c:\data\bandizip_byte.exe)에
 //전달하여 저장하는 프로그램 작성 - 파일 복사 프로그램 
+// => 가공하지 않은 원시데이타로 입력 또는 출력 처리해 모든 형식의 원본파일을 타겟파일로 복사하여 사용 가능
 public class FileCopyByteApp {
 	public static void main(String[] args) throws IOException {
 		//BufferedInputStream 클래스 : 대량의 원시데이타를 전달받을 수 있는 입력스트림을

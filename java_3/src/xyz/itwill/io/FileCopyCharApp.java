@@ -9,6 +9,8 @@ import java.io.IOException;
 
 //원본파일(c:\data\bandizip.exe)에 저장된 내용을 문자데이타로 읽어 타겟파일(c:\data\bandizip_char.exe)에
 //전달하여 저장하는 프로그램 작성 - 파일 복사 프로그램
+// => 인코딩 처리된 문자데이타로 입력 또는 출력 처리해 문서파일인 원본파일을 타겟파일로 복사하여 사용 가능
+// => 문서파일이 아닌 경우 원본파일의 내용을 변형해 타겟파일로 복사하므로 타겟파일 사용 불가능  
 public class FileCopyCharApp {
 	public static void main(String[] args) throws IOException {
 		//BufferedReader 클래스 : 대량의 문자데이타를 전달받을 수 있는 입력스트림을 생성하기 위한 클래스
