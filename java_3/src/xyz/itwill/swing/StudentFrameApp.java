@@ -13,6 +13,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import java.awt.Toolkit;
 
 public class StudentFrameApp extends JFrame {
 
@@ -38,6 +39,8 @@ public class StudentFrameApp extends JFrame {
 	 * Create the frame.
 	 */
 	public StudentFrameApp() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(StudentFrameApp.class.getResource("/images/stone.gif")));
+		setTitle("학생관리프로그램");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(700, 200, 500, 400);
 		contentPane = new JPanel();
@@ -62,7 +65,7 @@ public class StudentFrameApp extends JFrame {
 		//JTable 클래스 : 값을 행과 열로 구성된 테이블(Table - 표) 형식으로 출력하는 컴퍼넌트를
 		//생성하기 위한 클래스
 		// => JTable(TableModel tm) 생성자를 사용하여 객체 생성
-		// => tm 매개변수에 TableModel 객체를 전달 JTable 객체에 컬럼명과 행 출력 처리
+		// => tm 매개변수에 TableModel 객체를 전달받아 JTable 객체에 컬럼명과 행 출력 처리
 		table = new JTable(tableModel);
 		table.setFont(new Font("굴림체", Font.PLAIN, 16));
 		scrollPane.setViewportView(table);
@@ -88,9 +91,8 @@ public class StudentFrameApp extends JFrame {
 				//갯수를 반환하는 메소드		
 				if(tableModel.getRowCount() == 0) return;
 				
-				//DefaultTableModel.getSelectedRow() : JTable 컴퍼넌트에 출력된 행에서 선택된
-				//행의 행번호를 반환하는 메소드
-				// => 선택행이 없는 경우 [-1] 반환
+				//JTable.getSelectedRow() : JTable 컴퍼넌트에 출력된 행에서 선택된 행의 행번호를
+				//반환하는 메소드 - 선택행이 없는 경우 [-1] 반환
 				int row=table.getSelectedRow();
 				if(row == -1) return;
 				

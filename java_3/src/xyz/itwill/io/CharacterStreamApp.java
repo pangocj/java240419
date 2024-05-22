@@ -42,8 +42,8 @@ public class CharacterStreamApp {
 			
 			//Writer.write(int b) : 매개변수로 전달받은 정수값을 인코딩 처리한 문자데이타로 변환
 			//하여출력스트림으로 전달하는 메소드
-			// => 모니터 출력스트림(System.out) 버퍼(Buffer)에 문자데이타를 저장하고 일정 크기가
-			//되면 출력스트림으로 전달하여 처리
+			// => 모니터 출력스트림(System.out)을 사용할 경우 출력버퍼(Buffer)에 문자데이타를
+			//저장하고 일정 크기가 되면 출력스트림으로 전달하여 출력처리
 			out.write(readByte);
 			
 			//Writer.flush() : 출력스트림 버퍼(Buffer)에 저장된 문자데이타를 출력스트림으로

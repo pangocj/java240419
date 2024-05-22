@@ -23,11 +23,11 @@ public class ByteStreamApp {
 		
 		while(true) {
 			//System.in : 프로그램 개발을 위해 제공되는 키보드 입력스트림이 저장된 필드
-			// => InptStream 클래스를 기반으로 생성된 입력스트림
+			// => InptStream 클래스를 기반으로 생성된 객체 - 입력스트림
 			// => 키보드를 누르면 키보드 입력값(1Byte)을 입력스트림으로 전달
 			//InptStream.read() : 입력스트림에 저장된 원시데이타(1Byte)를 얻어와 정수값(int)으로
 			//반환하는 메소드
-			// => 입력스트림에 원시데이타가 하나도 없는 경우 스레드가 일시 중지 상태로 전환
+			// => 입력스트림에 입력값이 하나도 없는 경우 스레드가 일시 중지 상태로 전환
 			// => 키보드로 엔터(Enter)를 입력하면 일시 중지된 스레드는 재실행
 			//입력스트림 또는 출력스트림으로 메소드를 호출할 경우 대부분 IOException 발생
 			// => IOException : 입력스트림 또는 출력스트림에 문제가 있는 경우 발생되는 일반예외 
@@ -37,7 +37,7 @@ public class ByteStreamApp {
 			if(readByte == -1) break;
 			
 			//System.out : 프로그램 개발을 위해 제공되는 모니터(콘솔) 출력스트림이 저장된 필드
-			// => PrintStream 클래스(OutputStream 클래스)를 기반으로 생성된 출력스트림
+			// => PrintStream 클래스(OutputStream 클래스)를 기반으로 생성된 객체 - 출력스트림
 			//OutputStream.write(int b) : 매개변수로 전달받은 정수값을 출력스트림에 원시데이타
 			//(1Byte)로 전달하는 메소드
 			System.out.write(readByte);

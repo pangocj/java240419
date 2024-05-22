@@ -9,7 +9,7 @@ import java.util.Calendar;
 public class ConsoleIOApp {
 	public static void main(String[] args) throws IOException {
 		//키보드 입력스트림(System.in)을 InputStreamReader 클래스를 사용해 문자데이타를 입력받을
-		//수 있는 입력스트림으로 확장하고 BufferedReader 클래스를 사용해 대량의 문자데이타를
+		//수 있는 입력스트림으로 확장하고 BufferedReader 클래스를 사용해 대량의 문자데이타(문자열)를
 		//입력받을 수 있는 입력스트림으로 확장 - 스트림의 다단계 연결을 이용한 스트림 확장
 		BufferedReader in=new BufferedReader(new InputStreamReader(System.in));
 

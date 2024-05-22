@@ -22,6 +22,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.Vector;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class StudentDialog extends JDialog {
 
@@ -38,16 +39,14 @@ public class StudentDialog extends JDialog {
 		//비활성화 여부를 설정하는 논리값(false : 부모창 활성화 - Modeless Dialog, true : 
 		//부모창 비활성화 - Model Dialog)을 전달받아 JDialog 객체 생성
 		super(frame, title, true);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(StudentDialog.class.getResource("/images/stone.gif")));
 		
 		setBounds(700, 200, 450, 300);
 		setDefaultCloseOperation(JDialog.DO_NOTHING_ON_CLOSE);
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				numTF.setText("");
-				nameTF.setText("");
-				phoneTF.setText("");
-				setVisible(false);
+				init();
 			}
 		});
 		
@@ -145,10 +144,7 @@ public class StudentDialog extends JDialog {
 						// => Vector 객체의 요소값이 행을 구성하는 열의 값으로 처리
 						((DefaultTableModel)tableModel).addRow(vector);
 						
-						numTF.setText("");
-						nameTF.setText("");
-						phoneTF.setText("");
-						setVisible(false);
+						init();
 					}
 				});
 				okButton.setFont(new Font("굴림체", Font.BOLD, 20));
@@ -160,12 +156,7 @@ public class StudentDialog extends JDialog {
 				JButton cancelButton = new JButton("취소");
 				cancelButton.addActionListener(new ActionListener() {
 					public void actionPerformed(ActionEvent e) {
-						//JTextField 컴퍼넌트의 입력값 초기화
-						numTF.setText("");
-						nameTF.setText("");
-						phoneTF.setText("");
-						//JDialog 컨테이너 숨김 처리
-						setVisible(false);
+						init();
 					}
 				});
 				cancelButton.setFont(new Font("굴림체", Font.BOLD, 20));
@@ -175,4 +166,14 @@ public class StudentDialog extends JDialog {
 		}
 	}
 
+	//다이얼로그의 JTextField 컴퍼넌트를 초기화 처리하고 숨김 처리하는 메소드
+	private void init() {
+		//JTextField 컴퍼넌트의 입력값 초기화
+		numTF.setText("");
+		nameTF.setText("");
+		phoneTF.setText("");
+		//JDialog 컨테이너 숨김 처리
+		setVisible(false);
+	}
+	
 }
