@@ -20,7 +20,6 @@ public class FileOutputStreamApp {
 		//내용으로 저장되도록 처리
 		//FileOutputStream out=new FileOutputStream("c:/data/byte.txt");
 		
-		
 		//FileOutputStream(String name, boolean append) 생성자를 사용하여 FileOutputStream 객체 생성
 		// => append 매개변수에 [true]를 전달할 경우 name 매개변수로 전달받은 전달받은 파일이
 		//있으면 기존 내용의 새로운 내용을 추가하여 저장되도록 처리
