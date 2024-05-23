@@ -124,7 +124,7 @@ public class NotepadApp extends JFrame {
 					
 					try {
 						BufferedReader in=new BufferedReader(new FileReader(file.getAbsoluteFile()));
-						
+						 
 						textArea.setText("");//JTextArea 컴퍼넌트 초기화 처리
 						
 						while(true) {
