@@ -21,7 +21,7 @@ public class TimeServerApp {
 			//ServerSocket(int port) 생성자를 사용하여 ServerSocket 객체 생성
 			// => port 매개변수에는 클라이언트가 접속할 수 있는 포트번호를 전달해 포트 활성화 처리
 			// => 매개변수로 전달받은 포트번호가 다른 네트워크 프로그램에서 사용중인 경우 IOException 발생
-			ntpServer=new ServerSocket (2000);
+			ntpServer=new ServerSocket(2000);
 			
 			//ServerSocket.toString() : ServerSocket 객체에 저장된 네트워크 정보를 문자열로 반환하는 메소드
 			//System.out.println("ntpServer = "+ntpServer);
@@ -70,13 +70,3 @@ public class TimeServerApp {
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-

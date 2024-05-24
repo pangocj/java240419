@@ -72,7 +72,7 @@ public class InetAddressApp {
 		//현재 사용중인 컴퓨터는 기본적으로 [127.0.0.1]의 IP 주소(LoopBack IP)라 제공되며
 		//[localhost]라는 호스트이름 사용
 		InetAddress myComputer=InetAddress.getLocalHost(); 
-		
+
 		//InetAddress.toString() : InetAddress 객체에 저장된 네트워크 식별자를 문자열로 반환하는 메소드
 		System.out.println("myComputer = "+myComputer);//toString() 메소드 자동 호출
 		//InetAddress.getHostName() : InetAddress 객체에 저장된 호스트이름을 문자열로 반환하는 메소드
