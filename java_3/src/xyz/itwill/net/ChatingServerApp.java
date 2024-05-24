@@ -86,7 +86,10 @@ public class ChatingServerApp {
 				in=new BufferedReader(new InputStreamReader(socket.getInputStream()));
 				
 				//소켓의 출력스트림을 사용해 모든 자료형의 값을 문자열로 전달할 수 있는 출력스트림으로 확장
-				out=new PrintWriter(socket.getOutputStream());
+				// => PrintWriter(OutputStream out, boolean autoFlush) 생성자로 PrintWriter 객체 생성
+				// => autoFlush 매개변수에 [true]를 전달할 경우 출력버퍼를 사용하지 않고
+				//출력스트림으로 데이타를 직접 전달할 수 있도록 처리
+				out=new PrintWriter(socket.getOutputStream(), true);
 				
 				//클라이언트에서 보내온 대화명을 입력스트림으로 반환받아 저장
 				aliasName=in.readLine();
