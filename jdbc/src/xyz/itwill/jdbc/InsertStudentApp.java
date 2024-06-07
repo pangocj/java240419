@@ -1,8 +1,10 @@
 package xyz.itwill.jdbc;
 
+import java.sql.Connection;
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Enumeration;
 
 import oracle.jdbc.driver.OracleDriver;
@@ -35,6 +37,10 @@ import oracle.jdbc.driver.OracleDriver;
 //STUDENT 테이블에 행(학생정보)을 삽입하여 저장하는 JDBC 프로그램 작성
 public class InsertStudentApp {
 	public static void main(String[] args) {
+		//JDBC 관련 객체를 저장하기 위한 참조변수 선언
+		// => try 영역을 포함한 모든 영역에서 참조변수로 객체를 참조하여 메소드 호출 가능
+		Connection con=null;
+		Statement stmt=null;
 		try {
 			/*
 			//1.OracleDriver 클래스를 객체로 생성하여 DriverManager 클래스에 JDBC Driver 객체로 등록
@@ -58,7 +64,7 @@ public class InsertStudentApp {
 			
 			//1.Class.forName(String className) 메소드를 호출하여 OracleDriver 클래스를 
 			//제공받아 Class 객체로 생성해 메모리에 저장
-			// => OracleDriver 클래스의 정적영역에서 OracleDriver 클래스를 객체로 생성하여 
+			// => OracleDriver 클래스의 정적영역에서 OracleDriver 클래스로 객체를 생성하여 
 			//DriverManager 클래스에 JDBC Driver 객체로 등록
 			Class.forName("oracle.jdbc.driver.OracleDriver");			
 
@@ -70,28 +76,62 @@ public class InsertStudentApp {
 			}
 			*/
 			
+			//2.DBMS 서버를 접속하여 Connection 객체를 반환받아 저장
+			//DriverManager.getConnection(String url, String username, String password)
+			// => DBMS 서버를 접속하여 Connection 객체를 반환하는 정적 메소드
+			// => DriverManager 클래스에 등록된 JDBC Driver 객체로 매개변수로 전달받은 값을
+			//사용해 DBMS 서버에 접속
+			// => DBMS 서버 접속에 성공하면 Connection 객체를 반환하고 실패한 경우 SQLException 발생
+			//Connection 객체 : DBMS 서버에 접속된 정보를 저장한 객체
+			//SQLException : JDBC 관련 객체로 메소드를 호출한 경우 발생되는 예외
+			// => SQLException 객체에는 예외가 발생된 DBMS 관련 에러메세지 저장
+			//URL(Uniform Resource Location) : 인터넷에 존재하는 자원의 위치를 표현하기 위한 주소
+			//형식) Protocol:ServerName:Port:ResourcePath
+			//ex) https://www.itwill.xyz:80/test/index.html
+			//Oracle DBMS 서버에 접속해 전역 데이타베이스(XE)에 접근하기 위한 URL 주소
+			//형식) jdbc:oracle:thin:@ServerName:Port:SID
+			String url="jdbc:oracle:thin:@localhost:1521:xe";
+			String username="scott";
+			String password="tiger";
+			con=DriverManager.getConnection(url, username, password);
 			
+			//3.Connection 객체로 메소드를 호출하여 Statement 객체를 반환받아 저장
+			//Connection.createStatement() : Connection 객체에 SQL 명령을 전달하는 Statement 객체를
+			//반환하는 메소드
+			//Statement 객체 : 접속된 DBMS 서버에 SQL 명령을 전달하는 기능을 제공하는 객체
+			stmt=con.createStatement();
+			
+			//4.Statement 객체로 메소드를 호출하여 DBMS 서버에 SQL 명령을 전달하여 실행해
+			//실행 결과를 반환받아 저장 
+			//Statement.executeUpdate(String sql) : DML(INSERT, UPDATE, DELETE) 명령을 전달하여
+			//실행하는 메소드 - 조작행의 갯수를 정수값(int)로 반환
+			//Statement.executeQuery(String sql) : DQL(SELECT) 명령을 전달하여 실행하는 메소드
+			// => SELECT 명령의 실행결과로 검색된 행이 저장된 ResultSet 객체 반환
+			//전달하여 실행될 SQL 명령을 잘못된 경우 SQLException 발생
+			//String sql="insert into student values(1000,'홍길동','010-1234-5678','서울시 강남구','01/01/01')";
+			//String sql="insert into student values(2000,'임꺽정','010-2378-2341','수원시 월정구','02/05/09')";
+			String sql="insert into student values(3000,'전우치','010-7214-3911','인천시 상당구','1998-12-11')";
+			int rows=stmt.executeUpdate(sql);
+			
+			//5.SQL 명령을 실행하여 반환받은 정수값 또는 ResultSet 객체를 사용해 출력 처리
+			System.out.println("[메세지]"+rows+"명의 학생정보를 삽입하여 저장 하였습니다.");
 		} catch (ClassNotFoundException e) {
-			System.out.println("OracleDriver 클래스를 찾을 수 없습니다.");
+			System.out.println("[에러]OracleDriver 클래스를 찾을 수 없습니다.");
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("[에러]DBMS 관련 오류 = "+e.getMessage());
+		} finally {
+			try {
+				//6.JDBC 관련 객체를 모든 제거 - 객체가 생성된 순서의 반대로 제거
+				// => DBMS 서버 접속을 종료하기 위해 JDBC 관련 객체를 제거
+				//Statement.close() : Statement 객체를 제거하는 메소드
+				// => NullPointerException 발생 가능 - if 명령을 사용해 예외 발생 방지
+				//NullPointerException : 참조변수에 NULL이 저장된 상태에서 메소드를 호출한 경우 발생되는 예외
+				if(stmt!=null) stmt.close();
+				//Connection.close() : Connection 객체를 제거하는 메소드 - DBMS 서버 접속 종료
+				if(con!=null) con.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
 		} 
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
