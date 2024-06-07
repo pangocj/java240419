@@ -14,14 +14,14 @@ public class UpdateStudentApp {
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			
-			String url="jdbc:oracle:thin:@locahost:1521:xe";
+			String url="jdbc:oracle:thin:@localhost:1521:xe";
 			String username="scott";
 			String password="tiger";
 			con=DriverManager.getConnection(url, username, password);
 			
 			stmt=con.createStatement();
 			
-			String sql="update student set name='임걱정',address='부천시 원미구' where no=2000";
+			String sql="update set student name='임걱정',address='부천시 원미구' where no=2000";
 			int rows=stmt.executeUpdate(sql);
 			
 			System.out.println("[메세지]"+rows+"명의 학생정보를 변경 하였습니다.");
