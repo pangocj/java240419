@@ -56,14 +56,19 @@ public class SelectStudentApp {
 					String name=rs.getString("name");
 					String phone=rs.getString("phone");
 					String address=rs.getString("address");
-					Date birthday=rs.getDate("birthday");
+					//Date birthday=rs.getDate("birthday");
+					//검색행의 컬럼값은 컬럼 자료형에 상관없이 getString() 메소드를 호출하여
+					//문자열로 반환받아 저장 가능
+					String birthday=rs.getString("birthday");
 					
 					//컬럼값이 저장된 변수값을 출력
 					System.out.println("학번 = "+no);
 					System.out.println("이름 = "+name);
 					System.out.println("전화번호 = "+phone);
 					System.out.println("주소 = "+address);
-					System.out.println("생년월일 = "+birthday);
+					//날짜형의 컬럼값을 문자열로 반환받으면 [yyyy-MM-dd HH:mm:ss] 패턴의 문자열로 반환
+					// => 날짜 또는 시간만 필요한 경우 문자열을 분리하여 출력 처리
+					System.out.println("생년월일 = "+birthday.substring(0,10));
 					System.out.println("==================================================");					
 				} while(rs.next());
 			} else {
