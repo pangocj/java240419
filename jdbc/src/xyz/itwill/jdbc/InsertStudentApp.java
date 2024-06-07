@@ -14,8 +14,27 @@ package xyz.itwill.jdbc;
 //1.https://www.oracle.com 사이트에서 Oracle JDBC Driver 관련 라이브러리 파일 다운로드
 // => Oracle JDBC Driver 관련 라이브러리 파일 : ojdbc11.jar - JDK 버전 참조
 //2.Oracle JDBC Driver 관련 라이브러리 파일(ojdbc11.jar)을 프로젝트 폴더에 복사하여 붙여놓기
+//3.프로젝트 폴더에 저장된 라이브러리 파일을 프로젝트에 연결하여 프로그램 작성시 사용 가능
+//하도록 빌드(Build) 처리
+// => 라이브러리 파일에 작성된 인터페이스 또는 클래스를 프로그램에서 사용할 수 있도록 설정
+// => 프로젝트 >> 마우스 오른쪽 버튼 >> Properties >> 속성창 >> Java Build Path >> Libraries
+//    >> classpath >> Add Jars >> 파일 선택창 >> 프로젝트 폴더의 Jar 파일 선택 >> OK >> Apply And Close
+
+//STUDENT 테이블 : 학생정보를 저장하기 위한 테이블
+// => 학번(숫자형 - PK), 이름(문자형), 전화번호(문자형), 주소(문자형), 생년월일(날짜형)
+//CREATE TABLE STUDENT(NO NUMBER(4) PRIMARY KEY,NAME VARCHAR2(50),PHONE VARCHAR2(20)
+//	,ADDRESS VARCHAR2(100),BIRTHDAY DATE);
 
 //STUDENT 테이블에 행(학생정보)을 삽입하여 저장하는 JDBC 프로그램 작성
 public class InsertStudentApp {
 
 }
+
+
+
+
+
+
+
+
+
