@@ -1,5 +1,12 @@
 package xyz.itwill.jdbc;
 
+import java.sql.Driver;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.util.Enumeration;
+
+import oracle.jdbc.driver.OracleDriver;
+
 //JDBC(Java DataBase Connectivity) : Java를 사용하여 DBMS 서버에 접속해 SQL 명령을 전달하여  
 //실행하기 위한 기능을 제공하는 Java API(인터페이스 또는 클래스)
 
@@ -27,8 +34,58 @@ package xyz.itwill.jdbc;
 
 //STUDENT 테이블에 행(학생정보)을 삽입하여 저장하는 JDBC 프로그램 작성
 public class InsertStudentApp {
+	public static void main(String[] args) {
+		try {
+			/*
+			//1.OracleDriver 클래스를 객체로 생성하여 DriverManager 클래스에 JDBC Driver 객체로 등록
+			// => 동일한 Driver 클래스로 생성된 다수의 객체가 DriverManager 클래스에 JDBC Driver 객체로 등록 가능
+			// => 불필요한 자원이 존재해 프로그램 성능 저하 
+			//OracleDriver 클래스 : Oracle DBMS 서버에 접속할 수 있는 기능을 제공하는 Driver 객체를 
+			//생성하기 위한 클래스
+			//Driver 객체 : DBMS 서버에 접속할 수 있는 기능을 제공하기 위한 객체
+			//DriverManager 클래스 : Driver 객체를 관리하기 위한 기능을 제공하는 클래스
+			//DriverManager.registerDriver(Driver driver) : 매개변수로 전달받은 Driver 객체를
+			//DriverManager 클래스가 관리할 수 있는 JDBC Driver 객체로 등록하는 정적메소드 
+			DriverManager.registerDriver(new OracleDriver());
+			
+			//DriverManager 클래스가 관리하는 Driver 객체를 반환받아 출력 처리
+			Enumeration<Driver> drivers=DriverManager.getDrivers();
+			while (drivers.hasMoreElements()) {
+				Driver driver = (Driver) drivers.nextElement();
+				System.out.println(driver);
+			}
+			*/
+			
+			//1.Class.forName(String className) 메소드를 호출하여 OracleDriver 클래스를 
+			//제공받아 Class 객체로 생성해 메모리에 저장
+			// => OracleDriver 클래스의 정적영역에서 OracleDriver 클래스를 객체로 생성하여 
+			//DriverManager 클래스에 JDBC Driver 객체로 등록
+			Class.forName("oracle.jdbc.driver.OracleDriver");			
 
+			/*
+			Enumeration<Driver> drivers=DriverManager.getDrivers();
+			while (drivers.hasMoreElements()) {
+				Driver driver = (Driver) drivers.nextElement();
+				System.out.println(driver);
+			}
+			*/
+			
+			
+		} catch (ClassNotFoundException e) {
+			System.out.println("OracleDriver 클래스를 찾을 수 없습니다.");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+	}
 }
+
+
+
+
+
+
+
 
 
 
