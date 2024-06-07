@@ -1,13 +1,9 @@
 package xyz.itwill.jdbc;
 
 import java.sql.Connection;
-import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Enumeration;
-
-import oracle.jdbc.driver.OracleDriver;
 
 //JDBC(Java DataBase Connectivity) : Java를 사용하여 DBMS 서버에 접속해 SQL 명령을 전달하여  
 //실행하기 위한 기능을 제공하는 Java API(인터페이스 또는 클래스)
