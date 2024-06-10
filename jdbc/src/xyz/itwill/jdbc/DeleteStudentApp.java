@@ -17,7 +17,7 @@ public class DeleteStudentApp {
 			String username="scott";
 			String password="tiger";
 			con=DriverManager.getConnection(url, username, password);
-			
+			 
 			stmt=con.createStatement();
 			
 			String sql="delete from student where no=3000";
