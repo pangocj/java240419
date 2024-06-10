@@ -1,14 +1,13 @@
 package xyz.itwill.jdbc;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-//STUDENT 테이블에 저장된 모든 행(학생정보)을 학번으로 오름차순 정렬하여 검색해 학생정보를
-//출력하는 JDBC 프로그램 작성
+//STUDENT 테이블에 저장된 모든 행(학생정보)을 NO 컬럼값(학번)으로 오름차순 정렬하여 검색해 
+//학생정보를 출력하는 JDBC 프로그램 작성
 public class SelectStudentApp {
 	public static void main(String[] args) {
 		Connection con=null;
@@ -37,7 +36,6 @@ public class SelectStudentApp {
 			// => false 반환 : ResultSet 커서가 이동한 위치에 처리행이 없는 경우의 반환값 
 			//    - EOF(End Of File) 영역에 ResultSet 커서가 위치한 경우의 반환값 
 			// => true 반환 : ResultSet 커서가 이동한 위치에 처리행이 있는 경우의 반환값
-			
 			if(rs.next()) {
 				//System.out.println("[결과]검색된 학생정보가 있습니다.");
 				
