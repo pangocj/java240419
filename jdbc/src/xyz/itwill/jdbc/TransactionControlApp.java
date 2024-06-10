@@ -14,7 +14,7 @@ import java.sql.Statement;
 
 //STUDENT 테이블에 저장된 행(학생정보)에서 NO 컬럼값(학번)이 [2000]인 행의 NAME 컬럼값(이름)을
 //[임꺽정]으로 변경하는 JDBC 프로그램 작성
-public class TransactionControlApp {
+public class TransactionControlApp { 
 	public static void main(String[] args) {
 		Connection con=null;
 		Statement stmt=null;
