@@ -52,8 +52,8 @@ public class TransactionControlApp {
 		} catch (Exception e) {
 			System.out.println("[에러]프로그램 실행에 예기치 못한 오류가 발생 되었습니다.");
 			
-			//Connection.rollback() : ROLLBACK 명령을 전달하여 실행하는 메소드 - 롤백 처리
 			try {
+				//Connection.rollback() : ROLLBACK 명령을 전달하여 실행하는 메소드 - 롤백 처리
 				con.rollback();
 			} catch (SQLException e1) {
 				e1.printStackTrace();

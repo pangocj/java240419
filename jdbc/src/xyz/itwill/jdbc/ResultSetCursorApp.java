@@ -51,7 +51,7 @@ public class ResultSetCursorApp {
 		rs.first();
 		System.out.println(rs.getRow()+ "행 : 학번 = "+rs.getInt("no")+", 이름 = "+rs.getString("name"));
 
-		//ResultSet.first() : ResultSet 객체의 커서를 마지막 행으로 이동하는 메소드
+		//ResultSet.last() : ResultSet 객체의 커서를 마지막 행으로 이동하는 메소드
 		rs.last();
 		System.out.println(rs.getRow()+ "행 : 학번 = "+rs.getInt("no")+", 이름 = "+rs.getString("name"));
 		
@@ -97,7 +97,7 @@ public class ResultSetCursorApp {
 		rs.absolute(3);//ResultSet 객체의 커서를 3번째 행으로 이동
 		
 		//ResultSet.moveToInsertRow() : ResultSet 객체의 커서가 위치한 다음행에 새로운 행을
-		//삽입하여 커서를 이동하고 기존 행은 다음행을 차례대로 이동 처리하는 메소드
+		//삽입하여 커서를 이동하고 기존 행은 다음행으로 차례대로 이동 처리하는 메소드
 		rs.moveToInsertRow();
 		
 		//ResultSet 객체의 커서가 위치한 삽입행의 컬럼값 변경
