@@ -1,7 +1,10 @@
 package xyz.itwill.dbcp;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Properties;
 
 import oracle.ucp.jdbc.PoolDataSource;
 import oracle.ucp.jdbc.PoolDataSourceFactory;
@@ -21,7 +24,17 @@ import oracle.ucp.jdbc.PoolDataSourceFactory;
 // => https://www.oracle.com 사이트에서 UCP 라이브러리 파일(ucp11.jar)을 다운로그 받아
 //프로젝트에 빌드 처리
 public class DataSourceApp {
-	public static void main(String[] args) throws SQLException {
+	public DataSourceApp() throws IOException, SQLException {
+		InputStream in=getClass().getClassLoader().getResourceAsStream("xyz/itwill/dbcp/dbcp.properties");
+		Properties properties=new Properties();
+		properties.load(in);
+		String driver=(String)properties.get("driver");
+		String url=(String)properties.get("url");
+		String user=(String)properties.get("user");
+		String password=(String)properties.get("password");
+		String initCons=(String)properties.get("initCons");
+		String maxCons=(String)properties.get("maxCons");
+		
 		//DataSource 객체(PoolDataSource 객체 - DBCP 객체)를 반환받아 저장
 		//PoolDataSourceFactory.getPoolDataSource() : PoolDataSource 객체를 반환하는 정적 메소드
 		//PoolDataSource pds=new PoolDataSourceImpl();
@@ -29,21 +42,21 @@ public class DataSourceApp {
 		
 		//PoolDataSource 객체에 저장될 Connection 객체를 미리 생성하기 위한 메소드 호출 - 필수
 		//PoolDataSource.setConnectionFactoryClassName(String driver) : JDBC Driver 클래스를 변경하는 메소드
-		pds.setConnectionFactoryClassName("oracle.jdbc.driver.OracleDriver");
+		pds.setConnectionFactoryClassName(driver);
 		//PoolDataSource.setURL(String url) : DBMS 서버에 접속하기 위한 URL 주소를 변경하는 메소드
-		pds.setURL("jdbc:oracle:thin:@localhost:1521:xe");
+		pds.setURL(url);
 		//PoolDataSource.setUser(String user) : DBMS 서버에 접속하기 위한 계정명을 변경하는 메소드
-		pds.setUser("scott");
+		pds.setUser(user);
 		//PoolDataSource.setPassword(String password) : DBMS 서버에 접속하기 위한 비밀번호를 변경하는 메소드
-		pds.setPassword("tiger");
+		pds.setPassword(password);
 		
 		//PoolDataSource 객체에 저장될 Connection 객체의 갯수를 제한 - 선택 : 생략시 기본값 사용
 		//PoolDataSource.setInitialPoolSize(int size) : PoolDataSource 객체에 최초 생성될 
 		//Connection 객체의 갯수를 변경하는 메소드
-		pds.setInitialPoolSize(2);
+		pds.setInitialPoolSize(Integer.parseInt(initCons));
 		//PoolDataSource.setMaxPoolSize(int size) : PoolDataSource 객체에 생성되어 저장할 수 
 		//있는 최대 Connection 객체의 갯수를 변경하는 메소드
-		pds.setMaxPoolSize(3);
+		pds.setMaxPoolSize(Integer.parseInt(maxCons));
 		
 		//PoolDataSource.getConnection() : PoolDataSource 객체에 저장된 Connection 객체 중
 		//하나를 반환하는 메소드 - PoolDataSource 객체의 반환된 Connection 객체는 비활성화 처리 
@@ -64,6 +77,10 @@ public class DataSourceApp {
 		Connection con4=pds.getConnection();
 		System.out.println("con4 = "+con4);
 		con4.close();
+	}
+	
+	public static void main(String[] args) throws SQLException, IOException {
+		new DataSourceApp();
 	}
 }
 
