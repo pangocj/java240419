@@ -11,6 +11,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.Vector;
+import java.util.regex.Pattern;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -308,6 +309,70 @@ public class StudentGUIApp extends JFrame implements ActionListener {
 			//하는 메소드 - JTable 컴퍼넌트에 행 출력
 			defaultTableModel.addRow(rowData);
 		}
+	}
+	
+	//JTextField 컴퍼넌트에 입력된 학생정보를 제공받아 STUDENT 테이블에 행으로 삽입하여 저장하고
+	//STUDENT 테이블에 저장된 모든 행을 검색하여 JTable 컴퍼넌트에 출력하는 메소드
+	// => 프레임의 모든 컴퍼넌트를 초기화 처리하기 위한 initDisplay() 메소드 호출
+	public void addStudent() {
+		//JTextField.getText() : JTextField 컴퍼넌트에 입력된 값을 문자열로 반환하는 메소드
+		String noString=noTF.getText();
+		
+		if(noString.equals("")) {//JTextField 컴퍼넌트에 입력된 값이 없는 경우
+			JOptionPane.showMessageDialog(this, "학번을 입력해 주세요.");
+			noTF.requestFocus();//JTextField 컴퍼넌트를 포커스가 위치되도록 커서 이동
+			return;
+		}
+		
+		String noReg="^[1-9][0-9]{3}$";
+		if(!Pattern.matches(noReg, noString)) {//정규표현식과 입력값의 패턴이 맞지 않는 경우
+			JOptionPane.showMessageDialog(this, "학번은 4자리 숫자로만 입력해 주세요.");
+			noTF.requestFocus();
+			return;
+		}
+	
+		int no=Integer.parseInt(noString);//문자열을 정수값으로 변환하여 저장
+		
+		//매개변수로 정수값(학번)을 전달받아 STUDNET 테이블에 저장된 행에서 NO 컬럼값이 매개변수에 
+		//저장된 값과 같은 행을 검색하여 StudentDTO 객체로 반환하는 DAO 클래스의 메소드 호출
+		// => 메소드 호출로 NULL을 반환한 경우 검색행이 없으며 StudentDTO 객체가 반환된 경우
+		//검색행 존재 - 검색행이 있으면 학번이 중복된 경우이므로 에러 메세지 출력
+		if(StudentDAOImpl.getDAO().selectStudentByNo(no) != null) {
+			JOptionPane.showMessageDialog(this, "이미 사용중인 학번을 입력 하였습니다.");
+			noTF.requestFocus();
+			return;
+		}
+		
+		String name=nameTF.getText();
+		
+		
+		String phone=phoneTF.getText();
+		
+		
+		String address=addressTF.getText();
+		
+		
+		String birthday=birthdayTF.getText();
+		
+		
+		
+		//StudentDTO 객체를 생성하여 입력값을 객체의 필드값으로 변경
+		// => DAO 클래스의 메소드 호출할 때 매개변수에 전달하기 위해 StudentDTO 객체 생성
+		StudentDTO student=new StudentDTO();
+		student.setNo(no);
+		student.setName(name);
+		student.setPhone(phone);
+		student.setAddress(address);
+		student.setBirthday(birthday);
+		
+		//매개변수로 StudentDTO 객체를 전달받아 STUDENT 테이블의 행으로 삽입하여 저장하고
+		//삽입행의 갯수를 반환하는 DAO 클래스의 메소드 호출
+		int rows=StudentDAOImpl.getDAO().insertStudent(student);
+		
+		JOptionPane.showMessageDialog(this, rows+"명의 학생정보를 삽입하여 저장 하였습니다.");
+		
+		displayAllStudent();
+		initDisplay();
 	}
 }
 
