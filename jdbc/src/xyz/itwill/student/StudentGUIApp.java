@@ -232,7 +232,7 @@ public class StudentGUIApp extends JFrame implements ActionListener {
 				if (cmd != ADD) {//첫번째 [삽입] 버튼을 누른 경우 - NONE 상태
 					setEnable(ADD);//컴퍼넌트의 활성화 상태 변경 - ADD 상태 변경					
 				} else {//두번째 [삽입] 버튼을 누른 경우 - ADD 상태
-					initDisplay();
+					addStudent();
 				}
 			} else if (c == updateB) {
 				if (cmd != UPDATE && cmd != UPDATE_CHANGE) {//첫번째 [변경] 버튼을 누른 경우 - NONE 상태
@@ -303,7 +303,7 @@ public class StudentGUIApp extends JFrame implements ActionListener {
 			rowData.add(student.getName());
 			rowData.add(student.getPhone());
 			rowData.add(student.getAddress());
-			rowData.add(student.getBirthday());
+			rowData.add(student.getBirthday().substring(0, 10));
 			
 			//DefaultTableModel.addRow(Vector rowData) : DefaultTableModel 객체에 행을 추가
 			//하는 메소드 - JTable 컴퍼넌트에 행 출력
@@ -345,16 +345,56 @@ public class StudentGUIApp extends JFrame implements ActionListener {
 		
 		String name=nameTF.getText();
 		
+		if(name.equals("")) {
+			JOptionPane.showMessageDialog(this, "이름을 입력해 주세요.");
+			nameTF.requestFocus();
+			return;
+		}
+		
+		String nameReg="^[가-힣]{2,5}$";
+		if(!Pattern.matches(nameReg, name)) {
+			JOptionPane.showMessageDialog(this, "이름은 2~5 범위의 한글로만 입력해 주세요.");
+			nameTF.requestFocus();
+			return;
+		}
 		
 		String phone=phoneTF.getText();
 		
+		if(phone.equals("")) {
+			JOptionPane.showMessageDialog(this, "전화번호를 입력해 주세요.");
+			phoneTF.requestFocus();
+			return;
+		}
+		
+		String phoneReg="(01[016789])-\\d{3,4}-\\d{4}";
+		if(!Pattern.matches(phoneReg, phone)) {
+			JOptionPane.showMessageDialog(this, "전화번호를 형식에 맞게 입력해 주세요.");
+			phoneTF.requestFocus();
+			return;
+		}
 		
 		String address=addressTF.getText();
 		
+		if(address.equals("")) {
+			JOptionPane.showMessageDialog(this, "주소를 입력해 주세요.");
+			addressTF.requestFocus();
+			return;
+		}
 		
 		String birthday=birthdayTF.getText();
 		
+		if(birthday.equals("")) {
+			JOptionPane.showMessageDialog(this, "생년월일을 입력해 주세요.");
+			phoneTF.requestFocus();
+			return;
+		}
 		
+		String birthdayReg="(19|20)\\d{2}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])";
+		if(!Pattern.matches(birthdayReg, birthday)) {
+			JOptionPane.showMessageDialog(this, "생년월일을 형식에 맞게 입력해 주세요.");
+			birthdayTF.requestFocus();
+			return;
+		}
 		
 		//StudentDTO 객체를 생성하여 입력값을 객체의 필드값으로 변경
 		// => DAO 클래스의 메소드 호출할 때 매개변수에 전달하기 위해 StudentDTO 객체 생성
@@ -374,6 +414,10 @@ public class StudentGUIApp extends JFrame implements ActionListener {
 		displayAllStudent();
 		initDisplay();
 	}
+	
+	//JTextField 컴퍼넌트에 입력된 학번을 제공받아 STUDENT 테이블에서 NO 컬럼값이 입력된
+	//학번과 같은 행을 검색하여 JTextField 컴퍼넌트에 출력하는 메소드
+	// => [UPDATE_CHANGE] 상태를 변경하여 컴퍼넌트 활성 또는 비활성화 상태를 변경
 }
 
 

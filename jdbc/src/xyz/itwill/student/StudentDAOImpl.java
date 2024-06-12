@@ -124,7 +124,7 @@ public class StudentDAOImpl extends JdbcDAO implements StudentDAO {
 		try {
 			con=getConnection();
 			
-			String sql="select no from student where no=?";
+			String sql="select no,name,phone,address,birthday from student where no=?";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setInt(1, no);
 			
