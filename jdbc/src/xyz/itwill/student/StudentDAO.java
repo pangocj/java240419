@@ -32,5 +32,5 @@ public interface StudentDAO {
 
 	//STUDENT 테이블에 저장된 모든 행(학생정보)을 검색하고 검색된 행(학생정보)을 StudentDTO 
 	//객체로 바꾸어 List 객체에 요소로 추가하여 반환하는 메소드
-	List<StudentDTO> selectStudentAll(String name);
+	List<StudentDTO> selectStudentAll();
 }
