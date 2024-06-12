@@ -98,15 +98,3 @@ public class StatementApp {
 		ConnectionFactory.close(con, stmt, rs);
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
