@@ -2,7 +2,9 @@ package xyz.itwill.student;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 //DAO(Data Access Object) 클래스 : 저장매체에 행을 삽입, 변경, 삭제, 검색하는 기능을 제공하는
@@ -111,21 +113,116 @@ public class StudentDAOImpl extends JdbcDAO implements StudentDAO {
 		return rows;
 	}
 
+	//매개변수로 학번(정수값)를 전달받아 STUDENT 테이블에 저장된 하나의 행(학생정보)을 검색하고 
+	//검색된 행(학생정보)을 StudentDTO 객체로 바꾸어 반환하는 메소드
 	@Override
 	public StudentDTO selectStudentByNo(int no) {
-		// TODO Auto-generated method stub
-		return null;
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		StudentDTO student=null;
+		try {
+			con=getConnection();
+			
+			String sql="select no from student where no=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, no);
+			
+			rs=pstmt.executeQuery();
+			
+			//검색행이 하나인 경우 선택문을 사용하여 명령 실행
+			// => 선택문을 사용해 검색된 행이 있는 경우에만 명령을 실행   
+			if(rs.next()) {
+				//ResultSet 객체에 저장된 검색행을 DTO 객체로 변환되도록 처리 - 매핑 처리
+				// => 검색행의 컬럼값을 DTO 객체의 필드에 저장되도록 명령 작성
+				student=new StudentDTO();
+				//ResultSet 객체의 커서가 위치한 처리행의 컬럼값을 반환받아 DTO 객체의 필드값으로 변경
+				student.setNo(rs.getInt("no"));
+				student.setName(rs.getString("name"));
+				student.setPhone(rs.getString("phone"));
+				student.setAddress(rs.getString("address"));
+				student.setBirthday(rs.getString("birthday"));
+			}
+		} catch (SQLException e) {
+			System.out.println("[에러]selectStudentByNo() 메소드의 SQL 오류 = "+e.getMessage());
+		} finally {
+			close(con, pstmt, rs);
+		}
+		return student;
 	}
 
+	//매개변수로 이름(문자열)를 전달받아 STUDENT 테이블에 저장된 다수의 행(학생정보)을 검색하고 
+	//검색된 행(학생정보)을 StudentDTO 객체로 바꾸어 List 객체에 요소로 추가하여 반환하는 메소드	
 	@Override
 	public List<StudentDTO> selectStudentByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<StudentDTO> studentList=new ArrayList<StudentDTO>();
+		try {
+			con=getConnection();
+			
+			String sql="select no,name,phone,address,birthday from student where name=? order by no";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setString(1, name);
+			
+			rs=pstmt.executeQuery();
+			
+			//검색행이 하나인 경우 반복문을 사용하여 명령 실행
+			// => 반복문을 사용해 검색된 행이 있는 경우에만 명령을 실행   
+			while(rs.next()) {
+				//ResultSet 객체의 커서가 위치한 처리행을 DTO 객체로 변환되도록 처리 - 매핑 처리
+				StudentDTO student=new StudentDTO();
+				student.setNo(rs.getInt("no"));
+				student.setName(rs.getString("name"));
+				student.setPhone(rs.getString("phone"));
+				student.setAddress(rs.getString("address"));
+				student.setBirthday(rs.getString("birthday"));
+				
+				//처리행이 변환된 DTO 객체를 List 객체의 요소로 추가하여 저장
+				studentList.add(student);
+			}
+		} catch (SQLException e) {
+			System.out.println("[에러]selectStudentByName() 메소드의 SQL 오류 = "+e.getMessage());
+		} finally {
+			close(con, pstmt, rs);
+		}
+		
+		return studentList;
 	}
 
+	//STUDENT 테이블에 저장된 모든 행(학생정보)을 검색하고 검색된 행(학생정보)을 StudentDTO 
+	//객체로 바꾸어 List 객체에 요소로 추가하여 반환하는 메소드
 	@Override
 	public List<StudentDTO> selectStudentAll() {
-		// TODO Auto-generated method stub
-		return null;
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<StudentDTO> studentList=new ArrayList<StudentDTO>();
+		try {
+			con=getConnection();
+			
+			String sql="select no,name,phone,address,birthday from student order by no";
+			pstmt=con.prepareStatement(sql);
+			
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				StudentDTO student=new StudentDTO();
+				student.setNo(rs.getInt("no"));
+				student.setName(rs.getString("name"));
+				student.setPhone(rs.getString("phone"));
+				student.setAddress(rs.getString("address"));
+				student.setBirthday(rs.getString("birthday"));
+				
+				studentList.add(student);
+			}
+		} catch (SQLException e) {
+			System.out.println("[에러]selectStudentAll() 메소드의 SQL 오류 = "+e.getMessage());
+		} finally {
+			close(con, pstmt, rs);
+		}
+		
+		return studentList;
 	}
 }
