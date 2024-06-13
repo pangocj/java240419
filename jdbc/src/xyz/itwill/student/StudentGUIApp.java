@@ -102,15 +102,13 @@ public class StudentGUIApp extends JFrame implements ActionListener {
 
 		Object[] title={"학번","이름","전화번호","주소","생년월일"};
 		
-		DefaultTableModel tableModel = new DefaultTableModel(title, 0){  
+		table=new JTable(new DefaultTableModel(title, 0) {  
 			private static final long serialVersionUID = 1L;
 
 			public boolean isCellEditable(int row, int column){ 
 				return false;
 			}
-		};
-
-		table=new JTable(tableModel);
+		});
 		table.getTableHeader().setReorderingAllowed(false);
 		table.getTableHeader().setResizingAllowed(false);
 		JScrollPane sp=new JScrollPane(table);
