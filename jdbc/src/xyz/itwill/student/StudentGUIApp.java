@@ -238,7 +238,7 @@ public class StudentGUIApp extends JFrame implements ActionListener {
 				if (cmd != UPDATE && cmd != UPDATE_CHANGE) {//첫번째 [변경] 버튼을 누른 경우 - NONE 상태
 					setEnable(UPDATE);//입출력 컴퍼넌트의 활성화 상태 변경 - UPDATE 상태 변경		
 				} else if (cmd != UPDATE_CHANGE) {//두번째 [변경] 버튼을 누른 경우	- UPDATE 상태
-					setEnable(UPDATE_CHANGE);
+					searchNoStudent();
 				} else {//세번째 [변경] 버튼을 누른 경우 - UPDATE_CHANGE 상태		
 					initDisplay();
 
@@ -278,7 +278,7 @@ public class StudentGUIApp extends JFrame implements ActionListener {
 		
 		//JTable.getModel() : JTable 컴퍼넌트의 행(Row) 또는 열(Column)을 관리하기 위한
 		//TableModel 객체를 반환하는 메소드
-		// => TableModel 객체는 DefaultTableModel 클래스로 명시적 객체 형변환하여 사용
+		// => TableModel 객체(부모)는 DefaultTableModel 클래스(자식)로 명시적 객체 형변환하여 사용
 		//DefaultTableModel 객체 : JTable 컴퍼넌트의 행(Row) 또는 열(Column)을 관리하기 위한 객체
 		DefaultTableModel defaultTableModel=(DefaultTableModel)table.getModel();
 		
@@ -418,6 +418,47 @@ public class StudentGUIApp extends JFrame implements ActionListener {
 	//JTextField 컴퍼넌트에 입력된 학번을 제공받아 STUDENT 테이블에서 NO 컬럼값이 입력된
 	//학번과 같은 행을 검색하여 JTextField 컴퍼넌트에 출력하는 메소드
 	// => [UPDATE_CHANGE] 상태를 변경하여 컴퍼넌트 활성 또는 비활성화 상태를 변경
+	public void searchNoStudent() {
+		String noString=noTF.getText();
+		
+		if(noString.equals("")) {//JTextField 컴퍼넌트에 입력된 값이 없는 경우
+			JOptionPane.showMessageDialog(this, "학번을 입력해 주세요.");
+			noTF.requestFocus();//JTextField 컴퍼넌트를 포커스가 위치되도록 커서 이동
+			return;
+		}
+		
+		String noReg="^[1-9][0-9]{3}$";
+		if(!Pattern.matches(noReg, noString)) {//정규표현식과 입력값의 패턴이 맞지 않는 경우
+			JOptionPane.showMessageDialog(this, "학번은 4자리 숫자로만 입력해 주세요.");
+			noTF.requestFocus();
+			return;
+		}
+	
+		int no=Integer.parseInt(noString);//문자열을 정수값으로 변환하여 저장
+		
+		//매개변수로 정수값(학번)을 전달받아 STUDNET 테이블에 저장된 행에서 NO 컬럼값이 매개변수에 
+		//저장된 값과 같은 행을 검색하여 StudentDTO 객체로 반환하는 DAO 클래스의 메소드 호출
+		// => NULL(검색행 X) 또는 StudentDTO 객체(검색행 O) 중 하나를 반환
+		StudentDTO student=StudentDAOImpl.getDAO().selectStudentByNo(no);
+		
+		if(student == null) {//학번으로 검색된 학생정보가 없는 경우
+			JOptionPane.showMessageDialog(this, "변경할 학번의 학생정보를 찾을 수 없습니다.");
+			noTF.requestFocus();
+			noTF.setText("");
+			return;
+		}
+		
+		//검색된 학생정보를 JTextField 컴퍼넌트에 출력 - 변경값 입력
+		noTF.setText(student.getNo()+"");
+		nameTF.setText(student.getName());
+		phoneTF.setText(student.getPhone());
+		addressTF.setText(student.getAddress());
+		birthdayTF.setText(student.getBirthday().substring(0, 10));
+		
+		//[UPDATE_CHANGE] 상태로 변경 - 컴퍼넌트의 활성 또는 비활성 상태 변경
+		setEditable(UPDATE_CHANGE);
+	}
+	
 }
 
 
