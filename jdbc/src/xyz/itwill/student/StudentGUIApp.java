@@ -21,6 +21,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
 import javax.swing.table.DefaultTableModel;
 
 public class StudentGUIApp extends JFrame implements ActionListener {
@@ -100,11 +101,18 @@ public class StudentGUIApp extends JFrame implements ActionListener {
 		cancelB.addActionListener(this);
 
 		Object[] title={"학번","이름","전화번호","주소","생년월일"};
-		table=new JTable(new DefaultTableModel(title, 0));
-		table.setEnabled(false);
+		
+		DefaultTableModel tableModel = new DefaultTableModel(title, 0){  
+			private static final long serialVersionUID = 1L;
+
+			public boolean isCellEditable(int row, int column){ 
+				return false;
+			}
+		};
+
+		table=new JTable(tableModel);
 		table.getTableHeader().setReorderingAllowed(false);
 		table.getTableHeader().setResizingAllowed(false);
-
 		JScrollPane sp=new JScrollPane(table);
 		
 		add(sp, "Center");
