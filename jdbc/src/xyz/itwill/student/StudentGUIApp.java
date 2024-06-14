@@ -286,6 +286,7 @@ public class StudentGUIApp extends JFrame implements ActionListener {
 		//DefaultTableModel 객체 : JTable 컴퍼넌트의 행(Row) 또는 열(Column)을 관리하기 위한 객체
 		DefaultTableModel defaultTableModel=(DefaultTableModel)table.getModel();
 		
+		/*
 		//DefaultTableModel.getRowCount() : DefaultTableModel 객체에 저장된 행의 갯수를 반환하는 메소드
 		//DefaultTableModel 객체에 저장된 행의 갯수만큼 명령을 실행하는 반복문
 		// => JTable 컴퍼넌트에 출력된 기존 행을 모든 삭제 처리 - JTable 컴퍼넌트 초기화
@@ -294,6 +295,11 @@ public class StudentGUIApp extends JFrame implements ActionListener {
 			//매개변수로 전달받은 위치의 행을 삭제하는 메소드
 			defaultTableModel.removeRow(0);//JTable 컴퍼넌트에 출력된 첫번째 행을 삭제 처리
 		}
+		*/
+	
+		//DefaultTableModel.setRowCount(int rowCount) : DefaultTableModel 객체에 저장된 행의 갯수를 변경하는 메소드
+		// => JTable 컴퍼넌트 초기화
+		defaultTableModel.setRowCount(0);
 		
 		//List 객체의 요소값(StudentDTO 객체)을 차례대로 제공받아 처리하는 반복문
 		// => List 객체의 요소값을 JTable 컴퍼넌트의 행으로 출력 처리
@@ -608,9 +614,7 @@ public class StudentGUIApp extends JFrame implements ActionListener {
 		
 		DefaultTableModel defaultTableModel=(DefaultTableModel)table.getModel();
 		
-		for(int i=defaultTableModel.getRowCount();i>0;i--) {
-			defaultTableModel.removeRow(0);//JTable 컴퍼넌트에 출력된 첫번째 행을 삭제 처리
-		}
+		defaultTableModel.setRowCount(0);
 		
 		for(StudentDTO student : studentList) {
 			Vector<Object> rowData=new Vector<Object>();
