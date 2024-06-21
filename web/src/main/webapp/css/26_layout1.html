@@ -4,6 +4,11 @@
 <meta charset="UTF-8">
 <title>HTML</title>
 <style type="text/css">
+/* 블럭 레벨의 박스모델과 인라인 레벨의 박스모델로 구분하여 브라우저 자동 배치 */
+/* 블럭 레벨의 박스모델 : 하나의 라인을 모두 사용하는 박스모델 */
+/* => div, h1~h6, ul, ol, li, p, talbe, tr, form 등 */
+/* 인라인 레벨의 박스모델 : 하나의 라인을 같이 사용하는 박스모델 */
+/* => span, img, a, input, select, label, button 등 */	
 ul li {
 	list-style-type: none;
 	font-size: 25px;
@@ -14,6 +19,11 @@ ul li {
 	, inline-block(인라인 레벨 배치 - (간격) 변경 가능), tabel, table-row, table-cell 등 */
 	display: inline; /* margin 미적용 */
 	display: inline-block; /* margin 적용 */
+}
+
+img {
+	margin: 20px;
+	display: block;
 }
 </style>
 </head>
@@ -29,9 +39,9 @@ ul li {
 		<li>제품후기</li>
 	</ul>
 	<hr>
+	<!-- 인라인 레벨의 박스모델(태그)는 하나의 라인에 박스모델이 여러개 출력 -->
 	<img alt="펜션 이미지1" src="/web/css/images/1.jpg">
 	<img alt="펜션 이미지2" src="/web/css/images/2.jpg">
 	<img alt="펜션 이미지3" src="/web/css/images/3.jpg">
-	
 </body>
 </html>
