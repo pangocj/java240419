@@ -3,6 +3,9 @@
   "plugins": {
     "outline": {
       
+    },
+    "browser-extension": {
+      
     }
   },
   "libs": [
