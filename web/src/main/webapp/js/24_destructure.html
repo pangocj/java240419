@@ -130,9 +130,16 @@
 	}
 	*/
 	
+	/*
 	//매개변수로 Object 객체를 전달받아 사용하는 함수
 	function display(obj) {
 		alert("학번 = "+obj.num+", 이름 = "+obj.name);
+	}
+	*/
+	
+	//매개변수로 Object 객체를 전달받아 구조분해할당하여 변수에 저장해 사용
+	function display({num, name}) {
+		alert("학번 = "+num+", 이름 = "+name);
 	}
 	
 	display({num:1000, name:"홍길동"});
@@ -140,18 +147,3 @@
 	</script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
