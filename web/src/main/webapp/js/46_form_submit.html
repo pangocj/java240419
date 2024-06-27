@@ -29,6 +29,42 @@
 		</tr>
 	</table>	
 	</form>
+
+	<script type="text/javascript">
+	//form 태그와 입력태그의 name 속성값으로 Element 객체 표현 가능
+	// => document 객체 생략 가능
+	//alert(document.loginForm);//[object HTMLFormElement]
+	//alert(loginForm.id);//[object HTMLInputElement]
+	
+	//HTMLInputElement.focus() : 입력태그에 포커스를 제공하는 멤버함수
+	loginForm.id.focus();
+	
+	//form 태그에서 제출 이벤트가 발생될 경우 자동 호출될 이벤트 처리 함수 저장
+	// => 입력태그의 입력값을 제공받아 검증하고 비정상적인 경우 form 태그의 실행을 취소하여
+	//웹프로그램을 요청하지 않도록 처리
+	loginForm.onsubmit=function() {
+		//HTMLInputElement.value : 입력태그에 입력된 값이 저장된 멤버변수 
+		if(loginForm.id.value=="") {//아이디가 입력되지 않은 경우
+			alert("아이디를 입력해 주세요.");
+			loginForm.id.focus();
+			
+			/*
+			event.preventDefault();//제출 이벤트에 의해 form 태그 실행 취소
+			return;//이벤트 처리 함수 종료
+			*/
+			
+			//이벤트 처리 함수에서 reutrn 명령을 사용해 [false]를 반환하면 이벤트 처리 함수를
+			//종료하면서 태그의 이벤트에 대한 기본 명령 실 취소 및 이벤트 전달 중지
+			return false;
+		}
+	
+		if(loginForm.passwd.value=="") {//비밀번호가 입력되지 않은 경우
+			alert("비밀번호를 입력해 주세요.");
+			loginForm.passwd.focus();
+			return false;
+		}
+	}	
+	</script>
 </body>
 </html>
 
