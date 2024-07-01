@@ -70,5 +70,68 @@ legend {
 		<button type="reset" id="resetBtn">다시작성</button>
 	</fieldset>
 	</form>
+	
+	<script type="text/javascript">
+	$("#id").focus();
+	
+	//$(selector).submit(callback) : 선택자로 검색된 태그(form 태그)에서 제출 이벤트(Submit Event)가
+	//발생될 경우 콜백함수(이벤트 처리함수)를 호출하는 멤버함수
+	// => 이벤트 처리 함수에서 입력태그의 입력값을 검증하고 검증이 실패된 경우 form 태그가
+	//실행되지 않도록 취소 처리
+	$("#joinForm").submit(function() {
+		//에러 메세지를 출력하는 모든 태그의 태그내용을 초기화 처리
+		$(".error").text("");
+		
+		//입력값 검증 결과를 저장하기 위한 변수
+		// => false : 검증 실패, true : 검증 성공
+		var result=true;
+		
+		var idReg=/[a-zA-Z]\w{5,19}$/g;
+		if($("#id").val()=="") {
+			$("#idMsg").text("아이디를 입력해 주세요.");
+			//return false;
+			result=false;
+		} else if(!idReg.test($("#id").val())) {
+			$("#idMsg").text("6~20자의 영문자, 숫자와 특수문자(_)만 사용 가능합니다.");
+			//return false;
+			result=false;
+		}
+		
+		if($("#passwd").val()=="") {
+			$("#passwdMsg").text("비밀번호를 입력해 주세요.");
+			//return false;
+			result=false;
+		} 
+		
+		if($("#name").val()=="") {
+			$("#nameMsg").text("이름을 입력해 주세요.");
+			//return false;
+			result=false;
+		}
+		
+		if($("#email").val()=="") {
+			$("#emailMsg").text("이메일을 입력해 주세요.");
+			//return false;
+			result=false;
+		}
+		
+		//result 변수에 저장된 값이 [false]인 경우 form 태그 실행 취소
+		return result;
+	});
+	</script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
