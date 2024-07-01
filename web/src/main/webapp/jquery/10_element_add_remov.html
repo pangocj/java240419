@@ -46,23 +46,27 @@
 	$("<img src='/web/jquery/images/1.png' width='200'>").appendTo("#imagesList2");
 	$("<img src='/web/jquery/images/2.png' width='200'>").appendTo("#imagesList2");
 	
-	
 	//$(selector).prependTo(tergetSelector) : 선택자로 검색된 태그를 타겟 선택자로 검색된 태그의
 	//첫번째 자식태그로 이동하는 멤버함수
 	$("<img src='/web/jquery/images/3.png' width='200'>").prependTo("#imagesList2");
 	$("<img src='/web/jquery/images/4.png' width='200'>").prependTo("#imagesList2");
+
+	//$(selector).insertBefore(tergetSelector) : 선택자로 검색된 태그를 타겟 선택자로 검색된 
+	//태그의 이전 태그로 이동하는 멤버함수
+	$("<img src='/web/jquery/images/5.png' width='200'>").insertBefore("#imagesList2 img[src='/web/jquery/images/1.png']");
+
+	//$(selector).insertAfter(tergetSelector) : 선택자로 검색된 태그를 타겟 선택자로 검색된 
+	//태그의 다음 태그로 이동하는 멤버함수
+	$("<img src='/web/jquery/images/6.png' width='200'>").insertAfter("#imagesList2 img[src='/web/jquery/images/1.png']");
+
+	//$(selector).remove([selector]) : 선택자로 검색된 태그를 삭제하는 멤버함수
+	// => DOM 트리의 태그를 검색하여 삭제해 출력되지 않도록 처리
+	//$("#imagesList3").remove();//부모태그를 삭제하면 자식태그도 삭제 처리
 	
+	//$("#imagesList3").children().eq(1).remove();
+	//$("#imagesList3").children(":eq(1)").remove();
+	//$("#imagesList3").children().remove(":eq(1)");
+	$("#img2").remove();
 	</script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
