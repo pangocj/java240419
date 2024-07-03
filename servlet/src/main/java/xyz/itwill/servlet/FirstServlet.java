@@ -76,14 +76,3 @@ public class FirstServlet extends HttpServlet {
 		out.println("</html>");
 	}
 }
-
-
-
-
-
-
-
-
-
-
-

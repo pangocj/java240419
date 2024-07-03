@@ -28,7 +28,7 @@ public class SendImageServlet extends HttpServlet {
 		
 		//서버에 저장된 이미지 파일의 시스템 경로를 반환받아 저장
 		//HttpServletRequest.getServletContext() : HttpServletRequest 객체를 생성한 
-		//ServletContext 객체(WAS)를 반환하는 메소드
+		//ServletContext 객체(WAS 프로그램의 정보를 저장한 객체)를 반환하는 메소드
 		//ServletContext.getRealPath(String contextPath) : 매개변수로 전달받은 웹자원에 대한
 		//파일 시스템 경로를 반환하는 메소드
 		String imageFilePath=request.getServletContext().getRealPath("/WEB-INF/Koala.jpg");
