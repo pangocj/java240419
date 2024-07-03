@@ -92,8 +92,8 @@ public class FileUploadServlet extends HttpServlet {
 		//MultipartRequest.getFilesystemName(String name) : 서버디렉토리에 저장된 업로드 처리된
 		//파일의 이름을 얻어와 반환하는 메소드
 		String uploadone=mr.getFilesystemName("fileone");	
-		String uploadtwo=mr.getFilesystemName("fileone");	
-				
+		String uploadtwo=mr.getFilesystemName("filetwo");	
+	 			
 		out.println("<!DOCTYPE html>");
 		out.println("<html>");
 		out.println("<head>");
