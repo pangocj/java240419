@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 //클라이언트 요청에 의해 이미지 파일로 응답하기 위한 서블릿
 // => /WEB-INF/Koala.jpg 파일(웹자원)을 읽어 클라이언트에게 응답
 // => [WEB-INF] 폴더와 [META-INF] 폴더는 서블릿(웹프로그램)에서만 접근 가능한 숨겨진 폴더로
-//클라이언트 요청 불가능
+//클라이언트 접근 불가능
 @WebServlet("/image.itwill")
 public class SendImageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
