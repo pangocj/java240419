@@ -15,7 +15,7 @@ import xyz.itwill.dto.StudentDTO;
 
 //STUDENT 테이블에 행(학생정보)을 삽입, 변경, 삭제, 검색하는 기능을 제공하는 클래스
 // => DBMS 서버에 하나의 SQL 명령을 전달하여 실행하고 실행결과를 Java 객체로 반환하는 메소드 작성
-public class StudentDAO {
+public class StudentDAO extends JdbcDAO {
 	private static StudentDAO _dao;
 	
 	private StudentDAO() {
@@ -42,11 +42,25 @@ public class StudentDAO {
 		ResultSet rs=null;
 		List<StudentDTO> studentList=new ArrayList<StudentDTO>();
 		try {
+			con=getConnection();
 			
+			String sql="select no,name,phone,address,birthday from student order by no";
+			pstmt=con.prepareStatement(sql);
+			
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				StudentDTO student=new StudentDTO();
+				student.setNo(rs.getInt("no"));
+				student.setName(rs.getString("name"));
+				student.setPhone(rs.getString("phone"));
+				student.setAddress(rs.getString("address"));
+				student.setBirthday(rs.getString("birthday"));
+			}
 		} catch (SQLException e) {
-			// TODO: handle exception
+			System.out.println("[에러]selectStudentList() 메소드의 SQL 오류 = "+e.getMessage());
 		} finally {
-			
+			close(con, pstmt, rs);
 		}
 		return studentList;
 	}
