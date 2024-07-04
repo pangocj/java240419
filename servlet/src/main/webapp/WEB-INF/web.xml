@@ -10,7 +10,7 @@
   	<!-- param-name : 값을 제공할 이름을 설정하는 엘리먼트 -->
   	<param-name>name</param-name>
   	<!-- param-name : 제공될 값을 설정하는 엘리먼트 -->
-  	<param-value>홍길동</param-value>
+  	<param-value>임꺽정</param-value>
   </context-param>
 
   <!-- error-page : 클라이언트에게 전달하여 응답될 에러페이지를 설정하기 위한 엘리먼트 -->	
@@ -45,7 +45,7 @@
   	<servlet-name>hello</servlet-name>
   	<!-- url-pattern : 서블릿을 요청하기 위한 URL 패턴을 설정하기 위한 엘리먼트 -->
   	<url-pattern>/hello.itwill</url-pattern>
-  </servlet-mapping>		
+  </servlet-mapping>	
   
   <!-- welcome-file-list : welcome-file 엘리먼트 목록을 설정하기 위한 엘리먼트 -->
   <welcome-file-list>
