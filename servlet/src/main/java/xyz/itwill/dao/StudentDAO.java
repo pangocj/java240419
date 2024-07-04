@@ -56,6 +56,9 @@ public class StudentDAO extends JdbcDAO {
 				student.setPhone(rs.getString("phone"));
 				student.setAddress(rs.getString("address"));
 				student.setBirthday(rs.getString("birthday"));
+				
+				//List 객체의 요소에 요소값(StudentDTO 객체)을 추가하여 저장
+				studentList.add(student);
 			}
 		} catch (SQLException e) {
 			System.out.println("[에러]selectStudentList() 메소드의 SQL 오류 = "+e.getMessage());
