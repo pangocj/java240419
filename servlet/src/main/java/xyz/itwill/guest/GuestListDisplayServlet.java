@@ -24,7 +24,7 @@ public class GuestListDisplayServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html;chatset=utf-8");
+		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out=response.getWriter();
 		
 		//GUEST 테이블에 저장된 모든 행(게시글)을 검색하여 List 객체로 반환하는 GuestDAO 클래스의 메소드의 호출
