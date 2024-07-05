@@ -76,5 +76,4 @@ public class GuestWriteFormServlet extends HttpServlet {
 		out.println("</body>");
 		out.println("</html>");
 	}
-
 }
