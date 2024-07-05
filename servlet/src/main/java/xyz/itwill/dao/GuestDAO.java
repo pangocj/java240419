@@ -113,20 +113,3 @@ public class GuestDAO extends JdbcDAO {
 		
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
