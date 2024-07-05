@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 //사용자로부터 게시글을 입력받기 위한 HTML 문서로 응답하는 서블릿
-// => [글저장] 태그를 클릭한 경우 게시글 삽입페이지(/guest/write.itwill)를 요청하여 페이지 이동 - 입력값 전달
+// => [글저장] 태그를 클릭한 경우 게시글 삽입페이지(/guest/write.itwill)를 요청하여 페이지 이동 - 입력값(게시글) 전달
 // => [글목록] 태그를 클릭한 경우 게시글 목록페이지(/guest/list.itwill)를 요청하여 페이지 이동
 @WebServlet("/guest/writeForm.itwill")
 public class GuestWriteFormServlet extends HttpServlet {
