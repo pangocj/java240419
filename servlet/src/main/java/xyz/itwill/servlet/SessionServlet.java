@@ -13,9 +13,9 @@ import javax.servlet.http.HttpSession;
 
 //세션(Session) : 서버(웹프로그램)와 클라이언트(브라우저)의 연결 지속성을 제공하기 위해
 //서버에 저장하는 값 - WAS 프로그램에 의해 관리
-// => 보안 관련 정보(권한)을 저장하기 위한 세션 사용
+// => 보안 관련 정보(권한)을 저장하기 위해 세션 사용
 // => 세션을 구분하기 위한 식별자(SessionId)를 사용해 클라이언트의 세션을 구분하여 서블릿에서
-//사용할 수 있도록 제공 - 세션 바인딩
+//세션을 사용할 수 있도록 제공 - 세션 바인딩
 //세션 바인딩(Session Binding) : 연결 지속성을 제공하기 위한 값이 저장된 세션을 서블릿에서
 //사용할 수 있도록 결합하는 작업 - WAS 프로그램에 의해 관리
 
@@ -70,13 +70,13 @@ public class SessionServlet extends HttpServlet {
 		out.println("<p>세션 유지시간 = "+session.getMaxInactiveInterval()+"</p>");
 
 		//HttpSession.getCreationTime() : 세션이 생성된 시간(TimeStamp)을 반환하는 메소드
-		out.println("<p>세션 유지시간 = "+session.getCreationTime()+"</p>");
+		out.println("<p>세션 생성시간 = "+session.getCreationTime()+"</p>");
 		
 		//HttpSession.setAttribute(String attributeName, Object attributeValue) : 매개변수로
 		//전달받은 속성명(문자열)과 속성값(객체)을 세션(HttpSession 객체)에 저장하는 메소드
-		// => 세션에 연결 지속성을 제공하기 위한 값(객체)를 저장하기 위한 메소드
+		// => 세션에 연결 지속성을 제공하기 위한 값(객체)를 속성명과 묶어서 저장
 		// => 매개변수로 전달받은 속성명과 같은 이름의 속성값이 세션에 이미 저장되어 있는
-		//경우 속성값 변경하여 저장
+		//경우 속성값을 변경하여 저장
 		// => 클라이언트는 서블릿에 같은 세션을 바인딩하여 사용할 수 있기 때문에 세션에 저장된
 		//속성값을 모든 서블릿이 객체로 반환받아 사용 가능 - 객체 공유
 		session.setAttribute("now", new Date());
@@ -92,7 +92,8 @@ public class SessionServlet extends HttpServlet {
 		//세션에 저장된 속성값(객체)을 삭제하는 메소드
 		session.removeAttribute("now");
 		
-		//HttpSession.invalidate() : 바인딩 처리된 세션을 언바인딩 처리한 후 세션을 삭제하는 메소드
+		//HttpSession.invalidate() : 바인딩 처리된 세션을 언바인딩 처리한 후 서블릿 종료 후 
+		//세션을 삭제하는 메소드
 		session.invalidate();
 		
 		//세션을 언바인딩 처리한 후 세션에 속성값을 저장하면 IllegalStateException 발생

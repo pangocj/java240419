@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-//STUDENT 테이블에 저장된 모든 행(학생정보)을 검색하여 HTML 문서에 포함하여 응답하는 서블릿
+//STUDENT 테이블에 저장된 모든 행(학생정보)을 검색해 HTML 문서에 포함하여 응답하는 서블릿
 // => JDBC 기능을 구현하기 위해서는 JDBC 관련 라이브러리 파일(ojdbc 라이브러리)을 프로젝트에 빌드 처리
 @WebServlet("/old.itwill")
 public class StudentDisplayOldServlet extends HttpServlet {
@@ -39,7 +39,7 @@ public class StudentDisplayOldServlet extends HttpServlet {
 			String password="tiger";
 			con=DriverManager.getConnection(url, username, password);
 			
-			//3.Connection 객체로부터우 SQL 명령이 저장된 PreparedStatement 객체를 반환받아 저장
+			//3.Connection 객체로부터 SQL 명령이 저장된 PreparedStatement 객체를 반환받아 저장
 			String sql="select no,name,phone,address,birthday from student order by no";
 			pstmt=con.prepareStatement(sql);
 			

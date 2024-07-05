@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 //클라이언트에게 전달받은 쿠키값을 HTML 문서에 포함하여 응답하는 서블릿
-// => 클라이언트는 서버에 접속하여 서블릿을 요청하여 접속 서버에 저장된 모든 쿠키를 리퀘스트
-//메세지에 저장하여 서블릿에게 전달
+// => 클라이언트는 서버에 접속하여 서블릿을 요청하면 접속된 서버정보로 저장된 모든 쿠키를 
+//리퀘스트 메세지 머릿부에 저장하여 서블릿에게 전달
 @WebServlet("/use.itwill")
 public class CookieUseServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -41,7 +41,7 @@ public class CookieUseServlet extends HttpServlet {
 			String id="";
 			String count="";
 			
-			//Cookie 객체 배열의 요소값(Cookie 객체)를 차례대로 제공받아 사용하기 위한 반복문
+			//배열의 요소값(Cookie 객체)를 차례대로 제공받아 변수에 저장하기 위한 반복문
 			for(Cookie cookie : cookies) {
 				//Cookie.getName() : Cookie 객체에 저장된 쿠키명을 반환하는 메소드
 				if(cookie.getName().equals("id")) {

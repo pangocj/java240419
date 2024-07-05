@@ -62,13 +62,3 @@ public class JndiServlet extends HttpServlet {
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
