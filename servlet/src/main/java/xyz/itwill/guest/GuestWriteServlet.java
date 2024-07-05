@@ -40,7 +40,7 @@ public class GuestWriteServlet extends HttpServlet {
 		guest.setSubject(subject);
 		guest.setContent(content);
 		
-		//게시글(GuestDTO 객체)를 전달받아 Guest 테이블의 행으로 삽입하고 삽입행의 갯수를
+		//게시글(GuestDTO 객체)를 전달받아 GUEST 테이블의 행으로 삽입하고 삽입행의 갯수를
 		//반환하는 GuestDAO 클래스의 메소드 호출
 		GuestDAO.getDAO().insertGuest(guest);
 		

@@ -34,7 +34,7 @@ public class GuestModifyFormServlet extends HttpServlet {
 		//전달값(글번호)을 반환받아 정수값으로 변환하여 저장
 		int num=Integer.parseInt(request.getParameter("num"));
 		
-		//글번호를 전달받아 GUEST 테이블에 저장된 게시글을 검색하여 GuestDTO 객체로 반환하는
+		//글번호를 전달받아 GUEST 테이블에 저장된 행을 검색하여 GuestDTO 객체로 반환하는
 		//GuestDAO 클래스의 메소드 호출
 		GuestDTO guest=GuestDAO.getDAO().selectGuest(num);
 
