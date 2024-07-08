@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" errorPage="/error/page_error.jsp"%>
 <%-- page Directive의 errorPage 속성을 사용하여 JSP 문서 실행시 예외가 발생될 경우 에러페이지로
 응답되도록 설정할 수 있지만 JSP 문서마다 errorPage 속성을 설정해야 하는 문제점 발생 --%>
 <%-- => 에러코드(4XX or 5XX)가 클라이언트에게 전달되어 응답될 때 에러페이지로 응답 처리되도록
@@ -9,12 +9,14 @@
 	String text="ABCDEFG";
 	//String text=null;
 	
-	//int su=10/0;
+	int su=10/0;
 	
+	/*
 	if(request.getMethod().equals("GET")) {
 		response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
 		return;
 	}
+	*/
 %>    
 <!DOCTYPE html>
 <html>
