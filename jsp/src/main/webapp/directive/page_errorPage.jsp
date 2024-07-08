@@ -9,7 +9,12 @@
 	String text="ABCDEFG";
 	//String text=null;
 	
-	int su=10/0;
+	//int su=10/0;
+	
+	if(request.getMethod().equals("GET")) {
+		response.sendError(HttpServletResponse.SC_METHOD_NOT_ALLOWED);
+		return;
+	}
 %>    
 <!DOCTYPE html>
 <html>
