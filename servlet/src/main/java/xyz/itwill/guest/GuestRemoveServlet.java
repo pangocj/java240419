@@ -33,7 +33,7 @@ public class GuestRemoveServlet extends HttpServlet {
 		if(rows > 0) {//삭제된 행이 있는 경우
 			//클라이언트에게 URL 주소를 전달하여 응답 처리
 			response.sendRedirect("list.itwill");//리다이렉트 이동
-		} else {//삭제된 행이 없는 경우
+		} else {//삭제된 행이 없는 경우 - 비정상적인 요청에 대한 응답
 			//클라이언트에게 [400] 에러코드를 전달하여 응답
 			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 			return;
