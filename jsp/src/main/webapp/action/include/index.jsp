@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	String headerFilePage="/action/include/header.jspf";
+	//String headerFilePath="/action/include/header.jspf";
+	String headerFilePath="/action/include/header.jsp";
 %>    
 <!DOCTYPE html>
 <html>
@@ -71,11 +72,22 @@ div {
 		코드를 JSP 문서에 포함하여 실행한 후 실행결과를 HTML 문서로 생성하여 응답 처리 --%>
 		<%-- => include Directive의 file 속성값으로 설정된 문서파일이 변경된 경우 JSP 문서가
 		변경된 경우 동일하므로 JSP 문서 요청시 서블릿 클래스를 새로 변환하여 실행 처리 --%>
-		<%--  include Directive의 file 속성값으로 표현식(Expression) 사용 불가능 --%>
 		<%-- <%@include file="/action/include/header.jspf" %> --%>
-		<%-- <%@include file="<%=headerFilePage %>" %> --%>
+		<%-- include Directive의 file 속성값으로 표현식(Expression) 사용 불가능 - 에러 발생 --%>
+		<%-- <%@include file="<%=headerFilePath %>" %> --%>
 		
-		
+		<%-- include Tag : 요청 JSP 문서에서 다른 JSP 문서로 스레드를 이동하여 JSP 문서를
+		실행하고 실행결과(HTML 태그)를 가져와 JSP 문서에 포함하는 JSP 태그 --%>
+		<%-- 형식) <jsp:include page="JSP 문서의 컨텍스트 경로"></jsp:include> --%>
+		<%-- => 요청 JSP 문서의 request 객체와 response 객체를 스레드가 이동될 JSP 문서로
+		전달하여 사용할 수 있도록 제공 --%>
+		<%-- => 스레드가 이동된 JSP 문서의 실행결과(CSL - HTML, CSS, JavaScript)를 요청 JSP 
+		문서에 포함 - 동적 포함 --%>
+		<%-- => include 태그의 page 속성값으로 설정된 JSP 문서를 변경해도 요청 JSP 문서에는 미영향 --%>
+		<%-- <jsp:include page="/action/include/header.jsp"></jsp:include> --%>
+		<%-- <jsp:include page="/action/include/header.jsp"/> --%>
+		<%-- include 태그의 file 속성값으로 표현식(Expression) 사용 가능 --%>
+		<jsp:include page="<%=headerFilePath %>"/>
 	</div>
 	
 	<%-- 몸체부 : 요청에 대한 실행 결과 --%>
