@@ -1,8 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%-- 클라이언트의 모든 요청에 대한 실행결과(HTML 문서)를 응답하는 JSP 문서 - 템플릿 페이지 --%>    
 <%
+	request.setCharacterEncoding("utf-8");
+
 	//String headerFilePath="/action/include/header.jspf";
 	String headerFilePath="/action/include/header.jsp";
+	
+	String worker=request.getParameter("worker");
+	if(worker == null) {
+		worker="main";
+	}
+	
+	//전달값으로 몸체부에 포함될 JSP 문서의 컨텍스트 경로를 생성하여 저장
+	String contentFilePath="/action/include/"+worker+".jsp";
+	//System.out.println("contentFilePath = "+contentFilePath);
+	
+	String webMaster="";
+	if(worker.equals("main")) {
+		webMaster="홍길동(abc@itwill.xyz)";
+	} else if(worker.equals("login") || worker.equals("join")) {
+		webMaster="임꺽정(opq@itwill.xyz)";
+	} else if(worker.equals("cart") || worker.equals("review")) {
+		webMaster="전우치(xyz@itwill.xyz)";
+	}
 %>    
 <!DOCTYPE html>
 <html>
@@ -92,13 +113,31 @@ div {
 	
 	<%-- 몸체부 : 요청에 대한 실행 결과 --%>
 	<div id="content">
-		<h2>메인 페이지 - 제품 목록 출력</h2>
+		<%-- <h2>메인 페이지 - 제품 목록 출력</h2> --%>
+		<jsp:include page="<%=contentFilePath %>"/>
 	</div>
 	
 	<%-- 꼬릿부 : 저작권, 약관, 개인정보 보호정책 등 --%>
 	<div id="footer">
+		<%-- 
 		<p>Copyright ⓒ Itwill Corp. All rights reserved</p>
 		<p>관리자 : 홍길동(abc@itwill.xyz)</p>
+		--%>
+		<%-- param 태그 : 스레드가 이동되는 JSP 문서에게 값을 전달하는 태그 --%>
+		<%-- => 리퀘스트 메세지(request 객체)의 몸체부에 값을 저장하여 전달 --%>
+		<%-- => include 태그와 forward 태그의 자식태그로만 사용 가능 --%>
+		<%-- => include 태그와 forward 태그의 자식태그로만 사용 가능 --%>
+		<%-- include 태그와 forward 태그에는 param 태그외 다른 코드(주석문 포함)를 작성하면 에러 발생 --%>
+		<jsp:include page="/action/include/footer.jsp">
+			<jsp:param value="<%=webMaster %>" name="master"/>
+		</jsp:include>		
 	</div>
+	<%
+		if(request.getAttribute("errorCode") != null) {
+			//클라이언트에게 에러코드를 전달하여 응답 처리
+			response.sendError((Integer)request.getAttribute("errorCode"));
+			return;
+		}
+	%>
 </body>
 </html>
