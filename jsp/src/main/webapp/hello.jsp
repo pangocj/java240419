@@ -9,8 +9,12 @@
 <%-- => JSP 문서가 변경된 후 클라이언트가 JSP 문서를 요청하면 JSP 문서를 서블릿 클래스로 
 변환해 객체 생성하고 요청 처리 메소드를 호출하여 응답 처리 --%>
 <%
+	//서버 플렛폼의 현재 날짜와 시간이 저장된 Date 객체를 생성하여 저장
 	Date now=new Date();
+	//날짜와 시간에 대한 패턴정보가 저장된 SimpleDateFormat 객체를 생성하여 저장
 	SimpleDateFormat dateFormat=new SimpleDateFormat("yyyy년 MM월 dd일 HH시 mm분 ss초");
+	//매개변수로 Date 객체를 전달받아 SimpleDateFormat 객체에 저장된 패턴의 문자열로 변환하여
+	//반환받아 저장
 	String displayNow=dateFormat.format(now);
 %>    
 <!DOCTYPE html>
