@@ -7,7 +7,7 @@
 	pageContext.setAttribute("pageName", "홍길동");//Page Scope
 	request.setAttribute("requestName", "임꺽정");//Request Scope
 	session.setAttribute("sessionName", "전우치");//Session Scope
-	application.setAttribute("applicationName", "일지먄");//Application Scope
+	application.setAttribute("applicationName", "일지매");//Application Scope
 %>    
 <!DOCTYPE html>
 <html>
