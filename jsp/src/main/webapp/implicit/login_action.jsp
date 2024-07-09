@@ -76,13 +76,3 @@
 	session.setAttribute("loginId", id);
 	response.sendRedirect("login_form.jsp");
 %>
-
-
-
-
-
-
-
-
-
-
