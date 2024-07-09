@@ -51,12 +51,12 @@ div {
 <body>
 	<%-- 머릿부 : 로고, 메뉴 등 --%>
 	<div id="header">
-		<h1><a href="index.jsp">쇼핑몰</a></h1>
+		<h1><a href="<%=request.getContextPath()%>/action/include/index.jsp">쇼핑몰</a></h1>
 		<div id="menu">
-			<a href="login.jsp">로그인</a>&nbsp;&nbsp;
-			<a href="join.jsp">회원가입</a>&nbsp;&nbsp;
-			<a href="cart.jsp">장바구니</a>&nbsp;&nbsp;
-			<a href="review.jsp">리뷰게시판</a>&nbsp;&nbsp;
+			<a href="<%=request.getContextPath()%>/action/include/index.jsp?worker=login">로그인</a>&nbsp;&nbsp;
+			<a href="<%=request.getContextPath()%>/action/include/index.jsp?worker=join">회원가입</a>&nbsp;&nbsp;
+			<a href="<%=request.getContextPath()%>/action/include/index.jsp?worker=cart">장바구니</a>&nbsp;&nbsp;
+			<a href="<%=request.getContextPath()%>/action/include/index.jsp?worker=review">제품후기</a>&nbsp;&nbsp;
 		</div>
 	</div>
 	
@@ -68,6 +68,7 @@ div {
 	<%-- 꼬릿부 : 저작권, 약관, 개인정보 보호정책 등 --%>
 	<div id="footer">
 		<p>Copyright ⓒ Itwill Corp. All rights reserved</p>
+		<p>관리자 : 홍길동(abc@itwill.xyz)</p>
 	</div>
 </body>
 </html>
