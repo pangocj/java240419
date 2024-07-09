@@ -107,7 +107,7 @@ div {
 		<%-- => include 태그의 page 속성값으로 설정된 JSP 문서를 변경해도 요청 JSP 문서에는 미영향 --%>
 		<%-- <jsp:include page="/action/include/header.jsp"></jsp:include> --%>
 		<%-- <jsp:include page="/action/include/header.jsp"/> --%>
-		<%-- include 태그의 file 속성값으로 표현식(Expression) 사용 가능 --%>
+		<%-- include 태그의 page 속성값으로 표현식(Expression) 사용 가능 --%>
 		<jsp:include page="<%=headerFilePath %>"/>
 	</div>
 	
