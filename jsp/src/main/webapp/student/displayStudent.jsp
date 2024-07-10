@@ -1,7 +1,16 @@
+<%@page import="xyz.itwill.dto.StudentDTO"%>
+<%@page import="java.util.List"%>
+<%@page import="xyz.itwill.dao.StudentDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%-- STUDENT 테이블에 저장된 모든 행(학생정보)를 검색하여 HTML 태그에 포함하여 응답하는 JSP 문서 --%>
-<%--  --%>    
+<%-- => [학생추가] 태그를 클릭한 경우 [insertFormStudent.jsp] 문서를 요청하여 페이지 이동 --%>    
+<%-- => 학생정보의 [삭제] 태그를 클릭한 경우 [deleteStudent.jsp] 문서를 요청하여 페이지 이동 - 학번 전달 --%>    
+<%-- => 학생정보의 [변경] 태그를 클릭한 경우 [updateFormStudent.jsp] 문서를 요청하여 페이지 이동 - 학번 전달 --%>
+<%
+	//STUDENT 테이블에 저장된 모든 행을 검색하여 List 객체로 반환하는 StudentDAO 클래스의 메소드 호출
+	List<StudentDTO> studentList=StudentDAO.getDAO().selectStudentList();
+%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -61,15 +70,19 @@ th, td {
 			<th class="remove">삭제</th>
 			<th class="modify">변경</th>
 		</tr>
+		<%-- List 객체에 저장된 요소값(StudentDTO 객체)을 차례대로 제공받아 변수에 저장하는 반복문 --%>
+		<%-- => StudentDTO 객체의 필드값을 반환받아 HTML 태그에 포함하여 출력 처리 --%> 
+		<% for(StudentDTO student : studentList) { %>
 		<tr align="center">
-			<td>1000</td>				
-			<td>홍길동</td>				
-			<td>010-1234-5678</td>				
-			<td>서울시 강남구</td>				
-			<td>2000-01-01</td>				
+			<td><%=student.getNo() %></td>				
+			<td><%=student.getName() %></td>				
+			<td><%=student.getPhone() %></td>				
+			<td><%=student.getAddress() %></td>				
+			<td><%=student.getBirthday().substring(0, 10) %></td>				
 			<td><button type="button">삭제</button></td>		
 			<td><button type="button">변경</button></td>		
 		</tr>	
+		<% } %>
 	</table>
 </body>
 </html>
