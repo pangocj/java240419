@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%-- STUDENT 테이블에 저장된 모든 행(학생정보)를 검색하여 HTML 태그에 포함하여 응답하는 JSP 문서 --%>
+<%--  --%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -47,7 +49,7 @@ th, td {
 <body>
 	<h1>학생목록</h1>
 	<div>
-		<input type="button" value="학생추가">
+		<button type="button">학생추가</button>
 	</div>
 	<table>
 		<tr>
