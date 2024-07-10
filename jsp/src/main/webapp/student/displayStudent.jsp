@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,7 +51,7 @@ th, td {
 	</div>
 	<table>
 		<tr>
-			<th class="no">학생번호</th>
+			<th class="no">학번</th>
 			<th class="name">이름</th>
 			<th class="phone">전화번호</th>
 			<th class="address">주소</th>
@@ -57,7 +59,6 @@ th, td {
 			<th class="remove">삭제</th>
 			<th class="modify">변경</th>
 		</tr>
-		
 		<tr align="center">
 			<td>1000</td>				
 			<td>홍길동</td>				
