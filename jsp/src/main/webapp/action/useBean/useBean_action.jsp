@@ -30,17 +30,32 @@
 	request.setAttribute("hewon", hewon);
 --%>
 
+<%-- setProperty 태그 : useBean 태그로 제공받은 객체의 필드값을 변경하는 태그 --%>
+<%-- => useBean 태그의 종속된 태그 --%>
+<%-- 형식) <jsp:setProperty name="식별자" property="필드명" value="변경값"></jsp:setProperty> --%>
+<%-- => 객체로 Setter 메소드를 호출하여 필드값을 변경하는 기능과 동일 --%>
+<%-- name 속성 : useBean 태그로 제공받은 객체의 식별자(id 속성값)를 속성값으로 설정 --%>
+<%-- property 속성 : 필드값을 변경하기 위한 필드명을 속성값으로 설정 --%>
+<%-- => 속성값으로 설정된 필드의 Setter 메소드를 호출하여 필드값 변경 - Setter 메소드가 없는 경우 에러 발생 --%>
+<%-- value 속성 : 필드에 저장될 필드값을 속성값으로 설정 --%>
+<%-- <jsp:setProperty name="hewon" property="name" value="홍길동"/> --%>
+<%-- hewon.setName("홍길동"); --%>
+
+<%-- setProperty 태그의 value 속성을 생략하면 JSP 문서 요청시 전달된 값을 반환받아 필드값으로 변경 --%>
+<%-- => 전달값의 이름과 같은 이름의 필드가 있어야 전달값을 반환받아 필드값으로 변경 가능 --%>
+<%-- 
+<jsp:setProperty name="hewon" property="name"/>
+<jsp:setProperty name="hewon" property="phone"/>
+<jsp:setProperty name="hewon" property="address"/>
+--%>
+<%-- property 속성값으로 [*] 기호를 설정하면 모든 전달값을 반환받아 전달값의 이름과 같은 이름의
+필드의 필드값을 변경 처리 --%>
+<jsp:setProperty name="hewon" property="*"/>
+<%--
+	hewon.setName(request.getParameter("name"));
+	hewon.setPhone(request.getParameter("phone"));
+	hewon.setAddress(request.getParameter("address"));
+--%>
 
 <jsp:forward page="/action/useBean/useBean_display.jsp"/>
 <%-- request.getRequestDispatcher("/action/useBean/useBean_display.jsp").forward(request, response); --%>	
-
-
-
-
-
-
-
-
-
-
-
