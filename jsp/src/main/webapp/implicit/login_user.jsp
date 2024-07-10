@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%-- 로그인 사용자 정보를 HTML 문서에 포함하여 응답하는 JSP 문서 --%>
+<%-- 로그인 사용자의 정보를 HTML 문서에 포함하여 응답하는 JSP 문서 --%>
 <%-- => 비로그인 사용자가 JSP 문서를 요청한 경우 [login_form.jsp] 문서를 요청할 수 있는 
 URL 주소를 전달하여 응답 --%>
 <%-- => [로그아웃] 태그를 클릭한 경우 [logout_action.jsp] 문서를 요청하여 페이지 이동 --%>

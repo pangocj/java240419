@@ -72,7 +72,7 @@
 		return;
 	}
 	
-	//인증 성공 - 권한 정보가 저장된 객체를 세션의 속성값으로 저장
+	//인증 성공 - 권한 관련 정보가 저장된 객체를 세션의 속성값으로 저장
 	session.setAttribute("loginId", id);
 	response.sendRedirect("login_form.jsp");
 %>

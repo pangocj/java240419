@@ -12,7 +12,7 @@
 		worker="main";
 	}
 	
-	//전달값으로 몸체부에 포함될 JSP 문서의 컨텍스트 경로를 생성하여 저장
+	//전달값이 저장된 변수로 몸체부에 포함될 JSP 문서의 컨텍스트 경로를 생성하여 저장
 	String contentFilePath="/action/include/"+worker+".jsp";
 	//System.out.println("contentFilePath = "+contentFilePath);
 	
@@ -97,7 +97,7 @@ div {
 		<%-- include Directive의 file 속성값으로 표현식(Expression) 사용 불가능 - 에러 발생 --%>
 		<%-- <%@include file="<%=headerFilePath %>" %> --%>
 		
-		<%-- include Tag : 요청 JSP 문서에서 다른 JSP 문서로 스레드를 이동하여 JSP 문서를
+		<%-- include Tag : 요청 JSP 문서에서 다른 JSP 문서로 스레드를 이동하여 JSP 문서의 명령을
 		실행하고 실행결과(HTML 태그)를 가져와 JSP 문서에 포함하는 JSP 태그 --%>
 		<%-- 형식) <jsp:include page="JSP 문서의 컨텍스트 경로"></jsp:include> --%>
 		<%-- => 요청 JSP 문서의 request 객체와 response 객체를 스레드가 이동될 JSP 문서로
