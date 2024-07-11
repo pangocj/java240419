@@ -58,7 +58,7 @@ th, td {
 <body>
 	<h1>학생정보 변경</h1>
 	<hr>
-	<form name="studentForm">
+	<form name="studentForm" action="<%=request.getContextPath()%>/student/updateStudent.jsp" method="post">
 	<table>
 		<tr>
 			<th class="title">학생번호</th>

@@ -79,7 +79,7 @@ th, td {
 			<td><%=student.getPhone() %></td>				
 			<td><%=student.getAddress() %></td>				
 			<td><%=student.getBirthday().substring(0, 10) %></td>				
-			<td><button type="button">삭제</button></td>		
+			<td><button type="button" onclick="removeStudent(<%=student.getNo()%>);">삭제</button></td>		
 			<td><button type="button" onclick="modifyStudent(<%=student.getNo()%>);">변경</button></td>		
 		</tr>	
 		<% } %>
@@ -93,6 +93,12 @@ th, td {
 	function modifyStudent(no) {
 		//alert(no);
 		location.href="<%=request.getContextPath()%>/student/updateFormStudent.jsp?no="+no;	
+	}
+	
+	function removeStudent(no) {
+		if(confirm("학생정보를 정말로 삭제 하시겠습니까?")) {
+			location.href="<%=request.getContextPath()%>/student/removeStudent.jsp?no="+no;
+		}
 	}
 	</script>
 </body>
