@@ -83,7 +83,7 @@ legend {
 			<div id="emailRegMsg" class="error">입력한 이메일이 형식에 맞지 않습니다.</div>
 		</li>
 		<li>
-			<label for="mobile">전화번호</label>
+			<label for="mobile2">전화번호</label>
 			<select name="mobile1">
 				<option value="010" selected>&nbsp;010&nbsp;</option>
 				<option value="011">&nbsp;011&nbsp;</option>
