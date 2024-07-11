@@ -49,7 +49,7 @@ legend {
 	background: aqua;
 }
 </style>
-<form id="join" action="#" method="post">
+<form id="join" action="<%=request.getContextPath() %>/index.jsp?workgroup=member&work=member_join_action" method="post">
 <fieldset>
 	<legend>회원가입 정보</legend>
 	<ul>
