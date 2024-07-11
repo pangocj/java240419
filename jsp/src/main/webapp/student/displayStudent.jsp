@@ -87,7 +87,7 @@ th, td {
 	
 	<script type="text/javascript">
 	document.getElementById("addBtn").onclick=function() {
-		location.href="insertFormStudent.jsp";	
+		location.href="<%=request.getContextPath()%>/student/insertFormStudent.jsp";	
 	}
 	</script>
 </body>

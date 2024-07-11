@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%-- 사용자로부터 학생정보를 입력받기 위한 JSP 문서 --%>
+<%-- => [학생추가] 태그를 클릭한 경우 [insertStudent.jsp] 문서를 요청하여 페이지 이동 - 입력값(학생정보) 전달 --%>    
+<%-- => [학생목록] 태그를 클릭한 경우 [displayStudent.jsp] 문서를 요청하여 페이지 이동 --%>    
 <!DOCTYPE html>
 <html>
 <head>
@@ -31,7 +34,7 @@ th, td {
 <body>
 	<h1>학생정보 입력</h1>
 	<hr>
-	<form name="studentForm">
+	<form name="studentForm" action="<%=request.getContextPath()%>/student/insertStudent.jsp" method="post">
 	<table>
 		<tr>
 			<th class="title">학생번호</th>
@@ -65,9 +68,9 @@ th, td {
 		</tr>
 		<tr>
 			<td colspan="2">
-				<button type="button">학생추가</button> 
+				<button type="submit">학생추가</button> 
 				<button type="reset">초기화</button> 
-				<button type="button">학생목록</button> 
+				<button type="button" id="listBtn">학생목록</button> 
 			</td>
 		</tr>
 	</table>
@@ -129,6 +132,10 @@ th, td {
 			return false;
 		}
 	} 
+	
+	document.getElementById("listBtn").onclick=function() {
+		location.href="<%=request.getContextPath()%>/student/displayStudent.jsp";	
+	}
 	</script>
 
 </body>
