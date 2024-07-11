@@ -52,6 +52,9 @@ legend {
 }
 </style>
 <form id="join" action="<%=request.getContextPath() %>/index.jsp?workgroup=member&work=member_join_action" method="post">
+<%-- [아이디 중복 검사] 기능 실행 여부를 확인하기 위한 입력태그 --%>
+<%-- => 0 : [아이디 중복 검사] 미실행 - 아이디 중복, 1 : [아이디 중복 검사] 실행 - 아이디 미중복 --%>
+<input type="hidden" id="idCheckResult" value="0">
 <fieldset>
 	<legend>회원가입 정보</legend>
 	<ul>
@@ -60,6 +63,7 @@ legend {
 			<input type="text" name="id" id="id"><span id="idCheck">아이디 중복 검사</span>
 			<div id="idMsg" class="error">아이디를 입력해 주세요.</div>
 			<div id="idRegMsg" class="error">아이디는 영문자로 시작되는 영문자,숫자,_의 6~20범위의 문자로만 작성 가능합니다.</div>
+			<div id="idCheckMsg" class="error">아이디 중복 검사를 반드시 실행해 주세요.</div>
 		</li>
 		<li>
 			<label for="passwd">비밀번호</label>
@@ -135,6 +139,9 @@ $("#join").submit(function() {
 		submitResult=false;
 	} else if(!idReg.test($("#id").val())) {
 		$("#idRegMsg").css("display","block");
+		submitResult=false;
+	} else if($("#idCheckResult").val()=="0") {
+		$("#idCheckMsg").css("display","block");
 		submitResult=false;
 	}
 		
@@ -215,5 +222,11 @@ $("#idCheck").click(function() {
 	//새로운 브라우저를 생성하여 [/member/id_check.jsp] 문서 요청
 	window.open("<%=request.getContextPath()%>/member/id_check.jsp?id="+$("#id").val()
 		,"idCheck","width=450, height=130, left=700, top=400");
+});
+
+//입력태그(아이디)의 입력값이 변경된 경우 호출되는 이벤트 처리 함수 등록
+$("#id").change(function() {
+	//입력태그(아이디 중복 검사 실행 여부)의 입력값이 변경
+	$("#idCheckResult").val("0");
 });
 </script>
