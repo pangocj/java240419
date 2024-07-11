@@ -29,6 +29,21 @@
 	student.setAddress(address);
 	student.setBirthday(birthday);
 	
+	//문제점)전달받은 학생번호가 STUDENT 테이블에 저장된 학생정보의 학생번호와 중복될 경우 
+	//PRIMARY KEY 제약조건을 위반하여 삽입 처리 불가능 - SQLException 발생
+	//해결법)전달받은 학생번호가 STUDENT 테이블에 저장된 학생정보의 학생번호와 중복될 경우
+	//[insertFormStudent.jsp] 문서를 요청할 수 있는 URL 주소로 응답 처리
+	
+	//학번를 전달받아 STUDENT 테이블에 저장된 하나의 행을 검색하여 검색된 학생정보(StudentDTO 
+	//객체)를 반환하는 StudentDAO 클래스의 메소드 호출
+	// => null 반환 : 학생정보 미검색 - 학번 미중복  , StudentDTO 객체 반환 : 학생정보 검색 - 학번 중복 
+	if(StudentDAO.getDAO().selectStudent(no) != null) {//학번이 중복된 경우
+		session.setAttribute("message", "이미 사용중인 학생번호를 입력 하였습니다. 다시 입력해 주세요.");
+		session.setAttribute("student", student);
+		response.sendRedirect(request.getContextPath()+"/student/insertFormStudent.jsp");
+		return;
+	}
+	
 	//학생정보(StudentDTO 객체)를 전달받아 STUDENT 테이블에 행으로 삽입하고 삽입행의 갯수를
 	//반환하는 StudentDAO 클래스의 메소드 호출
 	StudentDAO.getDAO().insertStudent(student);

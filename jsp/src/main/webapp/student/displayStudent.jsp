@@ -80,7 +80,7 @@ th, td {
 			<td><%=student.getAddress() %></td>				
 			<td><%=student.getBirthday().substring(0, 10) %></td>				
 			<td><button type="button">삭제</button></td>		
-			<td><button type="button">변경</button></td>		
+			<td><button type="button" onclick="modifyStudent(<%=student.getNo()%>);">변경</button></td>		
 		</tr>	
 		<% } %>
 	</table>
@@ -89,15 +89,12 @@ th, td {
 	document.getElementById("addBtn").onclick=function() {
 		location.href="<%=request.getContextPath()%>/student/insertFormStudent.jsp";	
 	}
+	
+	function modifyStudent(no) {
+		//alert(no);
+		location.href="<%=request.getContextPath()%>/student/updateFormStudent.jsp?no="+no;	
+	}
 	</script>
 </body>
 </html>
-
-
-
-
-
-
-
-
 
