@@ -97,7 +97,7 @@ th, td {
 	
 	function removeStudent(no) {
 		if(confirm("학생정보를 정말로 삭제 하시겠습니까?")) {
-			location.href="<%=request.getContextPath()%>/student/removeStudent.jsp?no="+no;
+			location.href="<%=request.getContextPath()%>/student/deleteStudent.jsp?no="+no;
 		}
 	}
 	</script>
