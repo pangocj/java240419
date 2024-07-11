@@ -58,7 +58,7 @@ th, td {
 <body>
 	<h1>학생목록</h1>
 	<div>
-		<button type="button">학생추가</button>
+		<button type="button" id="addBtn">학생추가</button>
 	</div>
 	<table>
 		<tr>
@@ -84,5 +84,20 @@ th, td {
 		</tr>	
 		<% } %>
 	</table>
+	
+	<script type="text/javascript">
+	document.getElementById("addBtn").onclick=function() {
+		location.href="insertFormStudent.jsp";	
+	}
+	</script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
