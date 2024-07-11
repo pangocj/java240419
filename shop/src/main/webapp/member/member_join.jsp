@@ -1,7 +1,9 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%-- 사용자로부터 회원정보를 입력받기 위한 JSP 문서 --%>
-<%-- => [회원가입] 태그를 클릭한 경우 [/member/member_join_action.jsp] 문서를 요청하여 페이지 이동 - 입력값 전달 --%>    
+<%-- => [회원가입] 태그를 클릭한 경우 [/member/member_join_action.jsp] 문서를 요청하여 페이지 이동 - 입력값 전달 --%>
+<%-- => [아이디 중복 검사] 태그를 클릭한 경우 새로운 브라우저(팝업창)를 생성하여 
+[/member/id_check.jsp] 문서 요청 - 아이디 전달  --%>    
 <style type="text/css">
 fieldset {
 	text-align: left;
@@ -55,7 +57,7 @@ legend {
 	<ul>
 		<li>
 			<label for="id">아이디</label>
-			<input type="text" name="id" id="id"><!-- <span id="idCheck">아이디 중복 검사</span> -->
+			<input type="text" name="id" id="id"><span id="idCheck">아이디 중복 검사</span>
 			<div id="idMsg" class="error">아이디를 입력해 주세요.</div>
 			<div id="idRegMsg" class="error">아이디는 영문자로 시작되는 영문자,숫자,_의 6~20범위의 문자로만 작성 가능합니다.</div>
 		</li>
@@ -193,5 +195,25 @@ $("#join").submit(function() {
 	}
 	
 	return submitResult;
+});
+
+$("#idCheck").click(function() {
+	//아이디 관련 에러메세지를 출력하는 태그가 보여지지 않도록 설정
+	$("#idMsg").css("display", "none");
+	$("#idRegMsg").css("display", "none");
+	
+	//입력태그(아이디)의 입력값에 대한 검증
+	var idReg=/^[a-zA-Z]\w{5,19}$/g;
+	if($("#id").val()=="") {
+		$("#idMsg").css("display","block");
+		return;
+	} else if(!idReg.test($("#id").val())) {
+		$("#idRegMsg").css("display","block");
+		return;
+	}
+	
+	//새로운 브라우저를 생성하여 [/member/id_check.jsp] 문서 요청
+	window.open("<%=request.getContextPath()%>/member/id_check.jsp?id="+$("#id").val()
+		,"idCheck","width=450, height=130, left=700, top=400");
 });
 </script>

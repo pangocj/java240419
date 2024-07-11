@@ -40,7 +40,7 @@ public class MemberDTO {
 	private String memberRegisterDate;
 	private String memberUpdateDate;
 	private String memberLastLogin;
-	private String memberAuth;
+	private int memberAuth;
 	
 	public MemberDTO() {
 		// TODO Auto-generated constructor stub
@@ -142,11 +142,11 @@ public class MemberDTO {
 		this.memberLastLogin = memberLastLogin;
 	}
 
-	public String getMemberAuth() {
+	public int getMemberAuth() {
 		return memberAuth;
 	}
 
-	public void setMemberAuth(String memberAuth) {
+	public void setMemberAuth(int memberAuth) {
 		this.memberAuth = memberAuth;
 	}
 }
