@@ -56,17 +56,3 @@ URL 주소로 응답 처리 --%>
 		request.setAttribute("returnUrl", url);
 	}
 %>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
