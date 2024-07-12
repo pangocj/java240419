@@ -3,6 +3,12 @@
 <%-- 사용자로부터 인증정보(아이디와 비밀번호)를 입력받기 위한 JSP 문서 --%>
 <%-- => [로그인] 태그를 클릭한 경우 [/member/member_login_action.jsp] 문서를 요청하여 페이지 이동 - 입력값 전달 --%>
 <%
+	//전달값(URL 주소)을 반환받아 저장
+	String url=request.getParameter("url");
+	if(url == null) {
+		url="";
+	}
+
 	String message=(String)session.getAttribute("message");
 	if(message == null) {
 		message="";
@@ -70,6 +76,7 @@ a:hover {
 <div id="space"></div>
 <form id="login" name="loginForm"  method="post"
 	action="<%=request.getContextPath() %>/index.jsp?workgroup=member&work=member_login_action">
+	<input type="hidden" name="url" value="<%=url%>">
 	<ul class="login_tag">
 		<li>
 			<label for="id">아이디</label>

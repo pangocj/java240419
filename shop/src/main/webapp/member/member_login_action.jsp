@@ -21,6 +21,10 @@ URL 주소로 응답 처리 --%>
 	//전달값을 반환받아 저장
 	String id=request.getParameter("id");
 	String passwd=Utility.encrypt(request.getParameter("passwd"));
+	String url=request.getParameter("url");
+	if(url == null) {
+		url="";
+	}
 	
 	//아이디를 전달받아 MEMBER 테이블에 저장된 하나의 행을 검색하여 검색된 회원정보를 반환하는
 	//MemberDAO 클래스의 메소드 호출
@@ -46,7 +50,11 @@ URL 주소로 응답 처리 --%>
 	MemberDAO.getDAO().updateLastLogin(member.getMemberNum());
 
 	//페이지 이동 처리
-	request.setAttribute("returnUrl", request.getContextPath()+"/index.jsp?workgroup=main&work=main_page");
+	if(url.equals("")) {//전달받은 URL 주소가 없는 경우 - 메인 페이지로 이동
+		request.setAttribute("returnUrl", request.getContextPath()+"/index.jsp?workgroup=main&work=main_page");
+	} else {//전달받은 URL 주소가 있는 경우 - URL 주소의 페이지로 이동
+		request.setAttribute("returnUrl", url);
+	}
 %>
 
 
