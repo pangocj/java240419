@@ -36,6 +36,17 @@ URL 주소로 응답 처리 --%>
 		return;
 	}
 
+	//인증 성공 - 권한 관련 정보가 저장된 객체를 session 내장객체의 속성값으로 저장
+	// => session 내장객체에 로그인 사용자의 정보(MemberDTO 객체)를 속성값으로 저장
+	//session.setAttribute("loginMemberNum", member.getMemberNum());
+	session.setAttribute("loginMember", member);
+	
+	//회원번호를 전달받아 MEMBER 테이블에 저장된 행에서 마지막 로그인 날짜를 현재 날짜와 시간으로 
+	//변경하고 변경행의 갯수(int)를 반환하는 MemberDAO 클래스의 메소드 호출
+	MemberDAO.getDAO().updateLastLogin(member.getMemberNum());
+
+	//페이지 이동 처리
+	request.setAttribute("returnUrl", request.getContextPath()+"/index.jsp?workgroup=main&work=main_page");
 %>
 
 
