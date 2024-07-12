@@ -1,3 +1,4 @@
+<%@page import="xyz.itwill.dao.MemberDAO"%>
 <%@page import="xyz.itwill.dto.MemberDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -12,7 +13,7 @@
 		request.setAttribute("returnUrl", request.getContextPath()+"/index.jsp?workgroup=error&work=error_400");
 		return;	
 	}
---%>   
+--%>
 <%@include file="/security/login_check.jspf" %> 
 <style type="text/css">
 #detail {
