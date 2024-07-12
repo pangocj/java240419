@@ -34,7 +34,7 @@ public class Utility {
 				//변환하여 반환하는 정적메소드
 				encryptPassword+=Integer.toHexString(digest[i] & 0xff);
 			}
-		} catch (NoSuchAlgorithmException e) {
+		} catch (NoSuchAlgorithmException e) { 
 			System.out.println("[에러]잘못된 암호화 알고리즘을 사용 하였습니다.");
 		}
 		return encryptPassword;
