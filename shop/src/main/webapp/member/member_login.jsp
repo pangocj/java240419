@@ -74,7 +74,7 @@ a:hover {
 }
 </style>
 <div id="space"></div>
-<form id="login" name="loginForm"  method="post"
+<form id="login" name="loginForm" method="post"
 	action="<%=request.getContextPath() %>/index.jsp?workgroup=member&work=member_login_action">
 	<input type="hidden" name="url" value="<%=url%>">
 	<ul class="login_tag">

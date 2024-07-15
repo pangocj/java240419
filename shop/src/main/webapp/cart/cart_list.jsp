@@ -12,10 +12,11 @@
 		String requestURI=request.getRequestURI();
 		//System.out.println("requestURI = "+requestURI);//requestURI = /shop/index.jsp
 				
-		//request.getRequestURI() : 요청 URL 주소에서 질의문자열(QueryString)을 반환하는 메소드
+		//request.getQueryString() : 요청 URL 주소에서 질의문자열(QueryString)을 반환하는 메소드
 		String queryString=request.getQueryString();		
 		//System.out.println("queryString = "+queryString);//queryString = workgroup=cart&work=cart_list
 		
+		//현재 실행중인 JSP 문서의 URL 주소를 생성하여 저장
 		String url=requestURI;
 		if(queryString != null) {
 			url+="?"+queryString;
@@ -23,7 +24,7 @@
 		
 		//URL 주소를 부호화 처리하여 저장
 		url=URLEncoder.encode(url, "utf-8");
-		System.out.println("url = "+url);//queryString = workgroup=cart&work=cart_list
+		System.out.println("url = "+url);
 		
 		request.setAttribute("returnUrl", request.getContextPath()+"/index.jsp?workgroup=member&work=member_login&url="+url);
 		return;	

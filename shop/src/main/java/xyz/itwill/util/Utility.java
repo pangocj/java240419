@@ -19,8 +19,8 @@ public class Utility {
 			//양방향 암호화 알고리즘(복호화 처리 가능) : AES-123, RSA 등
 			MessageDigest messageDigest=MessageDigest.getInstance("SHA-256");
 			
-			//MessageDigest.update(byte[] input) : 매개변수에 MessageDigest 객체에 암호화 처리하기 
-			//위한 문자열을 byte 배열로 전달받아 저장하기 위한 메소드
+			//MessageDigest.update(byte[] input) : 매개변수에 MessageDigest 객체로 암호화 처리하기 
+			//위한 문자열을 byte 배열로 전달받아 MessageDigest 객체에 저장하기 위한 메소드
 			//String.getBytes() : String 객체에 저장된 문장열을 byte 배열로 변환하여 반환하는 메소드
 			messageDigest.update(password.getBytes());	
 			
