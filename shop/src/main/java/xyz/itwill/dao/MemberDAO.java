@@ -209,6 +209,30 @@ public class MemberDAO extends JdbcDAO {
 		}
 		return rows;
 	}
+	
+	//회원정보(MemberDTO 객체)를 전달받아 MEMBER 테이블에 저장된 행의 회원권한을 변경하고 
+	//변경행의 갯수를 반환하는 메소드
+	public int updateAuth(MemberDTO member) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		int rows=0;
+		try {
+			con=getConnection();
+			
+			String sql="update member set member_auth=? where member_num=?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, member.getMemberAuth());
+			pstmt.setInt(2, member.getMemberNum());
+			
+			rows=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("[에러]updateAuth() 메서드의 SQL 오류 = "+e.getMessage());
+		} finally {
+			close(con, pstmt);
+		}
+		return rows;
+	}
+
 }
 
 
