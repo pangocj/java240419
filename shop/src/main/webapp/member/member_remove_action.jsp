@@ -1,3 +1,4 @@
+<%@page import="xyz.itwill.dao.MemberDAO"%>
 <%@page import="xyz.itwill.util.Utility"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -22,8 +23,13 @@ MEMBER 테이블에 저장된 행의 권한을 변경하고 [/member/member_logo
 		return;		
 	}
 	
+	MemberDTO member=new MemberDTO();
+	member.setMemberNum(loginMember.getMemberNum());
+	member.setMemberAuth(0);
+	
 	//회원정보(MemberDTO 객체)를 전달받아 MEMBER 테이블에 저장된 행의 회원권한을 변경하고 
 	//변경행의 갯수를 반환하는 MemberDAO 클래스의 메소드 호출
+	MemberDAO.getDAO().updateAuth(member);
 	
 	//페이지 이동
 	request.setAttribute("returnUrl", request.getContextPath()+"/index.jsp?workgroup=member&work=member_logout_action");
