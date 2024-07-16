@@ -149,7 +149,7 @@ public class ReviewDAO extends JdbcDAO {
 	}
 	
 	//게시글(ReviewDTO 객체)을 전달받아 REVIEW 테이블의 행으로 삽입하고 삽입행의 갯수를 반환하는 메소드
-	public int insertREview(ReviewDTO review) {
+	public int insertReview(ReviewDTO review) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		int rows=0;
