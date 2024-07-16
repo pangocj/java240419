@@ -248,11 +248,36 @@ td {
 	
 	<%-- 페이지 번호 출력 --%>
 	<%
+		//하나의 페이지블럭에 출력될 페이지번호의 갯수 설정
+		int blockSize=5;
+	
+		//페이지블럭에 출력될 시작 페이지번호를 계산하여 저장
+		//ex) 1Block : 1, 2Block : 6, 3Block : 11, 4Block : 16,...
+		int startPage=(pageNum-1)/blockSize*blockSize+1; 
+
+		//페이지블럭에 출력될 종료 페이지번호를 계산하여 저장
+		//ex) 1Block : 5, 2Block : 10, 3Block : 15, 4Block : 20,...
+		int endPage=startPage+blockSize-1;
+		
+		//종료 페이지번호가 페이지 총갯수보다 큰 경우 종료 페이지번호 변경
+		if(endPage > totalPage) {
+			endPage=totalPage;
+		}
+	%>
+	<%
 		String myUrl=request.getContextPath()+"/index.jsp?workgroup=review&work=review_list"
 			+"&pageSize="+pageSize+"&search="+search+"&keyword="+keyword;
 	%>
+	
 	<div id="page_list">
-		<% for(int i = 1 ; i <= totalPage ; i++) { %>
+		<%-- 이전 블럭을 출력할 수 있는 링크 제공 --%>
+		<% if(startPage > blockSize) { %>
+			<a href="<%=myUrl%>&pageNum=<%=startPage-blockSize%>">[이전]</a>
+		<% } else { %>
+			[이전]
+		<% } %>
+	
+		<% for(int i = startPage ; i <= endPage ; i++) { %>
 			<%-- 현재 처리중인 페이지 번호와 출력된 페이지 번호가 같지 않은 경우 링크 제공 --%>
 			<% if(pageNum != i) { %>
 				<a href="<%=myUrl%>&pageNum=<%=i%>">[<%=i %>]</a>
@@ -260,8 +285,16 @@ td {
 				[<%=i %>]
 			<% } %>
 		<% } %>
+
+		<%-- 다음 블럭을 출력할 수 있는 링크 제공 --%>
+		<% if(endPage != totalPage) { %>
+			<a href="<%=myUrl%>&pageNum=<%=startPage+blockSize%>">[다음]</a>
+		<% } else { %>
+			[다음]
+		<% } %>
 	</div>
-	
+
+	<%-- 조회기능을 제공하기 위한 form 태그 --%>	
 	<form action="<%=request.getContextPath() %>/index.jsp?workgroup=review&work=review_list" method="post">
 		<%-- select 태그로 전달되는 값은 반드시 컬럼명을 전달되도록 작성 --%>
 		<select name="search">
