@@ -278,7 +278,7 @@ td {
 //입력태그(게시글갯수)의 입력값을 변경한 경우 호출되는 이벤트 처리 함수 등록
 $("#pageSize").change(function() {	
 	location.href="<%=request.getContextPath()%>/index.jsp?workgroup=review&work=review_list"
-		+"&pageNum=<%=pageNum%>&pageSize=<%=pageSize%>&search=<%=search%>&keyword=<%=keyword%>";
+		+"&pageNum=<%=pageNum%>&pageSize="+$("#pageSize").val()+"&search=<%=search%>&keyword=<%=keyword%>";
 });
 
 $("#writeBtn").click(function() {

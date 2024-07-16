@@ -122,6 +122,62 @@ public class ReviewDAO extends JdbcDAO {
 		}
 		return reviewList;
 	}
+	
+	//REVIEW_SEQ 시퀸스의 다음값을 검색하여 반환하는 메소드
+	public int selectReviewNextNum() {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int nextNum=0;
+		try {
+			con=getConnection();
+			
+			String sql="select review_seq.nextval from dual";
+			pstmt=con.prepareStatement(sql);
+			
+			rs=pstmt.executeQuery();
+			
+			if(rs.next()) {
+				nextNum=rs.getInt(1);
+			}
+		} catch (SQLException e) {
+			System.out.println("[에러]selectReviewNextNum() 메소드의 SQL 오류 = "+e.getMessage());
+		} finally {
+			close(con, pstmt, rs);
+		}
+		return nextNum;
+	}
+	
+	//게시글(ReviewDTO 객체)을 전달받아 REVIEW 테이블의 행으로 삽입하고 삽입행의 갯수를 반환하는 메소드
+	public int insertREview(ReviewDTO review) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		int rows=0;
+		try {
+			con=getConnection();
+			
+			String sql="insert into review values(?,?,?,?,?,sysdate,null,?,0,?,?,?,?)";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, review.getReviewNum());
+			pstmt.setInt(2, review.getReviewMemberNum());
+			pstmt.setString(3, review.getReviewSubject());
+			pstmt.setString(4, review.getReviewContent());
+			pstmt.setString(5, review.getReviewImage());
+			pstmt.setString(6, review.getReviewIp());
+			pstmt.setInt(7, review.getReviewRef());
+			pstmt.setInt(8, review.getReviewRestep());
+			pstmt.setInt(9, review.getReviewRelevel());
+			pstmt.setInt(10, review.getReviewStatus()));
+			
+			rows=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("[에러]insertREview() 메소드의 SQL 오류 = "+e.getMessage());
+		} finally {
+			close(con, pstmt);
+		}
+		return rows;
+	}
+	
 }
 
 
