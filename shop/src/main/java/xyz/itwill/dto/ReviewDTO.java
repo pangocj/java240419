@@ -31,6 +31,7 @@ REVIEW_STATUS                 NUMBER(1)      - 글상태 : 0(삭제글), 1(일�
 public class ReviewDTO {
 	private int reviewNum;
 	private int reviewMemberNum;
+	private String memberName;//MEMBER 테이블의 회원이름을 저장하기 위한 필드 - 작성자 이름
 	private String reviewSubject;
 	private String reviewContent;
 	private String reviewImage;
@@ -61,6 +62,14 @@ public class ReviewDTO {
 
 	public void setReviewMemberNum(int reviewMemberNum) {
 		this.reviewMemberNum = reviewMemberNum;
+	}
+	
+	public String getMemberName() {
+		return memberName;
+	}
+
+	public void setMemberName(String memberName) {
+		this.memberName = memberName;
 	}
 
 	public String getReviewSubject() {

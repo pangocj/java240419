@@ -4,6 +4,10 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import xyz.itwill.dto.ReviewDTO;
 
 public class ReviewDAO extends JdbcDAO {
 	private static ReviewDAO _dao;
@@ -54,6 +58,69 @@ public class ReviewDAO extends JdbcDAO {
 			close(con, pstmt, rs);
 		}
 		return count;
+	}
+	
+	//페이징 관련 정보(시작행번호, 종료행번호)와 게시글 조회기능 관련 정보(조회대상과 조회단어)를
+	//전달받아 REVIEW 테이블에 저장된 행에서 조회정보가 포함된 행을 페이징 처리로 검색하여
+	//검색된 게시글 목록(List 객체)을 반환하는 메소드
+	public List<ReviewDTO> selectReviewList(int startRow, int endRow, String search, String keyword) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<ReviewDTO> reviewList=new ArrayList<ReviewDTO>();
+		try {
+			con=getConnection();
+			
+			if(keyword.equals("")) {
+				String sql="select * from (select rownum rn, temp.* from (select review_num"
+					+ ",review_member_num,member_name,review_subject,review_content,review_image"
+					+ ",review_register_date,review_update_date,review_ip,review_count,review_ref"
+					+ ",review_restep,review_relevel,review_status from review join member on"
+					+ " review_member_num=member_num order by review_ref desc,review_restep) temp)"
+					+" where rn between ? and ?";
+				pstmt=con.prepareStatement(sql);
+				pstmt.setInt(1, startRow);
+				pstmt.setInt(2, endRow);
+			} else {
+				String sql="select * from (select rownum rn, temp.* from (select review_num"
+					+ ",review_member_num,member_name,review_subject,review_content,review_image"
+					+ ",review_register_date,review_update_date,review_ip,review_count,review_ref"
+					+ ",review_restep,review_relevel,review_status from review join member on"
+					+ " review_member_num=member_num where "+search+" like '%'||?||'?' order"
+					+ " by review_ref desc,review_restep) temp) where rn between ? and ?";
+				pstmt=con.prepareStatement(sql);
+				pstmt.setString(1, keyword);
+				pstmt.setInt(2, startRow);
+				pstmt.setInt(3, endRow);
+			}
+			
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				ReviewDTO review=new ReviewDTO();
+				review.setReviewNum(rs.getInt("review_num"));
+				review.setReviewMemberNum(rs.getInt("review_member_num"));
+				review.setMemberName(rs.getString("member_name"));
+				review.setReviewSubject(rs.getString("review_subject"));
+				review.setReviewContent(rs.getString("review_content"));
+				review.setReviewImage(rs.getString("review_image"));
+				review.setReviewRegisterDate(rs.getString("review_register_date"));
+				review.setReviewUpdateDate(rs.getString("review_update_date"));
+				review.setReviewIp(rs.getString("review_ip"));
+				review.setReviewCount(rs.getInt("review_count"));
+				review.setReviewRef(rs.getInt("review_ref"));
+				review.setReviewRestep(rs.getInt("review_restep"));
+				review.setReviewRelevel(rs.getInt("review_relevel"));
+				review.setReviewStatus(rs.getInt("review_status"));
+				
+				reviewList.add(review);
+			}
+		} catch (SQLException e) {
+			System.out.println("[에러]selectReviewList() 메소드의 SQL 오류 = "+e.getMessage());
+		} finally {
+			close(con, pstmt, rs);
+		}
+		return reviewList;
 	}
 }
 
