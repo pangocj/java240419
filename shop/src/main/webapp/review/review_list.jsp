@@ -1,4 +1,5 @@
-﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
+﻿<%@page import="xyz.itwill.dao.ReviewDAO"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%-- REVIEW 테이블에 저장된 행을 검색하여 검색된 행을 HTML 태그에 포함해 응답하는 JSP 문서 --%>
 <%-- => REVIEW 테이블에 저장된 행을 페이지 단위로 구분하여 검색해 응답 처리 - 페이징 처리 --%>
@@ -37,6 +38,8 @@
 	
 	//조회정보(조회대상과 조회단어)를 전달받아 REVIEW 테이블에 저장된 행에서 조회정보가 포함된 
 	//행의 갯수를 검색하여 반환하는 RviewDAO 클래스의 메소드 호출
+	int totalReview=ReviewDAO.getDAO().selectTotalReview(search, keyword);//게시글의 총갯수
+	
 	
 %>
 
