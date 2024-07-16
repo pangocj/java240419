@@ -1,4 +1,9 @@
-﻿<%@page import="xyz.itwill.dao.ReviewDAO"%>
+﻿<%@page import="java.util.Date"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="xyz.itwill.dto.MemberDTO"%>
+<%@page import="xyz.itwill.dto.ReviewDTO"%>
+<%@page import="java.util.List"%>
+<%@page import="xyz.itwill.dao.ReviewDAO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%-- REVIEW 테이블에 저장된 행을 검색하여 검색된 행을 HTML 태그에 포함해 응답하는 JSP 문서 --%>
@@ -65,8 +70,21 @@
 	//페이징 관련 정보(시작행번호, 종료행번호)와 게시글 조회기능 관련 정보(조회대상과 조회단어)를
 	//전달받아 REVIEW 테이블에 저장된 행에서 조회정보가 포함된 행을 페이징 처리로 검색하여
 	//List 객체를 반환하는 ReviewDAO 클래스의 메소드 호출
+	List<ReviewDTO> reviewList=ReviewDAO.getDAO().selectReviewList(startRow, endRow, search, keyword);
 	
+	//세션에 저장된 권한 관련 정보가 저장된 속성값을 객체로 반환받아 저장
+	// => 로그인 사용자에게만 글쓰기 권한 제공
+	// => 게시글이 비밀글인 경우 로그인 사용자가 게시글 작성자이거나 관리자인 경우에만 권한 제공
+	MemberDTO loginMember=(MemberDTO)session.getAttribute("loginMember");
 	
+	//서버의 현재 날짜와 시간이 저장된 Date 객체를 생성하여 SimpleDateFormat 객체에 저장된
+	//패턴의 문자열로 변환하여 저장
+	// => 게시글의 작성날짜와 비교하여 게시글 작성날짜를 다르게 출력되도록 응답 처리
+	String currentDate=new SimpleDateFormat("yyyy-MM-dd").format(new Date());
+	
+	//게시글에 출력될 일련번호 시작값을 계산하여 저장
+	// => 게시글의 총갯수가 91개인 경우 => 1Page : 91, 2Page : 81, 3Page : 71, ...\
+	int displayNum=totalReview-(pageNum-1)*pageSize;
 %>                   
 <style type="text/css">
 #review_list {
@@ -131,20 +149,24 @@ td {
 
 <h1>제품후기</h1>
 <div id="review_list">
-	<div id="review_title">제품후기목록(1)</div>
+	<%-- 검색된 게시글의 총갯수 출력 --%>
+	<div id="review_title">제품후기(<%=totalReview %>)</div>
 	
 	<div style="text-align: right;">
 		게시글갯수 : 
 		<select id="pageSize">
-			<option value="10">&nbsp;10개&nbsp;</option>	
-			<option value="20">&nbsp;20개&nbsp;</option>	
-			<option value="50">&nbsp;50개&nbsp;</option>	
-			<option value="100">&nbsp;100개&nbsp;</option>	
+			<option value="10" <% if(pageSize==10) { %> selected <% } %>>&nbsp;10개&nbsp;</option>	
+			<option value="20" <% if(pageSize==20) { %> selected <% } %>>&nbsp;20개&nbsp;</option>	
+			<option value="50" <% if(pageSize==50) { %> selected <% } %>>&nbsp;50개&nbsp;</option>	
+			<option value="100" <% if(pageSize==100) { %> selected <% } %>>&nbsp;100개&nbsp;</option>	
 		</select>
 		&nbsp;&nbsp;&nbsp;
-		<button type="button" id="writeBtn">글쓰기</button>
+		<% if(loginMember != null) {//로그인 사용자인 경우 %>
+			<button type="button" id="writeBtn">글쓰기</button>
+		<% } %>	
 	</div>
 	
+	<%-- 검색된 게시글 목록 출력 --%>	
 	<table>
 		<tr>
 			<th width="100">글번호</th>
@@ -154,13 +176,74 @@ td {
 			<th width="200">작성일</th>
 		</tr>
 		
-		<tr>
-			<td>1</td>
-			<td class="subject">테스트</td>
-			<td>홍길동</td>
-			<td>10</td>
-			<td>2024-07-14</td>		
-		</tr>
+		<% if(totalReview == 0) {//검색된 게시글이 없는 경우 %>
+			<tr>
+				<td colspan="5">검색된 게시글이 없습니다.</td>
+			</tr>
+		<% } else { %>
+			<%-- List 객체의 요소값(ReviewDTO 객체)을 차례대로 제공받아 변수에 저장하는 반복문 --%>
+			<% for(ReviewDTO review : reviewList) { %>
+			<tr>
+				<%-- 게시글의 일련번호 출력 --%>
+				<td><%=displayNum %></td>
+				<% displayNum--; %><%-- 게시글의 일련번호를 1씩 감소하여 저장 --%>
+				
+				<%-- 게시글 제목 출력 --%>
+				<td class="subject">
+					<%-- 게시글이 답글인 경우에 대한 응답 처리 --%>
+					<% if(review.getReviewRestep() != 0) {//답글인 경우 %>
+						<span style="margin-left: <%=review.getReviewRelevel()*20%>px;">┖[답글]</span>
+					<% } %>
+					
+					<%-- 게시글 상태를 비교하여 제목 출력 --%>
+					<%
+						String url=request.getContextPath()+"/index.jsp?workgroup=review&work=review_detail"
+							+"&reviewNum="+review.getReviewNum()+"&pageNum="+pageNum+"&pageSize="+pageSize
+							+"&search="+search+"&keyword="+keyword;
+					%>
+					<% if(review.getReviewStatus() == 1) {//일반글인 경우 %>
+						<a href="<%=url%>"><%=review.getReviewSubject() %></a>
+					<% } else if(review.getReviewStatus() == 2) {//비밀글인 경우 %>
+						<span class="subject_hidden">
+						<%--로그인 사용자가 게시글 작성자이거나 관리자인 경우 제목 출력 --%>
+						<% if(loginMember != null && (loginMember.getMemberNum() == 
+							review.getReviewMemberNum() || loginMember.getMemberAuth() == 9)) { %>
+							<a href="<%=url%>"><%=review.getReviewSubject() %></a>
+						<% } else { %>
+							게시글 작성자 또는 관리자만 확인 가능합니다.
+						<% } %>	
+						</span>
+					<% } else if(review.getReviewStatus() == 0) {//삭제글인 경우 %>
+						<span class="subject_hidden">
+							게시글 작성자 또는 관리자에 의해 삭제된 게시글입니다.
+						</span>
+					<% } %>
+				</td>
+				
+			<% if(review.getReviewStatus() != 0) {//삭제글이 아닌 경우  %>	
+				<%-- 게시글 작성자(회원이름) 출력 --%>
+				<td><%=review.getMemberName() %></td>
+				
+				<%-- 게시글 조횟수 출력 --%>
+				<td><%=review.getReviewCount() %></td>
+				
+				<%-- 게시글 작성일 출력 --%>
+				<td>
+				<%-- 오늘 작성된 게시글인 경우 시간만 출력하고 아닌 경우 날짜와 시간 출력 --%>
+					<% if(currentDate.equals(review.getReviewRegisterDate().substring(0, 10))) { %>
+						<%=review.getReviewRegisterDate().substring(11) %>	
+					<% } else { %>
+						<%=review.getReviewRegisterDate() %>	
+					<% } %>
+				</td>
+			<% } else {//삭제글인 경우 %>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>		
+			<% } %>
+			</tr>
+			<% } %>
+		<% } %>
 	</table>
 	
 	
