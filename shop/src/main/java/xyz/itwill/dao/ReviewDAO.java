@@ -167,7 +167,7 @@ public class ReviewDAO extends JdbcDAO {
 			pstmt.setInt(7, review.getReviewRef());
 			pstmt.setInt(8, review.getReviewRestep());
 			pstmt.setInt(9, review.getReviewRelevel());
-			pstmt.setInt(10, review.getReviewStatus()));
+			pstmt.setInt(10, review.getReviewStatus());
 			
 			rows=pstmt.executeUpdate();
 		} catch (SQLException e) {
