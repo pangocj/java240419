@@ -42,7 +42,116 @@
 	
 	
 %>
+<style type="text/css">
+#review_list {
+	width: 1000px;
+	margin: 0 auto;
+	text-align: center;
+}
 
+#review_title {
+	font-size: 1.2em;
+	font-weight: bold;
+}
+
+table {
+	margin: 5px auto;
+	border: 1px solid black;
+	border-collapse: collapse;
+}
+
+th {
+	border: 1px solid black;
+	background: black;
+	color: white;
+}
+
+td {
+	border: 1px solid black;
+	text-align: center;	
+}
+
+.subject {
+	text-align: left;
+	padding: 5px;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+}
+
+#review_list a:hover {
+	text-decoration: none; 
+	color: blue;
+	font-weight: bold;
+}
+
+.subject_hidden {
+	background: black;
+	color: white;
+	font-size: 14px;
+	border: 1px solid black;
+	border-radius: 4px;
+}
+
+#page_list {
+	font-size: 1.1em;
+	margin: 10px;
+}
+
+#page_list a:hover {
+	font-size: 1.3em;
+}
+</style>
+
+<h1>제품후기</h1>
+<div id="review_list">
+	<div id="review_title">제품후기목록(1)</div>
+	
+	<div style="text-align: right;">
+		게시글갯수 : 
+		<select id="reviewCount">
+			<option value="10">&nbsp;10개&nbsp;</option>	
+			<option value="20">&nbsp;20개&nbsp;</option>	
+			<option value="50">&nbsp;50개&nbsp;</option>	
+			<option value="100">&nbsp;100개&nbsp;</option>	
+		</select>
+		&nbsp;&nbsp;&nbsp;
+		<button type="button" id="writeBtn">글쓰기</button>
+	</div>
+	
+	<table>
+		<tr>
+			<th width="100">글번호</th>
+			<th width="500">제목</th>
+			<th width="100">작성자</th>
+			<th width="100">조회수</th>
+			<th width="200">작성일</th>
+		</tr>
+		
+		<tr>
+			<td>1</td>
+			<td class="subject">테스트</td>
+			<td>홍길동</td>
+			<td>10</td>
+			<td>2024-07-14</td>		
+		</tr>
+	</table>
+	
+	
+	<div id="page_list">
+		[1]
+	</div>
+	
+	<form action="#" method="post">
+		<select name="search">
+			<option value="member_name" >&nbsp;작성자&nbsp;</option>
+			<option value="review_subject">&nbsp;제목&nbsp;</option>
+			<option value="review_content">&nbsp;내용&nbsp;</option>
+		</select>
+		<input type="text" name="keyword">
+		<button type="submit">검색</button>
+	</form>
+</div>
 
 
 
