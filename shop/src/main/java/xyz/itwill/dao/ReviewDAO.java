@@ -86,7 +86,7 @@ public class ReviewDAO extends JdbcDAO {
 					+ ",review_member_num,member_name,review_subject,review_content,review_image"
 					+ ",review_register_date,review_update_date,review_ip,review_count,review_ref"
 					+ ",review_restep,review_relevel,review_status from review join member on"
-					+ " review_member_num=member_num where "+search+" like '%'||?||'?' order"
+					+ " review_member_num=member_num where "+search+" like '%'||?||'%' order"
 					+ " by review_ref desc,review_restep) temp) where rn between ? and ?";
 				pstmt=con.prepareStatement(sql);
 				pstmt.setString(1, keyword);

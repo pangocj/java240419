@@ -29,7 +29,7 @@
 	if(keyword == null) {
 		keyword="";
 	}
-	
+		
 	//페이징 처리에 필요한 전달값(페이지번호와 게시글갯수)을 반환받아 저장
 	int pageNum=1;//페이지번호 - 전달값이 없는 경우 사용할 기본값 저장
 	if(request.getParameter("pageNum") != null) {//전달값이 있는 경우
