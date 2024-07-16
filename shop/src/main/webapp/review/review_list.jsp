@@ -285,16 +285,3 @@ $("#writeBtn").click(function() {
 	location.href="<%=request.getContextPath()%>/index.jsp?workgroup=review&work=review_write";
 });
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
