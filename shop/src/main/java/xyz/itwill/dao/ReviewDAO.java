@@ -249,22 +249,20 @@ public class ReviewDAO extends JdbcDAO {
 	
 	//글번호를 전달받아 REVIEW 테이블에 저장된 행의 게시글조횟수를 1 증가되도록 변경하고
 	//변경행의 갯수를 반환하는 메소드
-	public int updateReviewCount(int ref, int restep) {
+	public int updateReviewCount(int reviewNum) {
 		Connection con=null;
 		PreparedStatement pstmt=null;
 		int rows=0;
 		try {
 			con=getConnection();
 			
-			String sql="update review set review_restep=review_restep+1"
-					+ " where review_ref=? and review_restep>?";
+			String sql="update review set review_count=review_count+1 where review_num=?";
 			pstmt=con.prepareStatement(sql);
-			pstmt.setInt(1, ref);
-			pstmt.setInt(2, restep);
+			pstmt.setInt(1, reviewNum);
 			
 			rows=pstmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("[에러]updateReviewRestep() 메소드의 SQL 오류 = "+e.getMessage());
+			System.out.println("[에러]updateReviewCount() 메소드의 SQL 오류 = "+e.getMessage());
 		} finally {
 			close(con, pstmt);
 		}
