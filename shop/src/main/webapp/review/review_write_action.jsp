@@ -20,7 +20,7 @@
 	//파일을 저장할 서버 디렉토리의 파일 시스템 경로를 반환받아 저장
 	//String saveDirectory=application.getRealPath("/review_images");
 	String saveDirectory=request.getServletContext().getRealPath("/review_images");
-	System.out.println("saveDirectory = "+saveDirectory);
+	//System.out.println("saveDirectory = "+saveDirectory);
 	
 	//MultipartRequst 객체 생성 - 모든 전달파일이 서버 디렉토리에 자동으로 업로드 처리
 	// => cos.jar 라이브러리 파일이 프로젝트에 빌드 처리되어야만 MultipartRequst 클래스 사용 가능
@@ -50,6 +50,10 @@
 	
 	//게시글을 작성한 클라이언트의 IP 주소를 반환받아 저장
 	//requst.getRemoteAddress() : JSP 문서를 요청한 클라이언트의 IP 주소를 반환하는 메소드
+	// => 이클립스에 등록된 WAS 프로그램은 기본적으로 128Bit 형식(IPV6)의 IP 주소 제공
+	//32Bit(IPV4)의 IP 주소 제공받을 수 있도록 이클립스에 등록된 WAS 프로그램의 환경설정 변경
+	// => Run >> Run Configurations... >> Apache Tomcat >> 사용중인 Apache Tomcat 선택
+	// >> Arguments >> VM Arguments >> [-Djava.net.preferIPv4Stack=true] 추가 >> Apply 	
 	String reviewIp=request.getRemoteAddr();
 	System.out.println("reviewIp = "+reviewIp);
 	
