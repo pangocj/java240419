@@ -204,7 +204,7 @@ td {
 					<% if(review.getReviewStatus() == 1) {//일반글인 경우 %>
 						<a href="<%=url%>"><%=review.getReviewSubject() %></a>
 					<% } else if(review.getReviewStatus() == 2) {//비밀글인 경우 %>
-						<span class="subject_hidden">
+						<span class="subject_hidden">비밀글</span>
 						<%--로그인 사용자가 게시글 작성자이거나 관리자인 경우 제목 출력 --%>
 						<% if(loginMember != null && (loginMember.getMemberNum() == 
 							review.getReviewMemberNum() || loginMember.getMemberAuth() == 9)) { %>
@@ -212,11 +212,10 @@ td {
 						<% } else { %>
 							게시글 작성자 또는 관리자만 확인 가능합니다.
 						<% } %>	
-						</span>
+						
 					<% } else if(review.getReviewStatus() == 0) {//삭제글인 경우 %>
-						<span class="subject_hidden">
+						<span class="subject_hidden">삭제글</span>
 							게시글 작성자 또는 관리자에 의해 삭제된 게시글입니다.
-						</span>
 					<% } %>
 				</td>
 				
