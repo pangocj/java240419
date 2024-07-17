@@ -171,13 +171,36 @@ public class ReviewDAO extends JdbcDAO {
 			
 			rows=pstmt.executeUpdate();
 		} catch (SQLException e) {
-			System.out.println("[에러]insertREview() 메소드의 SQL 오류 = "+e.getMessage());
+			System.out.println("[에러]insertReview() 메소드의 SQL 오류 = "+e.getMessage());
 		} finally {
 			close(con, pstmt);
 		}
 		return rows;
 	}
 	
+	//부모글 관련 정보를 전달받아 REVIEW 테이블에서 저장된 행에서 전달값을 비교하여
+	//REVIEW_REF 컬럼값을 1 증가되도록 변경하고 변경행의 갯수를 반환하는 메소드
+	public int updateReviewRestep(int ref, int restep) {
+		Connection con=null;
+		PreparedStatement pstmt=null;
+		int rows=0;
+		try {
+			con=getConnection();
+			
+			String sql="update review set review_restep=review_restep+1"
+					+ " where review_ref=? and review_restep>?";
+			pstmt=con.prepareStatement(sql);
+			pstmt.setInt(1, ref);
+			pstmt.setInt(2, restep);
+			
+			rows=pstmt.executeUpdate();
+		} catch (SQLException e) {
+			System.out.println("[에러]updateReviewRestep() 메소드의 SQL 오류 = "+e.getMessage());
+		} finally {
+			close(con, pstmt);
+		}
+		return rows;
+	}
 }
 
 

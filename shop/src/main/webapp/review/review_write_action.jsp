@@ -46,7 +46,7 @@
 	String reviewImage=multipartReques.getFilesystemName("reviewImage");
 
 	//REVIEW_SEQ 시퀸스의 다음값을 검색하여 반환하는 ReviewDAO 클래스의 메소드 호출
-	int nuxtNum=ReviewDAO.getDAO().selectReviewNextNum();
+	int nextNum=ReviewDAO.getDAO().selectReviewNextNum();
 	
 	//게시글을 작성한 클라이언트의 IP 주소를 반환받아 저장
 	//requst.getRemoteAddress() : JSP 문서를 요청한 클라이언트의 IP 주소를 반환하는 메소드
@@ -55,9 +55,23 @@
 	// => Run >> Run Configurations... >> Apache Tomcat >> 사용중인 Apache Tomcat 선택
 	// >> Arguments >> VM Arguments >> [-Djava.net.preferIPv4Stack=true] 추가 >> Apply 	
 	String reviewIp=request.getRemoteAddr();
-	System.out.println("reviewIp = "+reviewIp);
+	//System.out.println("reviewIp = "+reviewIp);
 	
-	
+	//새글과 답글을 구분하여 전달값이 저장된 변수값(ref, restep, relevel) 변경
+	// => 새글인 경우에는 변수에 [0]이 저장되어 있고 답글인 경우에는 부모글의 값 저장 
+	if(ref == 0) {//새글인 경우
+		ref=nextNum;		
+	} else {//답글인 경우
+		//REVIEW 테이블에 저장된 행에서 REVIEW_REF 컬럼값이 ref 변수값(부모글)과 같은 행 중
+		//REVIEW_RESTEP 컬럼값이 restep 변수값(부모글)보다 큰 행의 REVIEW_RESTEP 컬럼값이
+		//1 증가되도록 변경 처리
+		// => 새로운 답글이 기존 답글보다 먼저 검색되도록 기존 답글의 순서를 증가 처리
+		//부모글 관련 정보를 전달받아 REVIEW 테이블에서 저장된 행에서 전달값을 비교하여
+		//REVIEW_REF 컬럼값을 1 증가되도록 변경하는 ReviewDAO 클래스의 메소드 호출
+		
+		restep++;
+		relevel++;
+	}
 %>    
 
 
