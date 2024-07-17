@@ -26,34 +26,34 @@
 	
 	//MultipartRequst 객체 생성 - 모든 전달파일이 서버 디렉토리에 자동으로 업로드 처리
 	// => cos.jar 라이브러리 파일이 프로젝트에 빌드 처리되어야만 MultipartRequst 클래스 사용 가능
-	MultipartRequest multipartReques=new MultipartRequest(request, saveDirectory
+	MultipartRequest multipartRequest=new MultipartRequest(request, saveDirectory
 			, 20*1024*1024, "utf-8", new DefaultFileRenamePolicy());
 	
 	//전달값을 반환받아 저장
-	int ref=Integer.parseInt(multipartReques.getParameter("ref"));
-	int restep=Integer.parseInt(multipartReques.getParameter("restep"));
-	int relevel=Integer.parseInt(multipartReques.getParameter("relevel"));
-	String pageNum=multipartReques.getParameter("pageNum");
-	String pageSize=multipartReques.getParameter("pageSize");
-	String search=multipartReques.getParameter("search");
-	String keyword=multipartReques.getParameter("keyword");
+	int ref=Integer.parseInt(multipartRequest.getParameter("ref"));
+	int restep=Integer.parseInt(multipartRequest.getParameter("restep"));
+	int relevel=Integer.parseInt(multipartRequest.getParameter("relevel"));
+	String pageNum=multipartRequest.getParameter("pageNum");
+	String pageSize=multipartRequest.getParameter("pageSize");
+	String search=multipartRequest.getParameter("search");
+	String keyword=multipartRequest.getParameter("keyword");
 	
 	//사용자로부터 입력받아 전달된 값에 HTML 태그가 존재할 경우 웹프로그램 실행시 문제 발생
 	// => XSS(Cross Site Scripting) 공격 : 사용자가 악의적인 스크립트를 입력해 페이지가 비정상적으로 
 	//출력되거나 다른 사용자의 사용을 방행 또는 개인정보를 특정 사이트로 전달하는 공격
 	//String reviewSubject=multipartReques.getParameter("reviewSubject");
 	//String reviewSubject=Utility.stripTag(multipartReques.getParameter("reviewSubject"));
-	String reviewSubject=Utility.escapeTag(multipartReques.getParameter("reviewSubject"));
+	String reviewSubject=Utility.escapeTag(multipartRequest.getParameter("reviewSubject"));
 	
 	int reviewStatus=1;//전달값이 없는 경우 - 일반글
-	if(multipartReques.getParameter("reviewStatus") != null) {//전달값이 있는 경우 - 비밀글
-		reviewStatus=Integer.parseInt(multipartReques.getParameter("reviewStatus"));
+	if(multipartRequest.getParameter("reviewStatus") != null) {//전달값이 있는 경우 - 비밀글
+		reviewStatus=Integer.parseInt(multipartRequest.getParameter("reviewStatus"));
 	}
 	
-	String reviewContent=Utility.escapeTag(multipartReques.getParameter("reviewContent"));
+	String reviewContent=Utility.escapeTag(multipartRequest.getParameter("reviewContent"));
 	
 	//업로드 처리된 파일의 이름을 반환받아 저장 - 전달파일이 없는 경우 [null] 반환
-	String reviewImage=multipartReques.getFilesystemName("reviewImage");
+	String reviewImage=multipartRequest.getFilesystemName("reviewImage");
 
 	//REVIEW_SEQ 시퀸스의 다음값을 검색하여 반환하는 ReviewDAO 클래스의 메소드 호출
 	int nextNum=ReviewDAO.getDAO().selectReviewNextNum();
