@@ -66,7 +66,7 @@ td {
 		<tr>
 			<th>내용</th>
 			<td>
-				<textarea rows="7" cols="6" name="reviewContent" id="reviewContent"></textarea>
+				<textarea rows="7" cols="60" name="reviewContent" id="reviewContent"></textarea>
 			</td>
 		</tr>
 		<tr>
