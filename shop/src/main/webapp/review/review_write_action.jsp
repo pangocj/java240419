@@ -42,13 +42,16 @@
 	// => XSS(Cross Site Scripting) 공격 : 사용자가 악의적인 스크립트를 입력해 페이지가 비정상적으로 
 	//출력되거나 다른 사용자의 사용을 방행 또는 개인정보를 특정 사이트로 전달하는 공격
 	//String reviewSubject=multipartReques.getParameter("reviewSubject");
-	String reviewSubject=Utility.stripTag(multipartReques.getParameter("reviewSubject"));
+	//String reviewSubject=Utility.stripTag(multipartReques.getParameter("reviewSubject"));
+	String reviewSubject=Utility.escapeTag(multipartReques.getParameter("reviewSubject"));
 	
 	int reviewStatus=1;//전달값이 없는 경우 - 일반글
 	if(multipartReques.getParameter("reviewStatus") != null) {//전달값이 있는 경우 - 비밀글
 		reviewStatus=Integer.parseInt(multipartReques.getParameter("reviewStatus"));
 	}
-	String reviewContent=multipartReques.getParameter("reviewContent");
+	
+	String reviewContent=Utility.escapeTag(multipartReques.getParameter("reviewContent"));
+	
 	//업로드 처리된 파일의 이름을 반환받아 저장 - 전달파일이 없는 경우 [null] 반환
 	String reviewImage=multipartReques.getFilesystemName("reviewImage");
 
