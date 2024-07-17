@@ -25,6 +25,11 @@
 	String pageSize=request.getParameter("pageSize");
 	String search=request.getParameter("search");
 	String keyword=request.getParameter("keyword");
+	
+	//글번호를 전달받아 REVIEW 테이블에 저장된 하나의 행을 검색하여 ReviewDTO 객체로 반환하는
+	//ReviewDAO 클래스의 메소드 호출
+	
+	
 %>
 <!DOCTYPE html>
 <html>
