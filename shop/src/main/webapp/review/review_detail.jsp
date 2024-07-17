@@ -99,6 +99,91 @@ td {
 }
 </style>
 
+<div id="review_detail">
+	<h1>제품후기</h1>
+	
+	<%-- 검색된 게시글 출력 --%>
+	<table>
+		<tr>
+			<th>작성자</th>
+			<td>
+				<%=review.getMemberName() %>
+				<%-- 로그인 사용자가 관리자인 경우 게시글을 작성한 클라이언트의 IP 주소 출력 --%>	
+				<% if(loginMember != null && loginMember.getMemberAuth() == 9) { %>
+					[<%=review.getReviewIp() %>]
+				<% } %>
+			</td>
+		</tr>
+		<tr>
+			<th>작성일</th>
+			<td><%=review.getReviewRegisterDate() %></td>
+		</tr>
+		<tr>
+			<th>조회수</th>
+			<td><%=review.getReviewCount()+1 %></td>
+		</tr>
+		<tr>
+			<th>제목</th>
+			<td>
+				<%-- 검색된 게시글이 비밀글인 경우에 대한 출력 처리 --%>			
+				<% if(review.getReviewStatus() == 2) { %>[비밀글]<% } %>
+				<%=review.getReviewSubject() %>
+			</td>
+		</tr>
+		<tr>
+			<th>내용</th>
+			<td>
+				<%=review.getReviewContent().replace("\n", "<br>") %>
+				<br>
+				<% if(review.getReviewImage() != null) { %>
+					<img src="<%=request.getContextPath()%>/review_images/<%=review.getReviewImage()%>" width="200">
+				<% } %>
+			</td>
+		</tr>
+	</table>
+	
+	<%-- 링크를 제공하는 태그 출력 --%>
+	<div id="review_menu">
+		<%-- 로그인 사용자가 게시글 작성자이거나 관리자인 경우 태그 출력 --%>
+		<% if(loginMember !=null && (loginMember.getMemberNum() == review.getReviewMemberNum()
+			|| loginMember.getMemberAuth() == 9)) { %>
+			<button type="button" id="modifyBtn">글변경</button>
+			<button type="button" id="removeBtn">글삭제</button>
+		<% } %>
+			
+		<%-- 로그인 사용자인 경우 태그 출력 --%>
+		<% if(loginMember !=null) { %>
+			<button type="button" id="replyBtn">답글쓰기</button>
+		<% } %>
+		
+		<button type="button" id="listBtn">글목록</button>
+	</div>
+</div>
 
+<script type="text/javascript">
+$("#modifyBtn").click(function() {
+	location.href="<%=request.getContextPath()%>/index.jsp?workgroup=review&work=review_modify"
+		+"&reviewNum=<%=review.getReviewNum()%>&pageNum=<%=pageNum%>&pageSize=<%=pageSize%>"
+		+"&search=<%=search%>&keyword=<%=keyword%>";
+});
 
+$("#removeBtn").click(function() {
+	if(confirm("게시글을 정말로 삭제 하시겠습니까?")) {
+		location.href="<%=request.getContextPath()%>/index.jsp?workgroup=review&work=review_remove_action"
+			+"&reviewNum=<%=review.getReviewNum()%>&pageNum=<%=pageNum%>&pageSize=<%=pageSize%>"
+			+"&search=<%=search%>&keyword=<%=keyword%>";
+	}
+});
+
+$("#replyBtn").click(function() {
+	location.href="<%=request.getContextPath()%>/index.jsp?workgroup=review&work=review_write"
+		+"&ref=<%=review.getReviewRef()%>&restep=<%=review.getReviewRestep()%>&relevel=<%=review.getReviewRelevel()%>"
+		+"&pageNum=<%=pageNum%>&pageSize=<%=pageSize%>&search=<%=search%>&keyword=<%=keyword%>";
+});
+
+$("#listBtn").click(function() {
+	location.href="<%=request.getContextPath()%>/index.jsp?workgroup=review&work=review_list"
+		+"&pageNum=<%=pageNum%>&pageSize=<%=pageSize%>&search=<%=search%>&keyword=<%=keyword%>";
+});
+</script>
 
