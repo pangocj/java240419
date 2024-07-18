@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%-- Ajax 엔진을 사용하여 [csv_two.jsp] 문서를 요청해 실행결과를 CSV 형식의 데이타로 응답받아 
-태그내용을 변경하여 응답하는 JSP 문서 --%>    
+HTML 태그로 변경하여 응답하는 JSP 문서 --%>    
 <%-- CSV(Comma Separated Values) : 콤마(,)를 사용해 값을 구분하여 제공하는 비구조적인 데이타 표현 방식 --%>
 <!DOCTYPE html>
 <html>
@@ -44,7 +44,32 @@
 		xhr.onreadystatechange=function() {
 			if(xhr.readyState == 4) {
 				if(xhr.status == 200) {
-					alert(xhr.responseText);
+					//alert(xhr.responseText);
+					
+					//XMLHttpRequest 객체에 저장된 응답결과(CSV)를 제공받아 변수에 저장
+					var csv=xhr.responseText;
+					
+					//응답결과(CSV)를 행(뉴스)단위로 분리하여 Array 객체의 요소값으로 저장
+					var newsList=csv.split("*");
+					//alert(newsList.length);
+					
+					var html="<ol>";
+					for(i=0;i<newsList.length;i++) {
+						//행(뉴스)을 열(제목과 언론사)단위로 분리하여 Array 객체의 요소값으로 저장
+						var news=newsList[i].split("|");
+						
+						//Array 객체의 [0] 위치의 요소값(제목) 저장
+						var title=news[0].trim();
+
+						//Array 객체의 [1] 위치의 요소값(언론사) 저장
+						var publisher=news[1].trim();
+						
+						html+="<li>"+title+"["+publisher+"]</li>";
+					}
+					html+="</ol>";
+					
+					document.getElementById("newsContents").innerHTML=html;
+					document.getElementById("newsContents").style="display: block;";
 				} else {
 					alert("에러코드 = "+xhr.status);
 				}
@@ -61,19 +86,3 @@
 	</script>	
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
