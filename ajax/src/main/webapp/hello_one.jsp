@@ -67,7 +67,9 @@
 		//, DELETE(삭제) 등
 		// => url : 요청 웹프로그램의 URL 주소 전달 - 현재 서버의 웹프로그램만 요청 가능
 		// => async : false(동기식 통신) 또는 true(비동기식 통신 - 기본값) 중 하나를 전달
+		//비동기식 통신 : 요청에 대한 응답 기다림 미발생 - 다른 작업 실행 가능 
 		xhr.open("get", "hello_two.jsp", true);
+		//동기식 통신 : 요청에 대한 응답 기다림 발생 - 다른 작업 실행 불가능
 		//xhr.open("get", "hello_two.jsp", false);
 		
 		//XMLHttpRequest 객체로 send() 멤버함수 호출 - 준비상태가 자동으로 [2]로 변경
@@ -97,27 +99,23 @@
 		if(xhr.readyState == 4) {
 			//XMLHttpRequest.status : 웹프로그램 요청에 대한 상태코드(StatusCode)가 저장된 멤버변수
 			if(xhr.status == 200) {//정상적인 실행결과를 응답 받은 경우
-			
+				//XMLHttpRequest.responseText : 웹프로그램 요청에 대한 응답결과(Text or HTML)가
+				//저장된 멤버변수
+				//alert(xhr.responseText);
+				
+				//요청 웹프로그램의 응답결과를 사용해 HTML 태그의 내용 변경
+				document.getElementById("display").innerHTML=xhr.responseText;
 			} else {//비정상적인 실행결과를 응답 받은 경우
 				alert("에러코드 = "+xhr.status);
 			}
+		} else {
+			document.getElementById("display").innerHTML="<img src='images/loading.gif' width='50'>";
 		}
+	}
+	
+	document.getElementById("btn2").onclick=function() {
+		document.getElementById("display").style="background: green;";
 	}
 	</script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
