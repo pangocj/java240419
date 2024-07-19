@@ -34,8 +34,8 @@
 	}
 	*/
 	
-	//AJAX(Asynchronous Javascript + XML) : XMLHttpRequest 객체를 사용하여 비동기식으로
-	//웹프로그램을 요청하여 실행결과를 XML 문서로 응답받아 태그를 변경하는 기능 
+	//AJAX(Asynchronous Javascript + XML) : XMLHttpRequest 객체를 사용하여 비동기식으로 웹프로그램을 
+	//요청하여 실행결과를 XML 문서로 응답받아 태그를 변경하는 웹프로그램 작성 방법 
 	//XMLHttpRequest 객체(Ajax Engine) : 비동기식 방식으로 웹프로그램을 요청하여 실행결과를
 	//응답받아 처리하기 위한 Javascript 객체
 	
@@ -76,7 +76,8 @@
 		//XMLHttpRequest.send(data) : XMLHttpRequest 객체에 저장된 정보를 사용해 웹프로그램을
 		//요청하는 멤버함수
 		// => data : 웹프로그램 요청시 [이름=값&이름=값&...] 형식으로 값 전달
-		// => 리퀘스트 메세지 몸체부에 값이 저장되어 전달 - POST 방식으로 요청한 경우에만 값 전달 가능
+		// => 리퀘스트 메세지 몸체부에 값이 저장되어 전달 - GET 방식을 제외한 나머지 요청방식으로 
+		//웹프로그램을 요청한 경우에만 매개변수를 사용해 값 전달 가능
 		// => 전달값이 없거나 GET 방식으로 웹프로그램을 요청한 경우 매개변수에 null 전달
 		xhr.send(null);//웹프로그램 요청 후 준비상태는 자동으로 [3]과 [4]로 변경
 	}
