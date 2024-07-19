@@ -92,9 +92,6 @@
 		} else if(!idReg.test(id)) {
 			$("#idValidMsg").show();
 			validResult=false;
-		} else if(!idCheckResult) {//아이디가 중복된 경우
-			$("#idDuplMsg").show();
-			validResult=false;
 		}
 		
 		var passwd=$("#passwd").val();
