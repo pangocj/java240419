@@ -153,7 +153,10 @@
 			data: "id="+id,
 			dataType: "xml",
 			success: function(xmlDoc) {
-				idCheckResult=true;
+				var code=$(xmlDoc).find("code").text();
+				if(code == "possible") {
+					idCheckResult=true;
+				}
 			}, 
 			error: function(xhr) {
 				alert("에러코드 = "+xhr.status);
