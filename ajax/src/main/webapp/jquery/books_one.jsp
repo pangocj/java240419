@@ -18,9 +18,28 @@
 	$.ajax({
 		type: "get",
 		url: "books_two.jsp",
+		//dataType 속성값으로 설정된 문서형태와 요청 웹프로그램의 응답결과의 문서형태가 맞지
+		//않을 경우 200 에러코드 발생
 		dataType: "xml",
 		success: function(xmlDoc) {
+			//alert(xmlDoc);//[object XMLDocument]
 			
+			var count=$(xmlDoc).find("book").length;
+			if(count == 0) {
+				$("#bookList").html("<p>검색된 교재가 하나도 없습니다.</p>");
+				return;
+			}
+			
+			var html="<p>검색된 교재가 "+count+"권 있습니다.<p>";
+			html+="<ol>";
+			$(xmlDoc).find("book").each(function() {
+				var title=$(this).find("title").text();
+				var author=$(this).find("author").text();
+				html+="<li><b>"+title+"</b>["+author+"]</li>";
+			});
+			html+="</ol>";
+			
+			$("#bookList").html(html);
 		},
 		error: function(xhr) {
 			alert("에러코드 = "+xhr.status);
@@ -29,16 +48,3 @@
 	</script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
