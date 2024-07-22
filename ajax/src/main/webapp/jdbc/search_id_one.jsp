@@ -50,7 +50,9 @@ XML 데이타로 제공받아 출력되도록 응답하는 JSP 문서 --%>
 		$.ajax({
 			type: "post",
 			url: "<%=request.getContextPath()%>/jdbc/search_id_two.jsp",
-			data: "name="+name+"&email="+email,
+			//data: "name="+name+"&email="+email,
+			//요청 웹프로그램에게 전달할 값을 Object 객체로 표현하여 사용 가능
+			data: {"name":name, "email":email},
 			dataType: "xml",
 			success: function(xmlDoc) {
 				var code=$(xmlDoc).find("code").text();
