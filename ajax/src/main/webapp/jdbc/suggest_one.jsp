@@ -62,7 +62,23 @@
 			data: {"keyword":keyword},
 			dataType: "xml",
 			success: function(xmlDoc) {
+				var code=$(xmlDoc).find("code").text();
 				
+				if(code == "success") {
+					var data=$(xmlDoc).find("data").text();
+					
+					var suggestList=JSON.parse(data);
+					
+					var html="";
+					$(suggestList).each(function() {
+						html+="<a href='"+this.url+"' target='_blank'>"+this.word+"</a><br>";
+					});
+					$("#suggestList").html(html);
+					
+					$("#suggestListDiv").show();
+				} else {
+					$("#suggestListDiv").hide();
+				} 
 			},
 			errror: function(xhr) {
 				alert("에러코드 = "+xhr.status);
