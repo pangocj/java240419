@@ -151,13 +151,37 @@ h1 {
 			url: "<%=request.getContextPath()%>/comment/comment_list.jsp",
 			dataType: "json",
 			success: function(result) {
+				//댓글목록태그의 자식태그(댓글)를 삭제 처리 - 기존 댓글 삭제
+				$("#comment_list").children().remove();
 				
+				if(result.code == "success") {//검색된 댓글정보가 있는 경우
+					//Array 객체를 일괄처리하기 위해 each() 멤버함수 호출
+					$(result.data).each(function() {
+						//Array 객체의 요소값(Object 객체 - 댓글정보)를 HTML 태그로 변환
+						var html="<div class='comment' id='comment_"+this.num+"'>";//댓글태그
+						html+="<b>["+this.writer+"]</b><br>";//댓글태그에 작성자 포함
+						html+=this.content.replace(/\n/g,"<br>")+"<br>";//댓글태그에 댓글내용 포함
+						html+="("+this.regdate+")<br>";//댓글태그에 작성날짜 포함
+						html+="<button type='button'>댓글변경</button>&nbsp;";//댓글태그에 댓글변경버튼 포함
+						html+="<button type='button'>댓글삭제</button>&nbsp;";//댓글태그에 댓글삭제버튼 포함
+						html+="</div>";
+						
+						//댓글목록태그에 댓글태그를 마지막 자식태그로 추가하여 출력 처리 
+						$("#comment_list").append(html);
+					});
+				} else {//검색된 댓글정보가 없는 경우
+					$("#comment_list").html("<div class='no_comment'>"+result.message+"</div>");
+				}
 			}, 
 			error: function(xhr) {
 				alert("에러코드 = "+xhr.status);
 			}
 		});	
 	}
+	
+	$("#add_btn").click(function() {
+		
+	});
 	</script>	
 </body>
 </html>
