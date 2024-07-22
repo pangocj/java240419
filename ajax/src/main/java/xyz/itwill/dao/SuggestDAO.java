@@ -34,7 +34,8 @@ public class SuggestDAO extends JdbcDAO {
 		try {
 			con=getConnection();
 			
-			String sql="select word,url from suggest where word like '%'||?||'%' order by word";
+			String sql="select rownum, temp.* from (select word, url from suggest where"
+				+ " upper(word) like '%'||upper(?)||'%' order by word) temp where rownum<=10";
 			pstmt=con.prepareStatement(sql);
 			pstmt.setString(1, keyword);
 			
