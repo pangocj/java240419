@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%-- Ajax 엔진으로 [comment_list.jsp] 문서를 요청하여 실행결과(댓글목록)를 제공받아 응답하는 JSP 문서 --%>
+<%-- => [댓글등록] 태그를 클릭한 경우 Ajax 엔진으로 [comment_add.jsp] 문서를 요청하여 댓글을
+삽입 처리하고 실행결과를 제공받아 출력 처리 - 입력값(댓글) 전달 --%>    
 <html>
 <head>
 <meta charset="UTF-8">
@@ -136,6 +139,40 @@ h1 {
 			<button type="button" id="remove_cancel_btn">취소</button>
 		</div>
 	</div>
+
+	<script type="text/javascript">
+	displayComment();
 	
+	//Ajax 엔진으로 [comment_list.jsp] 문서를 요청하여 실행결과(댓글목록)를 JSON으로 제공받아
+	//HTML 태그로 변환하여 댓글목록태그의 태그내용을 변경하는 함수
+	function displayComment() {
+		$.ajax({
+			type: "get",
+			url: "<%=request.getContextPath()%>/comment/comment_list.jsp",
+			dataType: "json",
+			success: function(result) {
+				
+			}, 
+			error: function(xhr) {
+				alert("에러코드 = "+xhr.status);
+			}
+		});	
+	}
+	</script>	
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
