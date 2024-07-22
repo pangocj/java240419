@@ -190,7 +190,7 @@ h1 {
 			return;
 		}
 		
-		var content=$("#add_writer").val();
+		var content=$("#add_content").val();
 		if(content == "") {
 			$("#add_message").html("내용을 입력해 주세요.");
 			$("#add_content").focus();
@@ -198,7 +198,7 @@ h1 {
 		}
 		
 		$("#add_writer").val("");
-		$("#add_writer").val("");
+		$("#add_content").val("");
 		$("#add_message").html("");
 		
 		$.ajax({
@@ -207,7 +207,11 @@ h1 {
 			data: {"writer":writer, "content":content},
 			dataType: "json",
 			success: function(result) {
-				
+				if(result.code == "success") {
+					displayComment();//댓글목록 출력
+				} else {
+					alert("댓글 삽입 실패");
+				}
 			},
 			error: function(xhr) {
 				alert("에러코드 = "+xhr.status);
