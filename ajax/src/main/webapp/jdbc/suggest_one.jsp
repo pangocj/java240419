@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%-- 입력태그에 입력값이 존재할 경우 Ajax 엔진을 사용해 [suggest_two.jsp] 문서를 요청하여
-실행결과를 XML로 제공받아 응답하는 JSP 문서 --%>    
+<%-- 입력값(검색어)이 존재할 경우 Ajax 엔진을 사용해 [suggest_two.jsp] 문서를 요청하여
+실행결과(제시어)를 XML로 제공받아 응답하는 JSP 문서 --%>    
 <!DOCTYPE html>
 <html>
 <head>
