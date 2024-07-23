@@ -52,17 +52,3 @@
 		if(method != null) method.releaseConnection();
 	}
 %>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
