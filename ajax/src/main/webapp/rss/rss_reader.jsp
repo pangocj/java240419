@@ -40,7 +40,7 @@ HTML 태그로 변환하여 응답하는 JSP 문서 --%>
 				} else {
 					date=$(this).find("dc\\:date").text();
 				}
-				html+="<li><a href='"+link+"'>"+title+"["+date+"]</a><li>";
+				html+="<li><a href='"+link+"'>"+title+"["+date+"]</a></li>";
 			});
 			html+="</ul>";
 			$("#display").html(html);
