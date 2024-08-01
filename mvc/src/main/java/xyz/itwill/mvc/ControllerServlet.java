@@ -67,6 +67,10 @@ public class ControllerServlet extends HttpServlet {
 			action=new LoginFormModel();
 		} else if(command.equals("/login.do")) {
 			action=new LoginModel();
+		} else if(command.equals("/error.do")) {
+			action=new ErrorModel();
+		} else {
+			action=new ErrorModel();
 		}
 		
 		//인터페이스로 생성된 참조변수로 추상메소드를 호출하면 묵시적 객체 형변환에 의해 참조변수에
