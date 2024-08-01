@@ -69,7 +69,9 @@
 	  	<table border="0" cellpadding="0" cellspacing="1" width="590">
 			<tr>
 				<td align="right">
-					<input type="button" value="회원등록" onclick="location.href='user_write.jsp';"/>
+					<% if(loginUserinfo.getAuth() == 9) { %>
+						<input type="button" value="회원등록" onclick="location.href='user_write.jsp';"/>
+					<% } %>
 					<input type="button" value="로그아웃" onclick="location.href='user_logout_action.jsp';"/>
 				</td>
 			</tr>
