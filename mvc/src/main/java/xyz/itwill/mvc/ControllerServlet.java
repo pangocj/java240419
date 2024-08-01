@@ -57,29 +57,30 @@ public class ControllerServlet extends HttpServlet {
 		// => [/remove.do]     - RemoveModel 클래스
 		// => [/error.do]      - ErrorModel 클래스
 		
+		//모델 역활의 클래스가 상속받기 위한 인터페이스로 참조변수 생성
+		// => 참조변수에는 인터페이스를 상속받은 모든 자식클래스(모델)의 객체 저장 가능
+		Action action=null;
+
 		//클라이언트 요청정보를 비교하여 요청을 처리하는 모델 역활의 클래스로 객체를 생성하여
-		//요청 처리 메소드 호출
+		//인터페이스로 생성된 참조변수에 저장
 		if(command.equals("/loginform.do")) {
-			LoginFormModel model=new LoginFormModel();
-			model.execute();
+			action=new LoginFormModel();
 		} else if(command.equals("/login.do")) {
-			LoginModel model=new LoginModel();
-			model.handler();
+			action=new LoginModel();
+		}
+		
+		//인터페이스로 생성된 참조변수로 추상메소드를 호출하면 묵시적 객체 형변환에 의해 참조변수에
+		//저장된 모델 객체에 오버라이드 선언된 요청 처리 메소드를 호출하여 요청을 처리하고
+		//뷰 관련 정보(ActionForward 객체)를 반환받아 저장 - 메소드 오버라이드에 의한 다형성
+		ActionForward actionForward=action.execute(request, response);
+		
+		//4.뷰 관련 정보가 저장된 객체를 사용해 응답 처리
+		if(actionForward.isForward()) {//ActionForward 객체의 forward 필드값이 [true]인 경우
+			//JSP 문서로 포워드 이동하여 JSP 문서의 실행결과(HTML)로 클라이언트에게 응답 처리
+			request.getRequestDispatcher(actionForward.getPath()).forward(request, response);
+		} else {//ActionForward 객체의 forward 필드값이 [false]인 경우
+			//서블릿(컨트롤러)에서 URL 주소(/XXX.do)로 클라이언트에게 응답 처리
+			response.sendRedirect(actionForward.getPath());
 		}
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
