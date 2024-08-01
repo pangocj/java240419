@@ -6,7 +6,7 @@ package xyz.itwill.dto;
 public class UserinfoDTO {
 	private String userid;
 	private String password;
-	private String mail;
+	private String name;
 	private String email;
 	private int auth;
 	
@@ -30,12 +30,12 @@ public class UserinfoDTO {
 		this.password = password;
 	}
 
-	public String getMail() {
-		return mail;
+	public String getName() {
+		return name;
 	}
 
-	public void setMail(String mail) {
-		this.mail = mail;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getEmail() {
