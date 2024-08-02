@@ -19,7 +19,7 @@ public class LogoutModel implements Action {
 		
 		ActionForward actionForward=new ActionForward();
 		actionForward.setForward(false);
-		actionForward.setPath(request.getContextPath()+"/loginform.do");
+		actionForward.setPath("/loginform.do");
 		return actionForward;
 	}
 

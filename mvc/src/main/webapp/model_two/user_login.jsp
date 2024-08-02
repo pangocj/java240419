@@ -106,7 +106,7 @@ function userLogin() {
 					<button type="button" onclick="location.href='<%=request.getContextPath()%>/list.do';">회원목록</button>
 					<button type="button" onclick="location.href='<%=request.getContextPath()%>/logout.do';">로그아웃</button>
 					<% if(loginUserinfo.getAuth() == 9) { %>
-					<button type="button" onclick="location.href='<%=request.getContextPath()%>/writeform.do';">회원등록</button>
+						<button type="button" onclick="location.href='<%=request.getContextPath()%>/writeform.do';">회원등록</button>
 					<% } %>
 				</td>
 			  </tr>
