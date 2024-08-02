@@ -79,9 +79,34 @@ public class ControllerServlet extends HttpServlet {
 			e.printStackTrace();
 		}
 		
-		//Properties 객체에 저장된 엔트리를 사용해 요청정보(Command)를 맵키로 설정하고 
-		//Model 객체를 맵값으로 설정한 엔트리(Entry)를 만들어 HashMap 객체에 저장
-		
+		//Properties 객체에 저장된 모든 엔트리의 이름(Key)을 Set 객체로 반환받아 반복문을 사용해 일괄처리
+		for(Object key : properties.keySet()) {
+			//Properties 객체에 저장된 엔트리의 이름(Key)을 문자열(요청정보)로 반환받아 저장 
+			String command=(String)key;
+			
+			//Properties 객체에 저장된 엔트리의 값(Value)을 문자열(모델클래스)로 반환받아 저장
+			String actionClass=(String)properties.get(key);
+			
+			try {
+				//문자열(Model 클래스)로 객체(Model 객체)를 생성하여 저장
+				// => 리플렉션(Reflection) : 프로그램의 명령 실행시 Class 객체를 사용하여 객체를
+				//생성해 접근 제한자와 상관없이 객체의 필드 또는 메소드를 사용할 수 있도록 제공하는 기능
+				//Class.forName(String className) : 매개변수로 전달받은 문자열의 클래스를
+				//읽어 메모리에 저장하고 클래스 정보가 저장된 Class 객체를 반환하는 정적메소드
+				//Class.getDeclaredConstructor() : Class 객체에 저장된 클래스 정보에서 기본 
+				//생성자 정보가 저장된 Constructor 객체를 반환하는 메소드
+				//Constructor.newInstance() : Constructor 객체에 저장된 생성자로 Object 객체를
+				//생성하여 반환하는 메소드
+				Action actionObject=(Action)Class.forName(actionClass)
+						.getDeclaredConstructor().newInstance();
+				
+				//클라이언트의 요청정보(Command)를 맵키로 설정하고 Model 객체를 맵값으로 설정한 
+				//엔트리(Entry)를 만들어 HashMap 객체에 저장
+				actionMap.put(command, actionObject);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 	
 	//클라이언트가 서블릿을 요청할 때마다 자동 호출되는 메소드
