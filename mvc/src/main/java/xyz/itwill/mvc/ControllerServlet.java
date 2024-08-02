@@ -1,7 +1,12 @@
 package xyz.itwill.mvc;
 
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Properties;
 
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +27,63 @@ import javax.servlet.http.HttpServletResponse;
 public class ControllerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
+	//HashMap 객체(Map 객체)가 저장될 필드 작성
+	private Map<String, Action> actionMap;
+	
+	//서블릿 클래스가 객체로 생성된 후 가장 먼저 한번만 호출되는 메소드 - 초기화 처리 
+	@Override
+	public void init(ServletConfig config) throws ServletException {
+		//System.out.println("ControllerServlet 클래스의 init() 메소드 호출");
+		//HashMap 객체(Map 객체)를 생성하여 필드에 저장
+		actionMap=new HashMap<String, Action>();
+
+		/*
+		//클라이언트의 요청정보(Command)를 맵키로 설정하고 Model 객체를 맵값으로 설정한 
+		//엔트리(Entry)를 만들어 HashMap 객체에 저장
+		actionMap.put("/loginform.do", new LoginFormModel());
+		actionMap.put("/login.do", new LoginModel());
+		actionMap.put("/logout.do", new LogoutModel());
+		actionMap.put("/writeform.do", new WriteFormModel());
+		actionMap.put("/write.do", new WriteModel());
+		actionMap.put("/list.do", new ListModel());
+		actionMap.put("/view.do", new ViewModel());
+		actionMap.put("/modifyform.do", new ModifyFormModel());
+		actionMap.put("/modify.do", new ModifyModel());
+		actionMap.put("/remove.do", new RemoveModel());
+		actionMap.put("/error.do", new ErrorModel());
+		*/
+		
+		//Properties 파일에 저장된 요청정보와 모델 클래스를 읽어 엔트리로 만들어 Map 객체에 추가
+		// => 컨트롤러 역활의 서블릿을 변경하지 않고 Properties 파일의 내용만 변경하여 요청정보에
+		//따른 모델 객체 관리 가능 - 유지보수의 효율성 증가
+		
+		//Properties 객체(Map 객체)를 생성하여 저장
+		// => Properties 객체 : Properties 파일의 이름(Key)과 값(Value)를 엔트리로 저장하기 위한 콜렉션 객체
+		Properties properties=new Properties();
+		
+		//Properties 파일의 시스템 경로를 반환받아 저장
+		//String configFilePath=config.getServletContext().getRealPath("/WEB-INF/model.properties");
+		//ServletConfig.getInitParameter(String name) : [web.xml] 파일의 init-param 엘리먼트로
+		//제공된 값을 읽어와 반환하는 메소드
+		String configFilePath=config.getServletContext().getRealPath(config.getInitParameter("configFilePath"));
+		//System.out.println("configFilePath = "+configFilePath);
+		
+		try {
+			//Properties 파일의 시스템 경로로 파일 입력스트림을 생성하여 저장
+			FileInputStream in=new FileInputStream(configFilePath);
+						
+			//Properties 파일의 파일 입력스트림을 사용해 Properties 파일에 저장된 요청정보와
+			//모델 클래스를 엔트리로 만들어 Properties 객체에 저장
+			properties.load(in);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		//Properties 객체에 저장된 엔트리를 사용해 요청정보(Command)를 맵키로 설정하고 
+		//Model 객체를 맵값으로 설정한 엔트리(Entry)를 만들어 HashMap 객체에 저장
+		
+	}
+	
 	//클라이언트가 서블릿을 요청할 때마다 자동 호출되는 메소드
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -58,6 +120,7 @@ public class ControllerServlet extends HttpServlet {
 		// => [/remove.do]     - RemoveModel 클래스
 		// => [/error.do]      - ErrorModel 클래스
 		
+		/*
 		//모델 역활의 클래스가 상속받기 위한 인터페이스로 참조변수 생성
 		// => 참조변수에는 인터페이스를 상속받은 모든 자식클래스(모델)의 객체 저장 가능
 		Action action=null;
@@ -88,6 +151,14 @@ public class ControllerServlet extends HttpServlet {
 			action=new ErrorModel();
 		} else {
 			action=new ErrorModel();
+		}
+		*/
+		
+		//Map 객체에서 맵키(Command)를 사용해 맵값(Model 객체)을 반환받아 저장
+		// => 프로그램의 가독성 증가
+		Action action=actionMap.get(command);
+		if(action == null) {//맵키에 대한 맵값이 없는 경우 
+			action=actionMap.get("/error.do");
 		}
 		
 		//인터페이스로 생성된 참조변수로 추상메소드를 호출하면 묵시적 객체 형변환에 의해 참조변수에
