@@ -57,6 +57,5 @@
 		<li>name 속성값(Session Scope) = ${sessionScope.name }</li>
 		<li>name 속성값(Application Scope) = ${applicationScope.name }</li>
 	</ul>
-	
 </body>
 </html>
