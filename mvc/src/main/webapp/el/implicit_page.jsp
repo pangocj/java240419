@@ -15,7 +15,7 @@
 	<p>요청 URI 주소 = <%=request.getRequestURI() %></p>
 	<hr>
 	<%-- pageContext 내장객체 : PageContext 객체로 웹프로그램 작성에 필요한 모든 정보를 저장한 객체 --%>
-	<%-- pageContext.getReuest() : 요청정보가 저장된 ServletRequest 객체를 반환하는 메소드 --%>
+	<%-- pageContext.getRequest() : 요청정보가 저장된 ServletRequest 객체를 반환하는 메소드 --%>
 	<p>컨텍스트 최상위 디렉토리 경로 = <%=((HttpServletRequest)pageContext.getRequest()).getContextPath() %></p>
 	<p>요청 URI 주소 = <%=((HttpServletRequest)pageContext.getRequest()).getRequestURI() %></p>
 	<hr>
