@@ -1,3 +1,4 @@
+<%@page import="xyz.itwill.jstl.Student"%>
 <%@page import="java.util.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -44,31 +45,23 @@
 	<p>now.getTime() = ${now.getTime() }</p>
 	<p>now.time = ${now.time }</p>
 	
+	<c:set var="student" value="<%=new Student() %>"/>
+	<%-- Student 클래스에 toString() 메소드가 오버라이드 선언되어 있지 않은 경우 Object 클래스의
+	toString() 메소드를 호출하여 객체의 메모리 주소(HashCode)를 문자열로 제공받아 출력 처리 --%>
+	<p>student = ${student }</p>
+	<p>학번 = ${student.num }, 이름 = ${student.name }</p>
 	
+	<%-- set 태그를 사용해 Scope 속성값으로 저장된 객체의 필드값 변경 가능 - Setter 메소드 자동 호출 --%>
+	<%-- target 속성 : 필드값을 변경할 객체를 속성값으로 설정 --%>
+	<%-- => EL를 사용해 Scope 속성값을 객체로 제공받아 target 속성값으로 설정 가능 --%>
+	<%-- property : 객체의 필드값을 변경할 필드명을 속성값으로 설정 --%>
+	<%-- value 속성 : 필드에 저장될 필드값을 속성값으로 설정 --%>
+	<c:set target="${student }" property="num" value="1000"/>
+	<c:set target="${student }" property="name" value="홍길동"/>
+	<p>학번 = ${student.num }, 이름 = ${student.name }</p>
+	
+	<%-- remove : Scope 속성값을 삭제하는 태그 --%>
+	<c:remove var="student"/>
+	<p>student = ${student }</p>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
