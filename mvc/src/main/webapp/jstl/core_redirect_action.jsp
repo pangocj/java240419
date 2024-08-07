@@ -16,7 +16,7 @@
 	<%-- requestEncoding : POST 방식으로 요청하여 전달된 값을 읽기 위한 문자형태(CharacterSet)를
 	변경하기 위한 태그 --%>
 	<%-- value 속성 : 문자형태에 대한 인코딩 방식을 속성값으로 설정 --%>
-	<fmt:requestEncoding value="utf-8"/>
+	<%-- <fmt:requestEncoding value="utf-8"/> --%>
 	
 	<c:choose>
 		<c:when test="${!empty(param.name) }">
