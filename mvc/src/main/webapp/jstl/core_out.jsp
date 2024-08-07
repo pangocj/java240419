@@ -19,11 +19,12 @@
 	<hr>
 	<%-- set 태그를 사용해 Scope 속성값으로 HTML 태그가 포함된 문자열을 저장 --%>
 	<c:set var="html" value="<font size='7' color='red'>안녕하세요.</font>"/>
-	<%-- EL만 사용하면 Scope 속성값이 HTML 태그가 포함될 문자열인 경우 HTML 태그로 실행되어 
-	문자열 출력 처리 - 비정상적인 출력 가능 --%>
+	<%-- Scope 속성값에 HTML 태그가 포함될 문자열인 경우 EL만 사용하면 HTML 태그가 태그로
+	동작되어 문자열 출력 처리 - 비정상적인 출력 가능 --%>
 	<p>html = ${html }</p>
 	
-	<%-- out 태그를 사용하면 Scope 속성값이 HTML 태그가 포함될 문자열인 경우 문자열을 그대로 출력 처리 --%>
+	<%-- Scope 속성값dp HTML 태그가 포함될 문자열인 경우 out 태그를 사용하면 HTML 태그도 
+	문자열로 출력 처리 --%>
 	<p>html = <c:out value="${html }"/></p>
 </body>
 </html>
