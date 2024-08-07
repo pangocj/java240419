@@ -1,6 +1,7 @@
 ﻿<%@page import="xyz.itwill.dto.UserinfoDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 <%-- 비로그인 사용자인 경우 - 사용자로부터 인증정보를 입력받기 위한 JSP 문서 --%>
 <%-- => [로그인] 태그를 클릭한 경우 [/login.do] 주소를 요청하여 페이지 이동 - 입력값 전달 --%>
 <%-- 로그인 사용자인 경우 - 환영메세지로 응답하기 위한 JSP 문서 --%>
@@ -26,7 +27,8 @@
 <title>MVC</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%-- <link rel=stylesheet href="<%=request.getContextPath() %>/model_two/css/user.css" type="text/css"> --%>
-<link rel=stylesheet href="${pageContext.request.contextPath }/model_two/css/user.css" type="text/css">
+<%-- <link rel=stylesheet href="${pageContext.request.contextPath }/model_two/css/user.css" type="text/css"> --%>
+<link rel=stylesheet href="<c:url value="/model_two/css/user.css"/>" type="text/css">
 <script language="JavaScript">
 function userLogin() {
 	if ( f.userid.value == "" ) {
