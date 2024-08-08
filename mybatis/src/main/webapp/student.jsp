@@ -1,10 +1,10 @@
 <%@page import="xyz.itwill.dao.StudentDAO"%>
-<%@page import="xyz.itwill.dto.StudentDTO"%>
+<%@page import="xyz.itwill.dto.Student"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	List<StudentDTO> studentList=StudentDAO.getDAO().selectStudentList();
+List<Student> studentList=StudentDAO.getDAO().selectStudentList();
 %>    
 <!DOCTYPE html>
 <html>
@@ -36,7 +36,9 @@ td {
 			<td>생년월일</td>
 		</tr>
 		
-		<% for(StudentDTO student : studentList) { %>
+		<%
+				for(Student student : studentList) {
+				%>
 		<tr>
 			<td><%=student.getNo() %></td>
 			<td><%=student.getName() %></td>
