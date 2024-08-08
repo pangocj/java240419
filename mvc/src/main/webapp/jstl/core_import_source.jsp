@@ -28,7 +28,7 @@
 	<c:import url="https://www.yonhapnewstv.co.kr/browse/feed/" var="xml"/>
 	<p>${xml }</p>
 	--%>
-	
+
 	<%-- import 태그의 하위태그로 param 태그를 사용해 요청 웹프로그램에게 값 전달 --%>
 	<%-- => import 태그에 param 태그외 다른 코드가 존재할 경우 에러 발생 - JSP 주석 제외 --%>
 	<c:import url="core_import_target.jsp">

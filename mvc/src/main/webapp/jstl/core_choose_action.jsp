@@ -33,7 +33,7 @@
 			<p>${param.score }점은 ${grade } 학점입니다.</p>
 		</c:when>
 		<c:otherwise>
-			<p style="color: red;">입력페이지로 이동해 점수를 입력해 요청해 주세요.</p>
+			<p style="color: red;">입력페이지로 이동해 점수를 입력해 주세요.</p>
 			<a href="core_choose_form.jsp">입력페이지 이동</a>
 		</c:otherwise>
 	</c:choose>
