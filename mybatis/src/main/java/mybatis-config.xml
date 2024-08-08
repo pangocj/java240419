@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- mybatis 환경설정파일 : SqlSessionFactory 객체를 생성하기 위해 필요한 정보를 제공하는 파일 -->
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "https://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<!-- environments : environment 엘리먼트(1개 이상)를 등록하기 위한 엘리먼트 -->
+	<!-- default 속성 : environment 엘리먼트의 식별자(id 속성값)를 속성값으로 설정 -->
+	<environments default="development">
+		<!-- environment : DBMS 서버 접속에 필요한 정보를 설정하기 위한 엘리먼트 -->
+		<!-- => Connection 객체를 생성하기 위한 정보 제공 -->
+		<!-- id 속성 : environment 엘리먼트를 구분하기 위한 식별자를 속성값으로 설정 -->
+		<environment id="development">
+			<!-- transactionManager : 트렌젝션을 관리(커밋 또는 롤백)하는 기능을 설정하기 위한 엘리먼트 -->
+			<!-- type 속성 : [JDBC] 또는 [MANAGED] 중 하나를 속성값으로 설정 -->
+			<!-- => JDBC 속성값 : JDBC 기능을 사용해 트렉젝션 관리 -->
+			<!-- => MANAGED 속성값 : 트렌젝션 관리 프로그램을 사용해 트렉젝션 관리 -->
+			<transactionManager type="JDBC"/>
+			<dataSource type=""></dataSource>
+		</environment>
+	</environments>
+</configuration>
