@@ -1,4 +1,4 @@
-package xyz.itwil.dao;
+package xyz.itwill.dao;
 
 import java.io.IOException;
 import java.io.InputStream;
