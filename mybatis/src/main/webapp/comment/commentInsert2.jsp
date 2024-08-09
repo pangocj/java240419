@@ -3,15 +3,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-	MyComment1 comment1=new MyComment1();
-	comment1.setCommentId("abc123");
-	comment1.setCommentContent("첫번째 게시글입니다.");
-	MyCommentDAO.getDAO().insertComment2(comment1);
+	MyComment1 comment3=new MyComment1();
+	comment3.setCommentId("xyz789");
+	comment3.setCommentContent("세번째 게시글입니다.");
+	MyCommentDAO.getDAO().insertComment1(comment3);
 
-	MyComment1 comment2=new MyComment1();
-	comment2.setCommentId("opq456");
-	comment2.setCommentContent("두번째 게시글입니다.");
-	MyCommentDAO.getDAO().insertComment2(comment2);
+	MyComment1 comment4=new MyComment1();
+	comment4.setCommentId("abc123");
+	comment4.setCommentContent("네번째 게시글입니다.");
+	MyCommentDAO.getDAO().insertComment1(comment4);
 %>    
 <!DOCTYPE html>
 <html>
