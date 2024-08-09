@@ -29,14 +29,22 @@
 	</settings>
 	
 	<!-- typeAliases : typeAlias 엘리먼트(1개 이상)를 등록하기 위한 엘리먼트 -->
+	<!-- => typeAlias 엘리먼트 대신 package 엘리먼트(1개 이상) 사용 가능 -->
 	<typeAliases>
 		<!-- typeAlias : XML 기반의 매퍼파일에서 Java 자료형(DTO 클래스) 대신 사용할 별칭을 
 		설정하기 위한 엘리먼트 -->
 		<!-- type 속성 : Java 자료형을 속성값으로 설정  -->
 		<!-- alias 속성 : Java 자료형 대신 사용할 별칭을 속성값으로 설정 -->
 		<!-- => 내부적으로 Java 자료형에 대한 별칭이 제공되어 사용 가능 -->
+		<!-- 
 		<typeAlias type="xyz.itwill.dto.Student" alias="Student"/>
 		<typeAlias type="xyz.itwill.dto.MyMember" alias="MyMember"/>
+		-->
+		 
+		<!-- package : 패키지에 작성된 모든 Java 자료형에 별칭을 자동하는 제공하는 엘리먼트 -->
+		<!-- => 패키지에 작성된 Java 자료형(DTO 클래스)의 이름을 별칭으로 사용  -->
+		<!-- name 속성 : Java 자료형이 작성된 패키지를 속성값으로 설정 -->
+		<package name="xyz.itwill.dto"/>
 	</typeAliases>
 
 	<!-- environments : environment 엘리먼트(1개 이상)를 등록하기 위한 엘리먼트 -->
@@ -72,6 +80,7 @@
 	</environments>
 	
 	<!-- mappers : mapper 엘리먼트(1개 이상)를 등록하기 위한 엘리먼트 -->
+	<!-- => mapper 엘리먼트 대신 package 엘리먼트(1개 이상) 사용 가능 -->
 	<mappers>
 		<!-- mapper : 매퍼 파일(Mapper File)을 매퍼로 등록하기 위한 엘리먼트 -->
 		<!-- 매퍼(Mapper) : SQL 명령에 필요한 값을 전달받아 SQL 명령을 등록하고 SQL 명령의
@@ -88,7 +97,7 @@
 		<!-- class 속성 : Interface 기반의 매퍼파일의 Java 자료형(인터페이스)을 속성값으로 설정 -->
 		<!-- => 장점 : SqlSession 객체로 SQL 명령을 제공받아 DAO 클래스 작성이 편리 -->
 		<!-- => 단점 : 수동 매핑과 동적 SQL 기능을 구현이 불편 -->
-		<mapper class="xyz.itwill.mapper.MyMemberInterfaceMapper"/>
+		<!-- <mapper class="xyz.itwill.mapper.MyMemberInterfaceMapper"/> -->
 		
 		<!-- 매퍼 바인딩 기능을 사용해 XML 기반의 매퍼파일과 Interface 기반의 매퍼파일을
 		하나의 매퍼로 등록하여 사용하도록 설정 가능 -->
@@ -96,8 +105,12 @@
 		DAO 클래스는 Interface 기반의 매퍼파일을 사용해 작성 -->
 		<!-- => mapper 엘리먼트에는 XML 기반의 매퍼파일 또는 Interface 기반의 매퍼파일 중
 		하나만 매퍼로 등록하여 사용 -->
-		<mapper resource="xyz/itwill/mapper/MyMemberMapper.xml"/>
+		<!-- <mapper resource="xyz/itwill/mapper/MyMemberMapper.xml"/> -->
 		
+		<!-- mapper : 패키지에 작성된 모든 Interface 기반의 매퍼파일을 자동으로 매퍼로 등록하는 엘리먼트 -->
+		<!-- => XML 기반의 매퍼파일은 pakeage 엘리먼트를 사용해 매퍼로 등록 불가능 -->
+		<!-- name 속성 : Interface 기반의 매퍼파일이 작성된 패키지를 속성값으로 설정 -->
+		<package name="xyz.itwill.mapper"/>
 	</mappers>
 </configuration>
 
