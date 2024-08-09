@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.session.SqlSession;
 
 import xyz.itwill.dto.MyComment1;
+import xyz.itwill.dto.MyComment2;
 import xyz.itwill.mapper.MyCommentMapper;
 
 public class MyCommentDAO extends AbstractSession {
@@ -30,6 +31,15 @@ public class MyCommentDAO extends AbstractSession {
 			sqlSession.close();
 		}
 	}
+		
+	public int insertComment2(MyComment1 comment) {
+		SqlSession sqlSession=getSqlSessionFactory().openSession(true);
+		try {
+			return sqlSession.getMapper(MyCommentMapper.class).insertComment2(comment);
+		} finally {
+			sqlSession.close();
+		}
+	}
 	
 	public List<MyComment1> selectCommentList1() {
 		SqlSession sqlSession=getSqlSessionFactory().openSession(true);
@@ -40,10 +50,10 @@ public class MyCommentDAO extends AbstractSession {
 		}
 	}
 	
-	public int insertComment2(MyComment1 comment) {
+	public List<MyComment2> selectCommentList2() {
 		SqlSession sqlSession=getSqlSessionFactory().openSession(true);
 		try {
-			return sqlSession.getMapper(MyCommentMapper.class).insertComment2(comment);
+			return sqlSession.getMapper(MyCommentMapper.class).selectCommentList2();
 		} finally {
 			sqlSession.close();
 		}
