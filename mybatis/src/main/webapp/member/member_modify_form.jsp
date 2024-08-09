@@ -1,5 +1,11 @@
+<%@page import="xyz.itwill.dao.MyMemberXMLDAO"%>
+<%@page import="xyz.itwill.dto.MyMember"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String id=request.getParameter("id");
+	MyMember member=MyMemberXMLDAO.getDAO().selectMyMember(id);
+%>     
 <!DOCTYPE html>
 <html>
 <head>
@@ -29,19 +35,19 @@ td, th {
 	<table>
 		<tr>
 			<th width="100">아이디</th>
-			<td width="200"><input type="text" name="id" id="id" value="abc123" readonly></td>
+			<td width="200"><input type="text" name="id" id="id" value="<%=member.getId() %>" readonly></td>
 		</tr>
 		<tr>
 			<th width="100">이름</th>
-			<td width="200"><input type="text" name="name" id="name" value="홍길동"></td>
+			<td width="200"><input type="text" name="name" id="name" value="<%=member.getName() %>"></td>
 		</tr>
 		<tr>
 			<th width="100">전화번호</th>
-			<td width="200"><input type="text" name="phone" id="phone" value="010-1234-5678"></td>
+			<td width="200"><input type="text" name="phone" id="phone" value="<%=member.getPhone() %>"></td>
 		</tr>
 		<tr>
 			<th width="100">이메일</th>
-			<td width="200"><input type="text" name="email" id="email" value="abc@itwill.xyz"></td>
+			<td width="200"><input type="text" name="email" id="email" value="<%=member.getEmail() %>"></td>
 		</tr>
 		<tr>
 			<td colspan="2">
