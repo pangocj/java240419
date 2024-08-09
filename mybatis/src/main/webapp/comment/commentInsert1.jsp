@@ -6,12 +6,12 @@
 	MyComment1 comment1=new MyComment1();
 	comment1.setCommentId("abc123");
 	comment1.setCommentContent("첫번째 게시글입니다.");
-	MyCommentDAO.getDAO().insertComment2(comment1);
+	MyCommentDAO.getDAO().insertComment1(comment1);
 
 	MyComment1 comment2=new MyComment1();
 	comment2.setCommentId("opq456");
 	comment2.setCommentContent("두번째 게시글입니다.");
-	MyCommentDAO.getDAO().insertComment2(comment2);
+	MyCommentDAO.getDAO().insertComment1(comment2);
 %>    
 <!DOCTYPE html>
 <html>
