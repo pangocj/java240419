@@ -15,7 +15,7 @@ public class MyUserDAO extends AbstractSession {
 	}
 	
 	static {
-		_dao=new MyUserDAO();
+		_dao=new MyUserDAO(); 
 	}
 	
 	public static MyUserDAO getDAO() {
