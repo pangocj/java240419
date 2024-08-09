@@ -80,7 +80,35 @@
 		사용해 매퍼 등록 -->
 		<!-- => ibatis 프레임워크에서는 XML 기반의 매퍼파일만 사용해 매퍼 등록 가능 -->
 		<!-- resource 속성 : XML 기반의 매퍼파일에 파일 시스템 경로를 속성값으로 설정 -->
+		<!-- => 장점 : 수동 매핑과 동적 SQL 기능을 구현이 편리 -->
+		<!-- => 단점 : SqlSession 객체로 SQL 명령을 제공받아 DAO 클래스 작성이 불편 -->
 		<mapper resource="xyz/itwill/mapper/StudentMapper.xml"/>
 		<mapper resource="xyz/itwill/mapper/MyMemberXMLMapper.xml"/>
+		
+		<!-- class 속성 : Interface 기반의 매퍼파일의 Java 자료형(인터페이스)을 속성값으로 설정 -->
+		<!-- => 장점 : SqlSession 객체로 SQL 명령을 제공받아 DAO 클래스 작성이 편리 -->
+		<!-- => 단점 : 수동 매핑과 동적 SQL 기능을 구현이 불편 -->
+		<mapper class="xyz.itwill.mapper.MyMemberInterfaceMapper"/>
+		
+		<!-- 매퍼 바인딩 기능을 사용해 XML 기반의 매퍼파일과 Interface 기반의 매퍼파일을
+		하나의 매퍼로 등록하여 사용하도록 설정 가능 -->
+		<!-- 매퍼 바인딩(Mapper Binding) : SQL 명령은 XML 기반의 매퍼파일에 등록하고
+		DAO 클래스는 Interface 기반의 매퍼파일을 사용해 작성 -->
+		<!-- => mapper 엘리먼트에는 XML 기반의 매퍼파일 또는 Interface 기반의 매퍼파일 중
+		하나만 매퍼로 등록하여 사용 -->
+		<mapper resource="xyz/itwill/mapper/MyMemberMapper.xml"/>
+		
 	</mappers>
 </configuration>
+
+
+
+
+
+
+
+
+
+
+
+
