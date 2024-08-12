@@ -1,4 +1,3 @@
-<%@page import="xyz.itwill.dao.MyUserDAO"%>
 <%@page import="xyz.itwill.dto.MyComment3"%>
 <%@page import="xyz.itwill.dao.MyCommentDAO"%>
 <%@page import="java.util.List"%>

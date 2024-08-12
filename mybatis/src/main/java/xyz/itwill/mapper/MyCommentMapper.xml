@@ -136,7 +136,7 @@
 			<id column="comment_no" property="commentNo"/>
 			<result column="comment_id" property="commentId"/>
 			<result column="comment_content" property="commentContent"/>
-			<result column="comment_date" property="CommentDate"/>
+			<result column="comment_date" property="commentDate"/>
 		</association>
 		<association property="user" javaType="MyUser">
 			<id column="user_id" property="userId"/>
