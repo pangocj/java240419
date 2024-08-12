@@ -9,4 +9,5 @@ public interface MyReplyMapper {
 	int insertReply(MyReply reply);
 	List<MyReply> selectReplyList();
 	List<MyReplyUser> selectReplyUserList1();
+	List<MyReplyUser> selectReplyUserList2();
 }
