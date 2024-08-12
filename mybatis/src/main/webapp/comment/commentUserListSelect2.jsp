@@ -46,7 +46,12 @@ td {
 			<td class="name"><%=commentUser.getUser().getUserName()%>[<%=commentUser.getUser().getUserId()%>]</td>
 			<%-- <td class="content"><%=commentUser.getComment().getCommentContent()%></td> --%>
 			<td class="content">
+				<%-- 
 				<a href="commentReplySelect1.jsp?commentNo=<%=commentUser.getComment().getCommentNo()%>">
+					<%=commentUser.getComment().getCommentContent()%>
+				</a>
+				--%>
+				<a href="commentReplySelect2.jsp?commentNo=<%=commentUser.getComment().getCommentNo()%>">
 					<%=commentUser.getComment().getCommentContent()%>
 				</a>
 			</td>
