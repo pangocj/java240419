@@ -12,4 +12,10 @@
 		select reply_no, reply_id, reply_content, reply_date, reply_comment_no 
 			from myreply order by reply_no desc
 	</select>
+	
+	<resultMap type="" id=""></resultMap>
+	
+	<select id="selectReplyUserList1" resultMap="">
+		
+	</select>
 </mapper>
