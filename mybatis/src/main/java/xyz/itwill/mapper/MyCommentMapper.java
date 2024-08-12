@@ -16,4 +16,5 @@ public interface MyCommentMapper {
 	List<MyComment3> selectCommentList3();
 	List<MyCommentUser1> selectCommentUserList1();
 	List<MyCommentUser2> selectCommentUserList2();
+	MyComment1 selectComment(int commentNo);
 }

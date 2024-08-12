@@ -41,6 +41,15 @@ public class MyReplyDAO extends AbstractSession {
 		}
 	}
 	
+	public  List<MyReply> selectCountReplyList() {
+		SqlSession sqlSession=getSqlSessionFactory().openSession(true);
+		try {
+			return sqlSession.getMapper(MyReplyMapper.class).selectCountReplyList();
+		} finally {
+			sqlSession.close();
+		}
+	}
+	
 	public List<MyReplyUser> selectReplyUserList1() {
 		SqlSession sqlSession=getSqlSessionFactory().openSession(true);
 		try {
@@ -54,6 +63,15 @@ public class MyReplyDAO extends AbstractSession {
 		SqlSession sqlSession=getSqlSessionFactory().openSession(true);
 		try {
 			return sqlSession.getMapper(MyReplyMapper.class).selectReplyUserList2();
+		} finally {
+			sqlSession.close();
+		}
+	}
+	
+	public List<MyReply> selectCommentNoReplyList(int commentNo) {
+		SqlSession sqlSession=getSqlSessionFactory().openSession(true);
+		try {
+			return sqlSession.getMapper(MyReplyMapper.class).selectCommentNoReplyList(commentNo);
 		} finally {
 			sqlSession.close();
 		}

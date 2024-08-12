@@ -88,6 +88,15 @@ public class MyCommentDAO extends AbstractSession {
 			sqlSession.close();
 		}
 	}
+	
+	public MyComment1 selectComment(int commentNo) {
+		SqlSession sqlSession=getSqlSessionFactory().openSession(true);
+		try {
+			return sqlSession.getMapper(MyCommentMapper.class).selectComment(commentNo);
+		} finally {
+			sqlSession.close();
+		}
+	}
 }
 
  
