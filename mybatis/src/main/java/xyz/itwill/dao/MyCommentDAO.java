@@ -36,7 +36,7 @@ public class MyCommentDAO extends AbstractSession {
 			sqlSession.close();
 		}
 	}
-		
+	 	
 	public int insertComment2(MyComment1 comment) {
 		SqlSession sqlSession=getSqlSessionFactory().openSession(true);
 		try {
