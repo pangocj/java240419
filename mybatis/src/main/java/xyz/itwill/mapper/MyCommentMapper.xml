@@ -189,13 +189,55 @@
 		</collection>
 	</resultMap>
 	
-	<!-- 게시글번호을 전달받아 MYCOMMENT 테이블에 저장된 행과 MYREPLY 테이블에 저장된 행을 
+	<!-- 게시글번호를 전달받아 MYCOMMENT 테이블에 저장된 행과 MYREPLY 테이블에 저장된 행을 
 	1:N 관계로 결합하여 MyCommentReply 객체로 제공하는 엘리먼트 -->
 	<select id="selectCommentReply" parameterType="int" resultMap="myCommentReplyResultMap">
 		select comment_no, comment_id, comment_content, comment_date, reply_no, reply_id
 			, reply_content, reply_date, reply_comment_no from mycomment left join myreply on 
 			comment_no=reply_comment_no where comment_no=#{commentNo} order by reply_no desc
 	</select>
+	
+	<resultMap type="MyCommentUserReplyUser" id="myCommentUserReplyUserResultMap">
+		<id column="comment_no" property="commentNo"/>
+		<result column="comment_id" property="commentId"/>
+		<result column="comment_content" property="commentContent"/>
+		<result column="comment_date" property="commentDate"/>
+		<association property="user" javaType="MyUser">
+			<id column="user_id" property="userId"/>
+			<result column="user_name" property="userName"/>
+		</association>
+		<collection property="replyUserList" ofType="MyReplyUser">
+			<association property="reply" javaType="MyReply">
+				<id column="reply_no" property="replyNo"/>
+				<result column="reply_id" property="replyId"/>
+				<result column="reply_content" property="replyContent"/>
+				<result column="reply_date" property="replyDate"/>
+				<result column="reply_comment_no" property="replyCommentNo"/>
+			</association>
+			<association property="user" javaType="MyUser">
+				<id column="reply_user_id" property="userId"/>
+				<result column="reply_user_name" property="userName"/>
+			</association>
+		</collection>
+	</resultMap>
+
+
+	<!-- autoMapping 속성 : false(기본값) 또는 true 중 하나를 속성값으로 설정 -->
+	<!-- => autoMapping 속성값을 [true]로 설정한 경우 검색행의 컬럼명과 같은 이름의 필드에
+	검색행의 컬럼값을 자동으로 저장되도록 처리 -->
+
+
+	<!-- 게시글번호를 전달받아 MYCOMMENT 테이블(MYUSER 테이블)에 저장된 행과 MYREPLY 테이블(MYUSER 
+	테이블)에 저장된 행을 1:N 관계로 결합하여 MyCommentUserReplyUser 객체로 제공하는 엘리먼트 -->
+	<select id="selectCommentUserReplyUser" parameterType="int" resultMap="myCommentUserReplyUserResultMap">
+		select comment_no, comment_id, comment_content, comment_date, user_id, user_name
+			, reply_no, reply_id, reply_content, reply_date, reply_comment_no, reply_user_id
+			, reply_user_name from mycomment join myuser on comment_id=user_id left join
+			(select reply_no, reply_id, reply_content, reply_date, reply_comment_no
+			, user_id reply_user_id, user_name reply_user_name from myreply join myuser 
+			on reply_id=user_id) on comment_no=reply_comment_no where comment_no=#{commentNo}
+			order by reply_no desc
+	</select>	
 </mapper>
 
 
