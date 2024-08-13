@@ -99,7 +99,7 @@ public class MyCommentDAO extends AbstractSession {
 			sqlSession.close();
 		}
 	}
-	
+	 
 	public MyCommentReply selectCommentReply(int commentNo) {
 		SqlSession sqlSession=getSqlSessionFactory().openSession(true);
 		try {
