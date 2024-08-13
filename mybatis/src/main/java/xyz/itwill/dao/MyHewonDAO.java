@@ -28,7 +28,7 @@ public class MyHewonDAO extends AbstractSession {
 			return sqlSession.getMapper(MyHewonMapper.class).insertHewon(hewon);
 		} finally {
 			sqlSession.close();
-		}
+		} 
 	}
 	
 	public List<MyHewon> selectHewonList() {

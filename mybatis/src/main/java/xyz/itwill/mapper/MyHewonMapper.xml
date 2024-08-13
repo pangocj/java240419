@@ -25,6 +25,7 @@
 	<!-- case : discriminator 엘리먼트로 제공받은 컬럼값과 비교하기 위한 값을 제공하기 위한 엘리먼트 -->
 	<!-- => 하위 엘리먼트로 매핑정보를 제공하는 엘리먼트(constructor, id, result, assocation, collection) 사용 -->
 	<!-- value 속성 : 비교값을 속성값으로 설정 -->
+	<!-- 
 	<resultMap type="MyHewon" id="myHewonDiscriminatorResultMap">
 		<discriminator javaType="int" column="hewon_scope">
 			<case value="1">
@@ -51,7 +52,61 @@
 			</case>
 		</discriminator>
 	</resultMap>
+	-->
 	
+	<!-- 모든 case 엘리먼트에 공통적인 매핑정보가 존재할 경우 discriminator 엘리먼트가 아닌
+	다른 엘리먼트를 사용해 매핑정보를 제공하는 것을 권장 -->
+	<!-- 
+	<resultMap type="MyHewon" id="myHewonDiscriminatorResultMap">
+		<id column="hewon_id" property="id"/>
+		<result column="hewon_scope" property="scope"/>
+		<discriminator javaType="int" column="hewon_scope">
+			<case value="2">
+				<result column="hewon_name" property="name"/>
+			</case>
+			<case value="3">
+				<result column="hewon_name" property="name"/>
+				<result column="hewon_phone" property="phone"/>				
+			</case>
+			<case value="4">
+				<result column="hewon_name" property="name"/>
+				<result column="hewon_phone" property="phone"/>
+				<result column="hewon_email" property="email"/>				
+			</case>
+		</discriminator>
+	</resultMap>
+	-->
+	
+	<resultMap type="MyHewon" id="myHewonOneResultMap">
+		<id column="hewon_id" property="id"/>
+		<result column="hewon_scope" property="scope"/>
+	</resultMap> 
+	
+	<!-- extends 속성 : 매핑정보가 저장된 resultMap 엘리먼트의 식별자(id 속성값)를 속성값으로 설정 -->
+	<!-- => resultMap 엘리먼트의 매핑정보를 상속받아 사용 -->
+	<resultMap type="MyHewon" id="myHewonTwoResultMap" extends="myHewonOneResultMap">
+		<result column="hewon_name" property="name"/>
+	</resultMap>
+	
+	<resultMap type="MyHewon" id="myHewonThreeResultMap" extends="myHewonTwoResultMap">
+		<result column="hewon_phone" property="phone"/>
+	</resultMap>
+	
+	<resultMap type="MyHewon" id="myHewonFourResultMap" extends="myHewonThreeResultMap">
+		<result column="hewon_email" property="email"/>				
+	</resultMap>
+	
+	<resultMap type="MyHewon" id="myHewonDiscriminatorResultMap">
+		<discriminator javaType="int" column="hewon_scope">
+			<!-- case 엘리먼트의 resultMap 속성을 사용해 다른 resultMap 엘리먼트의 매핑정보를
+			제공받아 사용 가능 -->
+			<case value="1" resultMap="myHewonOneResultMap"/>
+			<case value="2" resultMap="myHewonTwoResultMap"/>
+			<case value="3" resultMap="myHewonThreeResultMap"/>
+			<case value="4" resultMap="myHewonFourResultMap"/>
+		</discriminator>
+	</resultMap>
+	 
 	<select id="selectDiscriminatorHewonList" resultMap="myHewonDiscriminatorResultMap">
 		select hewon_id, hewon_name, hewon_phone, hewon_email, hewon_scope from myhewon order by hewon_id
 	</select>
