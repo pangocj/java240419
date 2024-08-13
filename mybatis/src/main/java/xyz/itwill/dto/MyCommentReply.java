@@ -10,7 +10,7 @@ public class MyCommentReply {
 	//MYCOMMENT 테이블의 검색행(게시글정보) 1개를 MyComment1 객체로 제공받아 저장하기 위한 필드
 	private MyComment1 comment;
 	
-	//MYREPLY 테이블의 검색행(댓글정보) 0개 이상을 List 객체(요소값 - MYREPLY 객체)로 제공받아 저장하기 위한 필드
+	//MYREPLY 테이블의 검색행(댓글정보) 0개 이상을 List 객체(요소값 - MyReply 객체)로 제공받아 저장하기 위한 필드
 	private List<MyReply> replyList;
 	
 	public MyCommentReply() {
