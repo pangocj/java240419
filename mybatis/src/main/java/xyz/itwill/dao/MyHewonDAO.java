@@ -48,4 +48,13 @@ public class MyHewonDAO extends AbstractSession {
 			sqlSession.close();
 		}
 	}
+	
+	public List<MyHewon> selectScopeHewonList(int scope) {
+		SqlSession sqlSession=getSqlSessionFactory().openSession(true);
+		try {
+			return sqlSession.getMapper(MyHewonMapper.class).selectScopeHewonList(scope);
+		} finally {
+			sqlSession.close();
+		}
+	}
 }
