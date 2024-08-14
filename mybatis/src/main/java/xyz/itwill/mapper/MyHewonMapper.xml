@@ -320,6 +320,84 @@
 		</where>
 		order by hewon_id
 	</select>
+	
+	<!-- 회원정보를 전달받아 MYHEWON 테이블에 저장된 행을 회원정보로 변경하는 엘리먼트 -->
+	<!-- => 아이디를 비교해 아이디를 제외한 모든 컬럼값을 전달값으로 변경하도록 처리 -->
+	<update id="updateHewon" parameterType="MyHewon">
+		update myhewon set hewon_name=#{name}, hewon_phone=#{phone}, hewon_email=#{email}
+			, hewon_scope=#{scope} where hewon_id=#{id}
+	</update>
+	
+	<!-- 회원정보를 전달받아 MYHEWON 테이블에 저장된 행을 회원정보로 변경하는 엘리먼트 -->
+	<!-- => 동적 SQL 기능을 사용해 아이디를 비교하여 아이디를 제외한 컬럼값을 전달값이 있는 
+	경우에만 변경하도록 처리 -->
+	<!-- if 엘리먼트의 test 속성값으로 조건식을 작성할 때 비교 연산자(>, <, >=, <=)를 사용하면 에러 발생 -->
+	<!-- => 기호된 비교 연산자 대신 문자로된 비교 연산자(gt, lt, gte, lte)를 사용하여 조건식 작성 -->
+	<!--  
+	<update id="updateDynamicHewon" parameterType="MyHewon">
+		update myhewon
+		<trim prefix="set" suffixOverrides=",">
+			<if test="name != null and name != ''">
+				hewon_name=#{name},
+			</if>
+			<if test="phone != null and phone != ''">
+				hewon_phone=#{phone},
+			</if>
+			<if test="email != null and email != ''">
+				hewon_email=#{email},
+			</if>
+			<if test="scope gte 1 and scope lte 4">
+				hewon_scope=#{scope}
+			</if>
+		</trim>
+		where hewon_id=#{id}
+	</update>
+	-->
+	
+	<!-- set : 엘리먼트 내용 뒷부분에 불필요한 SQL 문장(,)을 제거하고 엘리먼트 내용 앞부분에
+	[set] 문장을 추가하여 SQL 명령에 포함하는 엘리먼트 -->
+	<update id="updateDynamicHewon" parameterType="MyHewon">
+		update myhewon
+		<set>
+			<if test="name != null and name != ''">
+				hewon_name=#{name},
+			</if>
+			<if test="phone != null and phone != ''">
+				hewon_phone=#{phone},
+			</if>
+			<if test="email != null and email != ''">
+				hewon_email=#{email},
+			</if>
+			<if test="scope gte 1 and scope lte 4">
+				hewon_scope=#{scope}
+			</if>
+		</set>
+		where hewon_id=#{id}
+	</update>
+	
+	<!-- 0개 이상의 아이디를 전달받아 MYHEWON 테이블에 저장된 행에서 전달받은 아이디의 행을
+	검색하여 MyHewon 객체로 제공하는 엘리먼트 -->
+	<!-- => 전달받은 아이디가 하나도 없는 경우 MYHEWON 테이블에 저장된 모든 행을 검색하여 MyHewon 객체로 제공 -->
+	<!-- => parameterType 속성값으로 ArrayList 클래스(List 인터페이스)를 설정해 List 객체를
+	전달받아 SQL 명령에서 [list]라는 이름으로 List 객체의 요소값 사용 가능 -->
+	<select id="selectMultiIdDynamicHewonList" parameterType="list" resultMap="myHewonResultMap">
+		select hewon_id, hewon_name, hewon_phone, hewon_email, hewon_scope from myhewon
+		<if test="list != null">
+			where hewon_id in
+			<!-- foreach : 전달받은 List 객체의 요소값을 차례대로 제공받아 엘리먼트 내용을
+			생성해 SQL 명령에 포함하는 엘리먼트 -->
+			<!-- collection 속성 : 일괄 처리할 List 객체의 이름을 속성값으로 설정 -->
+			<!-- item 속성 : List 객체의 요소값을 제공받아 저장하기 위한 이름(변수명)을 속성값으로 설정 -->
+			<!-- => #{이름} 형식으로 표현하여 List 객체의 요소값으로 SQL 문장 작성시 사용 -->
+			<!-- open 속성 : foreach 엘리먼트로 완성된 SQL 문장 앞부분에 추가될 문장을 속성값으로 설정 -->
+			<!-- close 속성 : foreach 엘리먼트로 완성된 SQL 문장 뒷부분에 추가될 문장을 속성값으로 설정 -->
+			<!-- separator 속성 : 요소값을 구분하기 위한 문장을 속성값으로 설정 -->
+			<foreach collection="list" item="id" open="(" close=")" separator=",">
+				#{id}
+			</foreach>
+		</if>
+		order by hewon_id
+	</select>	
 </mapper>
 
 
