@@ -181,6 +181,14 @@
 	<insert id="insertMapHewon" parameterType="map">
 		insert into myhewon values(#{id}, #{name}, #{phone}, #{email}, #{scope})
 	</insert>
+	
+	<!-- select 엘리먼트의 resultType 속성값을 Map 인터페이스로 설정하면 하나의 검색행을 
+	Map 객체로 생성하여 제공 -->
+	<!-- => 검색행의 컬럼명은 맵키로 매핑되고 컬럼값은 맵값으로 매핑되어 Map 객체의 엔트리로 추가 -->
+	<!-- => 검색행의 컬럼명은 대문자로 변환되어 맵키로 사용 -->
+	<select id="selectMapHewonList" resultType="map">
+		select hewon_id, hewon_name, hewon_phone, hewon_email, hewon_scope from myhewon order by hewon_id
+	</select>
 </mapper>
 
 
