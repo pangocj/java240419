@@ -189,6 +189,17 @@
 	<select id="selectMapHewonList" resultType="map">
 		select hewon_id, hewon_name, hewon_phone, hewon_email, hewon_scope from myhewon order by hewon_id
 	</select>
+	
+	<!-- 조회대상(컬럼명)과 조회단어를 전달받아 MYHEWON 테이블에 저장된 행에서 조회대상에
+	조회단어가 저장된 행을 검색해 MyHewon 객체로 제공하는 엘리먼트 -->
+	<!-- #{변수명|필드명|맵키} : 전달값을 SQL 명령에서 문자값으로 사용 - '전달값' -->
+	<!-- ${변수명|필드명|맵키} : 전달값을 SQL 명령을 구성하는 문장으로 사용 - 전달값 -->
+	<!-- => ibatis 프레임워크에서는 $변수명|필드명|맵키$ 형식으로 표현하여 사용 -->
+	<!-- => $ 표현식은 InSQL 공격에 취약하므로 사용하는 것을 미권장  -->
+	<select id="selectSearchHewonList" parameterType="map" resultMap="myHewonResultMap">
+		select hewon_id, hewon_name, hewon_phone, hewon_email, hewon_scope 
+			from myhewon where ${searchColumn}=#{searchKeyword} order by hewon_id
+	</select>
 </mapper>
 
 

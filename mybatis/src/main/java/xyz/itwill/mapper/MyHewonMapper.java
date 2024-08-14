@@ -23,4 +23,5 @@ public interface MyHewonMapper {
 	String selectParamHewonId(@Param(value="name") String name,@Param("email") String email);
 	int insertMapHewon(Map<String, Object> map);
 	List<Map<String, Object>> selectMapHewonList();
+	List<MyHewon> selectSearchHewonList(Map<String, Object> map);
 }
