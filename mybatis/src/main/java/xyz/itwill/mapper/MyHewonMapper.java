@@ -21,4 +21,5 @@ public interface MyHewonMapper {
 	//value 속성 : 매개변수에 저장된 값을 SQL 명령에서 사용할 수 있는 이름을 속성값으로 설정
 	// => 다른 속성이 없는 경우 속성값만 설정 가능
 	String selectParamHewonId(@Param(value="name") String name,@Param("email") String email);
+	int insertMapHewon(Map<String, Object> map);
 }
