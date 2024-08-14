@@ -231,15 +231,93 @@
 	</select>
 	
 	<!-- 이름을 전달받지 못한 경우 MYHEWON 테이블에 저장된 모든 행을 검색하고 이름을 전달받은 경우 
-	MYHEWON 테이블에 저장된 행 중 전달받은 이름의 행들만 검색하여 MyHewon 객체로 제공하는 엘리먼트 -->
+	MYHEWON 테이블에 저장된 행 중 전달받은 이름의 행만 검색하여 MyHewon 객체로 제공하는 엘리먼트 -->
 	<select id="selectDynamicNameHewonList" parameterType="string" resultMap="myHewonResultMap">
 		select hewon_id, hewon_name, hewon_phone, hewon_email, hewon_scope from myhewon
 		<!-- if : 조건이 참(true)인 경우에만 엘리먼트의 내용(SQL 문장)을 SQL 명령에 포함하는 엘리먼트 -->
 		<!-- test 속성 : false(엘리먼트 내용 미포함) 또는 true(엘리먼트 내용 포함) 중 하나를 속성값으로 설정 -->
 		<!-- => parameterType 속성값으로 전달받은 값을 OGNL 표현식을 사용해 조건식을 작성하여 속성값으로 설정 가능 -->
 		<if test="name != null and name != ''"><!-- 전달값(이름)이 있는 경우 -->
-			where hewon_name=#{name}
+			where hewon_name = #{name}
 		</if> 
+		order by hewon_id
+	</select>
+	
+	<!-- 아이디와 이름을 전달받지 못한 경우 MYHEWON 테이블에 저장된 모든 행을 검색하고 아이디
+	또는 이름을 전달받은 경우 MYHEWON 테이블에 저장된 행에서 아이디 또는 이름이 전달값과 같은
+	행만 검색하여 MyHewon 객체로 제공하는 엘리먼트 -->
+	<!-- => 아이디와 이름을 모두 전달받은 경우 SQL 명령이 잘못되어 에러 발생 -->
+	<!--  
+	<select id="selectDynamicIdNameHewonList" parameterType="map" resultMap="myHewonResultMap">
+		select hewon_id, hewon_name, hewon_phone, hewon_email, hewon_scope from myhewon
+		<if test="id != null and id != ''">
+			where hewon_id = #{id}
+		</if>
+		<if test="name != null and name != ''">
+			where hewon_name = #{name}
+		</if>
+		order by hewon_id
+	</select>
+	-->
+	
+	<!-- 아이디와 이름을 모두 전달받은 경우에도 에러가 발생되지 않도록 동적 SQL 기능 구현 -->
+	<!-- => 아이디와 이름을 모두 전달받은 경우에는 아이디만 이용하여 검색 -->
+	<!-- choose : 조건이 참인 하나의 엘리먼트의 내용(SQL 문장)을 SQL 명령에 포함하는 엘리먼트 -->
+	<!-- => 하위 엘리먼트 : when 엘리먼트(1개 이상), otherwise(0개 또는 1개) -->
+	<!-- when : 조건이 참(true)인 경우에만 엘리먼트의 내용(SQL 문장)을 SQL 명령에 포함하는 엘리먼트 -->
+	<!-- => when 엘리먼트의 조건이 참인 경우 엘리먼트 내용을 SQL 명령에 포함한 후 choose 엘리먼트 종료 -->
+	<!-- test 속성 : false(엘리먼트 내용 미포함) 또는 true(엘리먼트 내용 포함) 중 하나를 속성값으로 설정 -->
+	<!-- otherwise : 모든 when 엘리먼트의 조건이 거짓인 경우 엘리먼트 내용을 무조건 SQL 명령에 포함하는 엘리먼트 -->
+	<!--  
+	<select id="selectDynamicIdNameHewonList" parameterType="map" resultMap="myHewonResultMap">
+		select hewon_id, hewon_name, hewon_phone, hewon_email, hewon_scope from myhewon
+		<choose>
+			<when test="id != null and id != ''">
+				where hewon_id = #{id}
+			</when>
+			<when test="name != null and name != ''">
+				where hewon_name = #{name}
+			</when>
+		</choose>
+		order by hewon_id
+	</select>
+	-->
+	
+	<!-- 아이디와 이름을 모두 전달받은 경우에도 에러가 발생되지 않도록 동적 SQL 기능 구현 -->
+	<!-- => 이름만 전달받은 경우 SQL 명령이 잘못되어 에러 발생 - trim 엘리먼트를 사용해 문제 해결 -->
+	<!-- trim : SQL 문장을 추가하거나 제거하여 생성된 SQL 문장을 SQL 명령에 포함하는 엘리먼트 -->
+	<!-- => 하위 엘리먼트에 다수의 if 엘리먼트를 사용해 제공된 SQL 문장을 변경해 SQL 명령에 포함하기 위해 사용 -->
+	<!-- prefix 속성 : trim 엘리먼트 내용 앞부분에 추가될 SQL 문장을 속성값으로 설정 -->
+	<!-- suffix 속성 : trim 엘리먼트 내용 뒷부분에 추가될 SQL 문장을 속성값으로 설정 -->
+	<!-- prefixOverrides 속성 : trim 엘리먼트 내용 앞부분에 제거될 SQL 문장을 속성값으로 설정 -->
+	<!-- suffixOverrides 속성 : trim 엘리먼트 내용 뒷부분에 제거될 SQL 문장을 속성값으로 설정 -->
+	<!--  
+	<select id="selectDynamicIdNameHewonList" parameterType="map" resultMap="myHewonResultMap">
+		select hewon_id, hewon_name, hewon_phone, hewon_email, hewon_scope from myhewon
+		<trim prefix="where" prefixOverrides="or|and">
+			<if test="id != null and id != ''">
+				hewon_id = #{id}
+			</if>
+			<if test="name != null and name != ''">
+				${choice} hewon_name = #{name}
+			</if>
+		</trim>
+		order by hewon_id
+	</select>
+	-->
+	
+	<!-- where : 엘리먼트 내용 앞부분에 불필요한 SQL 문장(or 또는 and 등)을 제거하고 엘리먼트
+	내용 앞부분에 [where] 문장을 추가하여 SQL 명령에 포함하는 엘리먼트 -->
+	<select id="selectDynamicIdNameHewonList" parameterType="map" resultMap="myHewonResultMap">
+		select hewon_id, hewon_name, hewon_phone, hewon_email, hewon_scope from myhewon
+		<where>
+			<if test="id != null and id != ''">
+				hewon_id = #{id}
+			</if>
+			<if test="name != null and name != ''">
+				${choice} hewon_name = #{name}
+			</if>
+		</where>
 		order by hewon_id
 	</select>
 </mapper>
