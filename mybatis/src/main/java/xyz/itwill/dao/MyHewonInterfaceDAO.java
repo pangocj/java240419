@@ -6,7 +6,6 @@ import org.apache.ibatis.session.SqlSession;
 
 import xyz.itwill.dto.MyHewon;
 import xyz.itwill.mapper.MyHewonInterfaceMapper;
-import xyz.itwill.mapper.MyHewonMapper;
 
 public class MyHewonInterfaceDAO extends AbstractSession {
 	private static MyHewonInterfaceDAO _dao;
