@@ -39,4 +39,13 @@ public class MyHewonInterfaceDAO extends AbstractSession {
 			sqlSession.close(); 
 		}
 	}
+
+	public List<MyHewon> selectDynamicNameHewonList(String name) {
+		SqlSession sqlSession=getSqlSessionFactory().openSession(true);
+		try {
+			return sqlSession.getMapper(MyHewonInterfaceMapper.class).selectDynamicNameHewonList(name);
+		} finally {
+			sqlSession.close(); 
+		}
+	}
 }
