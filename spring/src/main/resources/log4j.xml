@@ -38,6 +38,13 @@
 		</layout>
 	</appender>
 	
+	<appender name="hello" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%c{1} 클래스의 %{M} 메소드 호출 - %m%n" />
+		</layout>
+	</appender>
+	
 	<!-- Application Loggers -->
 	<!-- logger : 특정 패키지의 클래스에서 발생되는 로그 이벤트를 기록하기 위한 엘리먼트 -->
 	<!-- => logger 엘리먼트는 root 엘리먼트에 설정된 로그 구현체(Appender)를 제공받아 사용 -->
@@ -48,6 +55,13 @@
 		<!-- value 속성 : 로그 이벤트를 속성값으로 설정 -->
 		<!-- => 속성값으로 설정된 로그 이벤트보다 상위 로그 이벤트가 발생된 경우에도 로깅정보 기록 -->
 		<level value="info" />
+	</logger>
+	
+	<!-- logger 엘리먼트는 root 엘리먼트에서 사용하는 로그 구현체로 로깅정보 기록 -->
+	<!-- => logger 엘리먼트에 appender-ref 엘리먼트를 작성해 원하는 로그 구현체로 기록되도록 설정 가능 -->
+	<logger name="xyz.itwill00.log">
+		<level value="info"/>
+		<appender-ref ref="hello" />
 	</logger>
 	
 	<!-- 3rdparty Loggers -->
