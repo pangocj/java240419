@@ -16,4 +16,11 @@ public class AnnotationConfigurationBean {
 	public AnnotationBean annotationBean() {
 		return new AnnotationBean();
 	}
+	
+	/*
+	@Bean
+	public ComponentAnnotationBean componentAnnotationBean() {
+		return new ComponentAnnotationBean();
+	}
+	*/
 }
