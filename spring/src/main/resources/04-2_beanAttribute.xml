@@ -44,12 +44,3 @@
 	<!-- => 스프링 컨테이너가 초기화 될때 객체를 미리 생성하지 않고 getBean() 메소드 호출시 생성 -->
 	<bean class="xyz.itwill04.bean.ScopeBean" id="prototypeBean" scope="prototype"/>
 </beans>
-
-
-
-
-
-
-
-
-
