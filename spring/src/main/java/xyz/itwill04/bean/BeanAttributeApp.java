@@ -4,7 +4,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class BeanAttributeApp {
-	public static void main(String[] args) {
+	public static void main(String[] args) { 
 		System.out.println("=============== Spring Container 초기화 전 ===============");
 		ApplicationContext context=new ClassPathXmlApplicationContext("04-2_beanAttribute.xml");
 		System.out.println("=============== Spring Container 초기화 후 ===============");
