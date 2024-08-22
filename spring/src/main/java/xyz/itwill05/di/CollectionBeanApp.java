@@ -15,6 +15,10 @@ public class CollectionBeanApp {
 		//Collection 객체에 저장된 모든 요소값을 문자열로 반환받아 출력
 		System.out.println("nameSet = "+bean.getNameSet());
 		System.out.println("nameList = "+bean.getNameList());
+		System.out.println("controllerSet = "+bean.getControllerSet());
+		System.out.println("controllerList = "+bean.getControllerList());
+		System.out.println("controllerMap = "+bean.getControllerMap());
+		System.out.println("controllerProperties = "+bean.getControllerProperties());
 		System.out.println("==========================================================");
 		((ClassPathXmlApplicationContext)context).close();
 	}
