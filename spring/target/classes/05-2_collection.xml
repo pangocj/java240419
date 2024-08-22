@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- Spring Bean으로 등록된 CollectionBean 클래스의 필드에 Setter 메소드를 호출하여 
+	Collection 객체가 저장되도록 의존성 주입 -->
+	<bean class="xyz.itwill05.di.CollectionBean" id="collectionBean">
+		<property name="nameSet">
+			<!--  -->
+			<set></set>
+		</property>
+	</bean>
+</beans>
