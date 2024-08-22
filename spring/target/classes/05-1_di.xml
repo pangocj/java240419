@@ -94,20 +94,40 @@
 	
 	<!-- StudentDAO 인터페이스를 상속받은 자식클래스(DAO 클래스)를 Spring Bean으로 등록 -->
 	<bean class="xyz.itwill05.di.StudentJdbcDAOImpl" id="studentJdbcDAOImpl"/>
+	<bean class="xyz.itwill05.di.StudentMybatisDAOImpl" id="studentMybatisDAOImpl"/>
 
 	<!-- StudentService 인터페이스를 상속받은 자식클래스(Service 클래스)를 Spring Bean으로 등록 -->
-	<bean class="xyz.itwill05.di.StudentServiceImpl" id="studentServiceImpl"></bean>
+	<!-- => StudentServiceImpl 클래스의 기본 생성자를 사용해 객체 생성 - 필드에는 기본값 저장 -->
+	<!-- 문제점 : StudentServiceImpl 클래스의 studentDAO 필드에는 [null]이 저장되므로 StudentServiceImpl
+	클래스의 메소드에서 studentDAO 필드를 사용해 DAO 클래스의 메소드를 호출하면 NullPointerException 발생 -->
+	<!-- 해결법 : StudentServiceImpl 클래스의 studentDAO 필드에 StudentDAO 인터페이스를 상속
+	받은 자식클래스의 객체가 저장되도록 설정 - 의존관계 구현 -->
+	<!-- <bean class="xyz.itwill05.di.StudentServiceImpl" id="studentServiceImpl"/> -->
+	
+	<!-- StudentServiceImpl 클래스의 매개변수가 작성된 생성자를 사용하여 객체 생성 -->
+	<!-- => 생성자 매개변수에는 StudentDAO 인터페이스를 상속받은 자식클래스(DAO 클래스)의 
+	객체을 전달받아 studentDAO 필드에 저장 - Constructor Injection -->
+	<!-- constructor-arg 엘리먼트를 사용해 StudentServiceImpl 클래스가 객체로 생성될 때 생성자
+	매개변수에 StudentDAO 인터페이스를 상속받은 자식클래스의 객체를 전달받아 필드에 저장 -->
+	<!-- ref 속성 : Spring Bean의 식별자(beanName)를 속성값으로 설정 -->
+	<!-- => 스프링 컨테이너로부터 Spring Bean으로 등록된 클래스의 객체를 제공받아 필드에 
+	저장되도록 주입 - 의존성 주입(Dependency Injection) -->
+	<!--  
+	<bean class="xyz.itwill05.di.StudentServiceImpl" id="studentServiceImpl">
+		<constructor-arg ref="studentJdbcDAOImpl"/>
+	</bean>
+	-->
+	
+	<!-- StudentServiceImpl 클래스의 기본 생성자를 사용해 객체 생성 - 필드에는 기본값 저장 -->
+	<!-- => Setter 메소드를 호출하여 StudentDAO 인터페이스를 상속받은 자식클래스(DAO 클래스)의 
+	객체를 studentDAO 필드에 저장 - Setter Injection -->
+	<!-- property 엘리먼트를 사용해 StudentServiceImpl 클래스가 객체로 생성된 후 Setter 메소드를
+	호출하여 StudentDAO 인터페이스를 상속받은 자식클래스의 객체를 전달받아 필드에 저장 -->
+	<bean class="xyz.itwill05.di.StudentServiceImpl" id="studentServiceImpl">
+		<!-- Service 클래스에서 사용하던 DAO 클래스가 교체돼도 Service 클래스를 변경하지 않고
+		Spring Bean Configuration File만 변경해도 객체와의 의존관계 변경 가능  -->
+		<!-- => 클래스가 교체돼고 관계를 맺고 있는 클래스의 변경 불필요 - 유지보수의 효율성 증가 -->
+		<!-- <property name="studentDAO" ref="studentJdbcDAOImpl"/> -->
+		<property name="studentDAO" ref="studentMybatisDAOImpl"/>
+	</bean>
 </beans>
-
-
-
-
-
-
-
-
-
-
-
-
-
