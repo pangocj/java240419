@@ -6,7 +6,7 @@ import java.util.List;
 public interface StudentService {
 	void addStudent(Student student);
 	void modifyStudent(Student student);
-	void rmoveStudent(int num);
+	void removeStudent(int num);
 	Student getStudent(int num);
 	List<Student> getStudentList();
 }
