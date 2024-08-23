@@ -54,8 +54,8 @@
 		<!-- name 속성 : 필드값을 변경할 필드의 이름을 속성값으로 설정 -->
 		<!-- => name 속성값으로 설정된 필드의 Setter 메소드를 자동 호출하여 필드값 변경 -->
 		<!-- => 필드에 대한 Setter 메소드가 없거나 Setter 메소드 작성 규칙에 맞지 않을 경우 예외 발생 -->
-		<!-- value 속성 : Setter 메소드의 매개변수에 전달되어 저장될 값을 속성값으로 설정 -->
-		<!-- => 매개변수에 전달된 값은 필드값으로 저장 - 값 주입(Value Injection) -->
+		<!-- value 속성 : Setter 메소드를 호출하여 필드에 저장될 값을 속성값으로 설정 -->
+		<!-- => Setter 메소드를 사용해 필드값으로 저장 - 값 주입(Value Injection) -->
 		<property name="num" value="3000"/>
 		<property name="name" value="임꺽정"/>
 		<property name="email" value="opq456@itwill.xyz"/>
@@ -72,8 +72,8 @@
 	<!-- => PropertyPlaceholderConfigurer 객체 : Properties 파일을 제공받아 파일에 저장된 값을
 	Spring Bean Configuration File에서 사용할 수 있도록 제공하는 객체 -->
 	<!-- => locations 필드에 Properties 파일 경로를 전달하여 저장 -->
-	<!-- => Properties 파일에 의해 제공되는 값을 Spring Bean Configuration File에서 ${이름}
-	형식으로 표현하여 값을 제공받아 사용 -->
+	<!-- => Properties 파일에 저장된 값을 Spring Bean Configuration File에서 ${이름} 형식으로
+	표현하여 값을 제공받아 사용 -->
 	<!--  
 	<bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="locations" value="xyz/itwill05/di/student.properties"/>
