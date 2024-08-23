@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 //@Service : Service 클래스를 스프링 컨테이너가 관리할 수 있는 Spring Bean으로 등록하기 위한 어노테이션
 // => 클래스의 이름을 자동으로 식별자(beanName)으로 사용하지만 value 속성을 사용해 변경 가능
 // => 예외가 발생될 경우 ExceptionHandler를 사용해 예외 처리 가능
-@Service
+@Service("studentService")
 public class AnnotationStudentServiceImpl implements StudentService {
 	//@Autowired : 스프링 컨테이너로부터 Spring Bean으로 등록된 클래스의 객체를 제공받아 필드에
 	//자동으로 저장되도록 의존성 주입을 하기 위한 어노테이션
