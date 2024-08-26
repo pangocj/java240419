@@ -69,7 +69,7 @@
 			<artifactId>aspectjrt</artifactId>
 			<version>${org.aspectj-version}</version>
 			<!-- scope : 프로젝트에 라이브러리가 빌드되는 시점을 설정하는 엘리먼트 -->
-			<scope>runtime</scope>
+			<!-- <scope>runtime</scope> -->
 		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/org.aspectj/aspectjweaver -->

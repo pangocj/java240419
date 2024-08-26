@@ -18,6 +18,7 @@ public class HewonServiceImpl implements HewonService {
 	@Override
 	public Hewon getHewon(int num) {
 		System.out.println("*** HewonServiceImpl 클래스의 getHewon(int num) 메소드 호출 ***");
+		//if(num == 0) throw new RuntimeException();//인위적 예외 발생
 		return hewonDAO.selectHewon(num);
 	}
 
