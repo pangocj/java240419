@@ -22,10 +22,10 @@ import lombok.NoArgsConstructor;
 // => @NoArgsConstructor, @AllArgsConstructor, @RequiredArgsConstructor, @Setter, @Getter, @ToString 등
 
 //@NoArgsConstructor : 매개변수가 없는 기본 생성자를 제공하기 위한 어노테이션
+// => final 제한자를 사용한 필드를 작성한 경우 @NoArgsConstructor 어노테이션를 사용하면 에러 발생 
 //@AllArgsConstructor : 모든 필드를 초기화 처리하기 위한 매개변수가 작성된 생성자를 제공하기 위한 어노테이션
 //@RequiredArgsConstructor : final 제한자를 사용한 필드만 초기화 처리하기 위한 매개변수가 
 //작성된 생성자를 제공하기 위한 어노테이션
-// => final 제한자를 사용한 필드를 작성한 경우 @NoArgsConstructor 어노테이션를 사용하면 에러 발생 
 //@Setter : 클래스에 작성된 모든 필드에 대한 Setter 메소드를 제공하기 위한 어노테이션
 // => 필드에 @Setter 어노테이션을 사용하면 해당 필드에 대한 Setter 메소드 제공
 //@Getter : 클래스에 작성된 모든 필드에 대한 Getter 메소드를 제공하기 위한 어노테이션

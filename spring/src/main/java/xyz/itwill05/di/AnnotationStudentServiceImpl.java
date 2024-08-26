@@ -33,8 +33,8 @@ public class AnnotationStudentServiceImpl implements StudentService {
 	//문제점 : 필드의 자료형이 인터페이스인 경우 인터페이스를 상속받은 자식클래스가 Spring Bean으로
 	//2개이상 등록된 경우 의존성 주입 실패 - 예외 발생
 	//해결법-1 : 의존성 주입하고자 하는 클래스의 식별자(beanName)을 필드명과 동일하게 변경
-	// => 동일한 자료형의 Spring Bean이 여러개인 경우 autowire 속성값을 [byName]으로 설정한 
-	//경우와 같은 방법으로 의존성 주입
+	// => @Autowired 어노테이션은 동일한 자료형의 Spring Bean이 여러개인 경우 autowire 속성값을 
+	//[byName]으로 설정한 경우와 같은 방법으로 의존성 주입
 	//해결법-2 : 의존성 주입하고자 하는 클래스에 @Primary 어노테이션 사용
 	//해결법-3 : 의존성 주입을 위한 필드에 @Qualifier 어노테이션 사용
 	@Autowired
@@ -42,7 +42,7 @@ public class AnnotationStudentServiceImpl implements StudentService {
 	// => @Qualifier 어노테이션의 value 속성을 사용하여 의존성 주입을 위한 객체 설정
 	// => @Autowired 어노테이션에 종속된 어노테이션
 	//value 속성 : 클래스를 구분하기 위한 식별자(beanName)을 속성값으로 설정
-	// => 식별자(beanName)의 클래스로 생성된 객체를 제공받아 필드에 저장
+	// => 식별자(beanName)의 클래스로 생성된 객체를 제공받아 필드에 저장 - 의존성 주입
 	// => value 속성외에 다른 속성이 없는 경우 속성값만 설정 가능
 	//@Qualifier(value = "annotationStudentMybatisDAOImpl")
 	@Qualifier("annotationStudentMybatisDAOImpl")
