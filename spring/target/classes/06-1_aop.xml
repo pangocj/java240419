@@ -1,11 +1,37 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
 
-	<!-- 핵심관심모듈의 클래스(DAO 클래스 및 Service 클래스)를 Spring Bean으로 등록 -->
+	<!-- 핵심관심모듈의 클래스(DAO 클래스 및 Service 클래스)를 Spring Bean으로 등록 - 의존성 주입 -->
 	<bean class="xyz.itwill06.aop.HewonDAOImpl" id="hewonDAO"/>
 	<bean class="xyz.itwill06.aop.HewonServiceImpl" id="hewonService">
 		<property name="hewonDAO" ref="hewonDAO"/>
 	</bean>
+	
+	<!-- 횡단관심모듈의 클래스(Advice 클래스)를 Spring Bean으로 등록 -->
+	<bean class="xyz.itwill06.aop.HewonAdvice" id="hewonAdvice"/>
+	
+	<!-- Spring AOP(Aspect Oriented Programming - 관점 지향 프로그램) : AspectJ 컴파일러에
+	의해 프로그램 실행시 핵심관심코드와 횡단관심코드가 결합(Weaving)되어 실행되는 기능 제공 -->
+	<!-- => Spring AOP 기능을 사용하기 위해서는 aspectjrt 라이브러리와 aspectjweaver 라이브러라가
+	프로젝트에 빌드 처리 - 메이블 : pom.xml -->
+	<!-- => Spring AOP 기능을 구현하기 위해 Spring Bean Configuration File(XML) 파일의 엘리먼트를
+	사용하거나 AOP 관련 어노테이션을 사용해 환경 설정 -->
+	
+	<!-- Spring Bean Configuration File(XML)에서 Spring AOP 기능을 구현하기 위한 엘리먼트를 
+	사용하기 위해 aop 네임스페이스를 추가해 spring-aop.xsd 파일을 제공받도록 설정 -->
+	<!-- config : Spring AOP 기능을 구현하기 위한 정보를 제공하기 위한 엘리먼트 -->
+	<aop:config></aop:config>
 </beans>
+
+
+
+
+
+
+
+
+
