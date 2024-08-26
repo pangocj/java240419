@@ -14,8 +14,8 @@ public class MemberBuilderApp {
 		//값을 문자열로 결합하여 반환
 		System.out.println(member1);
 		System.out.println("=============================================================");
-		//클래스.builder() : 클래스에 선언된 Builder 클래스(내부 정적 클래스)로 Builder 객체를
-		//생성하여 반환하는 정적 메소드
+		//클래스.builder() : 클래스 내부에 선언된 Builder 클래스(내부 정적 클래스)로 Builder 
+		//객체를 생성하여 반환하는 정적 메소드
 		// => Builder 객체를 참조해 클래스의 필드에 필요한 값을 저장할 수 있는 메소드 호출 가능
 		//Builder.build() : Builder 클래스가 선언된 클래스(외부 클래스)로 객체를 생성하여 반환하는 메소드
 		// => Builder 객체에 저장된 값을 사용해 객체 필드를 초기화 처리하여 반환
