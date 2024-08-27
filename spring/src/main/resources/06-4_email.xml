@@ -45,7 +45,7 @@
 		<aop:pointcut expression="execution(* sendEmail(..))" id="sendEmailPointcut"/>
 		<aop:aspect ref="emailSendAdvice">
 			<aop:before method="accessLog" pointcut-ref="sendEmailPointcut"/>
-			<aop:after-returning method="successLog"  returning="email" pointcut-ref="sendEmailPointcut"/>
+			<aop:after-returning method="successLog" returning="email" pointcut-ref="sendEmailPointcut"/>
 			<aop:after-throwing method="errorLog" throwing="exception" pointcut-ref="sendEmailPointcut"/>
 		</aop:aspect>
 	</aop:config>
