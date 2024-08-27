@@ -10,8 +10,8 @@ public class JoinPointAdvice {
 	//JoinPoint 객체 : 타겟메소드 관련 정보가 저장된 객체
 	// => AspectJ 컴파일러에 의해 Advice 클래스의 메소드가 호출될 때 타겟메소드 관련 정보가
 	//저장된 JointPoint 객체를 전달받아 매개변수에 저장
-	// => Advice 클래스의 메소드에서 타겟메소드 관련 정보가 필요한 경우 매개변수를 작성하여
-	//JointPoint 객체를 제공받아 JointPoint 객체의 메소드를 호출해 사용 가능
+	// => Advice 클래스의 메소드에서 타겟메소드 관련 정보가 필요한 경우 JointPoint 매개변수를
+	//작성하여 JointPoint 객체를 제공받아 메소드를 호출해 필요한 기능 구현
 	public void beforeDisplay(JoinPoint joinPoint) {//Before Advice Method
 		//System.out.println("### [before]핵심관심코드 실행 전에 삽입되어 실행될 횡단관심코드");
 		

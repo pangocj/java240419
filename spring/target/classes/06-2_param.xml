@@ -14,7 +14,6 @@
 	<aop:config>
 		<aop:aspect ref="joinPointAdvice">
 			<aop:before method="beforeDisplay" pointcut="execution(* *(..))"/>
-			
 			<aop:after method="displayMessage" pointcut="execution(* remove(int))"/>
 		</aop:aspect>	
 	</aop:config>
