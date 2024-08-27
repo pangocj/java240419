@@ -5,5 +5,30 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
 
-
+	<!-- JavaMailSender 인터페이스를 상속받은 JavaMailSenderImpl 클래스를 Spring Bean으로 등록 -->
+	<!-- => JavaMailSenderImpl 클래스의 필드에 SMTP 서비스를 제공하는 메일 서버의 정보가 저장되도록 값 주입 -->
+	<bean class="org.springframework.mail.javamail.JavaMailSenderImpl" id="javaMailSender">
+		<!-- host 필드 : SMTP 서비스를 제공하는 메일 서버의 이름(HostName)을 저장 -->
+		<property name="host" value="smtp.gmail.com"/>
+		<!-- port 필드 : SMTP 서비스를 제공하는 메일 서버의 포트번호(PortNumber)를 저장 -->
+		<property name="port" value="587"/>
+		<!-- username 필드 : SMTP 서비스를 제공하는 메일 서버에 접속할 수 있는 사용자의 이름(아이디)를 저장 -->
+		<property name="username" value="ocj1778"/>
+		<!-- password 필드 : SMTP 서비스를 제공하는 메일 서버에 접속할 수 있는 사용자의 비밀번호를 저장 -->
+		<!-- => 사용자 비밀번호 대신 앱 비밀번호를 제공받아 필드에 저장 -->
+		<property name="password" value="ocj1778"/>
+		
+	</bean>
 </beans>
+
+
+
+
+
+
+
+
+
+
+
+
