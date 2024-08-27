@@ -3,7 +3,7 @@ package xyz.itwill06.aop;
 import org.springframework.stereotype.Component;
 
 @Component
-public class AopAnnotaionBean {
+public class AopAnnotationBean {
 	public void display1() {
 		System.out.println("*** AopAnnotaionBean 클래스의 display1() 메소드 호출 ***");
 	}
