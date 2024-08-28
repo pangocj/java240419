@@ -21,7 +21,7 @@
 		>> 앱 비밀번호 >> 앱 이름 입력 후 만들기 >> 비밀번호 생성  -->
 		<property name="password" value="nubo rusv gfwf cxsh"/>
 		<!-- javaMailProperties 필드 : SMTP 서비스를 제공하는 메일 서버의 메일 전송 관련
-		부가적인 정보를  Properties 객체의 앤트리로 전달하여 저장 -->
+		부가적인 정보를  Properties 객체의 엔트리로 전달하여 저장 -->
 		<property name="javaMailProperties">
 			<props>
 				<prop key="mail.smtp.ssl.trust">smtp.gmail.com</prop>

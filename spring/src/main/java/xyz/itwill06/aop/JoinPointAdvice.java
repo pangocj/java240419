@@ -101,7 +101,7 @@ public class JoinPointAdvice {
 		// => 타겟메소드를 호출해 반환되는 결과값을 변수에 저장하여 반환
 		// => Throwable(Error 클래스의 Exception 클래스의 부모클래스) 객체가 발생되므로 반드시  
 		//예외 처리 또는 예외 전달
-		Object object=joinPoint.proceed();//핵심관심코드 실행
+		Object object=joinPoint.proceed();//타겟메소드를 호출해 핵심관심코드 실행
 		
 		System.out.println("### [around]핵심관심코드 실행 후에 삽입되어 실행될 횡단관심코드");
 		return object;
