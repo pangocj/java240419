@@ -42,7 +42,7 @@ public class StudentDAOImpl implements StudentDAO {
 	//학번을 전달받아 STUDENT 테이블에 저장된 행을 삭제하고 삭제행의 갯수를 반환하는 메소드 
 	@Override
 	public int deleteStudent(int no) {
-		return jdbcTemplate.update("delete from student where no=?", no));
+		return jdbcTemplate.update("delete from student where no=?", no);
 	}
 
 	@Override
