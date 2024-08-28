@@ -34,15 +34,15 @@ public class StudentDAOImpl implements StudentDAO {
 	//학생정보를 전달받아 STUDENT 테이블에 저장된 행을 변경하고 변경행의 갯수를 반환하는 메소드 
 	@Override
 	public int updateStudent(Student student) {
-		String sql="";
-		return 0;
+		String sql="update student set name=?, phone=?, address=?, bithday=? where no=?";
+		return jdbcTemplate.update(sql, student.getName(), student.getPhone()
+				, student.getAddress(), student.getBirthday(), student.getNo());
 	}
 
 	//학번을 전달받아 STUDENT 테이블에 저장된 행을 삭제하고 삭제행의 갯수를 반환하는 메소드 
 	@Override
 	public int deleteStudent(int no) {
-		
-		return 0;
+		return jdbcTemplate.update("delete from student where no=?", no));
 	}
 
 	@Override
