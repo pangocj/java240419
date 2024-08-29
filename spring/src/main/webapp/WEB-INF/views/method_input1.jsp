@@ -7,9 +7,11 @@
 <title>SPRING</title>
 </head>
 <body>
-	<h1>출력페이지-1</h1>
+	<h1>입력페이지</h1>
 	<hr>
-	<h2>이름 = ${displayName1 }</h2>
-	<h2>현재 날짜와 시간 = ${now }</h2>
+	<form action="method_output" method="post">
+		이름 : <input type="text" name="name">
+		<button type="submit">제출</button>
+	</form>
 </body>
 </html>

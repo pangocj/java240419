@@ -7,9 +7,8 @@
 <title>SPRING</title>
 </head>
 <body>
-	<h1>출력페이지-1</h1>
+	<h1>출력페이지</h1>
 	<hr>
-	<h2>이름 = ${displayName1 }</h2>
-	<h2>현재 날짜와 시간 = ${now }</h2>
+	<h2>${name }님, 환영합니다.</h2>
 </body>
 </html>
