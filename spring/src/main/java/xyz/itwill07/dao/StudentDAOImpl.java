@@ -46,7 +46,7 @@ public class StudentDAOImpl implements StudentDAO {
 		return jdbcTemplate.update("delete from student where no=?", no);
 	}
 
-	//학번을 전달받아 STUDENT 테이블에 저장된 행을 검색하여 학생정보를 반환하는 메소드 
+	//학번을 전달받아 STUDENT 테이블에 저장된 하나의 행을 검색하여 학생정보를 반환하는 메소드 
 	@Override
 	public Student selectStudent(int no) {
 		try {
@@ -85,6 +85,7 @@ public class StudentDAOImpl implements StudentDAO {
 		}
 	}
 
+	//STUDENT 테이블에 저장된 모든 행을 검색하여 학생목록을 반환하는 메소드 
 	@Override
 	public List<Student> selectStudentList() {
 		String sql="select no, name, phone, address, birthday from student order by no";

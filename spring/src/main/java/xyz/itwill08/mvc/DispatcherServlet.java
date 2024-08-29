@@ -21,7 +21,7 @@ public class DispatcherServlet extends HttpServlet {
 	//클라이언트가 서블릿을 요청할 때만다 자동으로 호출되는 메소드
 	@Override
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//클라이언트의 요청 URL 주소를 분석하여 요청정보를 반환받아 저장
+		//클라이언트의 요청 URL 주소를 분석하여 요청정보(Command)를 반환받아 저장
 		String requestURI=request.getRequestURI();
 		String contextPath=request.getContextPath();
 		String command=requestURI.substring(contextPath.length());
