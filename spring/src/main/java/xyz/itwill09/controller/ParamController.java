@@ -1,5 +1,7 @@
 package xyz.itwill09.controller;
 
+import java.util.List;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -84,17 +86,22 @@ public class ParamController {
 	public String form2() {
 		return "paramValues_form";
 	}
+	
+	/*
+	//같은 이름으로 전달되는 값이 여러개인 경우 매개변수를 String 배열로 작성하여 
+	//전달값이 요소에 차례대로 저장된 배열을 제공받아 매개변수에 저장하여 사용
+	@RequestMapping(value = "/paramValues", method = RequestMethod.POST)
+	public String action(@RequestParam("hobby") String[] hobbyList, Model model) {
+		model.addAttribute("hobbyList", hobbyList);
+		return "paramValues_display";
+	}
+	*/
+	
+	//같은 이름으로 전달되는 값이 여러개인 경우 매개변수를 List 인터페이스로 작성해 
+	//전달값이 요소에 차례대로 저장된 List 객체를 제공받아 매개변수에 저장하여 사용
+	@RequestMapping(value = "/paramValues", method = RequestMethod.POST)
+	public String action(@RequestParam("hobby") List<String> hobbyList, Model model) {
+		model.addAttribute("hobbyList", hobbyList);
+		return "paramValues_display";
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
