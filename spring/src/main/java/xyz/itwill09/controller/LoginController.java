@@ -4,9 +4,11 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+
+import xyz.itwill09.dto.Member;
 
 @Controller
 public class LoginController {
@@ -16,6 +18,7 @@ public class LoginController {
 		return "login_form";
 	}
 	
+	/*
 	//전달값(인증정보)을 반환받아 인증 처리하고 인증 성공시 권한 관련 정보를 Session Scope 속성값으로 
 	//저장한 후 인증 성공 메세지를 출력하는 JSP 문서의 뷰이름을 반환하는 요청 처리 메소드
 	// => 전달값과 같은 이름의 String 클래스의 매개변수를 작성해 전달값을 제공받아 사용
@@ -35,6 +38,19 @@ public class LoginController {
 		//Session Scope : 동일한 세션을 사용하는 모든 요청 처리 메소드와 뷰에서 속성값을 제공받아 사용 가능
 		session.setAttribute("loginId", id);
 		
+		return "login_display";
+	}
+	*/
+	
+	//매개변수의 자료형을 DTO 클래스로 작성해 전달값과 같은 이름의 필드에 전달값이 저장된
+	//DTO 객체를 제공받아 매개변수에 저장하여 사용
+	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	public String login(@ModelAttribute Member member, Model model, HttpSession session) {
+		if(!member.getId().equals("abc123") || !member.getPasswd().equals("123456")) {
+			model.addAttribute("message", "아이디 또는 비밀번호를 잘못 입력 하였습니다.");
+			return "login_form";
+		}
+		session.setAttribute("loginId", member.getId());
 		return "login_display";
 	}
 	
