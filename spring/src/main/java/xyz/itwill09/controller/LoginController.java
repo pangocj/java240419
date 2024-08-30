@@ -25,7 +25,7 @@ public class LoginController {
 	public String login(@RequestParam String id, @RequestParam String passwd
 			, Model model, HttpSession session) {
 		if(!id.equals("abc123") || !passwd.equals("123456")) {//인증 실패
-			//Request Scope : 현재 요청 처리 메소드와 포워드 이동된 뷰에서만 속성값을 제공받아 사용 가능
+			//Request Scope : 요청 처리 메소드와 포워드 이동된 뷰에서만 속성값을 제공받아 사용 가능
 			model.addAttribute("message", "아이디 또는 비밀번호를 잘못 입력 하였습니다.");
 			model.addAttribute("id", id);
 			return "login_form";
@@ -45,6 +45,17 @@ public class LoginController {
 		session.invalidate();
 		
 		return "logout_display";
+	}
+
+	//로그인 사용자만 요청 처리 메소드의 명령을 실행해 응답 처리되도록 작성
+	@RequestMapping("/login_user")
+	public String login(HttpSession session, Model model) {
+		if(session.getAttribute("loginId") == null) {//비로그인 사용자인 경우
+			model.addAttribute("message", "로그인 사용자만 접근 가능합니다.");
+			return "login_form";
+		}
+		
+		return "login_display";
 	}
 }
 
