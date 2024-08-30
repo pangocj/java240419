@@ -10,7 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 // => 클래스의 이름을 Spring Bean을 구분하는 식별자(beanName)으로 사용 - 첫문자는 소문자로 변환
 // => value 속성을 사용해 식별자(beanName) 변경 가능
 //@Controller 어노테이션을 사용하여 Controller 인터페이스를 상속받지 않아도 요청 처리 클래스로 사용
-// => 메소드에 @RequestMapping 어노테이션을 사용해 요청 처리 메소드로 처리되도록 작성
+// => 메소드에 @RequestMapping 어노테이션을 사용해 요청 처리 메소드로 사용되도록 작성
 // => @RequestMapping 어노테이션을 사용한 요청 처리 메소드를 여러개 등록하여 사용 가능
 @Controller
 @Slf4j
