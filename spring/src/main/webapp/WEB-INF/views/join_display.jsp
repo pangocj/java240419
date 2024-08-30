@@ -10,10 +10,10 @@
 	<h1>회원등록확인</h1>
 	<hr>
 	<ul>
-		<li>아이디 = </li>
-		<li>비밀번호 = </li>
-		<li>이름 = </li>
-		<li>이메일 = </li>
+		<li>아이디 = ${id2 }</li>
+		<li>비밀번호 = ${passwd }</li>
+		<li>이름 = ${name }</li>
+		<li>이메일 = ${email }</li>
 	</ul>
 </body>
 </html>
