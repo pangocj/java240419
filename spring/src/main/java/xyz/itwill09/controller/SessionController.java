@@ -17,9 +17,10 @@ import xyz.itwill09.dto.Hewon;
 // => Model 객체를 사용해 저장된 속성값을 Request Scope 속성값이 아닌 제한적인 Session Scope
 //속성값으로 사용하는 기능 제공
 // => 뷰(JSP)에서 페이지 요청시 식별자 전달이 불필요하며 식별자로 정보를 검색하지 않아도 
-//요청 처리 메소드와 뷰에서 사용 가능
+//요청 처리 메소드와 뷰에서 사용 가능 - 변경 처리시 사용하는 기능
 //value 속성 : 제한적인 Session Scope 속성값으로 사용할 속성명을 속성값으로 설정
 // => value 속성외에 다른 속성이 없는 경우 속성값만 설정 가능
+// => 속성명이 여러개인 경우 {} 기호를 사용해 배열의 요소로 작성 가능
 @SessionAttributes("hewon")
 public class SessionController {
 	//아이디를 전달받아 회원정보를 검색해 반환하는 메소드 - Service 클래스의 메소드
