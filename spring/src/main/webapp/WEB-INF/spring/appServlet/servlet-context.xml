@@ -29,11 +29,39 @@
 	<resources mapping="/js/**" location="/resources/js/" />
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
+	<!-- InternalResourceViewResolver 클래스를 Spring Bean으로 등록 -->
+	<!-- => InternalResourceViewResolver 객체 : 요청 처리 메소드의 반환값으로 JSP 문서의 경로를 
+	만들어 반환하는 기능의 ViewResolver 객체 -->
 	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
+		<beans:property name="order" value="3"/>
+	</beans:bean>
+	
+	<!-- UrlBasedViewResolver 클래스를 Spring Bean으로 등록 -->
+	<!-- => UrlBasedViewResolver 객체 : 요청 처리 메소드의 반환값을 Spring 프레임워크에서 제공
+	하는 ViewResolver 객체를 사용하지 않고 직접 작성한 ViewResolver 객체를 사용해 응답 처리하는 
+	기능을 제공하기 위한 ViewResolver 객체 -->
+	<!-- => 뷰이름으로 응답 처리하기 위한 ViewResolver 객체를 커스터마이징(Customizing) 할 때 사용하는 객체 -->
+	<beans:bean class="org.springframework.web.servlet.view.UrlBasedViewResolver">
+		<!-- viewClass 필드에 ViewResolver 기능을 제공하는 클래스가 저장되도록 값 주입 -->
+		<beans:property name="viewClass" value="org.springframework.web.servlet.view.tiles3.TilesView"/>
+		<!-- order 필드에 ViewResolver 기능을 제공하는 클래스의 우선순위를 설정하기 위해 값(정수값) 주입 -->
+		<!-- => ViewResolver 기능을 제공하는 클래스가 여러개 등록될 경우 반드시 설정 -->
+		<!-- => 필드에 저장된 정수값이 작을수록 우선순위가 높게 설정되어 먼저 실행 -->
+		<beans:property name="order" value="2"/>
 	</beans:bean>
 	
 	<context:component-scan base-package="xyz.itwill09.controller" />
 	
 </beans:beans>
+
+
+
+
+
+
+
+
+
+

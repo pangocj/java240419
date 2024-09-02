@@ -1,12 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>SPRING</title>
-<link href="/spring/css/style.css" type="text/css" rel="stylesheet">
-<script type="text/javascript" src="/spring/js/jquery-3.7.1.min.js"></script>
+<%-- <link href="/spring/css/style.css" type="text/css" rel="stylesheet"> --%>
+<link href="<c:url value="/css/style.css"/>" type="text/css" rel="stylesheet">
+<%-- <script type="text/javascript" src="/spring/js/jquery-3.7.1.min.js"></script> --%>
+<script type="text/javascript" src="<c:url value="/js/jquery-3.7.1.min.js"/>"></script>
 </head>
 <body>
 	<h1 class="text">리소스 파일</h1>
@@ -33,23 +37,24 @@
 	<%-- <img alt="코알라" src="/spring/resources/images/Koala.jpg" width="200"> --%>
 	<img alt="코알라" src="/spring/images/Koala.jpg" width="200">
 	
+	<%-- 웹자원의 경로는 반드시 절대경로로 표현하여 요청 --%>
+	<%-- => 컨텍스트 폴더의 이름이 변경되면 URL 주소도 변경되어 404 에러코드 발생 가능 --%>
+	<%-- => 컨텍스트 폴더의 이름이 변경되면 URL 주소도 자동 변경되도록 컨텍스트 폴더의 경로를 제공받아 작성 --%>
+		
+	<%-- 1. EL 표현식에 pageContext 내장객체를 사용해 컨텍스트 폴더의 경로를 제공받아 URL 주소로 사용 --%>
+	<img alt="코알라" src="${pageContext.request.contextPath }/images/Koala.jpg" width="200">
+	
+	<%-- 2. core 태그 라이브러리의 url 태그를 사용해 웹자원의 URL 주소를 제공받아 사용 --%>
+	<img alt="코알라" src="<c:url value="/images/Koala.jpg"/>" width="200">
+	
+	<%-- 3. spring 태그 라이브러리의 url 태그를 사용해 웹자원의 URL 주소를 제공받아 사용 --%>
+	<img alt="코알라" src="<spring:url value="/images/Koala.jpg"/>" width="200">
+
 	<script type="text/javascript">
 	$(".text").css("text-align","center");
 	</script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
