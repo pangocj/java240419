@@ -19,7 +19,7 @@
 
 #content {
 	border: 2px solid green;
-	min-height: 450px;
+	min-height: 550px;
 	margin: 10px;
 	padding: 10px;
 }
