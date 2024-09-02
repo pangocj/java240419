@@ -20,4 +20,20 @@ public class TilesController {
 	public String tiles() {
 		return "main";
 	}
+	
+	@RequestMapping("/tiles")
+	public String tiles1() {
+		return "layout/tiles";
+	}
+	
+	@RequestMapping("/admin/")
+	public String admin() {
+		return "admin";
+	}
 }
+
+
+
+
+
+
