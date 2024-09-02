@@ -52,6 +52,19 @@
 		<beans:property name="order" value="2"/>
 	</beans:bean>
 	
+	<!-- TilesConfigurer 클래스를 Spring Bean으로 등록 --> 
+	<!-- => TilesConfigurer 객체 : 요청 처리 메소드의 반환값(ViewName)으로 응답 처리하기 위한
+	정보가 저장된 환경설정파일을 제공하기 위한 객체 -->
+	<beans:bean class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<!-- definitions 필드에 List 객체를 생성하여 저장되도록 의존성 주입 -->
+		<!-- => List 객체의 요소에는 환경설정파일의 경로가 저장되도록 값 주입 -->
+		<beans:property name="definitions">
+			<beans:list>
+				<beans:value>/WEB-INF/spring/appServlet/tiles.xml</beans:value>
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+	
 	<context:component-scan base-package="xyz.itwill09.controller" />
 	
 </beans:beans>

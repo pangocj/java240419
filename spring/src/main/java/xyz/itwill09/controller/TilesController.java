@@ -1,5 +1,8 @@
 package xyz.itwill09.controller;
 
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
 //TilesView 클래스를 사용해 생성된 뷰(View)로 응답 처리하기 위한 방법
 // => TilesView 클래스 : 요청 처리 메소드의 반환값(ViewName)을 제공받아 다수의 JSP 문서가 결합된
 //뷰(View)로 응답하기 위한 기능을 제공하는 ViewResolver 클래스
@@ -11,6 +14,10 @@ package xyz.itwill09.controller;
 //(servlet-context.xml)에 환경 설정
 // => InternalResourceViewResolver 객체보다 TilesView 객체가 먼저 실행되도록 우선순위 설정
 
+@Controller
 public class TilesController {
-
+	@RequestMapping("/")
+	public String tiles() {
+		return "main";
+	}
 }

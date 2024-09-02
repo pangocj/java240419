@@ -41,7 +41,7 @@
 	</div>
 	
 	<div id="content">
-		<tiles:insertAttribute name="main"/>
+		<tiles:insertAttribute name="content"/>
 	</div>
 	
 	<div id="footer">
