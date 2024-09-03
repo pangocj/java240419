@@ -10,6 +10,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import xyz.itwill09.dto.Employee;
 
+//Spring Validation 기능을 사용해 요청 처리 메소드의 매개변수에 저장된 Command 객체의 필드값
+//(전달값) 검증하는 방법
+//1.validation-api 라이브러리와 hibernate-validator 라이브러리를 프로젝트에 빌드 처리 - 메이븐 사용 : pom.xml
+
+
 @Controller
 public class ValidController {
 	@RequestMapping(value = "/valid/html", method = RequestMethod.GET)
