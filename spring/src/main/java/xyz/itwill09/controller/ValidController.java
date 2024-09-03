@@ -34,7 +34,7 @@ public class ValidController {
 	}
 	
 	@RequestMapping(value = "/valid/spring", method = RequestMethod.GET)
-	public String spring() {
+	public String spring(@ModelAttribute Employee employee) {
 		return "valid/spring_form";		
 	}
 }
