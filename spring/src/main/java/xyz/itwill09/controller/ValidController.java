@@ -2,8 +2,11 @@ package xyz.itwill09.controller;
 
 import java.util.regex.Pattern;
 
+import javax.validation.Valid;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -13,7 +16,10 @@ import xyz.itwill09.dto.Employee;
 //Spring Validation 기능을 사용해 요청 처리 메소드의 매개변수에 저장된 Command 객체의 필드값
 //(전달값) 검증하는 방법
 //1.validation-api 라이브러리와 hibernate-validator 라이브러리를 프로젝트에 빌드 처리 - 메이븐 사용 : pom.xml
-
+//2.HTML 태그 대신 Spring 태그를 사용해 JSP 문서 작성 - 에러메세지를 전달받아 출력 처리
+//3.요청 처리 메소드에서 Command 객체가 저장된 매개변수에 @Valid 어노테이션을 사용해 Command
+//객체의 필드에 저장된 전달값을 검증 처리되도록 설정
+//4.Command 객체를 저장한 DTO 클래스의 필드에 검증 관련 어노테이션을 사용해 전달값 검증
 
 @Controller
 public class ValidController {
@@ -43,8 +49,16 @@ public class ValidController {
 		return "valid/spring_form";		
 	}
 	
+	//요청 처리 메소드의 매개변수 자료형을 Errors 인터페이스로 작성하면 Front Controller에게
+	//Errors 객체를 제공받아 사용
+	// => Errors 객체 : 전달값에 대한 검증 실패시 발생되는 모든 에러 관련 정보를 저장한 객체
 	@RequestMapping(value = "/valid/spring", method = RequestMethod.POST)
-	public String spring3(@ModelAttribute Employee employee) {
+	public String spring3(@ModelAttribute @Valid Employee employee, Errors errors) {
+		//Errors.hasErrors() : Errors 객체에 에러 관련 정보가 저장된 경우 [true]를 반환하는 메소드
+		if(errors.hasErrors()) {
+			return "valid/spring_form";		
+		}
+		
 		return "valid/result";		
 	}
 }
