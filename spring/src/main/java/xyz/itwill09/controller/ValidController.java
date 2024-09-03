@@ -1,5 +1,7 @@
 package xyz.itwill09.controller;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.regex.Pattern;
 
 import javax.validation.Valid;
@@ -22,13 +24,18 @@ import xyz.itwill09.dto.Employee;
 //4.Command 객체를 저장한 DTO 클래스의 필드에 검증 관련 어노테이션을 사용해 전달값 검증
 
 @Controller
+//@RequestMapping 어노테이션을 클래스에 작성하면 Controller 클래스의 모든 요청 처리 메소드에
+//매핑된 요청 URL 주소 앞부분에 공통적으로 사용될 URL 주소 제공
+@RequestMapping("/valid")
 public class ValidController {
-	@RequestMapping(value = "/valid/html", method = RequestMethod.GET)
+	//@RequestMapping(value = "/valid/html", method = RequestMethod.GET)
+	@RequestMapping(value = "/html", method = RequestMethod.GET)
 	public String html() {
 		return "valid/html_form";		
 	}
 	
-	@RequestMapping(value = "/valid/html", method = RequestMethod.POST)
+	//@RequestMapping(value = "/valid/html", method = RequestMethod.POST)
+	@RequestMapping(value = "/html", method = RequestMethod.POST)
 	public String html(@ModelAttribute Employee employee, Model model) {
 		if(employee.getId() == null || employee.getId().equals("")) {
 			model.addAttribute("idMsg", "아이디를 입력해 주세요");
@@ -44,33 +51,33 @@ public class ValidController {
 		return "valid/result";		
 	}
 	
-	@RequestMapping(value = "/valid/spring", method = RequestMethod.GET)
-	public String spring(@ModelAttribute Employee employee) {
+	//@RequestMapping(value = "/valid/spring", method = RequestMethod.GET)
+	@RequestMapping(value = "/spring", method = RequestMethod.GET)
+	public String spring(@ModelAttribute Employee employee, Model model) {
+		//Arrays.asList(Object ... args) : 매개변수로 전달받은 값(객체)가 요소값으로 저장된
+		//List 객체를 생성하여 반환하는 정적메소드
+		//model.addAttribute("genderList", Arrays.asList("남자", "여자"));
 		return "valid/spring_form";		
 	}
 	
 	//요청 처리 메소드의 매개변수 자료형을 Errors 인터페이스로 작성하면 Front Controller에게
 	//Errors 객체를 제공받아 사용
 	// => Errors 객체 : 전달값에 대한 검증 실패시 발생되는 모든 에러 관련 정보를 저장한 객체
-	@RequestMapping(value = "/valid/spring", method = RequestMethod.POST)
-	public String spring3(@ModelAttribute @Valid Employee employee, Errors errors) {
+	//@RequestMapping(value = "/valid/spring", method = RequestMethod.POST)
+	@RequestMapping(value = "/spring", method = RequestMethod.POST)
+	public String spring3(@ModelAttribute @Valid Employee employee, Errors errors, Model model) {
 		//Errors.hasErrors() : Errors 객체에 에러 관련 정보가 저장된 경우 [true]를 반환하는 메소드
 		if(errors.hasErrors()) {
+			//model.addAttribute("genderList", Arrays.asList("남자", "여자"));
 			return "valid/spring_form";		
 		}
 		
 		return "valid/result";		
 	}
+	
+	//메소드의 반환값을 Controller 클래스의 모든 요청 메소드의 뷰에게 제공
+	@ModelAttribute("genderList")
+	public List<String> genderList() {
+		return Arrays.asList("남자", "여자");
+	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
