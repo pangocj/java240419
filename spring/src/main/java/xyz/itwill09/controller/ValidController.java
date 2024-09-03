@@ -37,6 +37,11 @@ public class ValidController {
 	public String spring(@ModelAttribute Employee employee) {
 		return "valid/spring_form";		
 	}
+	
+	@RequestMapping(value = "/valid/spring", method = RequestMethod.POST)
+	public String spring3(@ModelAttribute Employee employee) {
+		return "valid/result";		
+	}
 }
 
 
