@@ -7,6 +7,9 @@
 <meta charset="UTF-8">
 <title>SPRING</title>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<style type="text/css">
+.error { color: red; }
+</style>
 </head>
 <body>
 	<h1>사원등록</h1>
@@ -17,28 +20,28 @@
 		<tr>
 			<td>아이디</td>
 			<td>
-				<input type="text" name="id" id="id">
-				<span id="idMsg" class="error"></span>
+				<input type="text" name="id" id="id" value="${employee.id }">
+				<span id="idMsg" class="error">${idMsg }</span>
 			</td>	
 		</tr>
 		<tr>
 			<td>비밀번호</td>
 			<td>
-				<input type="password" name="passwd" id="passwd">
+				<input type="password" name="passwd" id="passwd" value="${employee.passwd }">
 				<span id="passwdMsg" class="error"></span>
 			</td>	
 		</tr>
 		<tr>
 			<td>이름</td>
 			<td>
-				<input type="text" name="name" id="name">
+				<input type="text" name="name" id="name" value="${employee.name }">
 				<span id="nameMsg" class="error"></span>
 			</td>	
 		</tr>
 		<tr>
 			<td>이메일</td>
 			<td>
-				<input type="text" name="email" id="email">
+				<input type="text" name="email" id="email" value="${employee.email }">
 				<span id="emailMsg" class="error"></span>
 			</td>	
 		</tr>
@@ -64,6 +67,7 @@
 		
 		$(".error").html("").hide();
 		
+		/*
 		var idReg=/^[a-zA-Z]\w{5,19}$/g;
 		if($("#id").val()=="") {
 			$("#idMsg").html("아이디를 입력해 주세요.");
@@ -72,6 +76,7 @@
 			$("#idMsg").html("아이디를 형식에 맞게 입력해 주세요.");
 			validResult=false;
 		}
+		*/
 
 		var passwdReg=/^(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[~!@#$%^&*_-]).{6,20}$/g;
 		if($("#passwd").val()=="") {
