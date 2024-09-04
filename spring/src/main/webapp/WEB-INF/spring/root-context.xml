@@ -8,5 +8,15 @@
 	Bean으로 등록하기 위한 Spring Bean Configuration File -->
 	<!-- => DAO 클래스 작성에 필요한 객체를 제공하기 위한 클래스를 Spring Bean으로 등록 -->
 	<!-- => DataSource, SqlSessionFactory, SqlSession, TransactionManager 등 -->	
+
+	<!-- DataSource 관련 클래스(DriverManagerDataSource 클래스)를 Spring Bean으로 등록 -->
+	<!-- => 클래스의 필드에는 Connection 객체 생성에 필요한 값이 저장되도록 값 주입 - Setter Injection -->
+	<bean class="org.springframework.jdbc.datasource.DriverManagerDataSource" id="dataSource">
+		<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
+		<property name="url" value="jdbc:oracle:thin:@localhost:1521:xe"/>
+		<property name="username" value="scott"/>
+		<property name="password" value="tiger"/>
+	</bean>
 	
+		
 </beans>

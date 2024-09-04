@@ -15,6 +15,8 @@ package xyz.itwill09.dao;
 //2.Mybatis 프레임워크의 환경설정파일(mybatis-config.xml - settings 엘리먼트) 작성
 // => [src/main/webapp] 폴더에 환경설정파일을 작성해야 스프링 컨테이너(WebApplicationContext 객체)가
 //환경설정파일을 제공받아 SqlSessionFactory 객체 생성 가능
+//3.Spring Bean Configuration File(root-context.xml)에 DataSource 관련 클래스, SqlSessionFactory 
+//관련 클래스, SqlSession 관련 클래스, TransactionManager 관련 클래스를 Spring Bean으로 등록 
 
 public class StudentDAOImpl {
 
