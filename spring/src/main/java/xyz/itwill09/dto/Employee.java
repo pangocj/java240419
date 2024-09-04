@@ -18,7 +18,7 @@ public class Employee {
 	//min 속성 : 전달값의 최소 크기를 속성값으로 설정
 	//max 속성 : 전달값의 최대 크기를 속성값으로 설정
 	//@Size(min = 6, max = 20, message = "아이디는 최소 6자 이상 최대 20자 이하로만 입력해 주세요.")
-	//@Pattern : 전달값의 문자패턴을 비교해 러를 발생하는 어노테이션
+	//@Pattern : 전달값의 문자패턴을 비교해 에러를 발생하는 어노테이션
 	//regexp 속성 : 전달값을 비교하기 위한 정규표현식을 속성값으로 설정
 	@Pattern(regexp = "^[a-zA-Z]\\w{5,19}$", message = "아이디를 형식에 맞게 입력해 주세요.")
 	private String id;

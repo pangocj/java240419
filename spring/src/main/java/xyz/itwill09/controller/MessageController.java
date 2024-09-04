@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
  
 import xyz.itwill09.dto.Product;
 
-//스프링 메세지(Spring Message - 메세지를 관리하는 기능) 사용 방법
-//1.메세지가 저장된 Properties 파일 생성
+//스프링 메세지(Spring Message - 메세지 관리) 기능을 사용하는 방법
+//1.메세지가 저장된 Properties 파일을 생성하여 메세지 저장
 // => 스프링 컨테이너(WebApplicationContext 객체)가 참조할 수 있도록 [src/main/webapp] 폴더에
 //Properties 파일을 작성하는 것을 권장 
-// => [src/main/java] 또는 [src/main/resources] 폴더에 작성 가능
+// => [src/main/java] 또는 [src/main/resources] 폴더에 Properties 파일 작성 가능
 //2.Spring Bean Configuration File(servlet-context.xml)에 메세지 관리 기능을 제공하는 클래스를
 //Spring Bean으로 등록하고 메세지가 저장된 Properties 파일의 경로를 필드에 저장되도록 의존성 주입
 

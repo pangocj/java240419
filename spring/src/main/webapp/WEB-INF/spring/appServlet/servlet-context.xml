@@ -73,11 +73,11 @@
 	<!-- => Spring Bean의 식별자(beanName)을 반드시 [messageSource]로 설정 -->
 	<beans:bean class="org.springframework.context.support.ReloadableResourceBundleMessageSource" id="messageSource">
 		<!-- basenames 필드에 List 객체를 생성하여 저장되도록 의존성 주입 -->
-		<!-- => List 객체의 요소에는 메세지가 저장된 Properties 파일의 경로가 저장되도록 값 주입 -->
+		<!-- => List 객체의 요소에는 메세지가 저장된 Properties 파일의 경로가 요소값으로 저장되도록 값 주입 -->
 		<beans:property name="basenames">
 			<beans:list>
-				<!-- [src/main/webapp] 폴더에 Properties 파일을 작성한 경우 웹자원으로
-				Properties 파일의 경로 제공 -->
+				<!-- [src/main/webapp] 폴더에 Properties 파일을 작성한 경우	Properties 파일을
+				웹자원의 경로로 제공 -->
 				<!-- => Properties 파일이 변경되면 자동으로 변경된 메세지 적용 -->
 				<!-- <beans:value>/WEB-INF/message/label</beans:value> -->
 				

@@ -15,8 +15,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import xyz.itwill09.dto.Employee;
 
-//Spring Validation 기능을 사용해 요청 처리 메소드의 매개변수에 저장된 Command 객체의 필드값
-//(전달값) 검증하는 방법
+//Spring Data Validation 기능을 사용해 요청 처리 메소드의 매개변수에 저장된 Command 객체의 
+//필드값(전달값)을 검증하는 방법 - 어노테이션 사용해 Spring Data Validation 기능 구현
 //1.validation-api 라이브러리와 hibernate-validator 라이브러리를 프로젝트에 빌드 처리 - 메이븐 사용 : pom.xml
 //2.HTML 태그 대신 Spring 태그를 사용해 JSP 문서 작성 - 에러메세지를 전달받아 출력 처리
 //3.요청 처리 메소드에서 Command 객체가 저장된 매개변수에 @Valid 어노테이션을 사용해 Command
