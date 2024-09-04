@@ -14,6 +14,17 @@ import xyz.itwill09.service.StudentService;
 // => 테이블 >> DTO 클래스 >> DAO 클래스(MyBatis) >> Service 클래스 >> Controller 클래스
 // >> 단위 프로그램 테스트 - 테스트 프로그램(JUnit) >> JSP 문서(HTML 문서)와 결합하여 실행(통합 테스트)
 
+//Mybatis 프레임워크의 로그 팩토리에 의해 발생되는 로그 이벤트를 Spring 프레임워크의 로그
+//구현체로 기록하는 방법
+//1.log4jdbc-log4j2-jdbc4 라이브러리를 프로젝트에 빌드 처리 - 메이븐 : pom.xml 
+//2.Spring Bean Configuration File(root-context.xml)에서 DataSource 관련 클래스를 Spring Bean으로
+//등록한 bean 엘리먼트에서 driverClassName 필드와 url 필드에 저장된 값 변경
+//3.[src/main/resources] 폴더에 [log4jdbc.log4j2.properties] 파일 작성
+// => Mybatis 프레임워크에서 발생되는 로그 이벤트를 Spring 프레임워크의 로그 구현체에게 제공하기
+//위한 SpyLogDelegator 클래스를 설정하기 위한 파일
+//4.SpyLogDelegator 객체에 의해 발생된 로그 이벤트를 Spring 프레임워크의 로그 구현체로 기록되도록
+//환경설정파일(log4j.xml) 변경 - logger 엘리먼트 추가  
+
 //Controller 클래스 : 클라이언트의 요청을 처리하기 기능을 제공하기 위한 클래스
 // => Controller 클래스의 요청 처리 메소드에서는 데이타 처리에 필요한 명령으로 Service 객체로
 //메소드를 호출해 작성 
