@@ -9,7 +9,7 @@ import xyz.itwill09.dao.StudentDAO;
 import xyz.itwill09.dto.Student;
 
 //Service 클래스 : 클라이언트 요청에 대한 데이타 처리 기능을 제공하기 위한 클래스
-// => Service 클래스의 메소드는 데이타 처리 기능에 필요한 명령으로 DAO 객체로 메소드를 호출해 작성 
+// => Service 클래스의 메소드는 데이타 처리 기능에 필요한 명령을 DAO 객체의 메소드를 호출해 작성 
 // => Service 클래스가 교체돼도 의존관계로 설정된 Controller 클래스에 영향을 최소화 하기 위해
 //인터페이스를 상속받아 작성하는 것을 권장 - 유지보수의 효율성 증가
 

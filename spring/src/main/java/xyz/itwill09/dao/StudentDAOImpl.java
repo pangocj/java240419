@@ -9,12 +9,12 @@ import lombok.RequiredArgsConstructor;
 import xyz.itwill09.dto.Student;
 import xyz.itwill09.mapper.StudentMapper;
 
-//DAO 클래스(Repository 클래스) : 저장매체에 행을 삽입하고 저장된 행을 변경, 삭제, 검색하는
+//DAO 클래스(Repository 클래스) : 저장매체에 행을 삽입하거나 저장된 행을 변경, 삭제, 검색하는
 //기능을 제공하기 위한 클래스
 // => DAO 클래스가 교체돼도 의존관계로 설정된 Service 클래스에 영향을 최소화 하기 위해
 //인터페이스를 상속받아 작성하는 것을 권장 - 유지보수의 효율성 증가
 
-//DBMS 서버를 저장매체로 사용하여 SQL 명령을 전달하여 행의 삽입, 변경, 삭제, 검색 처리
+//DBMS 서버를 저장매체로 사용해 SQL 명령을 전달하여 행의 삽입, 변경, 삭제, 검색 처리
 // => DAO 클래스의 메소드는 DBMS 서버에 접속해 하나의 SQL 명령을 전달하여 실행하고 실행결과를
 //Java 객체(값)으로 반환되도록 작성 - JDBC
 
@@ -26,7 +26,7 @@ import xyz.itwill09.mapper.StudentMapper;
 //환경설정파일을 제공받아 SqlSessionFactory 객체 생성 가능
 //3.Spring Bean Configuration File(root-context.xml)에 DataSource 관련 클래스, SqlSessionFactory 
 //관련 클래스, SqlSession 관련 클래스, TransactionManager 관련 클래스를 Spring Bean으로 등록
-//4.매퍼 파일을 이용해 DAO 클래스 작성
+//4.매퍼 파일을 사용해 DAO 클래스 작성
 
 //DAO 클래스는 Service 클래스에서 객체로 제공받아 사용할 수 있도록 Spring Bean으로 등록
 // => DAO 클래스는 @Repository 어노테이션을 사용하여 Spring Bean으로 등록 처리
@@ -48,7 +48,7 @@ public class StudentDAOImpl implements StudentDAO {
 
 	//@Autowired 어노테이션을 사용한 생성자로 필드에 객체가 저장되도록 의존성 주입 
 	// => 생성자 레벨의 의존성 주입 : 순환참조 방지
-	// => 생성자가 하나만 작성된 경우 @Autowired 어노테이션 생략 가능
+	// => 생성자를 하나만 작성된 경우 @Autowired 어노테이션 생략 가능
 	private final SqlSession sqlSession;
 
 	@Override

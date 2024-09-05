@@ -25,8 +25,8 @@ import xyz.itwill09.service.StudentService;
 //4.SpyLogDelegator 객체에 의해 발생된 로그 이벤트를 Spring 프레임워크의 로그 구현체로 기록되도록
 //환경설정파일(log4j.xml) 변경 - logger 엘리먼트 추가  
 
-//Controller 클래스 : 클라이언트의 요청을 처리하기 기능을 제공하기 위한 클래스
-// => Controller 클래스의 요청 처리 메소드에서는 데이타 처리에 필요한 명령으로 Service 객체로
+//Controller 클래스 : 클라이언트의 요청을 처리하는 기능을 제공하기 위한 클래스
+// => Controller 클래스의 요청 처리 메소드에서는 데이타 처리에 필요한 명령으로 Service 객체의
 //메소드를 호출해 작성 
 
 //Controller 클래스는 Front Controller에서 객체로 제공받아 사용할 수 있도록 Spring Bean으로 등록

@@ -13,7 +13,7 @@ import lombok.Data;
 @Builder
 public class Student {
 	//Mybatis 프레임워크를 사용할 경우 검색행의 컬럼값을 저장하기 위해 컬럼명과 같은 이름으로
-	//필드를 작성해 자동 매핑되도록 설정 가능
+	//필드를 작성해 자동 매핑되도록 설정
 	private int no;
 	private String name;
 	private String phone;
