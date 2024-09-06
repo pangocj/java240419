@@ -2,6 +2,8 @@ package xyz.itwill09.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.stereotype.Controller;
@@ -11,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import lombok.RequiredArgsConstructor;
 
@@ -110,6 +111,38 @@ public class FileController {
 		model.addAttribute("uploadFilename", uploadFilename);
 		
 		return "file/upload_success_one";
+	}
+	
+	@RequestMapping(value = "/upload2", method = RequestMethod.GET)
+	public String uploadTwo() {
+		return "file/form_two";
+	}
+	
+	@RequestMapping(value = "/upload2", method = RequestMethod.POST)
+	public String uploadTwo(@RequestParam String uploaderName
+			, @RequestParam List<MultipartFile> uploaderFileList, Model model) throws IOException {
+		String uploadDirectory=context.getServletContext().getRealPath("/resources/images/upload");
+
+		List<String> filenameList=new ArrayList<String>();
+		
+		//List 객체에 저장된 요소값(MultipartFile 객체)을 차례대로 제공받아 변수에 저장해 반복 처리
+		for(MultipartFile multipartFile : uploaderFileList) {
+			if(multipartFile.isEmpty()) {
+				return "file/upload_fail";
+			}
+			
+			String uploadFilename=UUID.randomUUID().toString()+"_"+multipartFile.getOriginalFilename(); 
+			File file=new File(uploadDirectory, uploadFilename);
+			multipartFile.transferTo(file);
+			
+			//List 객체의 요소값으로 업로드 처리된 파일을 추가하여 저장
+			filenameList.add(uploadFilename);
+		}
+		
+		model.addAttribute("uploaderName", uploaderName);
+		model.addAttribute("filenameList", filenameList);
+		
+		return "file/upload_success_two";
 	}
 }
 
