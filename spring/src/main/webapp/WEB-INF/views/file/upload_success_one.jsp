@@ -11,8 +11,8 @@
 	<h1>파일 업로드 성공</h1>
 	<hr>
 	<h2>업로더 이름 = ${uploaderName }</h2>
-	<h2>업로드 처리된 파일명 = ${uploadFileName }</h2>
+	<h2>업로드 처리된 파일명 = ${uploadFilename }</h2>
 	<hr>
-	<img src="<c:url value="/images/upload/${uploadFileName }"/>" width="200">
+	<img src="<c:url value="/images/upload/${uploadFilename }"/>" width="200">
 </body>
 </html>
