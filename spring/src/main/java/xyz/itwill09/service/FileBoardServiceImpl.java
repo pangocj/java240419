@@ -1,5 +1,7 @@
 package xyz.itwill09.service;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.stereotype.Service;
@@ -8,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import xyz.itwill09.dao.FileBoardDAO;
 import xyz.itwill09.dto.FileBoard;
+import xyz.itwill09.util.Pager;
 
 @Service
 @RequiredArgsConstructor
@@ -52,12 +55,22 @@ public class FileBoardServiceImpl implements FileBoardService {
 		//하나의 블럭에 출력될 페이지 번호의 갯수를 임의의 값으로 저장
 		int blockSize=5;
 		
+		Pager pager=new Pager(pageNum, pageSize, totalSize, blockSize);
 		
+		//FileBoardDAO 객체의 selectFileBoardList() 메소드의 매개변수에 전달될 Map 객체 생성
+		// => Map 객체에는 시작 행번호와 종료 행번호를 엔트리의 맵값으로 저장
+		Map<String, Object> pageMap=new HashMap<String, Object>();
+		pageMap.put("startRow", pager.getStartRow());
+		pageMap.put("endRow", pager.getEndRow());
+		List<FileBoard> fileBoardList=fileBoardDAO.selectFileBoardList(pageMap);
 		
+		//요청 처리 메소드에게 반환될 처리 결과값을 저장하기 위한 Map 객체 생성
+		// => 요청 처리 메소드는 반환받은 Map 객체를 Request Scope 속성값으로 저장해 뷰에게 제공
+		Map<String, Object> resultMap=new HashMap<String, Object>();
+		resultMap.put("pager", pager);
+		resultMap.put("fileBoardList", fileBoardList);
 		
-		
-		
-		return null;
+		return resultMap;
 	}
 
 }
