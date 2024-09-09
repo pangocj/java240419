@@ -22,7 +22,7 @@ th, td {
 <body>
 	<h1>자료실(출력페이지)</h1>
 	<p>
-		<button type="button" onclick="location.href='<url value="/file/write"/>';">업로드</button>
+		<button type="button" onclick="location.href='<c:url value="/file/write"/>';">업로드</button>
 	</p>
 	<table>
 		<tr>
