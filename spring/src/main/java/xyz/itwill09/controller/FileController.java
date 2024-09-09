@@ -213,6 +213,28 @@ public class FileController {
 		
 		return "redirect:/file/list";
 	}
+	
+	//다운로드(Download) : 서버 디렉토리에 저장된 파일을 클라이언트에게 전달하여 저장하는 기능
+	// => 요청 처리 메소드에 의해 반환되는 문자열(ViewName)로 다운로드 기능을 제공하는 객체의
+	//메소드를 호출하여 서버 디렉토리에 저장된 파일을 클라이언트에게 전달하여 저장되도록 응답 처리
+	// => BeanNameViewResolver 객체를 사용해 요청 처리 메소드의 반환값(ViewName)으로 응답 
+	//처리 클래스의 객체로 메소드를 호출하여 메소드의 명령으로 응답 처리
+	// => Spring Bean Configuration File(servlet-context.xml)에 BeanNameViewResolver 클래스를
+	//Spring Bean으로 등록 - ViewResolver 중 가장 우선순위가 높도록 설정
+	@RequestMapping("/download")
+	public String fileBoardDownload(@RequestParam int num, Model model) {
+		FileBoard fileBoard=fileBoardService.getFileBoard(num);
+
+		//Model 객체를 사용해 응답 처리 클래스의 메소드에서 사용할 수 있는 Request Scope
+		//속성값을 저장하여 제공
+		model.addAttribute("uploadDirectory", context.getServletContext().getRealPath("/WEB-INF/upload"));
+		model.addAttribute("uploadFilename", fileBoard.getFilename());
+		
+		//BeanNameViewResolver 객체에 의해 응답될 클래스의 Spring Bean 식별자(beanName)를 반환
+		// => 응답 처리 클래스는 반드시 Spring Bean Configuration File(servlet-context.xml)에서
+		//bean 엘리먼트를 사용해 Spring Bean으로 등록 - @Component 어노테이션 사용 가능
+		return "fileDownload";
+	}
 }
 
 

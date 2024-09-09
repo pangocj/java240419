@@ -42,7 +42,7 @@ th, td {
 			<td>${fileBoard.subject }</td>
 			<td>${fn:split(fileBoard.filename, "_")[1] }</td>
 			<td align="center"><button type="button" onclick="fileDelete(${fileBoard.num});">삭제</button></td>
-			<td align="center"><button type="button">다운로드</button></td>
+			<td align="center"><button type="button" onclick="fileDownload(${fileBoard.num});">다운로드</button></td>
 		</tr>
 		</c:forEach>
 	</table>
@@ -83,17 +83,10 @@ th, td {
 			location.href="<c:url value="/file/delete"/>?num="+num;
 		}
 	}	
+	
+	function fileDownload(num) {
+		location.href="<c:url value="/file/download"/>?num="+num;
+	}
 	</script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-

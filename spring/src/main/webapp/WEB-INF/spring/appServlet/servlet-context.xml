@@ -70,6 +70,15 @@
 		</beans:property>
 	</beans:bean>
 	
+	<!-- BeanNameViewResolver 클래스를 Spring Bean으로 등록 -->
+	<!-- BeanNameViewResolver 객체 : 요청 처리 메소드의 반환값(ViewName)과 같은 이름을 식별자
+	(beanName)의 객체로 메소드를 호출해 클라이언트에게 응답 처리하기 위한 기능을 제공하는 객체  -->
+	<!-- => JSP 문서로 응답 처리하지 않고 클래스의 메소드를 호출해 응답 처리 -->
+	<!-- => 다른 ViewResovler 객체보다 우선 순위가 높도록 설정 -->
+	<beans:bean class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<beans:property name="order" value="1"/>
+	</beans:bean>
+	
 	<context:component-scan base-package="xyz.itwill09.controller" />
 	<context:component-scan base-package="xyz.itwill09.dao" />
 	<context:component-scan base-package="xyz.itwill09.service" />
@@ -153,6 +162,10 @@
 		<!-- defaultEncoding 필드에 전달값에 대한 문자형태가 저장되도록 값 주입 -->
 		<beans:property name="defaultEncoding" value="utf-8"/>	
 	</beans:bean>
+	
+	<!-- 파일 다운로드 기능을 제공하는 응답 처리 클래스를 Spring Bean으로 등록 -->
+	<!-- => Spring Bean의 식별자(beanName)을 요청 처리 메소드의 반환값(ViewName)과 같도록 작성 -->
+	<beans:bean class="xyz.itwill09.util.FileDownload" id="fileDownload"/>
 </beans:beans>
 
 
