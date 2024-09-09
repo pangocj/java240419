@@ -147,6 +147,11 @@ public class FileController {
 		
 		return "file/upload_success_two";
 	}
+	
+	@RequestMapping(value = "/wrtie", method = RequestMethod.GET)
+	public String fileBoardWrite() {
+		return "file/board_write";
+	}
 }
 
 
