@@ -73,8 +73,8 @@ public class FileController {
 		//서버 디렉토리에 저장될 파일에 대한 정보가 저장된 File 객체 생성 - 업로드 처리될 파일 설정
 		File file=new File(uploadDirectory, uploadFilename);
 		
-		//MultipartFile.transferTo(File file) : MultipartFile 객체에 저장된 전달파일을 File 객체에
-		//저장된 파일로 저장되도록 업로드 처리하는 메소드
+		//MultipartFile.transferTo(File file) : MultipartFile 객체에 저장된 전달파일의 내용을  
+		//File 객체에 저장된 파일에 저장되도록 업로드 처리하는 메소드
 		// => 서버 디렉토리에 업로드 처리되는 파일과 같은 이름의 파일이 있는 경우 기존 파일
 		//대신 업로드 파일이 서버 디렉토리에 저장 - 덮어씌우기(OverWrite)
 		uploaderFile.transferTo(file);
@@ -90,8 +90,8 @@ public class FileController {
 	// => 전달값과 전달파일의 이름과 같은 이름으로 매개변수 작성
 	//문제점 : 전달 파일의 이름과 같은 이름의 파일이 서버 디렉토리에 있는 경우 기존 파일 대신
 	//전달파일로 덮어씌워 저장(OverWrite)
-	//해결법 : 전달파일의 이름으로 서버 디렉토리에 저장하기 않고 중복되지 않는 파일의 이름으로
-	//저장되도록 변경하여 업로드 처리
+	//해결법 : 전달파일의 이름으로 서버 디렉토리에 저장하기 않고 전달파일의 이름을 중복되지 
+	//않는 이름으로 변경해 저장되도록 업로드 처리
 	@RequestMapping(value = "/upload1", method = RequestMethod.POST)
 	public String uploadOne(@RequestParam String uploaderName
 			, @RequestParam MultipartFile uploaderFile, Model model) throws IOException {
@@ -99,14 +99,16 @@ public class FileController {
 			return "file/upload_fail";
 		}
 		
+		//WebApplicationContext.getServletContext() : WebApplicationContext 객체(스프링 컨테이너)를
+		//사용해 ServletContext 객체를 반환하는 메소드
 		String uploadDirectory=context.getServletContext().getRealPath("/resources/images/upload");
-		//UUID.randomUUID() : 36Byte 크기의 식별자가 저장된 UUID 객체를 반환하는 정적메소드
+		//UUID.randomUUID() : 36Byte 크기의 식별자가 저장된 UUID 객체를 생성하여 반환하는 정적메소드
 		//UUID.toString() : UUID 객체에 저장된 36Byte 크기의 식별자를 문자열로 반환하는 메소드
 		String uploadFilename=UUID.randomUUID().toString()+"_"+uploaderFile.getOriginalFilename(); 
 		
 		File file=new File(uploadDirectory, uploadFilename);
 		uploaderFile.transferTo(file);
-		
+
 		model.addAttribute("uploaderName", uploaderName);
 		model.addAttribute("uploadFilename", uploadFilename);
 		
@@ -123,6 +125,7 @@ public class FileController {
 			, @RequestParam List<MultipartFile> uploaderFileList, Model model) throws IOException {
 		String uploadDirectory=context.getServletContext().getRealPath("/resources/images/upload");
 
+		//업로드 처리된 파일의 이름을 저장하기 위한 List 객체 생성
 		List<String> filenameList=new ArrayList<String>();
 		
 		//List 객체에 저장된 요소값(MultipartFile 객체)을 차례대로 제공받아 변수에 저장해 반복 처리
