@@ -41,7 +41,7 @@ th, td {
 			<td align="center">${fileBoard.writer }</td>
 			<td>${fileBoard.subject }</td>
 			<td>${fn:split(fileBoard.filename, "_")[1] }</td>
-			<td align="center"><button type="button">삭제</button></td>
+			<td align="center"><button type="button" onclick="fileDelete(${fileBoard.num});">삭제</button></td>
 			<td align="center"><button type="button">다운로드</button></td>
 		</tr>
 		</c:forEach>
@@ -76,7 +76,14 @@ th, td {
 			[다음]
 		</c:otherwise>
 	</c:choose>
-	
+		
+	<script type="text/javascript">
+	function fileDelete(num) {
+		if(confirm("게시글을 정말로 삭제 하시겠습니까?")) {
+			location.href="<c:url value="/file/delete"/>?num="+num;
+		}
+	}	
+	</script>
 </body>
 </html>
 

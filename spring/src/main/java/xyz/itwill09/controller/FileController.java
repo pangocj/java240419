@@ -197,6 +197,22 @@ public class FileController {
 		
 		return "file/board_list";
 	}
+	
+	@RequestMapping("/delete")
+	public String fileBoardDelete(@RequestParam int num) {
+		//삭제될 게시글을 반환받아 저장 - 업로드 처리된 파일명을 제공받기 위해 사용
+		FileBoard fileBoard=fileBoardService.getFileBoard(num);
+		
+		//업로드 처리된 파일이 저장된 서버 디렉토리의 시스템 경로를 반환받아 저장
+		String uploadDirectory=context.getServletContext().getRealPath("/WEB-INF/upload");
+		
+		//서버 디렉토리에 저장된 게시글의 업로드 파일 삭제 처리
+		new File(uploadDirectory, fileBoard.getFilename()).delete();
+
+		fileBoardService.removeFileBoard(num);
+		
+		return "redirect:/file/list";
+	}
 }
 
 
