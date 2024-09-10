@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
-<title>MVC</title>
+<title>SPRING</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel=stylesheet href="<c:url value="/css/user.css"/>" type="text/css">
 <script language="JavaScript">
