@@ -187,6 +187,8 @@
 	<!-- method 속성 : 스케줄링 기능을 제공하는 객체로 호출될 메소드의 이름을 속성값으로 설정 -->
 	<!-- cron 속성 : 스케줄링 기능을 실행하기 위한 날짜 및 시간을 속성값으로 설정 -->
 	<!-- => 속성값 : 초 분 시 일 월 요일 - 패턴문자 사용 가능 -->
+	<!-- 스케줄링 관련 클래스의 메소드에 @Scheduled 어노테이션을 사용해 메소드가 특정 날짜 및 
+	시간마다 자동 호출되도록 설정 가능 -->
 	<!-- 
 	<task:scheduled-tasks scheduler="baseScheduler">
 		<task:scheduled ref="scheduler" method="autoUpdate" cron="1 * * * * *"/>

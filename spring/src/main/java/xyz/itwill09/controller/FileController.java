@@ -181,7 +181,7 @@ public class FileController {
 		//FileBoardService 객채로 addFileBoard() 메소드를 호출하여 FILE_BOARD 테이블에 행으로 삽입 처리
 		fileBoardService.addFileBoard(fileBoard);
 		
-		//클라이언트에게 URL 주소를 전달하여 응답 처리 - Redirect 이동
+		//클라이언트에게 URL 주소를 전달하여 응답 처리 - 리다이렉트 이동
 		return "redirect:/file/list";
 	}
 	
@@ -205,11 +205,11 @@ public class FileController {
 		
 		//업로드 처리된 파일이 저장된 서버 디렉토리의 시스템 경로를 반환받아 저장
 		String uploadDirectory=context.getServletContext().getRealPath("/WEB-INF/upload");
-		
-		//서버 디렉토리에 저장된 게시글의 업로드 파일 삭제 처리
-		new File(uploadDirectory, fileBoard.getFilename()).delete();
 
 		fileBoardService.removeFileBoard(num);
+
+		//서버 디렉토리에 저장된 게시글의 업로드 파일 삭제 처리
+		new File(uploadDirectory, fileBoard.getFilename()).delete();
 		
 		return "redirect:/file/list";
 	}
@@ -218,7 +218,7 @@ public class FileController {
 	// => 요청 처리 메소드에 의해 반환되는 문자열(ViewName)로 다운로드 기능을 제공하는 객체의
 	//메소드를 호출하여 서버 디렉토리에 저장된 파일을 클라이언트에게 전달하여 저장되도록 응답 처리
 	// => BeanNameViewResolver 객체를 사용해 요청 처리 메소드의 반환값(ViewName)으로 응답 
-	//처리 클래스의 객체로 메소드를 호출하여 메소드의 명령으로 응답 처리
+	//처리 클래스의 객체를 사용해 메소드를 호출하여 응답 처리
 	// => Spring Bean Configuration File(servlet-context.xml)에 BeanNameViewResolver 클래스를
 	//Spring Bean으로 등록 - ViewResolver 중 가장 우선순위가 높도록 설정
 	@RequestMapping("/download")
