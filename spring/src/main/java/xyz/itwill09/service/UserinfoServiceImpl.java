@@ -4,11 +4,14 @@ import java.util.List;
 
 import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import xyz.itwill09.dao.UserinfoDAO;
 import xyz.itwill09.dto.Userinfo;
 import xyz.itwill09.exception.ExistsUserinfoException;
+import xyz.itwill09.exception.LoginAuthFailException;
+import xyz.itwill09.exception.UserinfoNotFoundException;
 
 //사용자로부터 입력받아 전달된 문자열(비밀번호)을 암호화 처리하는 방법
 //1.jbcrypt 라이브러리를 프로젝트에 빌드 처리 - 메이븐 : pom.xml
@@ -25,6 +28,7 @@ import xyz.itwill09.exception.ExistsUserinfoException;
 public class UserinfoServiceImpl implements UserinfoService {
 	private final UserinfoDAO userinfoDAO;
 	
+	@Transactional
 	@Override
 	public void addUserinfo(Userinfo userinfo) {
 		if(userinfoDAO.selectUserinfo(userinfo.getUserid()) != null) {
@@ -39,34 +43,60 @@ public class UserinfoServiceImpl implements UserinfoService {
 		userinfoDAO.insertUserinfo(userinfo);	
 	}
 
+	@Transactional
 	@Override
 	public void modifyUserinfo(Userinfo userinfo) {
-		// TODO Auto-generated method stub
+		if(userinfoDAO.selectUserinfo(userinfo.getUserid()) == null) {
+			throw new UserinfoNotFoundException();
+		}
 		
+		if(userinfo.getPassword() != null && !userinfo.getPassword().equals("")) {
+			String hashedPassword=BCrypt.hashpw(userinfo.getPassword(), BCrypt.gensalt());
+			userinfo.setPassword(hashedPassword);		
+		}
+		
+		userinfoDAO.updateUserinfo(userinfo);
 	}
 
+	@Transactional
 	@Override
 	public void removeUserinfo(String userid) {
-		// TODO Auto-generated method stub
+		if(userinfoDAO.selectUserinfo(userid) == null) {
+			throw new UserinfoNotFoundException();
+		}
 		
+		userinfoDAO.deleteUserinfo(userid);
 	}
 
 	@Override
 	public Userinfo getUserinfo(String userid) {
-		// TODO Auto-generated method stub
-		return null;
+		Userinfo userinfo=userinfoDAO.selectUserinfo(userid);
+		
+		if(userinfo == null) {
+			throw new UserinfoNotFoundException();
+		}
+		
+		return userinfo;
 	}
 
 	@Override
 	public List<Userinfo> getUserinfoList() {
-		// TODO Auto-generated method stub
-		return null;
+		return userinfoDAO.selectUserinfoList();
 	}
 
 	@Override
 	public Userinfo loginAuth(Userinfo userinfo) {
-		// TODO Auto-generated method stub
-		return null;
+		Userinfo authUserinfo=userinfoDAO.selectUserinfo(userinfo.getUserid());
+		
+		if(authUserinfo == null) {//아이디 인증 실패
+			throw new LoginAuthFailException("아이디의 회원정보가 존재하지 않습니다.", userinfo.getUserid());
+		}
+		
+		if(!BCrypt.checkpw(userinfo.getPassword(), authUserinfo.getPassword())) {//비밀번호 인증 실패
+			throw new LoginAuthFailException("아이디가 없거나 비밀번호가 맞지 않습니다.", userinfo.getUserid());
+		}
+		
+		return authUserinfo;
 	}
 
 }

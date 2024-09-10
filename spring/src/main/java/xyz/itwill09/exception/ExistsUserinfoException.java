@@ -3,8 +3,8 @@ package xyz.itwill09.exception;
 import lombok.Getter;
 import xyz.itwill09.dto.Userinfo;
 
-//회원정보를 등록할 때 사용자부터 입력받은 회원정보의 아이디가 기존 회원정보의 아이디와 
-//중복될 경우 발생될 예외를 생성하기 위한 예외클래스 
+//회원정보를 등록할 때 전달받은 회원정보의 아이디가 기존 회원정보의 아이디와 중복될 경우 
+//발생될 예외를 생성하기 위한 예외클래스 
 // => Exception 클래스(RuntimeException 클래스) 상속받아 작성
 public class ExistsUserinfoException extends RuntimeException {
 	private static final long serialVersionUID = 1L;
