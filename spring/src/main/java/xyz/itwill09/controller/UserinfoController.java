@@ -28,7 +28,6 @@ public class UserinfoController {
 		Userinfo loginUserinfo=(Userinfo)session.getAttribute("loginUserinfo");
 		//try~catch 구문을 사용해 예외가 발생될 경우 에러페이지를 출력하는 JSP 문서의 뷰이름 반환
 		// => 500 에러코드 미발생
-		/*
 		try {
 			//페이지를 요청한 사용자가 비로그인 사용자이거나 관리자가 아닌 경우 인위적 예외 발생
 			if(loginUserinfo == null || loginUserinfo.getAuth() != 9) {
@@ -37,7 +36,6 @@ public class UserinfoController {
 		} catch (BadRequestException e) {
 			return "userinfo/user_error";
 		}
-		*/
 		return "userinfo/user_write";
 	}
 	
@@ -85,6 +83,31 @@ public class UserinfoController {
 		//session.removeAttribute("loginUserinfo");
 		session.invalidate();
 		return "redirect:/userinfo/login";
+	}
+	
+	//USERINFO 테이블에 저장된 모든 행을 검색하여 Request Scope 속성값으로 저장하고 회원목록을
+	//출력하는 JSP 문서의 뷰이름을 반환하는 요청 처리 메소드
+	// => 로그인 사용자만 요청 가능한 페이지
+	@RequestMapping("/list")
+	public String list(Model model, HttpSession session) {
+		try {
+			if(session.getAttribute("loginUserinfo") == null) {
+				throw new BadRequestException("비정상적인 방법으로 페이지를 요청 하였습니다.");
+			}
+		}catch (BadRequestException e) {
+			return "userinfo/user_error";
+		}
+		model.addAttribute("userinfoList", userinfoService.getUserinfoList());
+		return "userinfo/user_list";
+	}
+
+
+	//아이디를 전달받아 USERINFO 테이블에 저장된 행을 검색하여 Request Scope 속성값으로 저장하고
+	//회원정보를 출력하는 JSP 문서의 뷰이름을 반환하는 요청 처리 메소드
+	// => 로그인 사용자만 요청 가능한 페이지
+	@RequestMapping("/view")
+	public String view() {
+		return "userinfo/user_view";
 	}
 }
 
