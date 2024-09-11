@@ -47,8 +47,8 @@ public class RestBoardServiceImpl implements RestBoardService {
 		List<RestBoard> restBoardList=restBoardDAO.selectRestBoardList(pageMap);
 		
 		Map<String, Object> resultMap=new HashMap<String, Object>();
-		pageMap.put("pager", pager);
-		pageMap.put("restBoardList", restBoardList);
+		resultMap.put("pager", pager);
+		resultMap.put("restBoardList", restBoardList);
 		
 		return resultMap;
 	}
