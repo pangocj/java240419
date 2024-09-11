@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.RequiredArgsConstructor;
 import xyz.itwill09.dto.Userinfo;
-import xyz.itwill09.exception.BadRequestException;
 import xyz.itwill09.service.UserinfoService;
 
 @Controller
@@ -41,14 +40,10 @@ public class UserinfoController {
 	}
 	*/
 	
+	//예외 처리 메소드를 사용해 예외 처리 기능을 구현하고 인터셉터를 사용해 권한 관련 처리 기능 구현
+	// => 요청 처리 메소드에서는 예외 처리 및 권한 관련 명령 미작성
 	@RequestMapping(value = "/write", method = RequestMethod.GET)
-	public String write(HttpSession session) {
-		Userinfo loginUserinfo=(Userinfo)session.getAttribute("loginUserinfo");
-
-		//페이지를 요청한 사용자가 비로그인 사용자이거나 관리자가 아닌 경우 인위적 예외 발생
-		if(loginUserinfo == null || loginUserinfo.getAuth() != 9) {
-			throw new BadRequestException("비정상적인 방법으로 페이지를 요청 하였습니다.");
-		}
+	public String write() {
 		return "userinfo/user_write";
 	}
 	
@@ -133,10 +128,7 @@ public class UserinfoController {
 	}
 	*/
 	@RequestMapping("/list")
-	public String list(Model model, HttpSession session) {
-		if(session.getAttribute("loginUserinfo") == null) {
-			throw new BadRequestException("비정상적인 방법으로 페이지를 요청 하였습니다.");
-		}
+	public String list(Model model) {
 		model.addAttribute("userinfoList", userinfoService.getUserinfoList());
 		return "userinfo/user_list";
 	}
@@ -160,10 +152,7 @@ public class UserinfoController {
 	}
 	*/
 	@RequestMapping("/view")
-	public String view(@RequestParam String userid, Model model, HttpSession session) {
-		if(session.getAttribute("loginUserinfo") == null) {
-			throw new BadRequestException("비정상적인 방법으로 페이지를 요청 하였습니다.");
-		}
+	public String view(@RequestParam String userid, Model model) {
 		model.addAttribute("userinfo", userinfoService.getUserinfo(userid));
 		return "userinfo/user_view";
 	}
@@ -188,12 +177,7 @@ public class UserinfoController {
 	}
 	*/
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
-	public String modify(@RequestParam String userid, Model model, HttpSession session) {
-		Userinfo loginUserinfo=(Userinfo)session.getAttribute("loginUserinfo");
-		//페이지를 요청한 사용자가 비로그인 사용자이거나 관리자가 아닌 경우 인위적 예외 발생
-		if(loginUserinfo == null || loginUserinfo.getAuth() != 9) {
-			throw new BadRequestException("비정상적인 방법으로 페이지를 요청 하였습니다.");
-		}
+	public String modify(@RequestParam String userid, Model model) {
 		model.addAttribute("userinfo", userinfoService.getUserinfo(userid));
 		return "userinfo/user_modify";
 	}
@@ -244,10 +228,6 @@ public class UserinfoController {
 	@RequestMapping("/remove")
 	public String remove(@RequestParam String userid, HttpSession session) {
 		Userinfo loginUserinfo=(Userinfo)session.getAttribute("loginUserinfo");
-		//페이지를 요청한 사용자가 비로그인 사용자이거나 관리자가 아닌 경우 인위적 예외 발생
-		if(loginUserinfo == null || loginUserinfo.getAuth() != 9) {
-			throw new BadRequestException("비정상적인 방법으로 페이지를 요청 하였습니다.");
-		}
 		
 		userinfoService.removeUserinfo(userid);
 		

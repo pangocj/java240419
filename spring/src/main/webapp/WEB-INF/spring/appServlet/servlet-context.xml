@@ -197,6 +197,32 @@
 	 
 	<!-- annotation-driven : 스케줄링 관련 어노테이션을 사용하기 위해 설정하는 엘리먼트 --> 
 	<task:annotation-driven/>
+	
+	<beans:bean class="xyz.itwill09.util.AdminAuthInterceptor" id="adminAuthInterceptor"/>
+	<beans:bean class="xyz.itwill09.util.LoginAuthInterceptor" id="loginAuthInterceptor"/>
+	
+	<!-- interceptors : interceptor 엘리먼트를 등록하기 위한 엘리먼트 -->
+	<interceptors>
+		<!-- interceptor : Front Controller로 Interceptor 객체의 메소드를 호출하기 위한 
+		규칙을 제공하기 위한 엘리먼트 -->
+		<interceptor>
+			<!-- mapping : Front Controller로 Interceptor 객체의 메소드를 호출하기 위한 
+			요청 페이지 경로를 제공하는 엘리먼트 -->
+			<!-- path 속성 : 요청 페이지 경로를 속성값으로 설정 -->
+			<mapping path="/userinfo/write"/>
+			<mapping path="/userinfo/modify"/>
+			<mapping path="/userinfo/remove"/>
+			<!-- ref : Front Controller에 의해 사용될 Interceptor 객체를 제공하기 위한 엘리먼트 -->
+			<!-- bean 속성 : Interceptor 클래스의 Spring Bean 식별자(beanName)를 속성값으로 설정 -->
+			<beans:ref bean="adminAuthInterceptor"/>
+		</interceptor>	
+		
+		<interceptor>
+			<mapping path="/userinfo/list"/>
+			<mapping path="/userinfo/view"/>
+			<beans:ref bean="loginAuthInterceptor"/>
+		</interceptor>	
+	</interceptors>
 </beans:beans>
 
 
