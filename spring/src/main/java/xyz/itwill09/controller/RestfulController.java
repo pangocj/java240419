@@ -1,7 +1,9 @@
 package xyz.itwill09.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -99,6 +101,22 @@ public class RestfulController {
 		//List 객체를 자바스크립트의 Array 객체로 변환하여 응답 처리
 		// => List 객체의 요소값(RestMember 객체)는 자바스크립트의 Object 객체로 변환
 		return list;
+	}
+	
+	@RequestMapping("/member_map")
+	@ResponseBody
+	public Map<String, Object> restMemberMap() {
+		Map<String, Object> map=new HashMap<String, Object>();
+		map.put("id", "abc123");		
+		map.put("name", "홍길동");		
+		map.put("email", "abc@itwill.xyz");		
+		//Map 객체를 자바스크립트의 Object 객체로 변환하여 응답 처리
+		return map;
+	}
+	
+	@RequestMapping(value = "/board", method = RequestMethod.GET)
+	public String restBoard() {
+		return "rest/board";
 	}
 }
 
