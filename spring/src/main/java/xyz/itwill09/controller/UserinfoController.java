@@ -21,16 +21,17 @@ public class UserinfoController {
 	private final UserinfoService userinfoService;
 	
 	//회원정보를 입력받기 위한 JSP 문서의 뷰이름을 반환하는 요청 처리 메소드
-	// => 관리자만 요청 가능한 페이지
+	// => 관리자만 요청 가능한 페이지로 설정
 	/*
 	@RequestMapping(value = "/write", method = RequestMethod.GET)
 	public String write(HttpSession session) {
 		Userinfo loginUserinfo=(Userinfo)session.getAttribute("loginUserinfo");
 		//try~catch 구문을 사용해 예외가 발생될 경우 에러페이지를 출력하는 JSP 문서의 뷰이름 반환
-		// => 500 에러코드 미발생
+		// => 500 에러코드로 응답 처리하지 않고 뷰를 사용해 응답 처리
 		try {
 			//페이지를 요청한 사용자가 비로그인 사용자이거나 관리자가 아닌 경우 인위적 예외 발생
 			if(loginUserinfo == null || loginUserinfo.getAuth() != 9) {
+				//예외가 발생될 경우 클라이언트에게 500 에러코드를 전달하여 응답 처리
 				throw new BadRequestException("비정상적인 방법으로 페이지를 요청 하였습니다.");
 			}
 		} catch (BadRequestException e) {
@@ -116,7 +117,7 @@ public class UserinfoController {
 	
 	//USERINFO 테이블에 저장된 모든 행을 검색하여 Request Scope 속성값으로 저장하고 회원목록을
 	//출력하는 JSP 문서의 뷰이름을 반환하는 요청 처리 메소드
-	// => 로그인 사용자만 요청 가능한 페이지
+	// => 로그인 사용자만 요청 가능한 페이지로 설정
 	/*
 	@RequestMapping("/list")
 	public String list(Model model, HttpSession session) {
@@ -143,7 +144,7 @@ public class UserinfoController {
 
 	//아이디를 전달받아 USERINFO 테이블에 저장된 행을 검색하여 Request Scope 속성값으로 저장하고
 	//회원정보를 출력하는 JSP 문서의 뷰이름을 반환하는 요청 처리 메소드
-	// => 로그인 사용자만 요청 가능한 페이지
+	// => 로그인 사용자만 요청 가능한 페이지로 설정
 	/*
 	@RequestMapping("/view")
 	public String view(@RequestParam String userid, Model model, HttpSession session) {
@@ -169,7 +170,7 @@ public class UserinfoController {
 	
 	//아이디를 전달받아 USERINFO 테이블에 저장된 행을 검색하여 Request Scope 속성값으로 저장하고
 	//회원정보를 변경하는 JSP 문서의 뷰이름을 반환하는 요청 처리 메소드
-	// => 관리자만 요청 가능한 페이지
+	// => 관리자만 요청 가능한 페이지로 설정
 	/*
 	@RequestMapping(value = "/modify", method = RequestMethod.GET)
 	public String modify(@RequestParam String userid, Model model, HttpSession session) {
@@ -215,7 +216,7 @@ public class UserinfoController {
 	
 	//아이디를 전달받아 USERINFO 테이블에 저장된 행을 삭제하고 회원목록 출력 페이지를 요청할
 	//수 있는 URL 주소를 반환하는 요청 처리 메소드
-	// => 관리자만 요청 가능한 페이지
+	// => 관리자만 요청 가능한 페이지로 설정
 	/*
 	@RequestMapping("/remove")
 	public String remove(@RequestParam String userid, HttpSession session) {
@@ -263,7 +264,7 @@ public class UserinfoController {
 	//@ExceptionHandler : 예외 처리 기능을 제공하는 메소드를 설정하기 위한 어노테이션
 	// => Controller 클래스의 요청 처리 메소드에서 예외가 발생될 경우 예외 처리를 위해
 	//Front Controller가 자동으로 호출하는 메소드 - 예외 처리 메소드(Spring AOP 기능 사용)
-	// => 예외 처리 메소드에 매개변수를 작성해 예외 처리에 필요한 객체를 Front Controller로부터
+	// => 예외 처리 메소드에 매개변수를 작성하면 예외 처리에 필요한 객체를 Front Controller로부터
 	//제공받아 사용할 수 있으며 클라이언트에게 응답할 뷰의 뷰이름 반환 - 리다이렉트 이동 가능
 	//value 속성 : 예외 처리하기 위한 클래스의 Class 객체를 속성값으로 설정
 	// => value 속성외에 다른 속성이 없는 경우 속성값만 설정 가능

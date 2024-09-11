@@ -18,8 +18,8 @@ import xyz.itwill09.exception.UserinfoNotFoundException;
 //2.BCrypt.hashpw(String password, String salt) 정적메소드를 호출하여 문자열(비밀번호)를 암호화 처리 
 // => 메소드의 매개변수에는 암호화 처리할 문자열과 첨가물의 문자열을 전달받아 암호화 처리
 // => 첨가물에 의해 비밀번호가 다르게 암호화 처리
-// => BCrypt.gensalt(int log_bounds) : 매개변수에 첨가물의 길이를 전달받아 첨가물을 생성하여
-//반환하는 정적메소드 - 매개변수에 값을 전달하지 않으면 기본값으로 [10]으로 설정
+// => BCrypt.gensalt(int log_bounds) : 매개변수로 첨가물의 길이를 전달받아 첨가물을 생성하여
+//반환하는 정적메소드 - 매개변수에 값을 전달하지 않으면 기본값으로 [10]을 설정하여 사용
 //3.BCrypt.checkpw(String plainText, String hashed) 정적메소드를 호출하여 일반 문자열과 암호화
 //처리된 문자열을 비교하여 다른 경우 [false]를 반환하고 같은 경우 [true]를 반환받아 처리
 
