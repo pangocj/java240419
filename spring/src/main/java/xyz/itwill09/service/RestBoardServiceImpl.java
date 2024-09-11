@@ -13,7 +13,7 @@ import xyz.itwill09.util.Pager;
 
 @Service
 @RequiredArgsConstructor
-public class RestBoardServiceImpl implements RestBoardService {@Override
+public class RestBoardServiceImpl implements RestBoardService {
 	private final RestBoardDAO restBoardDAO;
 	
 	public void addRestBoard(RestBoard restBoard) {
