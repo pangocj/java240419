@@ -81,7 +81,6 @@ public class RestBoardController {
 	public RestBoard restBoardView(@PathVariable int idx) {
 		return restBoardService.getRestBoard(idx);
 	}
-
 	
 	//게시글을 전달받아 REST_BOARD 테이블에 저장된 행을 변경하고 실행결과를 문자열로 응답하는 요청 처리 메소드
 	@PutMapping("/board_modify")
