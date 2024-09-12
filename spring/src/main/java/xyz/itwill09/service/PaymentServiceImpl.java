@@ -6,6 +6,8 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
 import org.springframework.stereotype.Service;
 
 import xyz.itwill09.dto.Payment;
@@ -90,13 +92,24 @@ public class PaymentServiceImpl implements PaymentService {
 				
 				//JSON 형식의 문자열을 Java 객체로 변환하는 기능을 제공하는 json-simple
 				//라이브러리를 프로젝트에 빌드 처리 - 메이븐 : pom.xml
+				//JSONParser 객체 : JSON 형식의 문자열을 Java 객체로 변환하는 기능을 제공하는 객체
+				JSONParser jsonParser=new JSONParser();
 				
+				//JSONParser.parse(String json) : 매개변수로 전달받은 JSON 형식의 문자열을 
+				//Java 객체(Object 객체)로 변환하여 반환하는 메소드
+				// => 반환받은 Object 객체를 JSONObject 객체(자바스크립트의 Object 객체로 유사)로
+				//명시적 객체 형변환하여 저장
+				JSONObject jsonObject=(JSONObject)jsonParser.parse(result);
 				
+				//JSONObject.get(String name) : JSONObject 객체에서 매개변수로 전달받은 
+				//속성명의 속성값(Object 객채)을 반환하는 메소드 
+				JSONObject responseObject=(JSONObject)jsonObject.get("response");
+				
+				accessToken=(String)responseObject.get("access_token");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
-		
 		return accessToken;
 	}
 
