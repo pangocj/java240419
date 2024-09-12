@@ -91,5 +91,110 @@
 			</tr>
 		</table>
 	</div>
+	
+	<script type="text/javascript">
+	//요청 페이지 번호를 저장하기 위한 전역변수
+	// => 프로그램 종료시까지 값을 유지해 모든 자바스트립트 함수에서 사용할 수 있도록 전역변수로 선언 
+	var page=1;
+	
+	//페이지를 요청해 게시글 목록을 제공받아 출력하는 함수 호출
+	boardListDisplay(page, 5);
+	
+	//요청 페이지 번호를 전달받아 페이지 번호에 해당하는 게시글 목록을 출력하는 함수
+	// => 비동기식 방식으로 페이지를 요청해 JSON 형식의 문자열로 응답받아 HTML 태그로 변환하여 출력 처리
+	function boardListDisplay(pageNum, pageSize) {
+		page=pageNum;
+		$.ajax({
+			type: "get",
+			url: "<c:url value="/rest/board_list"/>",
+			data: {"pageNum":pageNum, "pageSize":pageSize},
+			dataType: "json",
+			success: function(result) {
+				//alert(result);
+				
+				//응답받은 자바스트립트 객체를 HTML 태그로 변환하여 출력 처리
+				if(result.restBoardList.length == 0) {//검색된 게시글이 없는 경우
+					var html="<table id='restBoardTable'>";
+					html+="<tr>";
+					html+="<th width='800'>검색된 게시글이 없습니다.</th>";
+					html+="</tr>";
+					html+="</table>";
+					$("#restBoardListDiv").html(html);
+					return;
+				}
+				
+				var html="<table id='restBoardTable'>";
+				html+="<tr>";
+				html+="<th width='50'>번호</th>";
+				html+="<th width='100'>작성자</th>";
+				html+="<th width='350'>내용</th>";
+				html+="<th width='200'>작성일</th>";
+				html+="<th width='50'>변경</th>";
+				html+="<th width='50'>삭제</th>";
+				html+="</tr>";
+				$(result.restBoardList).each(function() {
+					html+="<tr>";
+					html+="<td align='center'>"+this.idx+"</td>";
+					html+="<td align='center'>"+this.writer+"</td>";
+					html+="<td>"+this.content+"</td>";
+					html+="<td align='center'>"+this.regdate+"</td>";
+					html+="<td align='center'><button type='button'>변경</button></td>";
+					html+="<td align='center'><button type='button'>삭제</button></td>";
+					html+="</tr>";
+				});
+				html+="</table>";
+				$("#restBoardListDiv").html(html);
+				//페이지 번호를 출력하는 함수 호출
+				pageNumberDisplay(result.pager);
+			},
+			error: function(xhr) {
+				alert("에러코드(게시글 목록 검색) = "+xhr.status);
+			}
+		});
+	}
+	
+	//페이징 처리 관련 Object 객체를 전달받아 HTML 태그로 변환해 페이지 번호를 출력하는 함수
+	function pageNumberDisplay(pager) {
+		var html="";
+		
+		if(pager.startPage > pager.blockSize) {
+			html+="<a href='javascript:boardListDisplay("+pager.prevPage+");'>[이전]</a>";
+		} else {
+			html+"[이전]";
+		}
+		
+		for(i = pager.startPage ; i <= pager.endPage ; i++) {
+			if(pager.pageNum != i) {
+				html+="<a href='javascript:boardListDisplay("+i+");'>["+i+"]</a>";
+			} else {
+				html+="["+i+"]";	
+			}
+		}
+		
+		if(pager.endPage != pager.totalPage) {
+			html+="<a href='javascript:boardListDisplay("+pager.nextPage+");'>[다음]</a>";
+		} else {
+			html+"[다음]";
+		}
+		
+		$("#pageNumDiv").html(html);
+	}
+	</script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
