@@ -12,7 +12,7 @@ import xyz.itwill09.exception.BadRequestException;
 
 //인터셉터(Interceptor) : 요청 처리 메소드의 명령 실행 전 또는 실행 후에 실행될 명령을 제공하는 기능
 // => HandlerInterceptor 인터페이스를 상속받은 Interceptor 클래스를 작성하여 Spring Bean Configuration  
-//File(servlet-context.xml)에 Spring Bean으로 등록하고 인터셉트로 사용되도록 환경설정 설정
+//File(servlet-context.xml)에 Spring Bean으로 등록하고 인터셉트로 사용되도록 환경 설정
 // => HandlerInterceptor 인터페이스의 기본 메소드(Default Method) 중 필요한 메소드만 오버라이드 선언하여 사용
 // => 필터는 Front Controller의 이전 위치에 존재하여 실행되고 인터셉터는 Front Controller의 다음
 //위치에 존재하여 실행 - 필터는 WAS 프로그램에 의해 관리되고 인터셉터는 Front Controller에 의해 관리

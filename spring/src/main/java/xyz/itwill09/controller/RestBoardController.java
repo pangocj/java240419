@@ -35,15 +35,3 @@ public class RestBoardController {
 		return restBoardService.getRestBoardList(pageNum, pageSize);
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-

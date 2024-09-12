@@ -30,7 +30,7 @@ public class RestfulController {
 	}
 	
 	/*
-	//페이지 요청시 요청 처리 메소드를 호출해 요청 처리 후 실행결과를 Model 객체로 Request
+	//페이지 요청시 요청 처리 메소드를 호출해 요청 처리 후 실행결과를 Model 객체의 Request
 	//Scope 속성값으로 저장하고 뷰이름(ViewName)을 반환하여 뷰(View)로 응답 처리
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
 	public String join(@RequestParam String id, @RequestParam String name, Model model) {
@@ -40,18 +40,20 @@ public class RestfulController {
 	}
 	*/
 	
-	//@ResponseBody : 요청 처리 메소드의 반환값을 리스폰즈 메세지 몸체부에 저장하여 일반 
-	//문서로 클라이언트에게 전달하여 응답하는 기능을 제공하는 어노테이션
+	//@ResponseBody : 요청 처리 메소드의 반환값(문자열)을 리스폰즈 메세지 몸체부에 저장하여  
+	//클라이언트에게 전달하여 응답하는 기능을 제공하는 어노테이션
 	// => Front Controller가 요청 처리 메소드의 반환값을 뷰로 변환하여 응답 처리하지 않고
 	//요청 처리 메소드의 반환값으로 직접 응답 처리
 	// => @ResponseBody 어노테이션 대신 ResponseEntity 클래스를 요청 처리 메소드의 반환형으로
 	//작성해 응답 처리 가능
 	// => 페이지 요청시 JSON 형식의 문자열로 클라이언트에게 응답 처리하기 위해 사용
-	//@RequestBody : 리퀘스트 메세지 몸체부에 저장된 모든 전달값을 문자열로 제공하기 위한 어노테이션
+	//@RequestBody : 리퀘스트 메세지 몸체부에 저장된 모든 전달값을 문자열로 제공받아 매개변수에
+	//전달하기 위한 어노테이션
 	// => POST, PUT, PATCH, DELETE 등의 요청방식으로 페이지를 요청한 경우 리퀘스트 메세지 몸체부에
 	//저장된 모든 전달값을 문자열로 제공받아 매개변수에 저장
-	// => GET 방식으로 페이지를 요청한 경우 리퀘스트 메세지 몸체부 비어 있으므로 @RequestBody 어노테이션 사용 불가능
-	// => 페이지 요청시 JSON 형식으로 전달된 값을 제공받아 매개변수에 저장하기 위해 사용
+	// => GET 방식으로 페이지를 요청한 경우 리퀘스트 메세지 몸체부가 비어 있으므로 @RequestBody 
+	//어노테이션 사용 불가능
+	// => 페이지 요청시 JSON 형식으로 전달된 값(문자열)을 제공받아 매개변수에 저장하기 위해 사용
 	// => @RequestBody 어노테이션 대신 RequestEntity 클래스로 요청 처리 메소드의 매개변수를
 	//작성해 전달값을 제공받아 매개변수에 저장	
 	@RequestMapping(value = "/join", method = RequestMethod.POST)
