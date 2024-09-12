@@ -2,12 +2,18 @@ package xyz.itwill09.controller;
 
 import java.util.Map;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.util.HtmlUtils;
 
 import lombok.RequiredArgsConstructor;
+import xyz.itwill09.dto.RestBoard;
 import xyz.itwill09.service.RestBoardService;
 
 //@RestController : REST 기능을 제공하는 요청 처리 메소드(Restful API)만 작성된 Controller 
@@ -25,6 +31,8 @@ public class RestBoardController {
 	//요청 페이지의 경로를 제공받아 요청 처리 메소드에 매핑 처리하는 것을 권장
 	// => GET(검색), POST(삽입), PUT(전체 변경), PATCH(부분 변경), DELETE(삭제)
 	
+	//REST_BOARD 테이블에 저장된 행에서 요청 페이지 번호에 해당하는 행만 검색하여 JSON 형식의
+	//문자열로 응답하는 요청 처리 메소드
 	//@RequestMapping(value = "/board_list", method = RequestMethod.GET)
 	@GetMapping("/board_list")
 	//Controller 클래스에 @RestController 어노테이션을 사용해 Spring Bean으로 등록한 경우
@@ -34,4 +42,46 @@ public class RestBoardController {
 			, @RequestParam(defaultValue = "5") int pageSize) {
 		return restBoardService.getRestBoardList(pageNum, pageSize);
 	}
+	
+	//게시글을 전달받아 REST_BOARD 테이블의 행으로 삽입하고 실행결과를 문자열로 응답하는 요청 처리 메소드
+	// => 게시글을 [application/json] 형식의 문자열로 전달받아 매개변수에 RestBoard 객체로 
+	//저장하기 위해 @RequestBody 어노테이션 사용
+	// => @RequestBody 어노테이션을 사용한 매개변수의 자료형을 DTO 클래스로 설정하면 JSON 
+	//형식의 문자열로 저장된 값을 DTO 객체의 필드에 저장
+	@PostMapping("/board_add")
+	public String restBoardAdd(@RequestBody RestBoard restBoard) {
+		//HtmlUtils.htmlEscape(String str) : 매개변수로 전달받은 문자열에 존재하는 HTML 태그
+		//관련 문자를 회피문자로 변환하여 반환하는 정적메소드 - XSS 공격에 대한 방어
+		restBoard.setContent(HtmlUtils.htmlEscape(restBoard.getContent()));
+		restBoardService.addRestBoard(restBoard);
+		return "success";
+	}
+
+	//글번호를 전달받아 REST_BOARD 테이블에 저장된 행을 검색하여 JSON 형식의 문자열로 응답하는 요청 처리 메소드
+	@GetMapping("/board_view")
+	public RestBoard restBoardView(@RequestParam int idx) {
+		return restBoardService.getRestBoard(idx);
+	}
+	
+	//게시글을 전달받아 REST_BOARD 테이블에 저장된 행을 변경하고 실행결과를 문자열로 응답하는 요청 처리 메소드
+	@PutMapping("/board_modify")
+	public String restBoardModify(@RequestBody RestBoard restBoard) {
+		restBoard.setContent(HtmlUtils.htmlEscape(restBoard.getContent()));
+		restBoardService.modifyRestBoard(restBoard);
+		return "success";
+	}
+
+	//글번호를 전달받아 REST_BOARD 테이블에 저장된 행을 삭제하고 실행결과를 문자열로 응답하는 요청 처리 메소드
+	@DeleteMapping("/board_remove")
+	public String restBoardRemove(@RequestParam int idx) {
+		restBoardService.removeRestBoard(idx);
+		return "success";
+	}
 }
+
+
+
+
+
+
+
