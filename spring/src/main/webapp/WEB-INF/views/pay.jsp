@@ -62,8 +62,6 @@
 					}, function(response) {//결제정보를 제공받아 처리하기 위한 콜백함수
 						//response : 응답결과를 저장한 Object 객체
 						if(response.success) {//결제가 성공한 경우
-							alert(response.imp_uid);
-							
 							//결제금액을 검증하기 위한 페이지를 비동기식 방식으로 요청
 							$.ajax({
 								type: "post",

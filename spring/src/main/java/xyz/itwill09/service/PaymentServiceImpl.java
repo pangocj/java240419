@@ -140,8 +140,6 @@ public class PaymentServiceImpl implements PaymentService {
 				}
 				br.close();
 				
-				System.out.println(result);
-				
 				//응답결과(JSON 형식의 문자열)를 제공받아 객체(Payment 객체)의 필드값 변경 
 				JSONParser jsonParser=new JSONParser();
 				JSONObject jsonObject=(JSONObject)jsonParser.parse(result);
