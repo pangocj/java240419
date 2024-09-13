@@ -50,7 +50,7 @@
 						//amount(결재금액)
 						amount : amount,
 						//name(결제창에 보여질 제품명)
-						name : "컴퓨터"
+						name : "컴퓨터",
 						//buyer_email(결제창에 보여질 결재 사용자의 이메일 주소)
 						buyer_email : "ocj1778@hanmail.net",
 						//buyer_tel(결제창에 보여질 결재 사용자의 전화번호)
@@ -62,6 +62,8 @@
 					}, function(response) {//결제정보를 제공받아 처리하기 위한 콜백함수
 						//response : 응답결과를 저장한 Object 객체
 						if(response.success) {//결제가 성공한 경우
+							alert(response.imp_uid);
+							
 							//결제금액을 검증하기 위한 페이지를 비동기식 방식으로 요청
 							$.ajax({
 								type: "post",
