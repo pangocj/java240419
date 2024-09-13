@@ -63,7 +63,7 @@ public class PaymentServiceImpl implements PaymentService {
 			} catch (Exception e) {
 				e.printStackTrace();
 			} 
-			
+			 
 			//응답코드를 반환받아 저장
 			int responseCode=connection.getResponseCode();
 			

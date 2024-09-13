@@ -8,3 +8,4 @@ public interface PaymentService {
 	Payment getPayment(String accessToken, String impUid);
 	String cancelPayment(String accessToken, Payment payment);
 }
+ 
