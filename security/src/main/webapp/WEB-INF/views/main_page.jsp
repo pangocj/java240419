@@ -14,6 +14,6 @@
 	<h3><a href="<c:url value="/user/"/>">User</a></h3>
 	<h3><a href="<c:url value="/manager/"/>">Manager</a></h3>
 	<h3><a href="<c:url value="/admin/"/>">Admin</a></h3>
-	<h3><a href="<c:url value="/login"/>">로그인</a></h3>
+	<h3><a href="<c:url value="/loginPage"/>">로그인</a></h3>
 </body>
 </html>
