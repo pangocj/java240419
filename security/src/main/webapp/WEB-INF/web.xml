@@ -19,6 +19,10 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 
+	<!-- Spring Security 사용시 [multipart/form-data] 형식으로 전달되는 값을 제공받기 위한 
+	필터 클래스를 필터로 등록 -->
+	<!-- => [multipart/form-data]를 처리하는 CommonsMultipartResolver 클래스를 root-context.xml
+	에서 Spring Bean으로 등록 -->
 	<filter>
 		<filter-name>multipartFilter</filter-name>
 		<filter-class>org.springframework.web.multipart.support.MultipartFilter</filter-class>
@@ -28,7 +32,7 @@
 		<filter-name>multipartFilter</filter-name>
 		<url-pattern>/*</url-pattern>	
 	</filter-mapping>
-
+	
 	<filter>
 		<filter-name>encodingFilter</filter-name>
 		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>

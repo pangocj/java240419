@@ -3,6 +3,8 @@ package xyz.itwill.security;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 //Spring Security : 인증과 인가 기능을 제공하는 보안 프레임워크
 //인증(Authentication) : 프로그램을 사용할 수 있는 사용자가 맞는지를 확인하는 절차
@@ -76,6 +78,18 @@ public class HomeController {
 	@RequestMapping(value = "/admin/", method = RequestMethod.GET)
 	public String adminPage() {
 		return "admin_page";
+	}
+	
+	@RequestMapping(value = "/csrf", method = RequestMethod.GET)
+	public String form() {
+		return "csrf";
+	}
+	
+	@RequestMapping(value = "/csrf", method = RequestMethod.POST)
+	@ResponseBody
+	public String form(@RequestParam String name) {
+		System.out.println("name = "+name);
+		return "ok";
 	}
 }
 

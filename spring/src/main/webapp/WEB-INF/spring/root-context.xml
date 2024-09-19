@@ -87,6 +87,8 @@
 	<!-- annotation-driven : @Transcational 어노테이션을 사용해 TransactionManager 객체로
 	트렌젝션 관리 기능을 제공하는 엘리먼트 -->
 	<tx:annotation-driven/>
+	
+	
 </beans>
 
 
