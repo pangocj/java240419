@@ -77,11 +77,6 @@ public class HomeController {
 	public String adminPage() {
 		return "admin_page";
 	}
-	
-	@RequestMapping(value = "/loginPage", method = RequestMethod.GET)
-	public String loginPage() {
-		return "login_page";
-	}
 }
 
 

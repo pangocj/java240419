@@ -1,6 +1,8 @@
 package xyz.itwill.security;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 /*
 create table users(username varchar2(100) primary key, password varchar2(100), enabled varchar2(1));
@@ -26,5 +28,8 @@ commit;
 
 @Controller
 public class LoginController {
-
+	@RequestMapping(value = "/loginPage", method = RequestMethod.GET)
+	public String loginPage() {
+		return "login_page";
+	}
 }
