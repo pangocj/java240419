@@ -10,6 +10,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.filter.DelegatingFilterProxy;
+import org.springframework.web.multipart.support.MultipartFilter;
 
 //Spring Security : 인증과 인가 기능을 제공하는 보안 프레임워크
 //인증(Authentication) : 프로그램을 사용할 수 있는 사용자가 맞는지를 확인하는 절차
@@ -31,7 +34,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 //Spring Security를 SpringMVC 프로그램에 적용하는 방법
 //1.spring-security-web, spring-security-core, spring-security-config, spring-security-tablibs
 //라이브러리를 프로트젝에 빌드 처리 - 메이븐 : pom.xml
-
+//2.[web.xml] 파일에 Spring Security 기능을 제공하는 필터 클래스를 필터로 등록하고 필터가 실행
+//되기 위한 URL 패턴을 매핑 처리
 
 
 @Controller
@@ -40,6 +44,8 @@ public class HomeController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
+		DelegatingFilterProxy
+		
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
 		Date date = new Date();
