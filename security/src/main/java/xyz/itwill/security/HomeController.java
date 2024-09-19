@@ -10,9 +10,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.filter.CharacterEncodingFilter;
-import org.springframework.web.filter.DelegatingFilterProxy;
-import org.springframework.web.multipart.support.MultipartFilter;
 
 //Spring Security : 인증과 인가 기능을 제공하는 보안 프레임워크
 //인증(Authentication) : 프로그램을 사용할 수 있는 사용자가 맞는지를 확인하는 절차
@@ -36,7 +33,11 @@ import org.springframework.web.multipart.support.MultipartFilter;
 //라이브러리를 프로트젝에 빌드 처리 - 메이븐 : pom.xml
 //2.[web.xml] 파일에 Spring Security 기능을 제공하는 필터 클래스를 필터로 등록하고 필터가 실행
 //되기 위한 URL 패턴을 매핑 처리
-
+//3.[web.xml] 파일에 Spring Security 기능의 필터가 사용하기 위한 정보를 제공하는 Spring Bean
+//Configuration File 설정 - ContextLoaderListener 클래스가 읽을 수 있도록 파일 경로 지정
+//4.Spring Security 기능을 구현하기 위한 Spring Bean Configuration File 작성
+// => Spring Security 관련 필터가 동작되기 위한 정보를 security 네임스페이스를 추가하여
+//spring-security.xsd 파일에 설정된 엘리먼트를 사용하여 제공
 
 @Controller
 public class HomeController {
@@ -44,8 +45,6 @@ public class HomeController {
 	
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		DelegatingFilterProxy
-		
 		logger.info("Welcome home! The client locale is {}.", locale);
 		
 		Date date = new Date();
