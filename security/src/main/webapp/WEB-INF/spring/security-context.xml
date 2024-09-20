@@ -111,7 +111,7 @@
  		</authentication-provider>
  	</authentication-manager> 
  	
- 	<beans:bean class="xyz.itwill.security.CustomPasswordEncoder" id="customPasswordEncoder"/>
+ 	<beans:bean class="xyz.itwill.auth.CustomPasswordEncoder" id="customPasswordEncoder"/>
  	-->
 
 	<!-- 사용자 정보를 저장한 테이블과 권한 정보를 저장한 테이블을 원하는 형태로 생성하여  
