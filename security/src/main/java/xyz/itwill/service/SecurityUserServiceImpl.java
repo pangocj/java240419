@@ -26,6 +26,4 @@ public class SecurityUserServiceImpl implements SecurityUserService {
 	public SecurityUser getSecurityUserByUserid(String userid) {
 		return securityUserDAO.selectSecurityUserByUserid(userid);
 	}
-	
-	
 }
