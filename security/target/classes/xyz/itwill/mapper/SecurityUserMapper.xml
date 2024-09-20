@@ -39,7 +39,7 @@
 	</resultMap>
 	
 	<select id="selectSecurityAuthByUserid" resultType="SecurityAuth">
-		select usreid, auth from security_auth where userid=#{userid}
+		select userid, auth from security_auth where userid=#{userid}
 	</select>
 	
 	<select id="selectSecurityUserByUserid" resultMap="securityUserResultMap">
