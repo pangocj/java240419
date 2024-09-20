@@ -35,12 +35,15 @@
 		<result column="name" property="name"/>
 		<result column="email" property="email"/>
 		<result column="enabled" property="enabled"/>
-		<collection property="securityAuthList" />
+		<collection property="securityAuthList" select="selectSecurityAuthByUserid" column="userid"/>
 	</resultMap>
 	
+	<select id="selectSecurityAuthByUserid" resultType="SecurityAuth">
+		select usreid, auth from security_auth where userid=#{userid}
+	</select>
+	
 	<select id="selectSecurityUserByUserid" resultMap="securityUserResultMap">
-		select security_user.userid, passwd, name, email, enabled from 
-			 security_user where userid=#{userid}
+		select userid, passwd, name, email, enabled from security_user where userid=#{userid}
 	</select>	
 </mapper>
 
