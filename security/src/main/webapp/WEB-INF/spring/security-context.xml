@@ -114,9 +114,18 @@
  	<beans:bean class="xyz.itwill.security.CustomPasswordEncoder" id="customPasswordEncoder"/>
  	-->
 
+	<!-- 사용자 정보를 저장한 테이블과 권한 정보를 저장한 테이블을 원하는 형태로 생성하여  
+	인증 처리하기 위해 jdbc-user-service 엘리먼트에 users-by-username-query 속성과 
+	authorities-by-username-query 속성을 설정 -->
+	<!-- users-by-username-query 속성 : 전달받은 아이디를 비교해 같은 행의 아이디, 비밀번호
+	, 활성화 상태 등을 검색하는 SELECT 명령을 속성값으로 설정 - 인증 처리 -->
+	<!-- authorities-by-username-query 속성 : 전달받은 아이디를 비교해 같은 행의 아이디와
+	권한(ROLE)을 검색하는 SELECT 명령을 속성값으로 설정 - 인증 성공한 사용자에게 권한 제공 -->
  	<authentication-manager>
  		<authentication-provider>
- 			<jdbc-user-service data-source-ref="dataSource"/>
+ 			<jdbc-user-service data-source-ref="dataSource"
+ 				users-by-username-query="select userid, passwd, enabled from security_user where userid=?"
+ 				authorities-by-username-query="select userid, auth from security_auth where userid=?"/>
  			<password-encoder ref="passwordEncoder"/>
  		</authentication-provider>
  	</authentication-manager> 
