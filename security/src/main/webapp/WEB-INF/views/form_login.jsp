@@ -15,10 +15,14 @@
 	<table>
 		<tr>
 			<td>아이디</td>
+			<%-- 인증 처리 페이지에 아이디를 전달하는 name 속성값은 반드시 [username]으로 설정 --%>
+			<%-- <td><input type="text" name="username" id="userid"></td> --%>
 			<td><input type="text" name="userid" id="userid"></td>
 		</tr>
 		<tr>
 			<td>비밀번호</td>
+			<%-- 인증 처리 페이지에 비밀번호를 전달하는 name 속성값은 반드시 [password]으로 설정 --%>
+			<%-- <td><input type="password" name="password" id="passwd"></td> --%>
 			<td><input type="password" name="passwd" id="passwd"></td>
 		</tr>
 		<tr>

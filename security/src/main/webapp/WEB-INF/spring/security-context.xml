@@ -56,7 +56,12 @@
  		<!-- login-page 속성 : 아이디와 비밀번호를 입력받기 위한 페이지의 경로를 속성값으로 설정 -->
  		<!-- login-processing-url 속성 : 아이디와 비밀번호를 전달받아 인증 처리하는 페이지의 
  		경로를 속성값으로 설정 -->
- 		<form-login login-page="/user_login" login-processing-url="/user_login"/>
+ 		<!-- username-parameter : 로그인 처리 페이지에게 아이디를 전달할 때 사용할 이름(name 
+ 		속성값)을 속성값으로 설정 - 미설정시 아이디는 반드시 [username] 속성값으로 설정 -->
+ 		<!-- password-parameter : 로그인 처리 페이지에게 비밀번호를 전달할 때 사용할 이름(name
+ 		속성값)을 속성값으로 설정 - 미설정시 아이디는 반드시 [password] 속성값으로 설정 -->
+ 		<form-login login-page="/user_login" login-processing-url="/user_login"
+ 			username-parameter="userid" password-parameter="passwd"/>
  		
  		<!-- csrf : CSRF 토큰 사용 여부를 설정하기 위한 엘리먼트 -->
  		<!-- disabled 속성 : false 또는 true(기본값) 중 하나를 속성값으로 설정 -->
