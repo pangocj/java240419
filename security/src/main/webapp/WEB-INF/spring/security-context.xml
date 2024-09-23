@@ -72,7 +72,7 @@
  			username-parameter="userid" password-parameter="passwd"
  			default-target-url="/"
  			authentication-failure-handler-ref="customLoginFailureHandler" 
- 			authentication-success-handler-ref=""/>
+ 			authentication-success-handler-ref="customLoginSuccessHandler"/>
  		
  		<!-- logout : 로그아웃 처리 기능을 설정하기 위한 엘리먼트 -->
  		<!-- logout-url 속성 : 로그아웃 처리를 제공하기 위한 요청 페이지의 경로를 속성값으로 설정 -->
