@@ -68,11 +68,18 @@
  		<!-- authentication-success-handler-ref : 인증 성공 후 호출될 메소드가 작성된 클래스의 
  		Spring 식별자(beanName)를 속성값으로 설정 -->
  		
+ 		<!--
  		<form-login login-page="/user_login" login-processing-url="/user_login"
  			username-parameter="userid" password-parameter="passwd"
  			default-target-url="/"
  			authentication-failure-handler-ref="customLoginFailureHandler" 
  			authentication-success-handler-ref="customLoginSuccessHandler"/>
+ 		-->
+ 		
+ 		<form-login login-page="/user_login" login-processing-url="/user_login"
+ 			username-parameter="userid" password-parameter="passwd"
+ 			default-target-url="/"
+ 			authentication-failure-handler-ref="customLoginFailureHandler"/>
  		
  		<!-- logout : 로그아웃 처리 기능을 설정하기 위한 엘리먼트 -->
  		<!-- logout-url 속성 : 로그아웃 처리를 제공하기 위한 요청 페이지의 경로를 속성값으로 설정 -->
