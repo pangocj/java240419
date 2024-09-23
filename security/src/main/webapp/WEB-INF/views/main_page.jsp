@@ -54,6 +54,10 @@
 			<button type="submit">로그아웃</button>	
 		</form>
 	</sec:authorize>
+	
+	<%-- embed 태그 : 파일을 제공받아 HTML 문서의 내장 브라우저 내용으로 포함하는 태그  --%>
+	<%-- src 속성 : HTML 문서에 포함될 파일의 URL 주소를 속성값으로 설정  --%>
+	<embed src="<c:url value="/resources/eclipse_cheatsheet.pdf"/>" width="1000" height="1500">
 </body>
 </html>
 
