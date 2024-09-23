@@ -60,8 +60,19 @@
  		속성값)을 속성값으로 설정 - 미설정시 아이디는 반드시 [username] 속성값으로 설정 -->
  		<!-- password-parameter : 로그인 처리 페이지에게 비밀번호를 전달할 때 사용할 이름(name
  		속성값)을 속성값으로 설정 - 미설정시 아이디는 반드시 [password] 속성값으로 설정 -->
+ 		<!-- default-target-url 속성 : 인증 성공 후 이동될 페이지 경로를 속성값으로 설정 -->
+ 		<!-- authentication-failure-forward-url : 인증 실패 후 이동될 페이지 경로를 속성값으로 설정  -->
+ 		<!-- authentication-failure-handler-ref : 인증 실패 후 호출될 메소드가 작성된 클래스의 
+ 		Spring 식별자(beanName)를 속성값으로 설정 -->
+ 		<!-- authentication-success-forward-url : 인증 성공 후 이동될 페이지 경로를 속성값으로 설정  -->
+ 		<!-- authentication-success-handler-ref : 인증 성공 후 호출될 메소드가 작성된 클래스의 
+ 		Spring 식별자(beanName)를 속성값으로 설정 -->
+ 		
  		<form-login login-page="/user_login" login-processing-url="/user_login"
- 			username-parameter="userid" password-parameter="passwd"/>
+ 			username-parameter="userid" password-parameter="passwd"
+ 			default-target-url="/"
+ 			authentication-failure-handler-ref="customLoginFailureHandler" 
+ 			authentication-success-handler-ref=""/>
  		
  		<!-- logout : 로그아웃 처리 기능을 설정하기 위한 엘리먼트 -->
  		<!-- logout-url 속성 : 로그아웃 처리를 제공하기 위한 요청 페이지의 경로를 속성값으로 설정 -->
