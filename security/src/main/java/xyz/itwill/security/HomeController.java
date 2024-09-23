@@ -1,7 +1,5 @@
 package xyz.itwill.security;
 
-import java.security.Principal;
-
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,8 +8,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import xyz.itwill.auth.CustomUserDetails;
-import xyz.itwill.dto.SecurityUser;
-import xyz.itwill.service.SecurityUserService;
 
 //Spring Security : 인증과 인가 기능을 제공하는 보안 프레임워크
 //인증(Authentication) : 프로그램을 사용할 수 있는 사용자가 맞는지를 확인하는 절차

@@ -63,6 +63,15 @@
  		<form-login login-page="/user_login" login-processing-url="/user_login"
  			username-parameter="userid" password-parameter="passwd"/>
  		
+ 		<!-- logout : 로그아웃 처리 기능을 설정하기 위한 엘리먼트 -->
+ 		<!-- logout-url 속성 : 로그아웃 처리를 제공하기 위한 요청 페이지의 경로를 속성값으로 설정 -->
+ 		<!-- logout-success-url 속성 : 로그아웃 처리 후 요청 페이지의 경로를 속성값으로 설정 -->
+ 		<!-- invalidate-session 속성 : false 또는 true(기본값) 중 하나를 속성값으로 설정 -->
+ 		<!-- => invalidate-session 속성값을 [true]로 설정하면 로그아웃 처리 후 세션 언바인딩 처리 -->
+ 		<!-- delete-cookies 속성 : 로그아웃 처리 후 삭제될 쿠키의 이름을 속성값으로 설정 -->
+ 		<logout logout-url="/logout" logout-success-url="/" invalidate-session="true"
+ 			delete-cookies="JSESSIONID"/>
+ 		
  		<!-- csrf : CSRF 토큰 사용 여부를 설정하기 위한 엘리먼트 -->
  		<!-- disabled 속성 : false 또는 true(기본값) 중 하나를 속성값으로 설정 -->
  		<!-- => disabled 속성값을 [true]로 설정하면 CSRF 토큰을 발행하지 않으므로 form 태그에서
