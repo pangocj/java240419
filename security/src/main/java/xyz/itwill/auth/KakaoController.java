@@ -1,5 +1,17 @@
 package xyz.itwill.auth;
 
+import java.io.IOException;
+
+import javax.servlet.http.HttpSession;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.github.scribejava.core.model.OAuth2AccessToken;
+
+import lombok.RequiredArgsConstructor;
+
 //OAuth2.0 기능을 사용한 인증 처리
 // => Google, Kakao, Naver 등의 Social 로그인 기능을 사용한 인증 처리
 
@@ -17,7 +29,45 @@ package xyz.itwill.auth;
 //8.scribejava-apis 라이브러리와 json-simple 라이브러리를 프로젝트에 빌드 처리 - 메이븐 : pom.xml
 //9.로그인 관련 OpenAPI를 요청하기 위한 KakaoLoginApi 클래스와 KaKaoLoginBean 클래스 작성
 
-
+@Controller
+@RequestMapping("/kakao")
+@RequiredArgsConstructor
 public class KakaoController {
-
+	private final KaKaoLoginBean kaKaoLoginBean;
+	
+	//카카오 로그인 페이지를 요청하기 위한 요청 처리 메소드
+	@RequestMapping("/login")
+	public String login(HttpSession session) {
+		String kakaoAuthUrl=kaKaoLoginBean.getAuthorizationUrl(session);
+		return "redirect:"+kakaoAuthUrl;
+	}
+	
+	//카카오 로그인 성공시 요청되는 콜백 URL 주소를 처리하기 위한 요청 처리 메소드
+	@RequestMapping("/callback")
+	public String login(@RequestParam String code, @RequestParam String state
+			, HttpSession session) throws IOException {
+		OAuth2AccessToken accessToken=kaKaoLoginBean.getAccessToken(session, code, state);
+		String apiResult=kaKaoLoginBean.getUserProfile(accessToken);
+		System.out.println("apiResult = "+apiResult);
+		
+		return "redirect:/";
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
