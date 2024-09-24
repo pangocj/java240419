@@ -1,4 +1,4 @@
-package xyz.itwill.auth;
+package xyz.itwill.security;
 
 import java.io.IOException;
 
@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
 import lombok.RequiredArgsConstructor;
+import xyz.itwill.auth.KaKaoLoginBean;
 
 //OAuth2.0 기능을 사용한 인증 처리
 // => Google, Kakao, Naver 등의 Social 로그인 기능을 사용한 인증 처리
