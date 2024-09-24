@@ -96,7 +96,7 @@
  		<!-- delete-cookies 속성 : 로그아웃 처리 후 삭제될 쿠키의 이름을 속성값으로 설정 -->
  		<!-- => 삭제할 쿠키가 여러개인 경우 , 기호를 사용해 나열 작성 가능 -->
  		<logout logout-url="/logout" logout-success-url="/" invalidate-session="true"
- 			delete-cookies="JSESSIONID"/>
+ 			delete-cookies="JSESSIONID, remember-me"/>
  		
  		<!-- csrf : CSRF 토큰 사용 여부를 설정하기 위한 엘리먼트 -->
  		<!-- disabled 속성 : false 또는 true(기본값) 중 하나를 속성값으로 설정 -->
@@ -107,7 +107,25 @@
  		<!-- access-denied-handler : AccessDeniedException이 발생된 경우 403 에러코드 대신 
  		에러 페이지로 응답 처리하기 위한 기능을 제공하는 엘리먼트 -->
  		<!-- error-page 속성 : 에러 메세지를 제공하기 위한 페이지의 경로를 속성값으로 설정 -->
- 		<access-denied-handler error-page="/access_denied"/>
+ 		<!-- <access-denied-handler error-page="/access_denied"/> -->
+ 		<!-- ref 속성 : 접근이 제한된 페이지를 요청할 경우 호출될 메소드가 작성된 클래스의 
+ 		Spring Bean 식별자(beanName)를 속성값으로 설정 -->
+ 		<access-denied-handler ref="customAccessDeniedHandler"/>
+ 		
+ 		<!-- remember-me : 자동 로그인 기능을 제공하기 위한 엘리먼트 -->
+ 		<!-- => 아이디와 비밀번호로 인증 처리하기 전에 [remember-me]라는 이름의 쿠키를 검색
+ 		하여 인증 처리되도록 설정 -->
+ 		<!-- => [remember-me]라는 이름의 쿠키에는 아이디와 비밀번호로 인증 성공할 경우 인증
+ 		관련 토큰을 자동 생성하여 쿠키값으로 저장 - 쿠키 유지 시간 : 2주 -->
+ 		<!-- token-validity-seconds 속성 : 인증 관련 토큰의	유지시간(초)을 속성값으로 설정 -->
+ 		<!-- 인증 관련 토큰을 쿠키에 저장하는 것은 보안상 위험하므로 persistent_logins 테이블을
+ 		생성해 인증	관련 토큰을 저장하여 사용할 수 있도록 설정하는 것을 권장 -->
+ 		<!-- => create table persistent_logins(username varchar2(100), series varchar2(100) 
+    	primary key, token varchar2(100), last_used timestamp); -->
+    	<!-- data-source-ref : DataSource 관련 클래스의 Spring Bean 식별자를 속성값으로 설정 -->
+    	<!-- => 인증 성공시 인증 관련 토큰을 발급받아 테이블의 행으로 자동 삽입하고 인증 
+    	처리시 테이블의 행을 자동 검색해 사용 -->
+ 		<remember-me token-validity-seconds="604800" data-source-ref="dataSource"/>
  	</http>
  	
  	<!-- authentication-manager : 인증 관리자를 등록하기 위한 엘리먼트 -->
