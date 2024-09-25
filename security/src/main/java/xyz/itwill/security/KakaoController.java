@@ -4,6 +4,9 @@ import java.io.IOException;
 
 import javax.servlet.http.HttpSession;
 
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,11 +50,23 @@ public class KakaoController {
 	//카카오 로그인 성공시 요청되는 콜백 URL 주소를 처리하기 위한 요청 처리 메소드
 	@RequestMapping("/callback")
 	public String login(@RequestParam String code, @RequestParam String state
-			, HttpSession session) throws IOException {
+			, HttpSession session) throws IOException, ParseException {
 		OAuth2AccessToken accessToken=kaKaoLoginBean.getAccessToken(session, code, state);
 		String apiResult=kaKaoLoginBean.getUserProfile(accessToken);
 		//apiResult = {"id":3719292067,"connected_at":"2024-09-25T01:56:26Z","properties":{"nickname":"내삶의선물","profile_image":"http://k.kakaocdn.net/dn/dazM9Q/btsJEGW5mS6/J5HBuuTUjmBfLwAAajWbqk/img_640x640.jpg","thumbnail_image":"http://k.kakaocdn.net/dn/dazM9Q/btsJEGW5mS6/J5HBuuTUjmBfLwAAajWbqk/img_110x110.jpg"},"kakao_account":{"profile_nickname_needs_agreement":false,"profile_image_needs_agreement":false,"profile":{"nickname":"내삶의선물","thumbnail_image_url":"http://k.kakaocdn.net/dn/dazM9Q/btsJEGW5mS6/J5HBuuTUjmBfLwAAajWbqk/img_110x110.jpg","profile_image_url":"http://k.kakaocdn.net/dn/dazM9Q/btsJEGW5mS6/J5HBuuTUjmBfLwAAajWbqk/img_640x640.jpg","is_default_image":false,"is_default_nickname":false},"has_email":true,"email_needs_agreement":false,"is_email_valid":true,"is_email_verified":true,"email":"ocj1778@hanmail.net"}}
-		System.out.println("apiResult = "+apiResult);
+		//System.out.println("apiResult = "+apiResult);
+		
+		//JSON 형식의 문자열을 Java 객체로 변환하여 저장
+		JSONParser parser=new JSONParser();
+		JSONObject jsonObject=(JSONObject)parser.parse(apiResult);
+		Long id=(Long)jsonObject.get("id");
+		JSONObject propertiesObject=(JSONObject)jsonObject.get("properties");
+		String name=(String)propertiesObject.get("nickname");
+		JSONObject kakaoAccountObject=(JSONObject)jsonObject.get("kakao_account");
+		String email=(String)kakaoAccountObject.get("email");
+		System.out.println("id = "+id);
+		System.out.println("name = "+name);
+		System.out.println("email = "+email);
 		
 		return "redirect:/";
 	}
