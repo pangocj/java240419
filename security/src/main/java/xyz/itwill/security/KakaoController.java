@@ -1,12 +1,18 @@
 package xyz.itwill.security;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,7 +20,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.github.scribejava.core.model.OAuth2AccessToken;
 
 import lombok.RequiredArgsConstructor;
+import xyz.itwill.auth.CustomUserDetails;
 import xyz.itwill.auth.KaKaoLoginBean;
+import xyz.itwill.dto.SecurityAuth;
+import xyz.itwill.dto.SecurityUser;
+import xyz.itwill.service.SecurityUserService;
 
 //Spring Security는 OAuth2.0을 사용한 인증 처리 기능 제공
 // => Google, Kakao, Naver 등의 Social 로그인 기능을 사용한 인증 처리
@@ -39,6 +49,7 @@ import xyz.itwill.auth.KaKaoLoginBean;
 @RequiredArgsConstructor
 public class KakaoController {
 	private final KaKaoLoginBean kaKaoLoginBean;
+	private final SecurityUserService securityUserService;
 	
 	//카카오 로그인 페이지를 요청하기 위한 요청 처리 메소드
 	@RequestMapping("/login")
@@ -64,28 +75,50 @@ public class KakaoController {
 		String name=(String)propertiesObject.get("nickname");
 		JSONObject kakaoAccountObject=(JSONObject)jsonObject.get("kakao_account");
 		String email=(String)kakaoAccountObject.get("email");
-		System.out.println("id = "+id);
-		System.out.println("name = "+name);
-		System.out.println("email = "+email);
+		//System.out.println("id = "+id);
+		//System.out.println("name = "+name);
+		//System.out.println("email = "+email);
+		
+		//제공받은 프로필 정보를 사용해 사용자 정보 및 권한 정보가 저장된 객체 생성   
+		SecurityAuth auth=new SecurityAuth();
+		auth.setUserid("kakao_"+id);
+		auth.setAuth("ROLE_USER");
+		
+		List<SecurityAuth> authList=new ArrayList<SecurityAuth>();
+		authList.add(auth);
+		
+		SecurityUser user=new SecurityUser();
+		user.setUserid("kakao_"+id);
+		user.setPasswd(UUID.randomUUID().toString());
+		user.setName(name);
+		user.setEmail(email);
+		user.setEnabled("1");
+		user.setSecurityAuthList(authList);
+		
+		//카카오 로그인 사용자 정보를 SECURITY_USER 테이블 및 SECURITY_AUTH 테이블 저장
+		// => 회원가입과 동일한 기능 구현
+		if(securityUserService.getSecurityUserByUserid("kakao_"+id) == null) {
+			securityUserService.addSecurityUser(user);
+			securityUserService.addSecurityAuth(auth);
+		}
+		
+		//사용자 정보를 제공받아 인증 사용자 정보 및 권한 정보가 저장된 UserDetails 객체 생성 
+		CustomUserDetails userDetails=new CustomUserDetails(user);
+		
+		//UsernamePasswordAuthenticationToken 객체를 생성하여 Spring Security가 사용 가능한
+		//인증 사용자로 등록 처리
+		// => UsernamePasswordAuthenticationToken : UserDetails 객체를 전달받아 Spring Security가
+		//사용 가능한 인증 사용자로 등록하는 기능을 제공하는 객체
+		Authentication authentication=new UsernamePasswordAuthenticationToken
+				(userDetails, null, userDetails.getAuthorities());
+		
+		//SecurityContextHolder.getContext() : SecurityContext 객체를 반환하는 정적메소드
+		// => SecurityContext 객체 : 인증 처리된 사용자 정보를 세션에 저장하거나 세션에 저장된
+		//사용자를 검색하는 기능을 제공하는 객체
+		//SecurityContext.setAuthentication(Authentication authentication) : 매개변수로 전달받은
+		//Authentication 객체를 세션에 저장하기 위한 메소드
+		SecurityContextHolder.getContext().setAuthentication(authentication);
 		
 		return "redirect:/";
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
