@@ -1,11 +1,11 @@
-package xyz.itwill.mapper;
+package xyz.itwill.dao;
 
 import java.util.List;
 import java.util.Map;
 
 import xyz.itwill.dto.SecurityBoard;
 
-public interface SecurityBoardMapper {
+public interface SecurityBoardDAO {
 	int insertSecurityBoard(SecurityBoard board);
 	int updateSecurityBoard(SecurityBoard board);
 	int deleteSecurityBoard(int num);
