@@ -65,7 +65,7 @@ public class SecurityBoardServiceImpl implements SecurityBoardService {
 			pageNum=Integer.parseInt((String)map.get("pageNum"));
 		}
 		
-		int pageSize=1;
+		int pageSize=5;
 		if(map.get("pageSize") != null && !map.get("pageSize").equals("")) {
 			pageSize=Integer.parseInt((String)map.get("pageSize"));
 		}
@@ -75,6 +75,8 @@ public class SecurityBoardServiceImpl implements SecurityBoardService {
 		int blockSize=5;
 		
 		Pager pager=new Pager(pageNum, pageSize, totalBoard, blockSize);
+		
+		System.out.println(pager.toString());
 		
 		map.put("startRow", pager.getStartRow());
 		map.put("endRow", pager.getEndRow());

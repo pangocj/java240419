@@ -2,13 +2,17 @@ package xyz.itwill.security;
 
 import java.util.Map;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.util.HtmlUtils;
 
 import lombok.RequiredArgsConstructor;
+import xyz.itwill.dto.SecurityBoard;
 import xyz.itwill.service.SecurityBoardService;
 
 @Controller
@@ -28,6 +32,14 @@ public class SecurityBoardController {
 	@RequestMapping(value= "/register", method = RequestMethod.GET)
 	public String register() {
 		return "board/board_register";
+	}
+	
+	@RequestMapping(value= "/register", method = RequestMethod.POST)
+	public String register(@ModelAttribute SecurityBoard board) {
+		board.setSubject(HtmlUtils.htmlEscape(board.getSubject()));
+		board.setContent(HtmlUtils.htmlEscape(board.getContent()));
+		securityBoardService.addSecurityBoard(board);
+		return "redirect:/board/list";
 	}
 }
 
