@@ -5,6 +5,7 @@ import java.util.Map;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import lombok.RequiredArgsConstructor;
@@ -22,6 +23,11 @@ public class SecurityBoardController {
 		model.addAttribute("resultMap", securityBoardService.getSecurityBoardList(map));
 		model.addAttribute("searchMap", map);
 		return "board/board_list";
+	}
+	
+	@RequestMapping(value= "/register", method = RequestMethod.GET)
+	public String register() {
+		return "board/board_register";
 	}
 }
 
