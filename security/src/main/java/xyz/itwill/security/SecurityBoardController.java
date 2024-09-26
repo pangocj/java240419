@@ -1,5 +1,7 @@
 package xyz.itwill.security;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.util.Map;
 
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -69,10 +71,29 @@ public class SecurityBoardController {
 		model.addAttribute("searchMap", map);
 		return "board/board_modify";
 	}
+	
+	@PreAuthorize("hasRole('ROLE_ADMIN') or principal.userid eq #map['writer'] ")
+	@RequestMapping(value= "/modify", method = RequestMethod.POST)
+	public String modify(@ModelAttribute SecurityBoard board, 
+			@RequestParam Map<String, Object> map, Model model) throws UnsupportedEncodingException {
+		board.setSubject(HtmlUtils.htmlEscape(board.getSubject()));
+		board.setContent(HtmlUtils.htmlEscape(board.getContent()));
+		securityBoardService.modifySecurityBoard(board);
+		
+		String pageNum=(String)map.get("pageNum");
+		String pageSize=(String)map.get("pageSize");
+		String column=(String)map.get("column");
+		String keyword=URLEncoder.encode((String)map.get("keyword"), "utf-8");
+		
+		return "redirect:/board/detail?num="+board.getNum()+"&pageNum="+pageNum
+			+"&pageSize="+pageSize+"&column="+column+"&keyword="+keyword;
+	}
+	
+	//로그인 사용자 중 관리자 또는 게시글 작성자인 경우에만 요청 처리 메소드를 호출할 수 있도록 권한 설정
+	@PreAuthorize("hasRole('ROLE_ADMIN') or principal.userid eq #writer ")
+	@RequestMapping("/remove")
+	public String remove(@RequestParam int num, @RequestParam String writer) {
+		securityBoardService.removeSecurityBoard(num);
+		return "redirect:/board/list";
+	}
 }
-
-
-
-
-
-

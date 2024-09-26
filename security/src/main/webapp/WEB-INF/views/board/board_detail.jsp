@@ -22,7 +22,7 @@ th, td {
 </style>
 </head>
 <body>
-	<h1>게시글</h1>
+	<h1>게시글 상세</h1>
 	<hr>
 	<table>
 		<tr>
@@ -75,6 +75,17 @@ th, td {
 			</sec:authorize>
 		</form>
 	</div>
+	<hr>
+	
+	<%-- 댓글을 입력받거나 댓글 목록을 출력하는 태그 - 로그인 사용자에게만 제공 --%>
+	<sec:authorize access="isAuthenticated()">
+		<input type="hidden" id="writer" value="<sec:authentication property="principal.userid"/>">
+		<div>
+			<textarea rows="3" cols="60" id="content"></textarea>
+			<button type="button" id="addBtn">댓글쓰기</button>
+		</div>
+	</sec:authorize>
+	<div id="replyList"></div>
 	
 	<script type="text/javascript">
 	$("#listBtn").click(function() {
@@ -86,7 +97,7 @@ th, td {
 	});
 		
 	$("#removeBtn").click(function() {
-		$("#linkForm").attr("action","<c:url value="/board/rmeove"/>").submit();
+		$("#linkForm").attr("action","<c:url value="/board/remove"/>").submit();
 	});
 	</script>
 </body>
