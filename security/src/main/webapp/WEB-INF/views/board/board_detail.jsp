@@ -132,7 +132,7 @@ th, td {
 	replyListDisplay();
 	
 	//ajaxSend() 메소드를 호출하여 페이지를 Ajax 기능으로 요청할 경우 무조건 CSRF 토큰 전달
-	$(document).ajaxSend(function() {
+	$(document).ajaxSend(function(event, xhr) {
 		xhr.setRequestHeader("${_csrf.headerName}","${_csrf.token}");
 	});
 	
