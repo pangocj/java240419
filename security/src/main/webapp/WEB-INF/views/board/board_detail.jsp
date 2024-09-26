@@ -99,6 +99,69 @@ th, td {
 	$("#removeBtn").click(function() {
 		$("#linkForm").attr("action","<c:url value="/board/remove"/>").submit();
 	});
+	
+	function replyListDisplay() {
+		$.ajax({
+			type: "get",
+			url: "<c:url value="/reply/list"/>/"+${securityBoard.num},
+			dataType: "json",
+			success: function(result) {
+				if(result.length == 0) {
+					var html="<div style='width: 600px; border-bottom: 1px solid black;'>";
+					html+="댓글이 하나도 없습니다.";
+					html+="</div>";
+					$("#replyList").html(html);
+					return;
+				}
+				
+				var html="";
+				$(result).each(function() {
+					html+="<div style='width: 600px; border-bottom: 1px solid black;'>";
+					html+="["+this.num+"]"+this.name+"<br>";
+					html+="<pre>"+this.content+"</pre>("+this.regdate+")";
+					html+="</div>";
+				});
+				$("#replyList").html(html);
+			},
+			error: function(xhr) {
+				alert("에러코드 = "+xhr.status);
+			}
+		});
+	}
+	
+	replyListDisplay();
+	
+	$("#addBtn").click(function() {
+		/*
+		//자바스크립트에서 Spring Security 태그 사용 가능
+		<sec:authorize access="isAuthenticated()">
+			var writer="<sec:authentication property="principal.userid"/>";
+		</sec:authorize>
+		*/
+		var writer=$("#writer").val();
+		var content=$("#content").val();
+		if(content == null) {
+			alert("댓글내용을 입력해 주세요.");
+			return;			
+		}
+		$("#content").val("");
+		
+		$.ajax({
+			type: "post",
+			url: "<c:url value="/reply/register"/>",
+			contentType: "application/json",
+			data: JSON.stringify({"writer":writer, "content":content, "boardNum":${securityBoard.num}}),
+			dataType: "text",
+			success: function(result) {
+				if(result == "success") {
+					replyListDisplay();
+				}
+			},
+			error: function(xhr) {
+				alert("에러코드 = "+xhr.status);
+			}
+		});
+	});
 	</script>
 </body>
 </html>
