@@ -48,6 +48,16 @@ public class SecurityBoardController {
 		securityBoardService.addSecurityBoard(board);
 		return "redirect:/board/list";
 	}
+	
+	@RequestMapping("/detail")
+	public String detail(@RequestParam Map<String, Object> map, Model model) {
+		int num=Integer.parseInt((String)map.get("num"));
+		model.addAttribute("securityBoard", securityBoardService.getSecurityBoardByNum(num));
+		model.addAttribute("searchMap", map);
+		return "board/board_detail";
+	}
+	
+	
 }
 
 
