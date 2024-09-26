@@ -1,5 +1,7 @@
 package xyz.itwill.dto;
 
+import javax.validation.constraints.NotEmpty;
+
 import lombok.Data;
 
 /*
@@ -14,6 +16,7 @@ create sequence security_reply_seq;
 public class SecurityReply {
 	private int num;
 	private String writer;//작성자(아이디)
+	@NotEmpty(message = "내용을 입력해 주세요.")
 	private String content;
 	private String regdate;
 	private int boardNum;
