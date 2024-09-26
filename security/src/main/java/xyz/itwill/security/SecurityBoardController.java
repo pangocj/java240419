@@ -29,6 +29,7 @@ public class SecurityBoardController {
 		return "board/board_list";
 	}
 	
+	//로그인 사용자만 요청 처리 메소드를 호출할 수 있도록 권한 설정
 	//@PreAuthorize : 요청 처리 메소드가 실행되기 전에 권한을 설정하기 위한 어노테이션
 	//value 속성 : 권한(ROLE)을 속성값으로 설정 - SpEL 사용 가능
 	// => value 속성외에 다른 속성이 없는 경우 속성값만 설정 가능
@@ -57,7 +58,17 @@ public class SecurityBoardController {
 		return "board/board_detail";
 	}
 	
-	
+	//로그인 사용자 중 관리자 또는 게시글 작성자인 경우에만 요청 처리 메소드를 호출할 수 있도록 권한 설정
+	// => SpEL를 사용해 권한 설정할 경우 EL 연산자 사용 가능
+	// => # 표현식을 사용하여 요청 처리 메소드의 전달값이 저장된 매개변수 사용 가능
+	@PreAuthorize("hasRole('ROLE_ADMIN') or principal.userid eq #map['writer'] ")
+	@RequestMapping(value= "/modify", method = RequestMethod.GET)
+	public String modify(@RequestParam Map<String, Object> map, Model model) {
+		int num=Integer.parseInt((String)map.get("num"));
+		model.addAttribute("securityBoard", securityBoardService.getSecurityBoardByNum(num));
+		model.addAttribute("searchMap", map);
+		return "board/board_modify";
+	}
 }
 
 

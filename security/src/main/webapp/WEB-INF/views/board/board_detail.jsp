@@ -51,6 +51,9 @@ th, td {
 	
 	<div style="margin-top: 10px;">
 		<form method="get" id="linkForm">
+			<input type="hidden" name="num" value="${securityBoard.num }">
+			<%-- 권한 설정을 위해 게시글 작성자 전달 --%>
+			<input type="hidden" name="writer" value="${securityBoard.writer }">
 			<input type="hidden" name="pageNum" value="${searchMap.pageNum }">
 			<input type="hidden" name="pageSize" value="${searchMap.pageSize }">
 			<input type="hidden" name="column" value="${searchMap.column }">
