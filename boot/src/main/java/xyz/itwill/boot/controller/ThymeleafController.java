@@ -1,6 +1,7 @@
 package xyz.itwill.boot.controller;
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import xyz.itwill.boot.dto.User;
 
 //Thymeleaf : 서버에서 HTML 문서 또는 XML 문서를 생성하여 제공하는 Server Side Template Engine
-// => HTML 태그를 기반으로 [th:속성명="속성값"]을 추가하여 동적으로 뷰(View)를 생성하여 제공
+// => HTML 태그에 Thymeleaf 속성을 사용해 동적으로 뷰(View)를 생성하여 제공
 // => 서버를 실행하지 않으면 정적인 HTML 문서로 사용되며 서버를 실행하면 동적인 HTML 문서로 
 //생성되어 사용 - Natural Templates
 // => JSP 태그 및 커스텀 태그(JSTL)를 사용할 수 없어 코드의 재사용 불가능 - JavaScript 사용
@@ -26,10 +27,12 @@ public class ThymeleafController {
 		User user=User.builder().id("abc123").name("홍길동").email("abc@itwill.xyz").build();
 		model.addAttribute("user", user);
 		
+		model.addAttribute("now1", new Date());
 		//LocalDateTime.now() : 현재 날짜와 시간이 저장된 LocalDateTime 객체를 반환하는 정적메소드
-		model.addAttribute("now", LocalDateTime.now());
+		model.addAttribute("now2", LocalDateTime.now());
 
 		model.addAttribute("price", "100000000");
+		model.addAttribute("pi", "3.141592");
 		
 		return "result";
 	}
