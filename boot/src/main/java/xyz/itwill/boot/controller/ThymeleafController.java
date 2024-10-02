@@ -1,5 +1,7 @@
 package xyz.itwill.boot.controller;
 
+import java.time.LocalDateTime;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +25,11 @@ public class ThymeleafController {
 		
 		User user=User.builder().id("abc123").name("홍길동").email("abc@itwill.xyz").build();
 		model.addAttribute("user", user);
+		
+		//LocalDateTime.now() : 현재 날짜와 시간이 저장된 LocalDateTime 객체를 반환하는 정적메소드
+		model.addAttribute("now", LocalDateTime.now());
+
+		model.addAttribute("price", "100000000");
 		
 		return "result";
 	}
