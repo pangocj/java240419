@@ -65,17 +65,26 @@
 	<!-- src 속성 : HTML 태그의 src 속성값을 동적으로 변경하기 위한 속성 -->
 	<!-- => src 속성의 속성값으로 링크 표현식을 사용해 속성값 설정 가능 -->
 	<!-- 링크 표현식 : 웹자원을 요청하기 위한 경로를 Thymeleaf 속성값으로 사용 
-	<!-- =>src 속성, href 속성등의 속성값으로 사용 -->
+	<!-- => src 속성, href 속성등의 속성값으로 사용 -->
 	<!-- => 컨텍스트의 최상위 폴더 경로가 자동으로 제공되어 웹자원 요청 -->
 	<img src="/images/Koala.jpg" th:src="@{/images/Koala.jpg}" width="200">
+	
+	<!-- href 속성 : HTML 태그의 href 속성값을 동적으로 변경하기 위한 속성 -->
+	<h2><a href="/" th:href="@{/}">메인페이지</a></h2>
 	<hr>
-
 	<!-- Thymeleaf 속성값을 효율적으로 사용하기 위해 다수의 유틸리티 객체 제공  -->
+	<!-- strings : Scope 속성값으로 String 객체를 제공받아 문자열에서 원하는 정보를 Thymeleaf 
+	속성값으로 변환하기 위한 유틸리티 객체 -->	
+	<h2 th:text="${#strings.substring(phone, 0, 3)}">앞부분 3자리</h2>
+	<h2 th:text="${#strings.substring(phone, 4, 8)}">중간부분 4자리</h2>
+	<h2 th:text="${#strings.substring(phone, 9, 13)}">뒷부분 4자리</h2>
+	<hr>
+	
 	<h2 th:text="${now1}">2024-10-02 12:54:52</h2>	
 	<!-- dates : Scope 속성값으로 Date 객체를 제공받아 원하는 날짜 및 시간 패턴의 Thymeleaf 
 	속성값으로 변환하기 위한 유틸리티 객체 -->	
 	<h2 th:text="${#dates.format(now1, 'yyyy-MM-dd HH:mm:ss')}">2024-10-02 12:54:52</h2>		
-	<hr>
+	<hr>  
 	
 	<h2 th:text="${now2}">2024-10-02 12:54:52</h2>	
 	<!-- temporals : Scope 속성값으로 LocalDateTime 객체를 제공받아 원하는 날짜 및 시간 패턴의  

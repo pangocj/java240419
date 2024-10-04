@@ -27,6 +27,8 @@ public class ThymeleafController {
 		User user=User.builder().id("abc123").name("홍길동").email("abc@itwill.xyz").build();
 		model.addAttribute("user", user);
 		
+		model.addAttribute("phone", "010-1234-5678");
+
 		model.addAttribute("now1", new Date());
 		//LocalDateTime.now() : 현재 날짜와 시간이 저장된 LocalDateTime 객체를 반환하는 정적메소드
 		model.addAttribute("now2", LocalDateTime.now());
