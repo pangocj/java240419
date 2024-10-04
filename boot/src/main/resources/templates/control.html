@@ -8,12 +8,16 @@
 	<h1>Thymeleaf</h1>
 	<hr>
 	<!-- HTML 주석 : HTML 문서에 설명을 제공하기 위해 사용 -->
+	<!-- => 페이지 소스보기에서 주석문에 대한 설명문 출력 -->
 	<!-- <h2 th:text="설명문-1">HTML 주석문</h2> -->
 	
-	<!-- Thymeleaf 주석문(Parser 주석) :  -->
+	<!-- Thymeleaf 주석문(Parser 주석) : Thymeleaf 엔진으로 동적으로 HTML 문서를 생성해도 
+	설명을 제공하는 주석문 -->
+	<!-- => 페이지 소스보기에서 주석문에 대한 설명문 미출력 -->
 	<!--/* <h2 th:text="설명문-2">Thymeleaf 주석문(Parser 주석)</h2> */-->
 	
-	<!-- Thymeleaf 주석문(Prototype 주석) -->
+	<!-- Thymeleaf 주석문(Prototype 주석) : Thymeleaf 엔진으로 동적으로 HTML 문서를 생성하면
+	설명이 아닌 태그를 제공하는 주석문 -->
 	<!--/*/ <h2 th:text="설명문-3">Thymeleaf 주석문(Prototype 주석)</h2> /*/-->
 	<hr>
 	
