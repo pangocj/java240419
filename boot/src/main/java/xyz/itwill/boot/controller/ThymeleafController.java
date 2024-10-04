@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import xyz.itwill.boot.dto.User;
 
-//Thymeleaf : 서버에서 HTML 문서 또는 XML 문서를 생성하여 제공하는 Server Side Template Engine
+//Thymeleaf : 서버에서 HTML 문서 또는 XML 문서를 동적으로 생성하여 제공하는 Server Side Template Engine
 // => HTML 태그에 Thymeleaf 속성을 사용해 동적으로 뷰(View)를 생성하여 제공
 // => 서버를 실행하지 않으면 정적인 HTML 문서로 사용되며 서버를 실행하면 동적인 HTML 문서로 
 //생성되어 사용 - Natural Templates
@@ -38,14 +38,4 @@ public class ThymeleafController {
 		
 		return "result";
 	}
-	
-	
 }
-
-
-
-
-
-
-
-
