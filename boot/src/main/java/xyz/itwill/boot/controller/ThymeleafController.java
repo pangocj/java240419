@@ -1,7 +1,9 @@
 package xyz.itwill.boot.controller;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -38,4 +40,30 @@ public class ThymeleafController {
 		
 		return "result";
 	}
+	
+	@GetMapping("/control")
+	public String control(Model model) {
+		model.addAttribute("gender", "M");
+		model.addAttribute("age", 30);
+		
+		List<User> userList=new ArrayList<User>();
+		userList.add(User.builder().id("abc123").name("홍길동").email("abc@itwll.xyz").build());
+		userList.add(User.builder().id("opq456").name("임꺽정").email("opq@itwll.xyz").build());
+		userList.add(User.builder().id("xyz789").name("전우치").email("xyz@itwll.xyz").build());
+		model.addAttribute("userList", userList);
+		
+		return "control";
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
