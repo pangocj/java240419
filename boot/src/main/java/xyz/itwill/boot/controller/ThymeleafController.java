@@ -59,6 +59,16 @@ public class ThymeleafController {
 	public String fragment() {
 		return "fragment";
 	}
+	
+	@GetMapping("/content1")
+	public String content1() {
+		return "content1";
+	}
+	
+	@GetMapping("/content2")
+	public String content2() {
+		return "content2";
+	}
 }
 
 
