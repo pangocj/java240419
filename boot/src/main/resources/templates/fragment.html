@@ -37,11 +37,11 @@ div {
 	</div>
 	 -->
 	<!-- replace 속성 : fragment 속성으로 설정된 태그를 제공받아 태그를 변경하는 Thymeleaf 속성 -->
-	<!-- => ~{ HTML 문서 경로 :: Fragment 식별자} 형식으로 태그를 제공를 제공받아 변경 -->
+	<!-- => ~{ HTML 문서 경로 :: Fragment 식별자} 형식으로 속성값을 설정해 태그를 제공받아 사용 -->
 	<!-- => insert 속성 또는 include 속성으로 fragment 속성으로 설정된  태그를 제공받아 사용 가능 -->
-	<!-- insert : fragment 속성으로 설정된 태그를 제공받아 태그의 하위태그로 변경하는 Thymeleaf 속성 --> 
-	<!-- include : fragment 속성으로 설정된 태그를 제공받아 태그의 하위태그로 포함하는 Thymeleaf 속성 --> 
-	<div th:replace="~{/layout :: header}"></div> 
+	<!-- insert 속성 : fragment 속성으로 설정된 태그를 제공받아 태그의 하위태그로 변경하는 Thymeleaf 속성 --> 
+	<!-- include 속성 : fragment 속성으로 설정된 태그를 제공받아 태그의 하위태그로 포함하는 Thymeleaf 속성 --> 
+	<div th:insert="~{/layout :: header}"></div> 
 	
 	<div id="content">
 		<h2>페이지 몸체부</h2>

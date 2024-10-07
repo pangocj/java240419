@@ -8,20 +8,20 @@
 	<h1>Thymeleaf</h1>
 	<hr>
 	<!-- HTML 주석 : HTML 문서에 설명을 제공하기 위해 사용 -->
-	<!-- => 페이지 소스보기에서 주석문에 대한 설명문 출력 -->
+	<!-- => 페이지 소스보기에서 주석문에 대한 설명문 제공 -->
 	<!-- <h2 th:text="설명문-1">HTML 주석문</h2> -->
 	
-	<!-- Thymeleaf 주석문(Parser 주석) : Thymeleaf 엔진으로 동적으로 HTML 문서를 생성해도 
+	<!-- Thymeleaf 주석문(Parser 주석) : Thymeleaf 엔진을 사용해 동적으로 HTML 문서를 생성해도 
 	설명을 제공하는 주석문 -->
-	<!-- => 페이지 소스보기에서 주석문에 대한 설명문 미출력 -->
+	<!-- => 페이지 소스보기에서 주석문에 대한 설명문 미제공 -->
 	<!--/* <h2 th:text="설명문-2">Thymeleaf 주석문(Parser 주석)</h2> */-->
 	
-	<!-- Thymeleaf 주석문(Prototype 주석) : Thymeleaf 엔진으로 동적으로 HTML 문서를 생성하면
+	<!-- Thymeleaf 주석문(Prototype 주석) : Thymeleaf 엔진을 사용해 동적으로 HTML 문서를 생성하면
 	설명이 아닌 태그를 제공하는 주석문 -->
 	<!--/*/ <h2 th:text="설명문-3">Thymeleaf 주석문(Prototype 주석)</h2> /*/-->
 	<hr>
 	
-	<!-- if 속성 : 태그를 사용 여부를 설정하기 위한 Thymeleaf 속성 -->
+	<!-- if 속성 : 태그의 사용 여부를 설정하기 위한 Thymeleaf 속성 -->
 	<!-- => 속성값으로 false 또는 treu 중 하나를 제공받아 [true]인 경우 태그 사용 -->
 	<h2 th:if="${gender == 'M'}">남자</h2>
 	<h2 th:if="${gender == 'W'}">여자</h2>
@@ -52,7 +52,7 @@
 		</tr>
 		<!-- each 속성 : 태그를 반복 처리하기 위한 Thymeleaf 속성 -->
 		<!-- => 속성값으로 [Scope 속성명 : List 객체]로 설정하여 List 객체의 요소값을 차례대로
-		제공받아 반복 처리 -->
+		Scope 속성명의 속성값으로 제공받아 반복 처리 -->
 		<tr th:each="user : ${userList}">
 			<td th:text="${user.id}">test</td>
 			<td th:text="${user.name}">테스트</td>
@@ -60,8 +60,8 @@
 		</tr>
 	</table>
 	<hr>
-	<!-- each 속성에 status 속성값으로 status 객체를 제공받아 반복 처리시 필요한 값을 제공받아
-	사용 - index, count, size, current, even, odd, first, last -->
+	<!-- each 속성에 status 속성값으로 Status 객체를 제공받아 반복 처리시 필요한 값을 사용 
+	- index, count, size, current, even, odd, first, last 등의 필드명으로 필드값을 제공받아 일괄처리시 사용 -->
 	<th:block th:each="user, status : ${userList}">
 		<h2>
 			<th:block th:if="${status.odd}">
