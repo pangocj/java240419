@@ -43,11 +43,15 @@ public class BoardEntity extends BaseEntity {
 	
 	//@Column : 필드를 컬럼으로 변환하기 위한 어노테이션
 	// => 필드의 이름이 자동으로 컬럼명으로 설정
-	@Column
+	//length 속성 : 컬럼의 크기를 속성값으로 설정
+	// => length 속성을 설정하지 않은 경우 기본값으로 [255]로 설정
+	//nullable 속성 : false 또는 true 중 하나를 속성값으로 설정
+	// => 속성값을 [false]로 설정하면 테이블에 NOT NULL 제약조건 부여
+	@Column(length = 50, nullable = false)
 	private String writer;
-	@Column
+	@Column(length = 500)
 	private String title;
-	@Column
+	@Column(length = 4000)
 	private String content;
 	@Column
 	private int hit;
