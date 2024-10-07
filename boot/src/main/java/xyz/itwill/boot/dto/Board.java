@@ -2,10 +2,14 @@ package xyz.itwill.boot.dto;
 
 import java.time.LocalDateTime;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import xyz.itwill.boot.entity.BoardEntity;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Board {
 	private Long num;//글번호
 	private String writer;//작성자

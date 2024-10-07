@@ -1,6 +1,10 @@
 package xyz.itwill.boot.controller;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,8 +37,5 @@ public class BoardController {
 		return "redirect:/board/list"; 
 	}
 	
-	@GetMapping("/list")
-	public String list() {
-		return "board/list";
-	}
+	
 }

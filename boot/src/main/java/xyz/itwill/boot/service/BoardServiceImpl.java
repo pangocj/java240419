@@ -21,5 +21,4 @@ public class BoardServiceImpl implements BoardService {
 		//삽입하여 저장하는 메소드
 		boardRepository.save(boardEntity);
 	}
-
 }
