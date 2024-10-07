@@ -3,6 +3,7 @@ package xyz.itwill.boot.dto;
 import java.time.LocalDateTime;
 
 import lombok.Data;
+import xyz.itwill.boot.entity.BoardEntity;
 
 @Data
 public class Board {
@@ -13,4 +14,13 @@ public class Board {
 	private int hit;//조횟수
 	private LocalDateTime createDate;//작성날짜
 	private LocalDateTime updateDate;//변경날짜
+	
+	public BoardEntity toBoardEntity() {
+		BoardEntity entity=new BoardEntity();
+		entity.setWriter(writer);
+		entity.setTitle(title);
+		entity.setContent(content);
+		entity.setHit(0);
+		return entity;
+	}
 }
