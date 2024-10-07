@@ -15,11 +15,11 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void addBoard(Board board) {
 		//DTO 객체를 Entity 객체로 변환하여 저장
-		BoardEntity entity=board.toBoardEntity();
+		BoardEntity boardEntity=board.toBoardEntity();
 		
 		//JpaRepository.save(Entity entity) : 매개변수로 전달받은 Entity 객체로 테이블에 행을
 		//삽입하여 저장하는 메소드
-		boardRepository.save(entity);
+		boardRepository.save(boardEntity);
 	}
 
 }
