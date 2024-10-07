@@ -6,6 +6,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import xyz.itwill.boot.dto.Board;
+
 //JPA(Java Persistence API) : ORM(Object Relational Mapping) 기능을 제공하는 표준 인터페이스
 // => ORM : 데이타베이스의 테이블과 Java 객체가 1:1로 매핑되도록 처리하는 기능
 // => SQL 명령을 작성하지 않아도 객체와 테이블이 자동으로 매핑되어 필요한 SQL 명령이 자동으로 
@@ -21,7 +23,7 @@ public class BoardController {
 	}
 	
 	@PostMapping("/write")
-	public String write(@ModelAttribute Board Board) {
-		return "board/write";
+	public String write(@ModelAttribute Board board) {
+		return "board/write"; 
 	}
 }
