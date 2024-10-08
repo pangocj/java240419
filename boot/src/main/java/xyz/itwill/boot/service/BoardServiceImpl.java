@@ -3,7 +3,7 @@ package xyz.itwill.boot.service;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
-import xyz.itwill.boot.dto.Board;
+import xyz.itwill.boot.dto.BoardDTO;
 import xyz.itwill.boot.entity.BoardEntity;
 import xyz.itwill.boot.repository.BoardRepository;
 
@@ -13,7 +13,7 @@ public class BoardServiceImpl implements BoardService {
 	private final BoardRepository boardRepository;
 	
 	@Override
-	public void addBoard(Board board) {
+	public void addBoard(BoardDTO board) {
 		//DTO 객체를 Entity 객체로 변환하여 저장
 		BoardEntity boardEntity=board.toBoardEntity();
 		

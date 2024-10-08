@@ -1,7 +1,7 @@
 package xyz.itwill.boot.service;
 
-import xyz.itwill.boot.dto.Board;
+import xyz.itwill.boot.dto.BoardDTO;
 
 public interface BoardService {
-	void addBoard(Board board);
+	void addBoard(BoardDTO board);
 }
