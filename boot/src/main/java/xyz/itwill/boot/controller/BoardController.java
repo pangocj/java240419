@@ -42,7 +42,8 @@ public class BoardController {
 	}
 	
 	@GetMapping("/detail/{num}")
-	public String detail(@PathVariable Long num,  Model model) {
+	public String detail(@PathVariable(value = "num") Long num,  Model model) {
+		boardService.updateHit(num);
 		model.addAttribute("board", boardService.getBoard(num));
 		return "board/detail"; 
 	}

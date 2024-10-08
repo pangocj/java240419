@@ -8,4 +8,5 @@ public interface BoardService {
 	void addBoard(BoardDTO boardDTO);
 	List<BoardDTO> getBoardList();
 	BoardDTO getBoard(Long num);
+	void updateHit(Long num);
 }

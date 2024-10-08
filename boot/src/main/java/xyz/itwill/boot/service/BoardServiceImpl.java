@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import xyz.itwill.boot.dto.BoardDTO;
 import xyz.itwill.boot.entity.BoardEntity;
@@ -43,6 +44,11 @@ public class BoardServiceImpl implements BoardService {
 		return boardDTOList;
 	}
 
+	@Transactional
+	public void updateHit(Long num) {
+		boardRepository.updateHit(num);
+	}
+	
 	@Override
 	public BoardDTO getBoard(Long num) {
 		//JpaRepository.findById(Long id) : 매개변수로 전달받은 식별자의 행의 검색하여 Optional 객체로 반환하는 메소드
@@ -50,13 +56,14 @@ public class BoardServiceImpl implements BoardService {
 		//Optional 객체 : 제네릭으로 설정된 클래스의 객체 대신 NULL이 저장될 경우 안전하게
 		//처리하는 기능을 제공하는 객체
 		Optional<BoardEntity> optionalBoardEntity=boardRepository.findById(num);
-	
+		
 		//Optional.isPresent() : 제네릭으로 설정된 클래스의 객체가 있는 경우 [true]를 반환하는 메소드
 		// => Optional.empty() : 제네릭으로 설정된 클래스의 객체가 있는 경우 [false]를 반환하는 메소드
 		if(optionalBoardEntity.isPresent()) {
 			//Optional.get() : 제네릭으로 설정된 클래스의 객체를 반환하는 메소드
 			BoardEntity boardEntity=optionalBoardEntity.get();
 			BoardDTO boardDTO=boardEntity.toBoardDTO();
+			
 			return boardDTO;
 		} else {
 			return null;
