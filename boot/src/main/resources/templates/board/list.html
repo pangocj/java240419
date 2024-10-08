@@ -16,8 +16,8 @@ th, td {
 }
 
 .num { width: 50px; }
-.wirter { width: 100px; }
-.title { width: 300px; text-align: left; }
+.writer { width: 100px; }
+.title { width: 300px; }
 .date { width: 200px; }
 .hit { width: 50px; }
 </style>
@@ -36,8 +36,8 @@ th, td {
 		<tr th:each="board : ${boardList}">
 			<td th:text="${board.num}"></td>
 			<td th:text="${board.writer}"></td>
-			<td th:text="${board.title}"></td>
-			<td th:text="${board.createDate}"></td>
+			<td th:text="${board.title}" style="text-align: left;"></td>
+			<td th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
 			<td th:text="${board.hit}"></td>
 		</tr>
 	</table>
