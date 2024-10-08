@@ -15,6 +15,7 @@ public class BoardDTO {
 	private LocalDateTime createDate;//작성날짜
 	private LocalDateTime updateDate;//변경날짜
 	
+	//DTO 객체를 Entity 객체로 변환하여 반환하는 메소드 - 삽입 또는 변경 처리시 사용
 	public BoardEntity toBoardEntity() {
 		BoardEntity entity=new BoardEntity();
 		entity.setWriter(writer);

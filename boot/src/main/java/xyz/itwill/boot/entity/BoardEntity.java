@@ -9,6 +9,7 @@ import jakarta.persistence.SequenceGenerator;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
+import xyz.itwill.boot.dto.BoardDTO;
 
 //Entity 클래스 : 테이블과 매핑 처리되기 위한 Java 객체를 생성하기 위한 클래스
 // => Entity 클래스의 필드는 테이블의 컬럼과 매핑되도록 작성
@@ -75,4 +76,30 @@ public class BoardEntity extends BaseEntity {
 	@Column(name = "UPDATE_DATE", insertable = false)
 	private LocalDateTime updateDate;
 	*/
+	
+	//Entity 객체를 DTO 객체로 변환하여 반환하는 메소드 - 검색 처리시 사용
+	public BoardDTO toBoardDTO() {
+		BoardDTO board=new BoardDTO();
+		board.setNum(num);
+		board.setWriter(writer);
+		board.setTitle(title);
+		board.setContent(content);
+		board.setHit(hit);
+		board.setCreateDate(getCreateDate());
+		board.setUpdateDate(getUpdateDate());
+		return board;
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
