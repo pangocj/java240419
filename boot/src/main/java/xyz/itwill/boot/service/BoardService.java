@@ -7,4 +7,5 @@ import xyz.itwill.boot.dto.BoardDTO;
 public interface BoardService {
 	void addBoard(BoardDTO boardDTO);
 	List<BoardDTO> getBoardList();
+	BoardDTO getBoard(Long num);
 }

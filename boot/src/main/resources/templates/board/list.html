@@ -36,17 +36,16 @@ th, td {
 		<tr th:each="board : ${boardList}">
 			<td th:text="${board.num}"></td>
 			<td th:text="${board.writer}"></td>
-			<td th:text="${board.title}" style="text-align: left;"></td>
+			<td style="text-align: left;">
+				<!-- <a th:href="@{|/board/detail/${board.num}|}" th:text="${board.title}"></a>  -->
+				<a th:href="@{/board/detail/{num} (num=${board.num})}" th:text="${board.title}"></a>
+			</td>
 			<td th:text="${#temporals.format(board.createDate, 'yyyy-MM-dd HH:mm:ss')}"></td>
 			<td th:text="${board.hit}"></td>
 		</tr>
 	</table>
 </body>
 </html>
-
-
-
-
 
 
 
