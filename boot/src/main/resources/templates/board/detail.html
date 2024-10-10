@@ -62,6 +62,29 @@ pre {
 	$("#listBtn").click(function() {
 		location.href="/board/list";	
 	});
+	
+	$("#modifyBtn").click(function() {
+		var num=[[${board.num}]];
+		//alert("num = "+num);
+		location.href="/board/modify/"+num;	
+	});	
+	
+	$("#removeBtn").click(function() {
+		var num=[[${board.num}]];
+		location.href="/board/remove/"+num;	
+	});	
 	</script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+

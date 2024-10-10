@@ -21,7 +21,12 @@ public class BoardDTO {
 		entity.setWriter(writer);
 		entity.setTitle(title);
 		entity.setContent(content);
-		entity.setHit(0);
+		if(num == null) {
+			entity.setHit(0);
+		} else {
+			entity.setNum(num);
+			entity.setHit(hit);
+		}
 		return entity;
 	}
 }

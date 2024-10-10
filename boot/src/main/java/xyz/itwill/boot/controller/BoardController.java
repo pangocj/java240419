@@ -46,14 +46,22 @@ public class BoardController {
 		model.addAttribute("board", boardService.getBoard(num));
 		return "board/detail"; 
 	}
+	
+	@GetMapping("/modify/{num}")
+	public String modify(@PathVariable(value = "num") Long num,  Model model) {
+		model.addAttribute("board", boardService.getBoard(num));
+		return "board/modify"; 
+	}
+	
+	@PostMapping("/modify")
+	public String modify(@ModelAttribute BoardDTO board) {
+		boardService.modifyBoard(board);
+		return "redirect:/board/detail/"+board.getNum(); 
+	}
+	
+	@GetMapping("/remove/{num}")
+	public String remove(@PathVariable(value = "num") Long num) {
+		boardService.removeBoard(num);
+		return "redirect:/board/list"; 
+	}
 }
-
-
-
-
-
-
-
-
-
-

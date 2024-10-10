@@ -24,7 +24,8 @@ public class BoardServiceImpl implements BoardService {
 		BoardEntity boardEntity=boardDTO.toBoardEntity();
 		
 		//JpaRepository.save(Entity entity) : 매개변수로 전달받은 Entity 객체로 테이블에 행을
-		//삽입하여 저장하는 메소드
+		//삽입하거나 변경하여 저장하는 메소드
+		// => 식별자의 컬럼값이 없는 경우 삽입 처리하고 컬럼값이 있는 경우 변경 처리
 		boardRepository.save(boardEntity);
 	}
 
@@ -72,6 +73,20 @@ public class BoardServiceImpl implements BoardService {
 		} else {
 			return null;
 		}
+	}
+
+	@Override
+	public void modifyBoard(BoardDTO board) {
+		//DTO 객체를 Entity 객체로 변환하여 저장
+		BoardEntity entity=board.toBoardEntity();
+		boardRepository.save(entity);
+	}
+
+	@Override
+	public void removeBoard(Long num) {
+		//JpaRepository.deleteById(Long id) : 매개변수로 전달받은 식별자를 사용해 테이블에서 
+		//행을 삭제하는 메소드
+		boardRepository.deleteById(num);
 	}
 }
 
