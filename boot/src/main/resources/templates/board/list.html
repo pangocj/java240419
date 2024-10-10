@@ -37,6 +37,7 @@ th, td {
 			<td th:text="${board.num}"></td>
 			<td th:text="${board.writer}"></td>
 			<td style="text-align: left;">
+				<!-- <a th:href="@{'/board/detail/' + ${board.num}}" th:text="${board.title}"></a> -->
 				<!-- <a th:href="@{|/board/detail/${board.num}|}" th:text="${board.title}"></a>  -->
 				<a th:href="@{/board/detail/{num} (num=${board.num})}" th:text="${board.title}"></a>
 			</td>
@@ -46,10 +47,3 @@ th, td {
 	</table>
 </body>
 </html>
-
-
-
-
-
-
-
