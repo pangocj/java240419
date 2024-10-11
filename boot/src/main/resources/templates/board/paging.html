@@ -49,17 +49,17 @@ th, td {
 	<!-- 페이지 번호 출력 -->
 	<!-- 링크 표현식에서 (이름 = 값, 이름 = 값) 형식으로 표현해 요청 페이지에 값을 질의문자열
 	(QueryString)로 전달하여 요청 가능 -->
-	<a th:href="@{/board/paging(page = 1, size = 5)}">[처음]</a>
-	<a th:href="${boardList.first} ? '#' : @{/board/paging(page = ${boardList.number}, size = 5)}">[이전]</a>
+	<a th:href="@{/board/paging(page = 1, size = ${boardList.size})}">[처음]</a>
+	<a th:href="${boardList.number < blockSize} ? '#' : @{/board/paging(page = ${startPage} - ${blockSize}, size = ${boardList.size})}">[이전]</a>
 	
 	<span th:each="page : ${#numbers.sequence(startPage, endPage)}">
 		<span th:if="${page == boardList.number + 1}" th:text="${page}"></span>
 		<span th:unless="${page == boardList.number + 1}">
-			<a th:href="@{/board/paging(page = ${page}, size =5 )}" th:text="${page}"></a>
+			<a th:href="@{/board/paging(page = ${page}, size = ${boardList.size})}" th:text="${page}"></a>
 		</span>
 	</span>
 	
-	<a th:href="${boardList.last} ? '#' : @{/board/paging(page = ${boardList.number + 2}, size = 5)}">[다음]</a>
-	<a th:href="@{/board/paging(page = ${boardList.totalPages}, size = 5)}">[마지막]</a>
+	<a th:href="${endPage == boardList.totalPages} ? '#' : @{/board/paging(page = ${startPage} + ${blockSize}, size = ${boardList.size})}">[다음]</a>
+	<a th:href="@{/board/paging(page = ${boardList.totalPages}, size = ${boardList.size})}">[마지막]</a>
 </body>
 </html>
