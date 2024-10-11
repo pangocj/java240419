@@ -46,7 +46,7 @@ public class BoardController {
 	
 	@GetMapping("/detail/{num}")
 	public String detail(@PathVariable(value = "num") Long num,  Model model
-			, @PageableDefault(page = 1, size = 2) Pageable pageable) {
+			, @PageableDefault(page = 1, size = 5) Pageable pageable) {
 		model.addAttribute("board", boardService.getBoard(num));
 		model.addAttribute("page", pageable.getPageNumber());
 		model.addAttribute("size", pageable.getPageSize());
@@ -80,7 +80,7 @@ public class BoardController {
 	//page 속성 : 전달값이 없는 경우 요청 페이지 번호를 속성값으로 설정
 	//size 속성 : 전달값이 없는 경우 페이지에 출력될 검색행의 갯수를 속성값으로 설정
 	@GetMapping("/paging")
-	public String paging(@PageableDefault(page = 1, size = 1) Pageable pageable, Model model) {
+	public String paging(@PageableDefault(page = 1, size = 5) Pageable pageable, Model model) {
 		Page<BoardDTO> boardList=boardService.getBoardList(pageable); 
 		int blockSize=3;
 		int startPage=(((int)(Math.ceil((double)pageable.getPageNumber() / blockSize)))
@@ -96,16 +96,3 @@ public class BoardController {
 		return "board/paging"; 
 	}
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
