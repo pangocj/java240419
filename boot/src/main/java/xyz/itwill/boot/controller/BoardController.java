@@ -45,8 +45,11 @@ public class BoardController {
 	}
 	
 	@GetMapping("/detail/{num}")
-	public String detail(@PathVariable(value = "num") Long num,  Model model) {
+	public String detail(@PathVariable(value = "num") Long num,  Model model
+			, @PageableDefault(page = 1, size = 5) Pageable pageable) {
 		model.addAttribute("board", boardService.getBoard(num));
+		model.addAttribute("page", pageable.getPageNumber());
+		model.addAttribute("size", pageable.getPageSize());
 		return "board/detail"; 
 	}
 	

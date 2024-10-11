@@ -60,7 +60,11 @@ pre {
 	<!-- inline 속성 : css 태그 또는 javascript 태그에서 인라인 표현식을 사용하기 위한 속성 -->
 	<script th:inline="javascript">
 	$("#listBtn").click(function() {
-		location.href="/board/list";	
+		//location.href="/board/list";	
+		
+		var page=[[${page}]];
+		var size=[[${size}]];
+		location.href="/board/paging?page="+page+"&size="+size;	
 	});
 	
 	$("#modifyBtn").click(function() {
@@ -76,15 +80,3 @@ pre {
 	</script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
